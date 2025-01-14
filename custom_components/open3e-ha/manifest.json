@@ -1,12 +1,14 @@
 {
-  "domain": "integration_blueprint",
-  "name": "Integration blueprint",
+  "domain": "open3e-ha",
+  "name": "open3e-ha",
   "codeowners": [
-    "@ludeeus"
+    "@MojoOli"
   ],
   "config_flow": true,
-  "documentation": "https://github.com/ludeeus/integration_blueprint",
-  "iot_class": "cloud_polling",
-  "issue_tracker": "https://github.com/ludeeus/integration_blueprint/issues",
-  "version": "0.1.0"
+  "documentation": "https://github.com/MojoOli/open3e-ha",
+  "integration_type": "device",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/MojoOli/open3e-ha/issues",
+  "requirements": [],
+  "version": "0.0.1"
 }
