@@ -13,6 +13,10 @@ coverage.xml
 .ruff_cache
 
 
+# Jetbrains IDE
+.idea/
+.run/
+
 # Home Assistant configuration
 config/*
 !config/configuration.yaml
