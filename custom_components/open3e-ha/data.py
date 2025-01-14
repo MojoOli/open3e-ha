@@ -1,4 +1,4 @@
-"""Custom types for integration_blueprint."""
+"""Custom types for open3e-ha."""
 
 from __future__ import annotations
 
