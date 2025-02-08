@@ -1,5 +1,5 @@
 {
-    "name": "Open3e-HA",
+    "name": "Open3e",
     "homeassistant": "2025.2.1",
     "hacs": "2.0.3"
 }

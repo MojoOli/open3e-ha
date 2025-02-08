@@ -1,6 +1,6 @@
 {
-  "domain": "open3e-ha",
-  "name": "open3e-ha",
+  "domain": "open3e",
+  "name": "open3e",
   "codeowners": [
     "@MojoOli"
   ],

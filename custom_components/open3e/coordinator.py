@@ -1,4 +1,4 @@
-"""DataUpdateCoordinator for open3e-ha."""
+"""DataUpdateCoordinator for open3e."""
 
 from __future__ import annotations
 

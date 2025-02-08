@@ -9,4 +9,4 @@ homeassistant:
 logger:
   default: info
   logs:
-    custom_components.open3e-ha: debug
+    custom_components.open3e: debug
