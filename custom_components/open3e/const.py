@@ -1,7 +1,6 @@
 """Constants for open3e."""
 
 DOMAIN = "open3e"
-ATTRIBUTION = "Data provided by http://jsonplaceholder.typicode.com/"
 
 MQTT_CMD_KEY = "mqtt_cmnd"
 MQTT_CMD_DEFAULT = "open3e/cmnd"
