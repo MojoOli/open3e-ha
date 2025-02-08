@@ -1,0 +1,46 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "description": "Gib das Command Topic deines Open3e Servers an. Verwende den default Wert falls du diesen nicht geändert hast.",
+        "data": {
+          "mqtt_cmnd": "Open3e MQTT Command Topic"
+        }
+      }
+    },
+    "error": {
+      "communication": "Verbindung mit dem Open3e Server fehlgeschlagen. Überprüfe ob das Command Topic übereinstimmt, der Open3e Server läuft und mit dem MQTT Server von HomeAssistant verbunden ist.",
+      "mqtt": "Konnte keine Verbindung mit dem MQTT server aufbauen. Vergewissere dich, dass der MQTT Server läuft."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "flow_temperature": {
+        "name": "Vorlauftemperatur"
+      },
+      "return_temperature": {
+        "name": "Rücklauftemperatur"
+      },
+      "domestic_hot_water_temperature": {
+        "name": "Warmwassertemperatur"
+      },
+      "water_pressure": {
+        "name": "Wasserdruck"
+      },
+      "energy_consumption_central_heating_today": {
+        "name": "Stromverbrauch Heizung heute"
+      },
+      "energy_consumption_domestic_hot_water_today": {
+        "name": "Stromverbrauch Warmwasser heute"
+      },
+      "energy_consumption_cooling_today": {
+        "name": "Stromverbrauch Kühlung heute"
+      }
+    },
+    "climate": {
+      "climate_circuit_1": {
+        "name": "Heiz-Kühlkreis 1"
+      }
+    }
+  }
+}

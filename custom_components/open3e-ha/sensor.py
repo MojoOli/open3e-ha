@@ -2,56 +2,53 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import Any
 
-from homeassistant.components.sensor import SensorEntity, SensorEntityDescription
+from homeassistant.components.sensor import SensorEntity
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-from .entity import IntegrationBlueprintEntity
-
-if TYPE_CHECKING:
-    from homeassistant.core import HomeAssistant
-    from homeassistant.helpers.entity_platform import AddEntitiesCallback
-
-    from .coordinator import BlueprintDataUpdateCoordinator
-    from .data import IntegrationBlueprintConfigEntry
-
-ENTITY_DESCRIPTIONS = (
-    SensorEntityDescription(
-        key="open3e-ha",
-        name="Integration Sensor",
-        icon="mdi:format-quote-close",
-    ),
-)
+from .coordinator import Open3eDataUpdateCoordinator
+from .definitions.sensors import Open3eSensorEntityDescription
+from .definitions.sensors import SENSORS
+from .entity import Open3eEntity
+from .ha_data import Open3eDataConfigEntry
 
 
 async def async_setup_entry(
-    hass: HomeAssistant,  # noqa: ARG001 Unused function argument: `hass`
-    entry: IntegrationBlueprintConfigEntry,
-    async_add_entities: AddEntitiesCallback,
+        hass: HomeAssistant,
+        entry: Open3eDataConfigEntry,
+        async_add_entities: AddEntitiesCallback,
 ) -> None:
-    """Set up the sensor platform."""
     async_add_entities(
-        IntegrationBlueprintSensor(
+        Open3eSensor(
             coordinator=entry.runtime_data.coordinator,
-            entity_description=entity_description,
+            description=description
         )
-        for entity_description in ENTITY_DESCRIPTIONS
+        for description in SENSORS
+        if description.has_features(entry.runtime_data.coordinator.config)
     )
 
 
-class IntegrationBlueprintSensor(IntegrationBlueprintEntity, SensorEntity):
-    """open3e-ha Sensor class."""
+class Open3eSensor(Open3eEntity, SensorEntity):
+    entity_description: Open3eSensorEntityDescription
 
     def __init__(
-        self,
-        coordinator: BlueprintDataUpdateCoordinator,
-        entity_description: SensorEntityDescription,
-    ) -> None:
-        """Initialize the sensor class."""
-        super().__init__(coordinator)
-        self.entity_description = entity_description
+            self,
+            coordinator: Open3eDataUpdateCoordinator,
+            description: Open3eSensorEntityDescription
+    ):
+        super().__init__(coordinator, description)
 
     @property
-    def native_value(self) -> str | None:
-        """Return the native value of the sensor."""
-        return self.coordinator.data.get("body")
+    def available(self):
+        """Return True if entity is available."""
+        return self._attr_native_value is not None
+
+    async def async_on_data(self, feature_id: int) -> None:
+        """Handle updated data from MQTT."""
+        self._attr_native_value = self.__filter_data(self.data[feature_id])
+        self.async_write_ha_state()
+
+    def __filter_data(self, data: Any):
+        return self.entity_description.data_retriever(data)

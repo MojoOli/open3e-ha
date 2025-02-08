@@ -2,19 +2,45 @@
   "config": {
     "step": {
       "user": {
-        "description": "If you need help with the configuration have a look here: https://github.com/ludeeus/integration_blueprint",
+        "description": "Please enter the command topic for your Open3e server. Use the default if you haven't changed it.",
         "data": {
-          "mqtt_cmnd": "MQTT Command"
+          "mqtt_cmnd": "Open3e MQTT Command Topic"
         }
       }
     },
     "error": {
-      "auth": "Username/Password is wrong.",
-      "connection": "Unable to connect to the server.",
-      "unknown": "Unknown error occurred."
+      "communication": "Unable to communicate with the Open3e server. Make sure the command topic is correct, the Open3e server is running and connected to the MQTT client of HomeAssistant.",
+      "mqtt": "Unable to communicate with the MQTT server. Make sure the MQTT server is running."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "flow_temperature": {
+        "name": "Flow temperature"
+      },
+      "return_temperature": {
+        "name": "Return temperature"
+      },
+      "domestic_hot_water_temperature": {
+        "name": "Domestic Hot Water temperature"
+      },
+      "water_pressure": {
+        "name": "Water pressure"
+      },
+      "energy_consumption_central_heating_today": {
+        "name": "Energy consumption central heating today"
+      },
+      "energy_consumption_domestic_hot_water_today": {
+        "name": "Energy consumption domestic hot water today"
+      },
+      "energy_consumption_cooling_today": {
+        "name": "Energy consumption cooling today"
+      }
     },
-    "abort": {
-      "already_configured": "This entry is already configured."
+    "climate": {
+      "climate_circuit_1": {
+        "name": "Climate circuit 1"
+      }
     }
   }
 }

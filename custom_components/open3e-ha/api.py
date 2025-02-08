@@ -2,166 +2,153 @@
 
 from __future__ import annotations
 
-import socket
-from typing import Any, Callable
+import asyncio
+import logging
 
-import aiohttp
-import async_timeout
 from homeassistant.components import mqtt
+from homeassistant.components.mqtt import ReceiveMessage
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers.json import json_dumps
+from homeassistant.util.json import json_loads
 
-from .const import MQTT_CONFIG_TOPIC
+from .const import MQTT_CONFIG_TOPIC, MQTT_CONFIG_PAYLOAD
+from .definitions.open3e_data import Open3eDataConfig
+
+_LOGGER = logging.getLogger(__name__)
 
 
-class IntegrationBlueprintApiClientError(Exception):
+class Open3eApiClientError(Exception):
     """Exception to indicate a general API error."""
 
 
-class IntegrationBlueprintApiClientCommunicationError(
-    IntegrationBlueprintApiClientError,
+class Open3eClientCommunicationError(
+    Open3eApiClientError,
 ):
     """Exception to indicate a communication error."""
 
 
-class IntegrationBlueprintApiClientAuthenticationError(
-    IntegrationBlueprintApiClientError,
+class Open3eClientMQTTCommunicationError(
+    Open3eApiClientError,
 ):
-    """Exception to indicate an authentication error."""
-
-
-def _verify_response_or_raise(response: aiohttp.ClientResponse) -> None:
-    """Verify that the response is valid."""
-    if response.status in (401, 403):
-        msg = "Invalid credentials"
-        raise IntegrationBlueprintApiClientAuthenticationError(
-            msg,
-        )
-    response.raise_for_status()
-
-
-class IntegrationBlueprintApiClient:
-    """Sample API Client."""
-
-    def __init__(
-            self,
-            username: str,
-            password: str,
-            session: aiohttp.ClientSession,
-    ) -> None:
-        """Sample API Client."""
-        self._username = username
-        self._password = password
-        self._session = session
-
-    async def async_get_data(self) -> Any:
-        """Get data from the API."""
-        return await self._api_wrapper(
-            method="get",
-            url="https://jsonplaceholder.typicode.com/posts/1",
-        )
-
-    async def async_set_title(self, value: str) -> Any:
-        """Get data from the API."""
-        return await self._api_wrapper(
-            method="patch",
-            url="https://jsonplaceholder.typicode.com/posts/1",
-            data={"title": value},
-            headers={"Content-type": "application/json; charset=UTF-8"},
-        )
-
-    async def _api_wrapper(
-            self,
-            method: str,
-            url: str,
-            data: dict | None = None,
-            headers: dict | None = None,
-    ) -> Any:
-        """Get information from the API."""
-        try:
-            async with async_timeout.timeout(10):
-                response = await self._session.request(
-                    method=method,
-                    url=url,
-                    headers=headers,
-                    json=data,
-                )
-                _verify_response_or_raise(response)
-                return await response.json()
-
-        except TimeoutError as exception:
-            msg = f"Timeout error fetching information - {exception}"
-            raise IntegrationBlueprintApiClientCommunicationError(
-                msg,
-            ) from exception
-        except (aiohttp.ClientError, socket.gaierror) as exception:
-            msg = f"Error fetching information - {exception}"
-            raise IntegrationBlueprintApiClientCommunicationError(
-                msg,
-            ) from exception
-        except Exception as exception:  # pylint: disable=broad-except
-            msg = f"Something really wrong happened! - {exception}"
-            raise IntegrationBlueprintApiClientError(
-                msg,
-            ) from exception
+    """Exception to indicate a MQTT communication error."""
 
 
 class Open3eMqttClient:
     """Open3e Mqtt Client."""
 
-    _mqtt_cmd: str
+    __mqtt_cmd: str
+    __config: Open3eDataConfig = {}
 
     def __init__(
             self,
             mqtt_cmd: str
     ) -> None:
-        """Sample API Client."""
-        self._mqtt_cmd = mqtt_cmd
+        self.__mqtt_cmd = mqtt_cmd
 
-    async def async_request_config(self, hass: HomeAssistant, config_callback: Callable):
-        # mqtt.subscribe(hass=hass, topic=MQTT_CONFIG_TOPIC, msg_callback=config_callback)
-        """Get data from the API."""
-        return await mqtt.async_publish(hass=hass, topic=self._mqtt_cmd, payload='{"mode":"config"}')
+    async def async_get_open3e_config(self, hass: HomeAssistant):
+        if self.__config:
+            return self.__config
 
-    # async def async_set_title(self, value: str) -> Any:
-    #     """Get data from the API."""
-    #     return await self._api_wrapper(
-    #         method="patch",
-    #         url="https://jsonplaceholder.typicode.com/posts/1",
-    #         data={"title": value},
-    #         headers={"Content-type": "application/json; charset=UTF-8"},
-    #     )
-    #
-    # async def _api_wrapper(
-    #         self,
-    #         method: str,
-    #         url: str,
-    #         data: dict | None = None,
-    #         headers: dict | None = None,
-    # ) -> Any:
-    #     """Get information from the API."""
-    #     try:
-    #         async with async_timeout.timeout(10):
-    #             response = await self._session.request(
-    #                 method=method,
-    #                 url=url,
-    #                 headers=headers,
-    #                 json=data,
-    #             )
-    #             _verify_response_or_raise(response)
-    #             return await response.json()
-    #
-    #     except TimeoutError as exception:
-    #         msg = f"Timeout error fetching information - {exception}"
-    #         raise IntegrationBlueprintApiClientCommunicationError(
-    #             msg,
-    #         ) from exception
-    #     except (aiohttp.ClientError, socket.gaierror) as exception:
-    #         msg = f"Error fetching information - {exception}"
-    #         raise IntegrationBlueprintApiClientCommunicationError(
-    #             msg,
-    #         ) from exception
-    #     except Exception as exception:  # pylint: disable=broad-except
-    #         msg = f"Something really wrong happened! - {exception}"
-    #         raise IntegrationBlueprintApiClientError(
-    #             msg,
-    #         ) from exception
+        try:
+            subscription = await mqtt.async_subscribe(
+                hass=hass,
+                topic=MQTT_CONFIG_TOPIC,
+                msg_callback=self._set_config
+            )
+
+            # Subscribing takes a bit longer than waiting for the async method,
+            # so wait for 1 second just to be sure that we are subscribed
+            await asyncio.sleep(1)
+
+            await mqtt.async_publish(hass=hass, topic=self.__mqtt_cmd, payload=MQTT_CONFIG_PAYLOAD)
+        except Exception as exception:
+            raise Open3eClientMQTTCommunicationError(f"Couldn't communicate with MQTT server.") from exception
+
+        # Wait until data was sent, or we time out after 10 seconds
+        timeout = 0
+
+        while not self.__config and timeout < 10:
+            await asyncio.sleep(1)
+            timeout = timeout + 1
+
+        # Remove subscription
+        subscription()
+
+        if not self.__config:
+            raise Open3eClientCommunicationError(
+                f"Couldn't communicate with Open3e server via MQTT {self.__mqtt_cmd}."
+            )
+
+        return self.__config
+
+    def _set_config(self, message: ReceiveMessage):
+        self.__config = Open3eDataConfig.from_dict(json_loads(message.payload))
+
+    async def async_request_data(self, hass: HomeAssistant, ids: list[int]):
+        try:
+            data = ",".join(map(str, ids))
+            await mqtt.async_publish(hass=hass, topic=self.__mqtt_cmd,
+                                     payload=f'{{"mode": "read-json", "data":[{data}]}}')
+        except Exception as exception:
+            raise Open3eClientMQTTCommunicationError(f"Couldn't communicate with MQTT server.") from exception
+
+    async def async_set_target_temperature(self, hass: HomeAssistant, set_target_temperature_feature_id: int,
+                                           temperature: float):
+        try:
+            _LOGGER.debug(f"Setting temperature of feature ID {set_target_temperature_feature_id} to {temperature}")
+            await mqtt.async_publish(
+                hass=hass,
+                topic=self.__mqtt_cmd,
+                payload=self._write_json_payload(
+                    feature_id=set_target_temperature_feature_id,
+                    data={
+                        "Comfort": 27.0,
+                        "Standard": temperature,
+                        "Reduced": 23.0,
+                        "Unknown2": "0000",
+                        "Unknown1": 0
+                    }
+                )
+            )
+        except Exception as exception:
+            raise Open3eClientMQTTCommunicationError(f"Couldn't communicate with MQTT server.") from exception
+
+    async def async_turn_hvac_on(self, hass: HomeAssistant, power_hvac_feature_id: int):
+        try:
+            _LOGGER.debug(f"Turning HVAC off with feature ID {power_hvac_feature_id}")
+            await mqtt.async_publish(
+                hass=hass,
+                topic=self.__mqtt_cmd,
+                payload=self._write_raw_payload(
+                    feature_id=power_hvac_feature_id,
+                    data="0102"
+                )
+            )
+        except Exception as exception:
+            raise Open3eClientMQTTCommunicationError(f"Couldn't communicate with MQTT server.") from exception
+
+    async def async_turn_hvac_off(self, hass: HomeAssistant, power_hvac_feature_id: int):
+        try:
+            _LOGGER.debug(f"Turning HVAC off with feature ID {power_hvac_feature_id}")
+            await mqtt.async_publish(
+                hass=hass,
+                topic=self.__mqtt_cmd,
+                payload=self._write_raw_payload(
+                    feature_id=power_hvac_feature_id,
+                    data="0000"
+                )
+            )
+        except Exception as exception:
+            raise Open3eClientMQTTCommunicationError(f"Couldn't communicate with MQTT server.") from exception
+
+    @staticmethod
+    def _request_json_payload(feature_ids: list[int]):
+        return json_dumps({"mode": "read-json", "data": feature_ids})
+
+    @staticmethod
+    def _write_json_payload(feature_id: int, data: any):
+        return json_dumps({"mode": "write", "data": [[feature_id, json_dumps(data)]]})
+
+    @staticmethod
+    def _write_raw_payload(feature_id: int, data: str):
+        return json_dumps({"mode": "write-raw", "data": [[feature_id, data]]})
