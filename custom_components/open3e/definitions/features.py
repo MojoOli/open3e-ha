@@ -18,13 +18,16 @@ class Features:
         FlowTemperature = Feature(id=268, refresh_interval=5)
         ReturnTemperature = Feature(id=269, refresh_interval=5)
         DomesticHotWaterTemperature = Feature(id=271, refresh_interval=5)
+        OutsideTemperature = Feature(id=274, refresh_interval=5)
         FlowCircuit1Temperature = Feature(id=284, refresh_interval=5)
+        PrimaryHeatExchangerTemperature = Feature(id=320, refresh_interval=5)
         Room1Temperature = Feature(id=334, refresh_interval=5)
+        SecondaryHeatExchangerTemperature = Feature(id=355, refresh_interval=5)
         SetTargetTemperature = Feature(id=424, refresh_interval=None)
         TargetTemperature = Feature(id=1643, refresh_interval=5)
 
     class Pressure:
-        WaterPressure = Feature(id=318, refresh_interval=5)
+        WaterPressure = Feature(id=318, refresh_interval=15)
 
     class Energy:
         EnergyConsumptionCentralHeatingToday = Feature(id=548, refresh_interval=300)
@@ -37,3 +40,6 @@ class Features:
     class State:
         Hvac = Feature(id=1415, refresh_interval=30)
         Heater = Feature(id=2352, refresh_interval=30)
+
+    class Speed:
+        CentralHeatingPump = Feature(id=381, refresh_interval=10)

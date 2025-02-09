@@ -35,6 +35,18 @@
       },
       "energy_consumption_cooling_today": {
         "name": "Stromverbrauch Kühlung heute"
+      },
+      "outside_temperature": {
+        "name": "Außentemperatur"
+      },
+      "primary_heat_exchanger_temperature": {
+        "name": "Primärer Wärmetauscher Temperatur"
+      },
+      "secondary_heat_exchanger_temperature": {
+        "name": "Sekundärer Wärmetauscher Temperatur"
+      },
+      "central_heating_pump_speed_percentage": {
+        "name": "Primärpumpe Drehzahl Prozent"
       }
     },
     "climate": {

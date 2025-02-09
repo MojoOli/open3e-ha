@@ -35,6 +35,18 @@
       },
       "energy_consumption_cooling_today": {
         "name": "Energy consumption cooling today"
+      },
+      "outside_temperature": {
+        "name": "Outside temperature"
+      },
+      "primary_heat_exchanger_temperature": {
+        "name": "Primary heat exchanger temperature"
+      },
+      "secondary_heat_exchanger_temperature": {
+        "name": "Secondary heat exchanger temperature"
+      },
+      "central_heating_pump_speed_percentage": {
+        "name": "Central heating pump speed percentage"
       }
     },
     "climate": {

@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import Callable, Any
 
 from homeassistant.components.sensor import SensorEntityDescription, SensorDeviceClass, SensorStateClass
-from homeassistant.const import UnitOfTemperature, UnitOfPressure, UnitOfEnergy
+from homeassistant.const import UnitOfTemperature, UnitOfPressure, UnitOfEnergy, UnitOfSpeed, PERCENTAGE
 from homeassistant.util.json import json_loads
 
 from .entity_description import Open3eEntityDescription
@@ -93,5 +93,41 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="energy_consumption_cooling_today",
         translation_key="energy_consumption_cooling_today",
         data_retriever=SensorDataRetriever.TODAY
-    )
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.OutsideTemperature],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="outside_temperature",
+        translation_key="outside_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.PrimaryHeatExchangerTemperature],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="primary_heat_exchanger_temperature",
+        translation_key="primary_heat_exchanger_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.SecondaryHeatExchangerTemperature],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="secondary_heat_exchanger_temperature",
+        translation_key="secondary_heat_exchanger_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Speed.CentralHeatingPump],
+        device_class=SensorDeviceClass.POWER_FACTOR,
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="central_heating_pump_speed_percentage",
+        translation_key="central_heating_pump_speed_percentage",
+        data_retriever=SensorDataRetriever.RAW
+    ),
 )
