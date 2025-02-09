@@ -16,7 +16,7 @@ class Open3eClimateEntityDescription(
     flow_temperature_feature: Feature | None = None
     room_temperature_feature: Feature | None = None
     target_temperature_feature: Feature | None = None
-    set_target_temperature_feature: Feature | None = None
+    programs_temperature_feature: Feature | None = None
     fan_power_state_feature: Feature | None = None
     heater_state_feature: Feature | None = None
 
@@ -29,13 +29,14 @@ CLIMATE: tuple[Open3eClimateEntityDescription, ...] = (
             Features.State.Hvac,
             Features.Temperature.TargetTemperature,
             Features.Power.FanPower,
-            Features.State.Heater
+            Features.State.Heater,
+            Features.Temperature.ProgramsTemperatureCircuit1
         ],
         hvac_mode_feature=Features.State.Hvac,
         flow_temperature_feature=Features.Temperature.FlowCircuit1Temperature,
         room_temperature_feature=Features.Temperature.Room1Temperature,
         target_temperature_feature=Features.Temperature.TargetTemperature,
-        set_target_temperature_feature=Features.Temperature.SetTargetTemperature,
+        programs_temperature_feature=Features.Temperature.ProgramsTemperatureCircuit1,
         fan_power_state_feature=Features.Power.FanPower,
         heater_state_feature=Features.State.Heater,
         key="climate_circuit_1",

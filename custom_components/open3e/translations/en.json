@@ -53,6 +53,17 @@
       "climate_circuit_1": {
         "name": "Climate circuit 1"
       }
+    },
+    "number": {
+      "circuit_1_comfort_temperature": {
+        "name": "Climate circuit 1 Comfort temperature"
+      },
+      "circuit_1_standard_temperature": {
+        "name": "Climate circuit 1 Standard temperature"
+      },
+      "circuit_1_reduced_temperature": {
+        "name": "Climate circuit 1 Reduced temperature"
+      }
     }
   }
 }

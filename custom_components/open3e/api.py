@@ -92,22 +92,20 @@ class Open3eMqttClient:
         except Exception as exception:
             raise Open3eClientMQTTCommunicationError(f"Couldn't communicate with MQTT server.") from exception
 
-    async def async_set_target_temperature(self, hass: HomeAssistant, set_target_temperature_feature_id: int,
-                                           temperature: float):
+    async def async_set_programs(
+            self,
+            hass: HomeAssistant,
+            set_programs_feature_id: int,
+            programs
+    ):
         try:
-            _LOGGER.debug(f"Setting temperature of feature ID {set_target_temperature_feature_id} to {temperature}")
+            _LOGGER.debug(f"Setting programs of feature ID {set_programs_feature_id}")
             await mqtt.async_publish(
                 hass=hass,
                 topic=self.__mqtt_cmd,
                 payload=self._write_json_payload(
-                    feature_id=set_target_temperature_feature_id,
-                    data={
-                        "Comfort": 27.0,
-                        "Standard": temperature,
-                        "Reduced": 23.0,
-                        "Unknown2": "0000",
-                        "Unknown1": 0
-                    }
+                    feature_id=set_programs_feature_id,
+                    data=programs
                 )
             )
         except Exception as exception:

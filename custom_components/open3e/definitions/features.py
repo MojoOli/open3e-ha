@@ -23,7 +23,7 @@ class Features:
         PrimaryHeatExchangerTemperature = Feature(id=320, refresh_interval=5)
         Room1Temperature = Feature(id=334, refresh_interval=5)
         SecondaryHeatExchangerTemperature = Feature(id=355, refresh_interval=5)
-        SetTargetTemperature = Feature(id=424, refresh_interval=None)
+        ProgramsTemperatureCircuit1 = Feature(id=424, refresh_interval=30)
         TargetTemperature = Feature(id=1643, refresh_interval=5)
 
     class Pressure:

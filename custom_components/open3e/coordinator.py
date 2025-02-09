@@ -158,12 +158,24 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
 
         return None
 
-    async def async_set_target_temperature(self, set_target_temperature_feature_id: int, temperature: float,
-                                           target_temperature_feature_id: int):
-        await self.__client.async_set_target_temperature(self.hass, set_target_temperature_feature_id, temperature)
+    async def async_set_programs(
+            self,
+            set_programs_feature_id: int,
+            target_temperature_feature_id: int | None,
+            programs
+    ):
+        await self.__client.async_set_programs(
+            self.hass,
+            set_programs_feature_id,
+            programs
+        )
         # Wait for 2 seconds to request temperature
         await asyncio.sleep(2)
-        await self.__client.async_request_data(self.hass, [target_temperature_feature_id])
+
+        if target_temperature_feature_id is None:
+            await self.__client.async_request_data(self.hass, [set_programs_feature_id])
+        else:
+            await self.__client.async_request_data(self.hass, [set_programs_feature_id, target_temperature_feature_id])
 
     async def async_turn_hvac_on(self, power_hvac_feature_id: int):
         await self.__client.async_turn_hvac_on(self.hass, power_hvac_feature_id)

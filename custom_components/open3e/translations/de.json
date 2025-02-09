@@ -53,6 +53,17 @@
       "climate_circuit_1": {
         "name": "Heiz-Kühlkreis 1"
       }
+    },
+    "number": {
+      "circuit_1_comfort_temperature": {
+        "name": "Heiz-Kühlkreis 1 Komfort Temperatur"
+      },
+      "circuit_1_standard_temperature": {
+        "name": "Heiz-Kühlkreis 1 Standard Temperatur"
+      },
+      "circuit_1_reduced_temperature": {
+        "name": "Heiz-Kühlkreis 1 Reduzierte Temperatur"
+      }
     }
   }
 }

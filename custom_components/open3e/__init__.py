@@ -18,6 +18,7 @@ from .ha_data import Open3eDataUpdateCoordinator
 PLATFORMS: list[Platform] = [
     Platform.SENSOR,
     Platform.CLIMATE,
+    Platform.NUMBER,
 ]
 
 
