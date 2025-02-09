@@ -52,7 +52,6 @@ class CoordinatorEndpoint:
         self.last_refresh = now
 
 
-# https://developers.home-assistant.io/docs/integration_fetching_data#coordinated-single-api-poll-for-data-for-all-entities
 class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
     """
     Class to manage requesting for MQTT updates.
