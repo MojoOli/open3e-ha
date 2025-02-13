@@ -1,4 +1,4 @@
-"""Sensor platform for open3e."""
+"""Climate platform for open3e."""
 
 from __future__ import annotations
 
