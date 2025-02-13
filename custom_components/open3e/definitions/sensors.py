@@ -128,6 +128,6 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="central_heating_pump_speed_percentage",
         translation_key="central_heating_pump_speed_percentage",
-        data_retriever=SensorDataRetriever.RAW
+        data_retriever=SensorDataRetriever.ACTUAL
     ),
 )
