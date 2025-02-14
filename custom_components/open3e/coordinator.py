@@ -15,6 +15,7 @@ from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 from .api import Open3eMqttClient
 from .const import DOMAIN
 from .definitions.open3e_data import Open3eDataConfig
+from .errors import Open3eCoordinatorUpdateFailed
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -59,6 +60,8 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
     """
 
     __client: Open3eMqttClient
+    __server_available = None
+
     config: Open3eDataConfig
     __device_registry: DeviceRegistry
     __entry_id: str
@@ -86,6 +89,12 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
         This method will be called automatically during
         coordinator.async_config_entry_first_refresh.
         """
+        await self.__client.async_check_availability(self.hass)
+        await self.__client.async_subscribe_to_availability(
+            hass=self.hass,
+            callback=self.__on_availability_update
+        )
+
         self.config = await self.__client.async_get_open3e_config(self.hass)
         for device in self.config.devices:
             self.__device_registry.async_get_or_create(
@@ -99,8 +108,17 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
                 model="Vitocal",
             )
 
+    def __on_availability_update(self, available: bool):
+        self.__server_available = available
+
     async def _async_update_data(self) -> Any:
         """Update data."""
+        if self.__server_available is None:
+            return True
+
+        if self.__server_available is False:
+            raise Open3eCoordinatorUpdateFailed()
+
         now = time.time()
 
         ids = list()

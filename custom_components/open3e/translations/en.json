@@ -2,15 +2,25 @@
   "config": {
     "step": {
       "user": {
-        "description": "Please enter the command topic for your Open3e server. Use the default if you haven't changed it.",
+        "description": "Please enter the topic and command topic for your Open3e server. Use the default if you haven't changed it.",
         "data": {
+          "mqtt_topic": "Open3e MQTT Topic",
           "mqtt_cmnd": "Open3e MQTT Command Topic"
         }
       }
     },
     "error": {
-      "communication": "Unable to communicate with the Open3e server. Make sure the command topic is correct, the Open3e server is running and connected to the MQTT client of HomeAssistant.",
-      "mqtt": "Unable to communicate with the MQTT server. Make sure the MQTT server is running."
+      "timeout": "Unable to get a response from the Open3e server.",
+      "unavailable": "The Open3e server is not running.",
+      "general": "Unable to communicate with the Open3e server. Make sure the the MQTT topic and cmnd is correct, the MQTT server is running, the Open3e server is running and connected to the MQTT client of HomeAssistant."
+    }
+  },
+  "exceptions": {
+    "timeout": {
+      "message": "Request to the Open3e server timed out."
+    },
+    "unavailable": {
+      "message": "The Open3e server is unavailable."
     }
   },
   "entity": {

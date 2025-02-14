@@ -11,7 +11,7 @@ from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
 
 from .api import Open3eMqttClient
-from .const import MQTT_CMD_KEY
+from .const import MQTT_CMD_KEY, MQTT_TOPIC_KEY
 from .ha_data import Open3eDataConfigEntry, Open3eData
 from .ha_data import Open3eDataUpdateCoordinator
 
@@ -29,13 +29,16 @@ async def async_setup_entry(
 ) -> bool:
     """Set up this integration using UI."""
     client = Open3eMqttClient(
-        entry.data[MQTT_CMD_KEY]
+        mqtt_topic=entry.data[MQTT_TOPIC_KEY],
+        mqtt_cmd=entry.data[MQTT_CMD_KEY]
     )
+
     coordinator = Open3eDataUpdateCoordinator(
         hass=hass,
         client=client,
         entry_id=entry.entry_id
     )
+
     entry.runtime_data = Open3eData(
         client=client,
         coordinator=coordinator
