@@ -15,6 +15,10 @@ assignees: ''
 
 <!-- A clear and concise description of what you expected to happen -->
 
+## Screenshots
+
+<!-- Add any screenshots if applicable -->
+
 ## Steps to Reproduce
 
 1.
