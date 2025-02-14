@@ -1,5 +1,7 @@
 from enum import StrEnum
 
+from homeassistant.components.climate import PRESET_COMFORT, PRESET_ECO, PRESET_HOME
+
 
 class Program(StrEnum):
     Reduced = "Reduced"
@@ -19,3 +21,13 @@ class Program(StrEnum):
                 return Program.Standard
 
         return None
+
+    def to_ha_preset_mode(self):
+        return HA_PRESET_HEATING[self]
+
+
+HA_PRESET_HEATING = {
+    Program.Reduced: PRESET_ECO,
+    Program.Standard: PRESET_HOME,
+    Program.Comfort: PRESET_COMFORT
+}

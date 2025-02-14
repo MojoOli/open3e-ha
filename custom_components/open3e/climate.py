@@ -66,11 +66,11 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
 
         self._attr_temperature_unit = UnitOfTemperature.CELSIUS
         self._attr_preset_modes = [
-            Program.Reduced.name,
-            Program.Standard.name,
-            Program.Comfort.name
+            Program.Reduced.to_ha_preset_mode(),
+            Program.Standard.to_ha_preset_mode(),
+            Program.Comfort.to_ha_preset_mode()
         ]
-        self._attr_preset_mode = Program.Standard.name
+        self._attr_preset_mode = Program.Standard.to_ha_preset_mode()
         self._attr_hvac_mode = HVACMode.AUTO
         self.__current_hvac_actions = [HVACAction.IDLE]
 
@@ -113,7 +113,7 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
         if self.__current_program is None:
             return None
 
-        return self.__current_program.name
+        return self.__current_program.to_ha_preset_mode()
 
     def set_preset_mode(self, preset_mode: str) -> None:
         """Setting the preset mode is not supported."""
