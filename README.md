@@ -27,7 +27,7 @@ I only own a Vitocal, so I would appreciate any contributions regarding the othe
 ## Installation
 
 > [!TIP]
-> This integration will be added to HACS later down the line. Until then follow the installation below
+> This integration will be added to HACS later down the line. Until then, follow the installation below.
 
 You will need the [Open3e config Fork](https://github.com/MojoOli/open3e-config/tree/develop) (hoping to add it to the
 official repo in the future). Make sure to get the develop branch as only that branch has the changes. Once installed,
