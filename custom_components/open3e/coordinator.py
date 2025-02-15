@@ -15,6 +15,7 @@ from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 from .api import Open3eMqttClient
 from .const import DOMAIN
 from .definitions.open3e_data import Open3eDataConfig
+from .definitions.program import Program
 from .errors import Open3eCoordinatorUpdateFailed
 
 _LOGGER = logging.getLogger(__name__)
@@ -175,24 +176,23 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
 
         return None
 
-    async def async_set_programs(
+    async def async_set_program_temperature(
             self,
             set_programs_feature_id: int,
-            target_temperature_feature_id: int | None,
-            programs
+            program: Program,
+            temperature: float
     ):
-        await self.__client.async_set_programs(
-            self.hass,
-            set_programs_feature_id,
-            programs
+        await self.__client.async_set_program_temperature(
+            hass=self.hass,
+            set_programs_feature_id=set_programs_feature_id,
+            program=program,
+            temperature=temperature
         )
+
         # Wait for 2 seconds to request temperature
         await asyncio.sleep(2)
 
-        if target_temperature_feature_id is None:
-            await self.__client.async_request_data(self.hass, [set_programs_feature_id])
-        else:
-            await self.__client.async_request_data(self.hass, [set_programs_feature_id, target_temperature_feature_id])
+        await self.__client.async_request_data(self.hass, [set_programs_feature_id])
 
     async def async_turn_hvac_on(self, power_hvac_feature_id: int):
         await self.__client.async_turn_hvac_on(self.hass, power_hvac_feature_id)

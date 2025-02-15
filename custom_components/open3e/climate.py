@@ -79,7 +79,7 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
         """Return True if entity has a target temperature and the current flow temperature
         is not -3276.8 which is used when the circuit is not connected
         """
-        return self._attr_target_temperature is not None and self.__current_flow_temperature > -1000
+        return self.target_temperature is not None and self.__current_flow_temperature > -1000
 
     @property
     def hvac_action(self) -> HVACAction:
@@ -117,17 +117,29 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
 
         return self.__current_program.to_ha_preset_mode()
 
+    @property
+    def target_temperature(self) -> str | None:
+        """Return the current preset mode, e.g., home, away, temp.
+
+        Requires ClimateEntityFeature.PRESET_MODE.
+        """
+        if self.__current_program is None or self.__programs is None:
+            return None
+
+        return self.__programs[self.__current_program]
+
     def set_preset_mode(self, preset_mode: str) -> None:
         """Setting the preset mode is not supported."""
 
     async def async_set_temperature(self, **kwargs: Any) -> None:
         """Set new target temperature."""
-        self.__programs[self.__current_program] = kwargs["temperature"]
+        temperature = kwargs["temperature"]
+        self.__programs[self.__current_program] = temperature
 
-        await self.coordinator.async_set_programs(
+        await self.coordinator.async_set_program_temperature(
             set_programs_feature_id=self.entity_description.programs_temperature_feature.id,
-            target_temperature_feature_id=self.entity_description.target_temperature_feature.id,
-            programs=self.__programs
+            program=self.__current_program,
+            temperature=temperature
         )
 
     async def async_turn_on(self):
@@ -165,9 +177,6 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
 
             case self.entity_description.room_temperature_feature.id:
                 self.__current_room_temperature = json_loads(self.data[feature_id])["Actual"]
-
-            case self.entity_description.target_temperature_feature.id:
-                self._attr_target_temperature = json_loads(self.data[feature_id])
 
             case self.entity_description.fan_power_state_feature.id:
                 power_state = float(self.data[feature_id])

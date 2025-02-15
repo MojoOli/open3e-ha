@@ -15,6 +15,7 @@ from homeassistant.util.json import json_loads
 
 from .const import MQTT_CONFIG_TOPIC, MQTT_CONFIG_PAYLOAD
 from .definitions.open3e_data import Open3eDataConfig
+from .definitions.program import Program
 from .errors import Open3eServerTimeoutError, Open3eError, Open3eServerUnavailableError
 
 _LOGGER = logging.getLogger(__name__)
@@ -96,7 +97,7 @@ class Open3eMqttClient:
             subscription = await mqtt.async_subscribe(
                 hass=hass,
                 topic=f"{self.__mqtt_topic}/{MQTT_CONFIG_TOPIC}",
-                msg_callback=self._set_config
+                msg_callback=self.__set_config
             )
 
             # Subscribing takes a bit longer than waiting for the async method,
@@ -122,9 +123,6 @@ class Open3eMqttClient:
             if subscription is not None:
                 subscription()
 
-    def _set_config(self, message: ReceiveMessage):
-        self.__config = Open3eDataConfig.from_dict(json_loads(message.payload))
-
     async def async_request_data(self, hass: HomeAssistant, ids: list[int]):
         try:
             data = ",".join(map(str, ids))
@@ -133,20 +131,22 @@ class Open3eMqttClient:
         except Exception as exception:
             raise Open3eError(exception)
 
-    async def async_set_programs(
+    async def async_set_program_temperature(
             self,
             hass: HomeAssistant,
             set_programs_feature_id: int,
-            programs
+            program: Program,
+            temperature: float
     ):
         try:
             _LOGGER.debug(f"Setting programs of feature ID {set_programs_feature_id}")
             await mqtt.async_publish(
                 hass=hass,
                 topic=self.__mqtt_cmd,
-                payload=self._write_json_payload(
+                payload=self.__write_json_payload(
                     feature_id=set_programs_feature_id,
-                    data=programs
+                    sub_feature=program.name,
+                    data=temperature
                 )
             )
         except Exception as exception:
@@ -158,7 +158,7 @@ class Open3eMqttClient:
             await mqtt.async_publish(
                 hass=hass,
                 topic=self.__mqtt_cmd,
-                payload=self._write_raw_payload(
+                payload=self.__write_raw_payload(
                     feature_id=power_hvac_feature_id,
                     data="0102"
                 )
@@ -172,7 +172,7 @@ class Open3eMqttClient:
             await mqtt.async_publish(
                 hass=hass,
                 topic=self.__mqtt_cmd,
-                payload=self._write_raw_payload(
+                payload=self.__write_raw_payload(
                     feature_id=power_hvac_feature_id,
                     data="0000"
                 )
@@ -181,13 +181,19 @@ class Open3eMqttClient:
             raise Open3eError(exception)
 
     @staticmethod
-    def _request_json_payload(feature_ids: list[int]):
+    def __request_json_payload(feature_ids: list[int]):
         return json_dumps({"mode": "read-json", "data": feature_ids})
 
     @staticmethod
-    def _write_json_payload(feature_id: int, data: any):
-        return json_dumps({"mode": "write", "data": [[feature_id, json_dumps(data)]]})
+    def __write_json_payload(feature_id: int, sub_feature: str | None, data: any):
+        if sub_feature is None:
+            return json_dumps({"mode": "write", "data": [[feature_id, json_dumps(data)]]})
+
+        return json_dumps({"mode": "write", "data": [[f"{feature_id}.{sub_feature}", json_dumps(data)]]})
 
     @staticmethod
-    def _write_raw_payload(feature_id: int, data: str):
+    def __write_raw_payload(feature_id: int, data: str):
         return json_dumps({"mode": "write-raw", "data": [[feature_id, data]]})
+
+    def __set_config(self, message: ReceiveMessage):
+        self.__config = Open3eDataConfig.from_dict(json_loads(message.payload))

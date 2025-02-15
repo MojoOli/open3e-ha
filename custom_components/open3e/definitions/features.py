@@ -9,7 +9,7 @@ class Feature:
     """Represent the refresh interval in seconds.
     The minimum and step size is 5 seconds.
     
-    If its set to None, the feature should not be refreshed and only be used for setting data.
+    If its set to None, the feature will not be refreshed and only be used for setting data.
     """
 
 
@@ -33,10 +33,6 @@ class Features:
         ProgramsTemperatureCircuit2 = Feature(id=426, refresh_interval=30)
         ProgramsTemperatureCircuit3 = Feature(id=428, refresh_interval=30)
         ProgramsTemperatureCircuit4 = Feature(id=430, refresh_interval=30)
-        TargetTemperatureCircuit1 = Feature(id=1643, refresh_interval=5)
-        TargetTemperatureCircuit2 = Feature(id=1644, refresh_interval=5)
-        TargetTemperatureCircuit3 = Feature(id=1645, refresh_interval=5)
-        TargetTemperatureCircuit4 = Feature(id=1646, refresh_interval=5)
 
     class Pressure:
         WaterPressure = Feature(id=318, refresh_interval=15)

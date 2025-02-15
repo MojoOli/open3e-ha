@@ -15,7 +15,6 @@ class Open3eClimateEntityDescription(
     hvac_mode_feature: Feature | None = None
     flow_temperature_feature: Feature | None = None
     room_temperature_feature: Feature | None = None
-    target_temperature_feature: Feature | None = None
     programs_temperature_feature: Feature | None = None
     fan_power_state_feature: Feature | None = None
     heater_state_feature: Feature | None = None
@@ -27,7 +26,6 @@ CLIMATE: tuple[Open3eClimateEntityDescription, ...] = (
             Features.Temperature.FlowTemperatureCircuit1,
             Features.Temperature.Room1Temperature,
             Features.State.Hvac,
-            Features.Temperature.TargetTemperatureCircuit1,
             Features.Power.FanPower,
             Features.State.Heater,
             Features.Temperature.ProgramsTemperatureCircuit1
@@ -35,7 +33,6 @@ CLIMATE: tuple[Open3eClimateEntityDescription, ...] = (
         hvac_mode_feature=Features.State.Hvac,
         flow_temperature_feature=Features.Temperature.FlowTemperatureCircuit1,
         room_temperature_feature=Features.Temperature.Room1Temperature,
-        target_temperature_feature=Features.Temperature.TargetTemperatureCircuit1,
         programs_temperature_feature=Features.Temperature.ProgramsTemperatureCircuit1,
         fan_power_state_feature=Features.Power.FanPower,
         heater_state_feature=Features.State.Heater,
@@ -47,7 +44,6 @@ CLIMATE: tuple[Open3eClimateEntityDescription, ...] = (
             Features.Temperature.FlowTemperatureCircuit2,
             Features.Temperature.Room2Temperature,
             Features.State.Hvac,
-            Features.Temperature.TargetTemperatureCircuit2,
             Features.Power.FanPower,
             Features.State.Heater,
             Features.Temperature.ProgramsTemperatureCircuit2
@@ -55,7 +51,6 @@ CLIMATE: tuple[Open3eClimateEntityDescription, ...] = (
         hvac_mode_feature=Features.State.Hvac,
         flow_temperature_feature=Features.Temperature.FlowTemperatureCircuit2,
         room_temperature_feature=Features.Temperature.Room2Temperature,
-        target_temperature_feature=Features.Temperature.TargetTemperatureCircuit2,
         programs_temperature_feature=Features.Temperature.ProgramsTemperatureCircuit2,
         fan_power_state_feature=Features.Power.FanPower,
         heater_state_feature=Features.State.Heater,
@@ -68,7 +63,6 @@ CLIMATE: tuple[Open3eClimateEntityDescription, ...] = (
             Features.Temperature.FlowTemperatureCircuit3,
             Features.Temperature.Room3Temperature,
             Features.State.Hvac,
-            Features.Temperature.TargetTemperatureCircuit3,
             Features.Power.FanPower,
             Features.State.Heater,
             Features.Temperature.ProgramsTemperatureCircuit3
@@ -76,7 +70,6 @@ CLIMATE: tuple[Open3eClimateEntityDescription, ...] = (
         hvac_mode_feature=Features.State.Hvac,
         flow_temperature_feature=Features.Temperature.FlowTemperatureCircuit3,
         room_temperature_feature=Features.Temperature.Room3Temperature,
-        target_temperature_feature=Features.Temperature.TargetTemperatureCircuit3,
         programs_temperature_feature=Features.Temperature.ProgramsTemperatureCircuit3,
         fan_power_state_feature=Features.Power.FanPower,
         heater_state_feature=Features.State.Heater,
@@ -89,7 +82,6 @@ CLIMATE: tuple[Open3eClimateEntityDescription, ...] = (
             Features.Temperature.FlowTemperatureCircuit4,
             Features.Temperature.Room4Temperature,
             Features.State.Hvac,
-            Features.Temperature.TargetTemperatureCircuit4,
             Features.Power.FanPower,
             Features.State.Heater,
             Features.Temperature.ProgramsTemperatureCircuit4
@@ -97,7 +89,6 @@ CLIMATE: tuple[Open3eClimateEntityDescription, ...] = (
         hvac_mode_feature=Features.State.Hvac,
         flow_temperature_feature=Features.Temperature.FlowTemperatureCircuit4,
         room_temperature_feature=Features.Temperature.Room4Temperature,
-        target_temperature_feature=Features.Temperature.TargetTemperatureCircuit4,
         programs_temperature_feature=Features.Temperature.ProgramsTemperatureCircuit4,
         fan_power_state_feature=Features.Power.FanPower,
         heater_state_feature=Features.State.Heater,

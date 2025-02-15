@@ -59,10 +59,10 @@ class Open3eNumber(Open3eEntity, NumberEntity):
         """Set new value."""
         self.__programs[self.entity_description.program.name] = value
 
-        await self.coordinator.async_set_programs(
+        await self.coordinator.async_set_program_temperature(
             set_programs_feature_id=self.entity_description.poll_data_features[0].id,
-            target_temperature_feature_id=None,
-            programs=self.__programs
+            program=self.entity_description.program,
+            temperature=value
         )
 
     async def async_on_data(self, feature_id: int) -> None:
