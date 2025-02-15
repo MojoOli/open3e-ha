@@ -23,36 +23,36 @@ class Open3eClimateEntityDescription(
 CLIMATE: tuple[Open3eClimateEntityDescription, ...] = (
     Open3eClimateEntityDescription(
         poll_data_features=[
-            Features.Temperature.FlowTemperatureCircuit1,
-            Features.Temperature.Room1Temperature,
+            Features.Temperature.FlowCircuit1,
+            Features.Temperature.Room1,
             Features.State.Hvac,
-            Features.Power.FanPower,
+            Features.Power.Fan,
             Features.State.Heater,
-            Features.Temperature.ProgramsTemperatureCircuit1
+            Features.Temperature.ProgramsCircuit1
         ],
         hvac_mode_feature=Features.State.Hvac,
-        flow_temperature_feature=Features.Temperature.FlowTemperatureCircuit1,
-        room_temperature_feature=Features.Temperature.Room1Temperature,
-        programs_temperature_feature=Features.Temperature.ProgramsTemperatureCircuit1,
-        fan_power_state_feature=Features.Power.FanPower,
+        flow_temperature_feature=Features.Temperature.FlowCircuit1,
+        room_temperature_feature=Features.Temperature.Room1,
+        programs_temperature_feature=Features.Temperature.ProgramsCircuit1,
+        fan_power_state_feature=Features.Power.Fan,
         heater_state_feature=Features.State.Heater,
         key="climate_circuit_1",
         translation_key="climate_circuit_1"
     ),
     Open3eClimateEntityDescription(
         poll_data_features=[
-            Features.Temperature.FlowTemperatureCircuit2,
-            Features.Temperature.Room2Temperature,
+            Features.Temperature.FlowCircuit2,
+            Features.Temperature.Room2,
             Features.State.Hvac,
-            Features.Power.FanPower,
+            Features.Power.Fan,
             Features.State.Heater,
-            Features.Temperature.ProgramsTemperatureCircuit2
+            Features.Temperature.ProgramsCircuit2
         ],
         hvac_mode_feature=Features.State.Hvac,
-        flow_temperature_feature=Features.Temperature.FlowTemperatureCircuit2,
-        room_temperature_feature=Features.Temperature.Room2Temperature,
-        programs_temperature_feature=Features.Temperature.ProgramsTemperatureCircuit2,
-        fan_power_state_feature=Features.Power.FanPower,
+        flow_temperature_feature=Features.Temperature.FlowCircuit2,
+        room_temperature_feature=Features.Temperature.Room2,
+        programs_temperature_feature=Features.Temperature.ProgramsCircuit2,
+        fan_power_state_feature=Features.Power.Fan,
         heater_state_feature=Features.State.Heater,
         key="climate_circuit_2",
         translation_key="climate_circuit_2",
@@ -60,18 +60,18 @@ CLIMATE: tuple[Open3eClimateEntityDescription, ...] = (
     ),
     Open3eClimateEntityDescription(
         poll_data_features=[
-            Features.Temperature.FlowTemperatureCircuit3,
-            Features.Temperature.Room3Temperature,
+            Features.Temperature.FlowCircuit3,
+            Features.Temperature.Room3,
             Features.State.Hvac,
-            Features.Power.FanPower,
+            Features.Power.Fan,
             Features.State.Heater,
-            Features.Temperature.ProgramsTemperatureCircuit3
+            Features.Temperature.ProgramsCircuit3
         ],
         hvac_mode_feature=Features.State.Hvac,
-        flow_temperature_feature=Features.Temperature.FlowTemperatureCircuit3,
-        room_temperature_feature=Features.Temperature.Room3Temperature,
-        programs_temperature_feature=Features.Temperature.ProgramsTemperatureCircuit3,
-        fan_power_state_feature=Features.Power.FanPower,
+        flow_temperature_feature=Features.Temperature.FlowCircuit3,
+        room_temperature_feature=Features.Temperature.Room3,
+        programs_temperature_feature=Features.Temperature.ProgramsCircuit3,
+        fan_power_state_feature=Features.Power.Fan,
         heater_state_feature=Features.State.Heater,
         key="climate_circuit_3",
         translation_key="climate_circuit_3",
@@ -79,18 +79,18 @@ CLIMATE: tuple[Open3eClimateEntityDescription, ...] = (
     ),
     Open3eClimateEntityDescription(
         poll_data_features=[
-            Features.Temperature.FlowTemperatureCircuit4,
-            Features.Temperature.Room4Temperature,
+            Features.Temperature.FlowCircuit4,
+            Features.Temperature.Room4,
             Features.State.Hvac,
-            Features.Power.FanPower,
+            Features.Power.Fan,
             Features.State.Heater,
-            Features.Temperature.ProgramsTemperatureCircuit4
+            Features.Temperature.ProgramsCircuit4
         ],
         hvac_mode_feature=Features.State.Hvac,
-        flow_temperature_feature=Features.Temperature.FlowTemperatureCircuit4,
-        room_temperature_feature=Features.Temperature.Room4Temperature,
-        programs_temperature_feature=Features.Temperature.ProgramsTemperatureCircuit4,
-        fan_power_state_feature=Features.Power.FanPower,
+        flow_temperature_feature=Features.Temperature.FlowCircuit4,
+        room_temperature_feature=Features.Temperature.Room4,
+        programs_temperature_feature=Features.Temperature.ProgramsCircuit4,
+        fan_power_state_feature=Features.Power.Fan,
         heater_state_feature=Features.State.Heater,
         key="climate_circuit_4",
         translation_key="climate_circuit_4",

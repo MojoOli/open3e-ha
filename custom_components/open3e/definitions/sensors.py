@@ -32,7 +32,7 @@ class Open3eSensorEntityDescription(
 
 SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
     Open3eSensorEntityDescription(
-        poll_data_features=[Features.Temperature.FlowTemperature],
+        poll_data_features=[Features.Temperature.Flow],
         device_class=SensorDeviceClass.TEMPERATURE,
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         state_class=SensorStateClass.MEASUREMENT,
@@ -41,7 +41,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.ACTUAL
     ),
     Open3eSensorEntityDescription(
-        poll_data_features=[Features.Temperature.ReturnTemperature],
+        poll_data_features=[Features.Temperature.Return],
         device_class=SensorDeviceClass.TEMPERATURE,
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         state_class=SensorStateClass.MEASUREMENT,
@@ -50,7 +50,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.ACTUAL
     ),
     Open3eSensorEntityDescription(
-        poll_data_features=[Features.Temperature.DomesticHotWaterTemperature],
+        poll_data_features=[Features.Temperature.DomesticHotWater],
         device_class=SensorDeviceClass.TEMPERATURE,
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         state_class=SensorStateClass.MEASUREMENT,
@@ -59,7 +59,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.ACTUAL
     ),
     Open3eSensorEntityDescription(
-        poll_data_features=[Features.Pressure.WaterPressure],
+        poll_data_features=[Features.Pressure.Water],
         device_class=SensorDeviceClass.PRESSURE,
         native_unit_of_measurement=UnitOfPressure.BAR,
         state_class=SensorStateClass.MEASUREMENT,
@@ -90,7 +90,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.RAW
     ),
     Open3eSensorEntityDescription(
-        poll_data_features=[Features.Energy.EnergyConsumptionCentralHeatingToday],
+        poll_data_features=[Features.Energy.CentralHeatingToday],
         device_class=SensorDeviceClass.ENERGY,
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         state_class=SensorStateClass.TOTAL_INCREASING,
@@ -99,7 +99,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.TODAY
     ),
     Open3eSensorEntityDescription(
-        poll_data_features=[Features.Energy.EnergyConsumptionDomesticHotWaterToday],
+        poll_data_features=[Features.Energy.DomesticHotWaterToday],
         device_class=SensorDeviceClass.ENERGY,
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         state_class=SensorStateClass.TOTAL_INCREASING,
@@ -108,7 +108,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.TODAY
     ),
     Open3eSensorEntityDescription(
-        poll_data_features=[Features.Energy.EnergyConsumptionCoolingToday],
+        poll_data_features=[Features.Energy.CoolingToday],
         device_class=SensorDeviceClass.ENERGY,
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         state_class=SensorStateClass.TOTAL_INCREASING,
@@ -117,7 +117,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.TODAY
     ),
     Open3eSensorEntityDescription(
-        poll_data_features=[Features.Temperature.OutsideTemperature],
+        poll_data_features=[Features.Temperature.Outside],
         device_class=SensorDeviceClass.TEMPERATURE,
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         state_class=SensorStateClass.MEASUREMENT,
@@ -126,7 +126,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.ACTUAL
     ),
     Open3eSensorEntityDescription(
-        poll_data_features=[Features.Temperature.PrimaryHeatExchangerTemperature],
+        poll_data_features=[Features.Temperature.PrimaryHeatExchanger],
         device_class=SensorDeviceClass.TEMPERATURE,
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         state_class=SensorStateClass.MEASUREMENT,
@@ -135,7 +135,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.ACTUAL
     ),
     Open3eSensorEntityDescription(
-        poll_data_features=[Features.Temperature.SecondaryHeatExchangerTemperature],
+        poll_data_features=[Features.Temperature.SecondaryHeatExchanger],
         device_class=SensorDeviceClass.TEMPERATURE,
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         state_class=SensorStateClass.MEASUREMENT,
