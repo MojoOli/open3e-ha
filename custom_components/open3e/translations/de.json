@@ -82,6 +82,33 @@
       },
       "circuit_1_reduced_temperature": {
         "name": "Heiz-Kühlkreis 1 Reduzierte Temperatur"
+      },
+      "circuit_2_comfort_temperature": {
+        "name": "Heiz-Kühlkreis 2 Komfort Temperatur"
+      },
+      "circuit_2_standard_temperature": {
+        "name": "Heiz-Kühlkreis 2 Standard Temperatur"
+      },
+      "circuit_2_reduced_temperature": {
+        "name": "Heiz-Kühlkreis 2 Reduzierte Temperatur"
+      },
+      "circuit_3_comfort_temperature": {
+        "name": "Heiz-Kühlkreis 3 Komfort Temperatur"
+      },
+      "circuit_3_standard_temperature": {
+        "name": "Heiz-Kühlkreis 3 Standard Temperatur"
+      },
+      "circuit_3_reduced_temperature": {
+        "name": "Heiz-Kühlkreis 3 Reduzierte Temperatur"
+      },
+      "circuit_4_comfort_temperature": {
+        "name": "Heiz-Kühlkreis 4 Komfort Temperatur"
+      },
+      "circuit_4_standard_temperature": {
+        "name": "Heiz-Kühlkreis 4 Standard Temperatur"
+      },
+      "circuit_4_reduced_temperature": {
+        "name": "Heiz-Kühlkreis 4 Reduzierte Temperatur"
       }
     }
   }

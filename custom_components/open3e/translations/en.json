@@ -82,6 +82,33 @@
       },
       "circuit_1_reduced_temperature": {
         "name": "Climate circuit 1 Reduced temperature"
+      },
+      "circuit_2_comfort_temperature": {
+        "name": "Climate circuit 2 Comfort temperature"
+      },
+      "circuit_2_standard_temperature": {
+        "name": "Climate circuit 2 Standard temperature"
+      },
+      "circuit_2_reduced_temperature": {
+        "name": "Climate circuit 2 Reduced temperature"
+      },
+      "circuit_3_comfort_temperature": {
+        "name": "Climate circuit 3 Comfort temperature"
+      },
+      "circuit_3_standard_temperature": {
+        "name": "Climate circuit 3 Standard temperature"
+      },
+      "circuit_3_reduced_temperature": {
+        "name": "Climate circuit 3 Reduced temperature"
+      },
+      "circuit_4_comfort_temperature": {
+        "name": "Climate circuit 4 Comfort temperature"
+      },
+      "circuit_4_standard_temperature": {
+        "name": "Climate circuit 4 Standard temperature"
+      },
+      "circuit_4_reduced_temperature": {
+        "name": "Climate circuit 4 Reduced temperature"
       }
     }
   }
