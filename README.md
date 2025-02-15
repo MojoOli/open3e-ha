@@ -33,6 +33,20 @@ You will need the [Open3e config Fork](https://github.com/MojoOli/open3e-config/
 official repo in the future). Make sure to get the develop branch as only that branch has the changes. Once installed,
 the Open3e server sends a config json on the `[open3e-mqtt-topic]/config` topic.
 
+Start the Open3e server with the default arguments. Only an MQTT connection and listen is necessary. Such a config (args file) looks like this:
+```
+--can
+can0
+--mqtt
+127.0.0.1:1883:open3e
+--mqttformatstring
+{device}_{ecuAddr:03X}_{didNumber}_{didName}
+--listen
+open3e/cmnd
+--config
+devices.json
+```
+
 Once the Open3e server is running, either a new HomeAssistant instance can be setup for a local
 development environment (more information can be
 found [here](https://github.com/ludeeus/integration_blueprint?tab=readme-ov-file#how)) or the files in the
