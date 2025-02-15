@@ -57,6 +57,12 @@
       },
       "central_heating_pump_speed_percentage": {
         "name": "Central heating pump speed percentage"
+      },
+      "power_consumption_system": {
+        "name": "Power consumption system"
+      },
+      "power_consumption_electric_heater": {
+        "name": "Power consumption electrical heater"
       }
     },
     "climate": {

@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import Callable, Any
 
 from homeassistant.components.sensor import SensorEntityDescription, SensorDeviceClass, SensorStateClass
-from homeassistant.const import UnitOfTemperature, UnitOfPressure, UnitOfEnergy, UnitOfSpeed, PERCENTAGE
+from homeassistant.const import UnitOfTemperature, UnitOfPressure, UnitOfEnergy, PERCENTAGE, UnitOfPower
 from homeassistant.util.json import json_loads
 
 from .entity_description import Open3eEntityDescription
@@ -66,6 +66,28 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="water_pressure",
         translation_key="water_pressure",
         data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Power.System],
+        device_class=SensorDeviceClass.POWER,
+        native_unit_of_measurement=UnitOfPower.WATT,
+        suggested_unit_of_measurement=UnitOfPower.KILO_WATT,
+        state_class=SensorStateClass.MEASUREMENT,
+        suggested_display_precision=2,
+        key="power_consumption_system",
+        translation_key="power_consumption_system",
+        data_retriever=SensorDataRetriever.RAW
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Power.ElectricalHeater],
+        device_class=SensorDeviceClass.POWER,
+        native_unit_of_measurement=UnitOfPower.WATT,
+        suggested_unit_of_measurement=UnitOfPower.KILO_WATT,
+        state_class=SensorStateClass.MEASUREMENT,
+        suggested_display_precision=2,
+        key="power_consumption_electric_heater",
+        translation_key="power_consumption_electric_heater",
+        data_retriever=SensorDataRetriever.RAW
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.EnergyConsumptionCentralHeatingToday],

@@ -44,6 +44,8 @@ class Features:
 
     class Power:
         FanPower = Feature(id=1775, refresh_interval=30)
+        ElectricalHeater = Feature(id=2487, refresh_interval=5)
+        System = Feature(id=2488, refresh_interval=5)
 
     class State:
         Hvac = Feature(id=1415, refresh_interval=30)
