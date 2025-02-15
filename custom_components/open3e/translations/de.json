@@ -62,6 +62,15 @@
     "climate": {
       "climate_circuit_1": {
         "name": "Heiz-Kühlkreis 1"
+      },
+      "climate_circuit_2": {
+        "name": "Heiz-Kühlkreis 2"
+      },
+      "climate_circuit_3": {
+        "name": "Heiz-Kühlkreis 3"
+      },
+      "climate_circuit_4": {
+        "name": "Heiz-Kühlkreis 4"
       }
     },
     "number": {
