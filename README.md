@@ -20,7 +20,7 @@ sent by Open3e. Data is then automatically refreshed.
 - [x] Vitocal (Partially)
 - [ ] Vitoair
 - [ ] Vitodens
-- [ ] Vitocharge
+- [x] Vitocharge (In-Progress)
 
 I only own a Vitocal, so I would appreciate any contributions regarding the other devices.
 
