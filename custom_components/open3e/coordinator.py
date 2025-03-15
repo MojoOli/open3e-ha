@@ -14,7 +14,8 @@ from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
 from .api import Open3eMqttClient
 from .const import DOMAIN
-from .definitions.open3e_data import Open3eDataConfig
+from .definitions.dmw_mode import DmwMode
+from .definitions.open3e_data import Open3eDataSystemInformation
 from .definitions.program import Program
 from .errors import Open3eCoordinatorUpdateFailed
 
@@ -63,7 +64,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
     __client: Open3eMqttClient
     __server_available = None
 
-    config: Open3eDataConfig
+    system_information: Open3eDataSystemInformation
     __device_registry: DeviceRegistry
     __entry_id: str
 
@@ -96,8 +97,8 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             callback=self.__on_availability_update
         )
 
-        self.config = await self.__client.async_get_open3e_config(self.hass)
-        for device in self.config.devices:
+        self.system_information = await self.__client.async_get_system_information(self.hass)
+        for device in self.system_information.devices:
             self.__device_registry.async_get_or_create(
                 config_entry_id=self.__entry_id,
                 identifiers={(DOMAIN, device.name)},
@@ -160,7 +161,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
         mqtt_topics: list[Open3eDataDeviceFeature] = []
 
         for feature in features:
-            for device in self.config.devices:
+            for device in self.system_information.devices:
                 for mqtt_topic in device.features:
                     if mqtt_topic.id == feature.id:
                         mqtt_topics.append(mqtt_topic)
@@ -170,7 +171,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
 
     def get_device_for_features(self, features: list[Feature]):
         for feature in features:
-            for device in self.config.devices:
+            for device in self.system_information.devices:
                 if feature.id in map(lambda entity: entity.id, device.features):
                     return device
 
@@ -194,6 +195,22 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
 
         await self.__client.async_request_data(self.hass, [set_programs_feature_id])
 
+    async def async_set_hot_water_temperature(
+            self,
+            feature_id: int,
+            temperature: float
+    ):
+        await self.__client.async_set_hot_water_temperature(
+            hass=self.hass,
+            feature_id=feature_id,
+            temperature=temperature
+        )
+
+        # Wait for 2 seconds to request temperature
+        await asyncio.sleep(2)
+
+        await self.__client.async_request_data(self.hass, [feature_id])
+
     async def async_turn_hvac_on(self, power_hvac_feature_id: int):
         await self.__client.async_turn_hvac_on(self.hass, power_hvac_feature_id)
         # Wait for 2 seconds to request hvac state
@@ -203,3 +220,21 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
         await self.__client.async_turn_hvac_off(self.hass, power_hvac_feature_id)
         # Wait for 2 seconds to request hvac state
         await asyncio.sleep(2)
+
+    async def async_set_hot_water_mode(
+            self,
+            mode: DmwMode,
+            dmw_state_feature_id: int,
+            dmw_efficiency_mode_feature_id: int
+    ):
+        await self.__client.async_set_dmw_mode(
+            hass=self.hass,
+            mode=mode,
+            dmw_state_feature_id=dmw_state_feature_id,
+            dmw_efficiency_mode_feature_id=dmw_efficiency_mode_feature_id
+        )
+
+        # Wait for 2 seconds to request new states
+        await asyncio.sleep(2)
+
+        await self.__client.async_request_data(self.hass, [dmw_state_feature_id, dmw_efficiency_mode_feature_id])

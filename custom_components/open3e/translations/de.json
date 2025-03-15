@@ -116,6 +116,11 @@
       "circuit_4_reduced_temperature": {
         "name": "Heiz-Kühlkreis 4 Reduzierte Temperatur"
       }
+    },
+    "water_heater": {
+      "water_heater": {
+        "name": "Wasserboiler"
+      }
     }
   }
 }

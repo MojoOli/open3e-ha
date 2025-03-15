@@ -18,6 +18,7 @@ class Features:
         Flow = Feature(id=268, refresh_interval=5)
         Return = Feature(id=269, refresh_interval=5)
         DomesticHotWater = Feature(id=271, refresh_interval=5)
+        DomesticHotWaterTarget = Feature(id=396, refresh_interval=300)
         Outside = Feature(id=274, refresh_interval=5)
         FlowCircuit1 = Feature(id=284, refresh_interval=5)
         FlowCircuit2 = Feature(id=286, refresh_interval=5)
@@ -50,6 +51,8 @@ class Features:
     class State:
         Hvac = Feature(id=1415, refresh_interval=30)
         Heater = Feature(id=2352, refresh_interval=30)
+        DomesticHotWater = Feature(id=531, refresh_interval=30)
+        DomesticHotWaterEfficiency = Feature(id=3029, refresh_interval=30)
 
     class Speed:
         CentralHeatingPump = Feature(id=381, refresh_interval=10)

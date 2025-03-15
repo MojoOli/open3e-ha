@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from homeassistant.helpers.entity import EntityDescription
 
 from .features import Feature
-from .open3e_data import Open3eDataConfig
+from .open3e_data import Open3eDataSystemInformation
 
 
 @dataclass(frozen=True)
@@ -13,7 +13,7 @@ class Open3eEntityDescription(EntityDescription):
     poll_data_features: list[Feature] | None = None
     """Defines which features should be polled on a regular basis."""
 
-    def has_features(self, config: Open3eDataConfig):
+    def has_features(self, config: Open3eDataSystemInformation):
         has_features = True
 
         if self.poll_data_features:

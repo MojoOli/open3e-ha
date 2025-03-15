@@ -116,6 +116,11 @@
       "circuit_4_reduced_temperature": {
         "name": "Climate circuit 4 Reduced temperature"
       }
+    },
+    "water_heater": {
+      "water_heater": {
+        "name": "Water heater"
+      }
     }
   }
 }

@@ -26,7 +26,7 @@ async def async_setup_entry(
             description=description
         )
         for description in SENSORS
-        if description.has_features(entry.runtime_data.coordinator.config)
+        if description.has_features(entry.runtime_data.coordinator.system_information)
     )
 
 

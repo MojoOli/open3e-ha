@@ -29,7 +29,7 @@ async def async_setup_entry(
             description=description
         )
         for description in CLIMATE
-        if description.has_features(entry.runtime_data.coordinator.config)
+        if description.has_features(entry.runtime_data.coordinator.system_information)
     )
 
 
@@ -64,7 +64,6 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
     ):
         super().__init__(coordinator, description)
 
-        self._attr_temperature_unit = UnitOfTemperature.CELSIUS
         self._attr_preset_modes = [
             Program.Reduced.to_ha_preset_mode(),
             Program.Standard.to_ha_preset_mode(),

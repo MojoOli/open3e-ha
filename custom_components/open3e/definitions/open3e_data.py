@@ -46,7 +46,7 @@ class Open3eDataDevice:
 
 
 @dataclass(frozen=True)
-class Open3eDataConfig:
+class Open3eDataSystemInformation:
     devices: list[Open3eDataDevice]
 
     @staticmethod
@@ -59,4 +59,4 @@ class Open3eDataConfig:
             if device is not None:
                 devices.append(device)
 
-        return Open3eDataConfig(devices)
+        return Open3eDataSystemInformation(devices)
