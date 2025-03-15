@@ -1,5 +1,6 @@
-> [!NOTE] 
-> This integration is still in an early alpha state and under heavy development, so do not expect a finished/full working integration. Any contribution is welcome.
+> [!NOTE]
+> This integration is still in an early alpha state and under heavy development, so do not expect a finished/full
+> working integration. Any contribution is welcome.
 
 # Open3e HomeAssistant Integration
 
@@ -30,9 +31,11 @@ I only own a Vitocal, so I would appreciate any contributions regarding the othe
 > This integration will be added to HACS later down the line. Until then, follow the installation below.
 
 You will need the [develop branch of Open3e](https://github.com/open3e/open3e/tree/develop) (for now). Once installed,
-the Open3e server sends a config json on the `[open3e-mqtt-topic]/config` topic.
+the Open3e server sends the system information json on the `[open3e-mqtt-topic]/system` topic.
 
-Start the Open3e server with the default arguments. Only an MQTT connection and listen is necessary. Such a config (args file) looks like this:
+Start the Open3e server with the default arguments. Only an MQTT connection and listen is necessary. Such a config (args
+file) looks like this:
+
 ```
 --can
 can0
