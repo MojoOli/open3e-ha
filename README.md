@@ -17,7 +17,7 @@ sent by Open3e. Data is then automatically refreshed.
 
 ## Supported devices
 
-- [x] Vitocal (Partially)
+- [x] Vitocal (Mostly)
 - [ ] Vitoair
 - [ ] Vitodens
 - [x] Vitocharge (In-Progress)
@@ -29,8 +29,7 @@ I only own a Vitocal, so I would appreciate any contributions regarding the othe
 > [!TIP]
 > This integration will be added to HACS later down the line. Until then, follow the installation below.
 
-You will need the [Open3e config Fork](https://github.com/MojoOli/open3e-config/tree/develop) (hoping to add it to the
-official repo in the future). Make sure to get the develop branch as only that branch has the changes. Once installed,
+You will need the [develop branch of Open3e](https://github.com/open3e/open3e/tree/develop) (for now). Once installed,
 the Open3e server sends a config json on the `[open3e-mqtt-topic]/config` topic.
 
 Start the Open3e server with the default arguments. Only an MQTT connection and listen is necessary. Such a config (args file) looks like this:
