@@ -75,10 +75,10 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
 
     @property
     def available(self):
-        """Return True if entity has a target temperature and the current flow temperature
+        """Return True if the current flow temperature
         is not -3276.8 which is used when the circuit is not connected
         """
-        return self.target_temperature is not None and self.__current_flow_temperature > -1000
+        return self.__current_flow_temperature > -1000
 
     @property
     def hvac_action(self) -> HVACAction:
