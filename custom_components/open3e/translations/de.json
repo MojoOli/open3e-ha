@@ -81,6 +81,66 @@
       },
       "power_consumption_electric_heater": {
         "name": "Stromverbrauch Zusatzheizung"
+      },
+      "battery_state_percentage": {
+        "name": "Batterieladestand"
+      },
+      "battery_charge_today": {
+        "name": "Batterieladung Heute"
+      },
+      "battery_charge_week": {
+        "name": "Batterieladung Woche"
+      },
+      "battery_charge_month": {
+        "name": "Batterieladung Monat"
+      },
+      "battery_charge_year": {
+        "name": "Batterieladung Jahr"
+      },
+      "battery_charge_total": {
+        "name": "Batterieladung Gesamt"
+      },
+      "battery_discharge_today": {
+        "name": "Batterieentladung Heute"
+      },
+      "battery_discharge_week": {
+        "name": "Batterieentladung Woche"
+      },
+      "battery_discharge_month": {
+        "name": "Batterieentladung Monat"
+      },
+      "battery_discharge_year": {
+        "name": "Batterieentladung Jahr"
+      },
+      "battery_discharge_total": {
+        "name": "Batterieentladung Gesamt"
+      },
+      "battery_power_current": {
+        "name": "Aktuelle Batterieleistung"
+      },
+      "pv_power_string_1_current": {
+        "name": "PV-Leistung String1"
+      },
+      "pv_power_string_2_current": {
+        "name": "PV-Leistung String2"
+      },
+      "pv_power_string_3_current": {
+        "name": "PV-Leistung String3"
+      },
+      "pv_energy_production_today": {
+        "name": "PV-Energieproduktion Heute"
+      },
+      "pv_energy_production_week": {
+        "name": "PV-Energieproduktion Woche"
+      },
+      "pv_energy_production_month": {
+        "name": "PV-Energieproduktion Monat"
+      },
+      "pv_energy_production_year": {
+        "name": "PV-Energieproduktion Jahr"
+      },
+      "pv_energy_production_total": {
+        "name": "PV-Energieproduktion Gesamt"
       }
     },
     "climate": {
