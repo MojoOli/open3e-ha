@@ -10,7 +10,7 @@ sent by Open3e. Data is then automatically refreshed.
 ## Features
 
 - Connects to Open3e via MQTT
-- Automatic device/entity setup
+- Automatic device discovery and entity setup
 - Integrates sensors, climate controls, automations, etc.
 - Automatic data refreshing
 - Varies data refreshing interval based on integration and enabled entities
