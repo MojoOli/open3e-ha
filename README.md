@@ -18,12 +18,14 @@ sent by Open3e. Data is then automatically refreshed.
 
 ## Supported devices
 
-- [x] Vitocal (Mostly)
+- [x] Vitocal (Implemented and test ready)
 - [ ] Vitoair
 - [ ] Vitodens
 - [x] Vitocharge (In-Progress)
 
 I only own a Vitocal, so I would appreciate any contributions regarding the other devices.
+
+If there are any features missing, which you would like to have, just make an issue on this repo.
 
 ## Installation
 
