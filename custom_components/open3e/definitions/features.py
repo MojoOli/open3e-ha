@@ -42,17 +42,22 @@ class Features:
         CentralHeating = Feature(id=548, refresh_interval=300)
         DomesticHotWater = Feature(id=565, refresh_interval=300)
         Cooling = Feature(id=566, refresh_interval=300)
+        Battery = Feature(id=1801, refresh_interval=300)
+        PV = Feature(id=1802, refresh_interval=300)
 
     class Power:
         Fan = Feature(id=1775, refresh_interval=30)
         ElectricalHeater = Feature(id=2487, refresh_interval=5)
         System = Feature(id=2488, refresh_interval=5)
+        Battery = Feature(id=1836, refresh_interval=5)
+        PV = Feature(id=1831, refresh_interval=5)
 
     class State:
         Hvac = Feature(id=1415, refresh_interval=30)
         Heater = Feature(id=2352, refresh_interval=30)
         DomesticHotWater = Feature(id=531, refresh_interval=30)
         DomesticHotWaterEfficiency = Feature(id=3029, refresh_interval=30)
+        Battery = Feature(id=1664, refresh_interval=30)
 
     class Speed:
         CentralHeatingPump = Feature(id=381, refresh_interval=10)

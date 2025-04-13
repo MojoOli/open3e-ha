@@ -19,6 +19,24 @@ class SensorDataRetriever:
     TODAY = lambda data: json_loads(data)["Today"]
     CURRENT_MONTH = lambda data: json_loads(data)["CurrentMonth"]
     CURRENT_YEAR = lambda data: json_loads(data)["CurrentYear"]
+    BATTERY_CHARGE_TODAY = lambda data: json_loads(data)["BatteryChargeToday"]
+    BATTERY_CHARGE_WEEK = lambda data: json_loads(data)["BatteryChargeWeek"]
+    BATTERY_CHARGE_MONTH = lambda data: json_loads(data)["BatteryChargeMonth"]
+    BATTERY_CHARGE_YEAR = lambda data: json_loads(data)["BatteryChargeYear"]
+    BATTERY_CHARGE_TOTAL = lambda data: json_loads(data)["BatteryChargeTotal"]
+    BATTERY_DISCHARGE_TODAY = lambda data: json_loads(data)["BatteryDischargeToday"]
+    BATTERY_DISCHARGE_WEEK = lambda data: json_loads(data)["BatteryDischargeWeek"]
+    BATTERY_DISCHARGE_MONTH = lambda data: json_loads(data)["BatteryDischargeMonth"]
+    BATTERY_DISCHARGE_YEAR = lambda data: json_loads(data)["BatteryDischargeYear"]
+    BATTERY_DISCHARGE_TOTAL = lambda data: json_loads(data)["BatteryDischargeTotal"]
+    PV_ENERGY_PRODUCTION_TODAY = lambda data: json_loads(data)["PhotovoltaicProductionToday"]
+    PV_ENERGY_PRODUCTION_WEEK = lambda data: json_loads(data)["PhotovoltaicProductionWeek"]
+    PV_ENERGY_PRODUCTION_MONTH = lambda data: json_loads(data)["PhotovoltaicProductionMonth"]
+    PV_ENERGY_PRODUCTION_YEAR = lambda data: json_loads(data)["PhotovoltaicProductionYear"]
+    PV_ENERGY_PRODUCTION_TOTAL = lambda data: json_loads(data)["PhotovoltaicProductionTotal"]
+    PV_POWER_STRING_1 = lambda data: (lambda val: val if val < 65000 else 0)(json_loads(data)["String1"])
+    PV_POWER_STRING_2 = lambda data: (lambda val: val if val < 65000 else 0)(json_loads(data)["String2"])
+    PV_POWER_STRING_3 = lambda data: (lambda val: val if val < 65000 else 0)(json_loads(data)["String3"])
     RAW = lambda data: data
     """The data state represents a raw value without any encapsulation."""
 
@@ -33,6 +51,11 @@ class Open3eSensorEntityDescription(
 
 
 SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
+
+    ###############
+    ### VITOCAL ###
+    ###############
+
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.Flow],
         device_class=SensorDeviceClass.TEMPERATURE,
@@ -207,5 +230,214 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="central_heating_pump_speed_percentage",
         translation_key="central_heating_pump_speed_percentage",
         data_retriever=SensorDataRetriever.ACTUAL
+    ),
+
+    ##################
+    ### VitoCharge ###
+    ##################
+
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.State.Battery],
+        device_class=SensorDeviceClass.BATTERY,
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="battery_state_percentage",
+        translation_key="battery_state_percentage",
+        data_retriever=SensorDataRetriever.RAW
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.Battery],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
+        suggested_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="battery_charge_today",
+        translation_key="battery_charge_today",
+        data_retriever=SensorDataRetriever.BATTERY_CHARGE_TODAY
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.Battery],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
+        suggested_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="battery_charge_week",
+        translation_key="battery_charge_week",
+        data_retriever=SensorDataRetriever.BATTERY_CHARGE_WEEK,
+        entity_registry_enabled_default=False
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.Battery],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
+        suggested_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="battery_charge_month",
+        translation_key="battery_charge_month",
+        data_retriever=SensorDataRetriever.BATTERY_CHARGE_MONTH,
+        entity_registry_enabled_default=False
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.Battery],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
+        suggested_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="battery_charge_year",
+        translation_key="battery_charge_year",
+        data_retriever=SensorDataRetriever.BATTERY_CHARGE_YEAR,
+        entity_registry_enabled_default=False
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.Battery],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
+        suggested_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="battery_charge_total",
+        translation_key="battery_charge_total",
+        data_retriever=SensorDataRetriever.BATTERY_CHARGE_TOTAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.Battery],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
+        suggested_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="battery_discharge_today",
+        translation_key="battery_discharge_today",
+        data_retriever=SensorDataRetriever.BATTERY_DISCHARGE_TODAY
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.Battery],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
+        suggested_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="battery_discharge_week",
+        translation_key="battery_discharge_week",
+        data_retriever=SensorDataRetriever.BATTERY_DISCHARGE_WEEK,
+        entity_registry_enabled_default=False
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.Battery],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
+        suggested_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="battery_discharge_month",
+        translation_key="battery_discharge_month",
+        data_retriever=SensorDataRetriever.BATTERY_DISCHARGE_MONTH,
+        entity_registry_enabled_default=False
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.Battery],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
+        suggested_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="battery_discharge_year",
+        translation_key="battery_discharge_year",
+        data_retriever=SensorDataRetriever.BATTERY_DISCHARGE_YEAR,
+        entity_registry_enabled_default=False
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.Battery],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
+        suggested_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="battery_discharge_total",
+        translation_key="battery_discharge_total",
+        data_retriever=SensorDataRetriever.BATTERY_DISCHARGE_TOTAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Power.Battery],
+        device_class=SensorDeviceClass.POWER,
+        native_unit_of_measurement=UnitOfPower.WATT,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="battery_power_current",
+        translation_key="battery_power_current",
+        data_retriever=SensorDataRetriever.RAW
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Power.PV],
+        device_class=SensorDeviceClass.POWER,
+        native_unit_of_measurement=UnitOfPower.WATT,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="pv_power_string_1_current",
+        translation_key="pv_power_string_1_current",
+        data_retriever=SensorDataRetriever.PV_POWER_STRING_1
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Power.PV],
+        device_class=SensorDeviceClass.POWER,
+        native_unit_of_measurement=UnitOfPower.WATT,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="pv_power_string_2_current",
+        translation_key="pv_power_string_2_current",
+        data_retriever=SensorDataRetriever.PV_POWER_STRING_2
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Power.PV],
+        device_class=SensorDeviceClass.POWER,
+        native_unit_of_measurement=UnitOfPower.WATT,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="pv_power_string_3_current",
+        translation_key="pv_power_string_3_current",
+        data_retriever=SensorDataRetriever.PV_POWER_STRING_3
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.PV],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
+        suggested_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="pv_energy_production_today",
+        translation_key="pv_energy_production_today",
+        data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_TODAY
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.PV],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
+        suggested_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="pv_energy_production_week",
+        translation_key="pv_energy_production_week",
+        data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_WEEK,
+        entity_registry_enabled_default=False
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.PV],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
+        suggested_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="pv_energy_production_month",
+        translation_key="pv_energy_production_month",
+        data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_MONTH,
+        entity_registry_enabled_default=False
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.PV],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
+        suggested_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="pv_energy_production_year",
+        translation_key="pv_energy_production_year",
+        data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_YEAR,
+        entity_registry_enabled_default=False
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.PV],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
+        suggested_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="pv_energy_production_total",
+        translation_key="pv_energy_production_total",
+        data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_TOTAL
     ),
 )

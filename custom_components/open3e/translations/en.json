@@ -81,6 +81,66 @@
       },
       "power_consumption_electric_heater": {
         "name": "Power consumption electrical heater"
+      },
+      "battery_state_percentage": {
+        "name": "Battery State of Charge"
+      },
+      "battery_charge_today": {
+        "name": "Battery Charge Today"
+      },
+      "battery_charge_week": {
+        "name": "Battery Charge Week"
+      },
+      "battery_charge_month": {
+        "name": "Battery Charge Month"
+      },
+      "battery_charge_year": {
+        "name": "Battery Charge Year"
+      },
+      "battery_charge_total": {
+        "name": "Battery Charge Total"
+      },
+      "battery_discharge_today": {
+        "name": "Battery Discharge Today"
+      },
+      "battery_discharge_week": {
+        "name": "Battery Discharge Week"
+      },
+      "battery_discharge_month": {
+        "name": "Battery Discharge Month"
+      },
+      "battery_discharge_year": {
+        "name": "Battery Discharge Year"
+      },
+      "battery_discharge_total": {
+        "name": "Battery Discharge Total"
+      },
+      "battery_power_current": {
+        "name": "Current Battery Load"
+      },
+      "pv_power_string_1_current": {
+        "name": "PV Power String1"
+      },
+      "pv_power_string_2_current": {
+        "name": "PV Power String2"
+      },
+      "pv_power_string_3_current": {
+        "name": "PV Power String3"
+      },
+      "pv_energy_production_today": {
+        "name": "PV Energy Production Today"
+      },
+      "pv_energy_production_week": {
+        "name": "PV Energy Production Week"
+      },
+      "pv_energy_production_month": {
+        "name": "PV Energy Production Month"
+      },
+      "pv_energy_production_year": {
+        "name": "PV Energy Production Year"
+      },
+      "pv_energy_production_total": {
+        "name": "PV Energy Production Total"
       }
     },
     "climate": {
