@@ -17,6 +17,8 @@ class SensorDataRetriever:
     MAXIMUM = lambda data: json_loads(data)["Maximum"]
     AVERAGE = lambda data: json_loads(data)["Average"]
     TODAY = lambda data: json_loads(data)["Today"]
+    CURRENT_MONTH = lambda data: json_loads(data)["CurrentMonth"]
+    CURRENT_YEAR = lambda data: json_loads(data)["CurrentYear"]
     RAW = lambda data: data
     """The data state represents a raw value without any encapsulation."""
 
@@ -90,7 +92,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.RAW
     ),
     Open3eSensorEntityDescription(
-        poll_data_features=[Features.Energy.CentralHeatingToday],
+        poll_data_features=[Features.Energy.CentralHeating],
         device_class=SensorDeviceClass.ENERGY,
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         state_class=SensorStateClass.TOTAL_INCREASING,
@@ -99,7 +101,25 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.TODAY
     ),
     Open3eSensorEntityDescription(
-        poll_data_features=[Features.Energy.DomesticHotWaterToday],
+        poll_data_features=[Features.Energy.CentralHeating],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="energy_consumption_central_heating_current_month",
+        translation_key="energy_consumption_central_heating_current_month",
+        data_retriever=SensorDataRetriever.CURRENT_MONTH
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.CentralHeating],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="energy_consumption_central_heating_current_year",
+        translation_key="energy_consumption_central_heating_current_year",
+        data_retriever=SensorDataRetriever.CURRENT_YEAR
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.DomesticHotWater],
         device_class=SensorDeviceClass.ENERGY,
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         state_class=SensorStateClass.TOTAL_INCREASING,
@@ -108,13 +128,49 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.TODAY
     ),
     Open3eSensorEntityDescription(
-        poll_data_features=[Features.Energy.CoolingToday],
+        poll_data_features=[Features.Energy.DomesticHotWater],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="energy_consumption_domestic_hot_water_current_month",
+        translation_key="energy_consumption_domestic_hot_water_current_month",
+        data_retriever=SensorDataRetriever.CURRENT_MONTH
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.DomesticHotWater],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="energy_consumption_domestic_hot_water_current_year",
+        translation_key="energy_consumption_domestic_hot_water_current_year",
+        data_retriever=SensorDataRetriever.CURRENT_YEAR
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.Cooling],
         device_class=SensorDeviceClass.ENERGY,
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="energy_consumption_cooling_today",
         translation_key="energy_consumption_cooling_today",
         data_retriever=SensorDataRetriever.TODAY
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.Cooling],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="energy_consumption_cooling_current_month",
+        translation_key="energy_consumption_cooling_current_month",
+        data_retriever=SensorDataRetriever.CURRENT_MONTH
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.Cooling],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="energy_consumption_cooling_current_year",
+        translation_key="energy_consumption_cooling_current_year",
+        data_retriever=SensorDataRetriever.CURRENT_YEAR
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.Outside],

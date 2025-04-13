@@ -39,9 +39,9 @@ class Features:
         Water = Feature(id=318, refresh_interval=15)
 
     class Energy:
-        CentralHeatingToday = Feature(id=548, refresh_interval=300)
-        DomesticHotWaterToday = Feature(id=565, refresh_interval=300)
-        CoolingToday = Feature(id=566, refresh_interval=300)
+        CentralHeating = Feature(id=548, refresh_interval=300)
+        DomesticHotWater = Feature(id=565, refresh_interval=300)
+        Cooling = Feature(id=566, refresh_interval=300)
 
     class Power:
         Fan = Feature(id=1775, refresh_interval=30)

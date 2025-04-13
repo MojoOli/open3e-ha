@@ -40,11 +40,29 @@
       "energy_consumption_central_heating_today": {
         "name": "Energieverbrauch Heizung heute"
       },
+      "energy_consumption_central_heating_current_month": {
+        "name": "Energieverbrauch Heizung Monat"
+      },
+      "energy_consumption_central_heating_current_year": {
+        "name": "Energieverbrauch Heizung Jahr"
+      },
       "energy_consumption_domestic_hot_water_today": {
         "name": "Energieverbrauch Warmwasser heute"
       },
+      "energy_consumption_domestic_hot_water_current_month": {
+        "name": "Energieverbrauch Warmwasser Monat"
+      },
+      "energy_consumption_domestic_hot_water_current_year": {
+        "name": "Energieverbrauch Warmwasser Jahr"
+      },
       "energy_consumption_cooling_today": {
         "name": "Energieverbrauch Kühlung heute"
+      },
+      "energy_consumption_cooling_current_month": {
+        "name": "Energieverbrauch Kühlung Monat"
+      },
+      "energy_consumption_cooling_current_year": {
+        "name": "Energieverbrauch Kühlung Jahr"
       },
       "outside_temperature": {
         "name": "Außentemperatur"

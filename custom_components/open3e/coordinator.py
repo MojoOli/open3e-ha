@@ -28,18 +28,18 @@ from .definitions.features import Feature
 
 @dataclass
 class CoordinatorEndpoint:
-    last_refresh: float = -1
-    entities_subscribed: int = 1
+    __last_refresh: float = -1
+    __entities_subscribed: int = 1
 
     def __init__(self, refresh_interval: int):
         self.refresh_interval = refresh_interval
 
     def add_entity_subscription(self):
-        self.entities_subscribed = self.entities_subscribed + 1
+        self.__entities_subscribed = self.__entities_subscribed + 1
 
     def remove_entity_subscription(self):
-        self.entities_subscribed = self.entities_subscribed - 1
-        if self.entities_subscribed <= 0:
+        self.__entities_subscribed = self.__entities_subscribed - 1
+        if self.__entities_subscribed <= 0:
             return True
         else:
             return False
@@ -49,10 +49,10 @@ class CoordinatorEndpoint:
             self.refresh_interval = refresh_interval
 
     def should_refresh(self, now: float):
-        return now - self.last_refresh > self.refresh_interval - 0.5  # let's use a range so we can make sure it gets refreshed
+        return now - self.__last_refresh > self.refresh_interval - 0.5  # let's use a range so we can make sure it gets refreshed
 
     def update_last_refresh(self, now: float):
-        self.last_refresh = now
+        self.__last_refresh = now
 
 
 class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
@@ -130,8 +130,8 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
                 ids.append(id)
                 self._endpoints[id].update_last_refresh(now)
 
-        if len(ids) == 0:
-            return True
+                if len(ids) == 0:
+                    return True
 
         _LOGGER.debug(f"Requesting data update for features {ids}")
 
