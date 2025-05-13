@@ -2,18 +2,20 @@
 Custom integration to integrate open3e with Home Assistant.
 
 For more details about this integration, please refer to
-https://github.com/ludeeus/integration_blueprint
+https://github.com/MojoOli/open3e-ha
 """
 
 from __future__ import annotations
 
-from homeassistant.const import Platform
-from homeassistant.core import HomeAssistant
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from homeassistant.const import Platform
+    from homeassistant.core import HomeAssistant
 
 from .api import Open3eMqttClient
 from .const import MQTT_CMD_KEY, MQTT_TOPIC_KEY
-from .ha_data import Open3eDataConfigEntry, Open3eData
-from .ha_data import Open3eDataUpdateCoordinator
+from .ha_data import Open3eDataConfigEntry, Open3eData, Open3eDataUpdateCoordinator
 
 PLATFORMS: list[Platform] = [
     Platform.SENSOR,
@@ -23,7 +25,6 @@ PLATFORMS: list[Platform] = [
 ]
 
 
-# https://developers.home-assistant.io/docs/config_entries_index/#setting-up-an-entry
 async def async_setup_entry(
         hass: HomeAssistant,
         entry: Open3eDataConfigEntry,
@@ -45,7 +46,6 @@ async def async_setup_entry(
         coordinator=coordinator
     )
 
-    # https://developers.home-assistant.io/docs/integration_fetching_data#coordinated-single-api-poll-for-data-for-all-entities
     await coordinator.async_config_entry_first_refresh()
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
