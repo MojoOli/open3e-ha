@@ -16,7 +16,7 @@ if TYPE_CHECKING:
 
 from .api import Open3eMqttClient
 from .const import MQTT_CMD_KEY, MQTT_TOPIC_KEY
-from .ha_data import Open3eDataConfigEntry, Open3eData, Open3eDataUpdateCoordinator
+from .ha_data import Open3eData, Open3eDataConfigEntry, Open3eDataUpdateCoordinator
 
 PLATFORMS: list[Platform] = [
     Platform.SENSOR,
