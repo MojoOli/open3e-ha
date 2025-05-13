@@ -1,6 +1,5 @@
 > [!NOTE]
-> This integration is still in an early alpha state and under heavy development, so do not expect a finished/full
-> working integration. Any contribution is welcome.
+> This integration is still in a beta state and under development. Any contribution is welcome.
 
 # Open3e HomeAssistant Integration
 
@@ -18,10 +17,10 @@ sent by Open3e. Data is then automatically refreshed.
 
 ## Supported devices
 
-- [x] Vitocal (Implemented and test ready)
+- [x] Vitocal
 - [x] Vitoair (In-Progress)
 - [ ] Vitodens
-- [x] Vitocharge (Implemented and test ready)
+- [x] Vitocharge
 
 I only own a Vitocal, so I would appreciate any contributions regarding the other devices.
 
