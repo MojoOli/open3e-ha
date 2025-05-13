@@ -9,13 +9,14 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from homeassistant.const import Platform
+
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
 
 from .api import Open3eMqttClient
 from .const import MQTT_CMD_KEY, MQTT_TOPIC_KEY
 from .ha_data import Open3eDataConfigEntry, Open3eData, Open3eDataUpdateCoordinator
-from homeassistant.const import Platform
 
 PLATFORMS: list[Platform] = [
     Platform.SENSOR,
