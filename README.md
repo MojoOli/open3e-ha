@@ -28,9 +28,6 @@ If there are any features missing, which you would like to have, just make an is
 
 ## Installation
 
-> [!TIP]
-> This integration will be added to HACS later down the line. Until then, follow the installation below.
-
 You will need the [develop branch of Open3e](https://github.com/open3e/open3e/tree/develop) (for now). Once installed,
 the Open3e server sends the system information json on the `[open3e-mqtt-topic]/system` topic.
 
@@ -50,9 +47,5 @@ open3e/cmnd
 devices.json
 ```
 
-Once the Open3e server is running, either a new HomeAssistant instance can be setup for a local
-development environment (more information can be
-found [here](https://github.com/ludeeus/integration_blueprint?tab=readme-ov-file#how)) or the files in the
-`custom_component` folder can be moved to the config folder of HomeAssistant.
-
-After that, you can just add the integration to your HomeAssistant instance. Follow the wizard in HA.
+Once the Open3e server is running, you can add this repository as a custom repository in HACS. Install the integration
+and you are good to go. Follow the wizard in HA.
