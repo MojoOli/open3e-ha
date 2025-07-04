@@ -28,10 +28,9 @@ If there are any features missing, which you would like to have, just make an is
 
 ## Installation
 
-You will need the [develop branch of Open3e](https://github.com/open3e/open3e/tree/develop) (for now). Once installed,
-the Open3e server sends the system information json on the `[open3e-mqtt-topic]/system` topic.
+Install [Open3e](https://github.com/open3e/open3e/issues) on your device. You can either directly run it on the system, use a [HA Addon](https://github.com/flecke-m/ha-addons), or run it in a [docker container](https://hub.docker.com/r/fleckem/open3e).
 
-Start the Open3e server with the default arguments. Only an MQTT connection and listen is necessary. Such a config (args
+Start the Open3e server with the default arguments. Only an MQTT connection to HA and listen is necessary. Such a config (args
 file) looks like this:
 
 ```
