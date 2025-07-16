@@ -28,9 +28,9 @@ If there are any features missing, which you would like to have, just make an is
 
 ## Installation
 
-Install [Open3e](https://github.com/open3e/open3e/issues) on your device. You can either directly run it on the system, use a [HA Addon](https://github.com/flecke-m/ha-addons/tree/main/open3e), or run it in a [docker container](https://hub.docker.com/r/fleckem/open3e).
+Install [Open3e](https://github.com/open3e/open3e/issues) on your device. You can either directly run it on the system, use a [HA Addon](https://github.com/flecke-m/ha-addons/tree/main/open3e), or run it in a [docker container](https://hub.docker.com/r/fleckem/open3e). Follow the setup provided by the specific option u chose.
 
-Start the Open3e server with the default arguments. Only an MQTT connection to HA and listen is necessary. Such a config (args
+Start the Open3e server with the default arguments. Only an MQTT connection to the broker and listen is necessary. Such a config (args
 file) looks like this:
 
 ```
@@ -46,5 +46,5 @@ open3e/cmnd
 devices.json
 ```
 
-Once the Open3e server is running, you can add this repository as a custom repository in HACS. Install the integration
+Once the Open3e server is running and you have a connection to your MQTT broker in HA, you can add this repository as a custom repository in HACS. Install the integration
 and you are good to go. Follow the wizard in HA.
