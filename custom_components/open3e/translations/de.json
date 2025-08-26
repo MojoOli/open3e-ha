@@ -141,6 +141,78 @@
       },
       "pv_energy_production_total": {
         "name": "PV-Energieproduktion Gesamt"
+      },
+      "domestic_hot_water_target_temperature": {
+        "name": "Warmwasser-Zieltemperatur"
+      },
+      "flow_circuit1_temperature": {
+        "name": "Vorlaufkreis 1 Temperatur"
+      },
+      "compressor_inlet_temperature": {
+        "name": "Verdichtereintrittstemperatur"
+      },
+      "compressor_inlet_pressure": {
+        "name": "Verdichtereintrittsdruck"
+      },
+      "compressor_outlet_temperature": {
+        "name": "Verdichteraustrittstemperatur"
+      },
+      "compressor_outlet_pressure": {
+        "name": "Verdichteraustrittsdruck"
+      },
+      "room1_temperature": {
+        "name": "Raum 1 Temperatur"
+      },
+      "room2_temperature": {
+        "name": "Raum 2 Temperatur"
+      },
+      "room3_temperature": {
+        "name": "Raum 3 Temperatur"
+      },
+      "room4_temperature": {
+        "name": "Raum 4 Temperatur"
+      },
+      "expansion_valve1_position": {
+        "name": "Expansionsventil 1 Stellung"
+      },
+      "expansion_valve2_position": {
+        "name": "Expansionsventil 2 Stellung"
+      },
+      "allengra_flow_rate": {
+        "name": "Allengra Durchflussrate"
+      },
+      "allengra_temperature": {
+        "name": "Allengra Temperatur"
+      },
+      "primary_inlet_temperature": {
+        "name": "Primäreintrittstemperatur"
+      },
+      "engine_room_temperature": {
+        "name": "Maschinenraumtemperatur"
+      },
+      "compressor_oil_temperature": {
+        "name": "Verdichteröltemperatur"
+      },
+      "fan1_power": {
+        "name": "Lüfter 1 Leistung"
+      },
+      "fan2_power": {
+        "name": "Lüfter 2 Leistung"
+      },
+      "economizer_liquid_temperature": {
+        "name": "Vorwärmer Flüssigkeitstemperatur"
+      },
+      "evaporation_vapor_temperature": {
+        "name": "Verdampfungstemperatur"
+      },
+      "compressor_speed_percentage": {
+        "name": "Verdichterdrehzahl"
+      },
+      "heater_active": {
+        "name": "Heizung"
+      },
+      "heat_pump_compressor_active": {
+        "name": "Wärmepumpenkompressor"
       }
     },
     "climate": {

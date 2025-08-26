@@ -141,6 +141,78 @@
       },
       "pv_energy_production_total": {
         "name": "PV Energy Production Total"
+      },
+      "domestic_hot_water_target_temperature": {
+        "name": "Domestic Hot Water Temperature"
+      },
+      "flow_circuit1_temperature": {
+        "name": "Flow Circuit 1 Temperature"
+      },
+      "compressor_inlet_temperature": {
+        "name": "Compressor Inlet Temperature"
+      },
+      "compressor_inlet_pressure": {
+        "name": "Compressor Inlet Pressure"
+      },
+      "compressor_outlet_temperature": {
+        "name": "Compressor Outlet Temperature"
+      },
+      "compressor_outlet_pressure": {
+        "name": "Compressor Outlet Pressure"
+      },
+      "room1_temperature": {
+        "name": "Room 1 Temperature"
+      },
+      "room2_temperature": {
+        "name": "Room 2 Temperature"
+      },
+      "room3_temperature": {
+        "name": "Room 3 Temperature"
+      },
+      "room4_temperature": {
+        "name": "Room 4 Temperature"
+      },
+      "expansion_valve1_position": {
+        "name": "Expansion Valve 1 Position"
+      },
+      "expansion_valve2_position": {
+        "name": "Expansion Valve 2 Position"
+      },
+      "allengra_flow_rate": {
+        "name": "Allengra Flow Rate"
+      },
+      "allengra_temperature": {
+        "name": "Allengra Temperature"
+      },
+      "primary_inlet_temperature": {
+        "name": "Primary Inlet Temperature"
+      },
+      "engine_room_temperature": {
+        "name": "Engine Room Temperature"
+      },
+      "compressor_oil_temperature": {
+        "name": "Compressor Oil Temperature"
+      },
+      "fan1_power": {
+        "name": "Fan 1 Power"
+      },
+      "fan2_power": {
+        "name": "Fan 2 Power"
+      },
+      "economizer_liquid_temperature": {
+        "name": "Economizer Liquid Temperature"
+      },
+      "evaporation_vapor_temperature": {
+        "name": "Evaporation Vapor Temperature"
+      },
+      "compressor_speed_percentage": {
+        "name": "Compressor Speed"
+      },
+      "heater_active": {
+        "name": "Heater"
+      },
+      "heat_pump_compressor_active": {
+        "name": "Heat Pump Compressor"
       }
     },
     "climate": {
