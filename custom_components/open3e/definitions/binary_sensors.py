@@ -36,6 +36,7 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
         poll_data_features=[Features.State.Heater],
         key="heater_active",
         translation_key="heater_active",
+        icon="mdi:power",
         data_transform=BinarySensorDataTransform.POWERSTATE
     ),
     Open3eBinarySensorEntityDescription(
@@ -43,6 +44,7 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
         poll_data_features=[Features.State.HeatPumpCompressor],
         key="heat_pump_compressor_active",
         translation_key="heat_pump_compressor_active",
+        icon="mdi:power",
         data_transform=BinarySensorDataTransform.POWERSTATE
     ),
 )

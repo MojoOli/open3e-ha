@@ -1,33 +1,50 @@
 from enum import StrEnum
 
-from homeassistant.components.climate import PRESET_COMFORT, PRESET_ECO, PRESET_HOME
-
 
 class Program(StrEnum):
-    Reduced = "Reduced"
-    Standard = "Standard"
-    Comfort = "Comfort"
+    Off = "off_mode"
+    Reduced = "reduced"
+    Normal = "normal"
+    Comfort = "comfort"
+    FixedValue = "fixed_value"
+    FrostProtection = "frost_protection"
+    EcoReduced = "eco_reduced"
+    EcoNormal = "eco_normal"
+    EcoComfort = "eco_comfort"
 
     @staticmethod
-    def from_text(text: str):
-        match text:
-            case Program.Reduced.name:
+    def from_operation_mode(mode: int):
+        match mode:
+            case 0:
+                return Program.Off
+            case 1:
                 return Program.Reduced
-            case Program.Standard.name:
-                return Program.Standard
-            case Program.Comfort.name:
+            case 2:
+                return Program.Normal
+            case 3:
                 return Program.Comfort
-            case "Normal":
-                return Program.Standard
+            case 4:
+                return Program.FixedValue
+            case 5:
+                return Program.FrostProtection
+            case 6:
+                return Program.EcoReduced
+            case 7:
+                return Program.EcoNormal
+            case 8:
+                return Program.Comfort
 
         return None
 
-    def to_ha_preset_mode(self):
-        return HA_PRESET_HEATING[self]
+    def map_to_api(self):
+        match self:
+            case Program.Off:
+                return "Reduced"
+            case Program.Reduced:
+                return "Reduced"
+            case Program.FrostProtection:
+                return "Reduced"
+            case Program.Comfort:
+                return "Comfort"
 
-
-HA_PRESET_HEATING = {
-    Program.Reduced: PRESET_ECO,
-    Program.Standard: PRESET_HOME,
-    Program.Comfort: PRESET_COMFORT
-}
+        return "Standard"

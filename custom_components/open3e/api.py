@@ -146,7 +146,7 @@ class Open3eMqttClient:
                 topic=self.__mqtt_cmd,
                 payload=self.__write_json_payload(
                     feature_id=set_programs_feature_id,
-                    sub_feature=program.name,
+                    sub_feature=program,
                     data=temperature
                 )
             )

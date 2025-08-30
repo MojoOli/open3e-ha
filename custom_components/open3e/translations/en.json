@@ -207,7 +207,9 @@
       },
       "compressor_speed_percentage": {
         "name": "Compressor Speed"
-      },
+      }
+    },
+    "binary_sensor": {
       "heater_active": {
         "name": "Heater"
       },
@@ -217,7 +219,22 @@
     },
     "climate": {
       "climate_circuit_1": {
-        "name": "Climate circuit 1"
+        "name": "Climate circuit 1",
+        "state_attributes": {
+          "preset_mode": {
+            "state": {
+              "off_mode": "Off",
+              "reduced": "Reduced",
+              "normal": "Normal",
+              "comfort": "Comfort",
+              "fixed_value": "Fixed value",
+              "frost_protection": "Frost protection",
+              "eco_reduced": "Eco reduced",
+              "eco_normal": "Eco normal",
+              "eco_comfort": "Eco comfort"
+            }
+          }
+        }
       },
       "climate_circuit_2": {
         "name": "Climate circuit 2"

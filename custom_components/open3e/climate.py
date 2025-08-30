@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 from typing import Any
 
 from homeassistant.components.climate import ClimateEntity, ClimateEntityFeature, HVACMode, HVACAction
@@ -16,6 +17,8 @@ from .definitions.climate import Open3eClimateEntityDescription, CLIMATE
 from .definitions.program import Program
 from .entity import Open3eEntity
 from .ha_data import Open3eDataConfigEntry
+
+_LOGGER = logging.getLogger(__name__)
 
 
 async def async_setup_entry(
@@ -64,12 +67,8 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
     ):
         super().__init__(coordinator, description)
 
-        self._attr_preset_modes = [
-            Program.Reduced.to_ha_preset_mode(),
-            Program.Standard.to_ha_preset_mode(),
-            Program.Comfort.to_ha_preset_mode()
-        ]
-        self._attr_preset_mode = Program.Standard.to_ha_preset_mode()
+        self._attr_preset_modes = list(Program)
+        self._attr_preset_mode = Program.Normal
         self._attr_hvac_mode = HVACMode.AUTO
         self.__current_hvac_actions = [HVACAction.IDLE]
 
@@ -78,7 +77,7 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
         """Return True if the current flow temperature
         is not -3276.8 which is used when the circuit is not connected
         """
-        return self.__current_flow_temperature > -1000
+        return self.__current_flow_temperature is not None and self.__current_flow_temperature > -1000
 
     @property
     def hvac_action(self) -> HVACAction:
@@ -111,10 +110,7 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
 
         Requires ClimateEntityFeature.PRESET_MODE.
         """
-        if self.__current_program is None:
-            return None
-
-        return self.__current_program.to_ha_preset_mode()
+        return self.__current_program
 
     @property
     def target_temperature(self) -> str | None:
@@ -125,7 +121,7 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
         if self.__current_program is None or self.__programs is None:
             return None
 
-        return self.__programs[self.__current_program]
+        return self.__programs[self.__current_program.map_to_api()]
 
     def set_preset_mode(self, preset_mode: str) -> None:
         """Setting the preset mode is not supported."""
@@ -133,11 +129,11 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
     async def async_set_temperature(self, **kwargs: Any) -> None:
         """Set new target temperature."""
         temperature = kwargs["temperature"]
-        self.__programs[self.__current_program] = temperature
+        self.__programs[self.__current_program.map_to_api()] = temperature
 
         await self.coordinator.async_set_program_temperature(
             set_programs_feature_id=self.entity_description.programs_temperature_feature.id,
-            program=self.__current_program,
+            program=Program.map_to_api(self.__current_program),
             temperature=temperature
         )
 
@@ -162,7 +158,7 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
             case self.entity_description.hvac_mode_feature.id:
                 hvac_mode = json_loads(self.data[feature_id])
 
-                self.__current_program = Program.from_text(hvac_mode["State"]["Text"])
+                self.__current_program = Program.from_operation_mode(hvac_mode["State"]["ID"])
 
                 if hvac_mode["Mode"]["ID"] == 0:
                     self._attr_hvac_mode = HVACMode.OFF
