@@ -2,7 +2,8 @@ from dataclasses import dataclass
 from typing import Callable, Any
 
 from homeassistant.components.sensor import SensorEntityDescription, SensorDeviceClass, SensorStateClass
-from homeassistant.const import UnitOfTemperature, UnitOfPressure, UnitOfEnergy, PERCENTAGE, UnitOfPower
+from homeassistant.const import UnitOfTemperature, UnitOfPressure, UnitOfEnergy, PERCENTAGE, UnitOfPower, \
+    UnitOfVolumeFlowRate
 from homeassistant.util.json import json_loads
 
 from .entity_description import Open3eEntityDescription
@@ -34,6 +35,7 @@ class SensorDataRetriever:
     PV_ENERGY_PRODUCTION_MONTH = lambda data: json_loads(data)["PhotovoltaicProductionMonth"]
     PV_ENERGY_PRODUCTION_YEAR = lambda data: json_loads(data)["PhotovoltaicProductionYear"]
     PV_ENERGY_PRODUCTION_TOTAL = lambda data: json_loads(data)["PhotovoltaicProductionTotal"]
+    TEMPERATURE = lambda data: json_loads(data)["Temperature"]
     PV_POWER_STRING_1 = lambda data: (lambda val: val if val < 65000 else 0)(json_loads(data)["String1"])
     PV_POWER_STRING_2 = lambda data: (lambda val: val if val < 65000 else 0)(json_loads(data)["String2"])
     PV_POWER_STRING_3 = lambda data: (lambda val: val if val < 65000 else 0)(json_loads(data)["String3"])
@@ -82,6 +84,15 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="domestic_hot_water_temperature",
         translation_key="domestic_hot_water_temperature",
         data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.DomesticHotWaterTarget],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="domestic_hot_water_temperature",
+        translation_key="domestic_hot_water_temperature",
+        data_retriever=SensorDataRetriever.RAW
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Pressure.Water],
@@ -230,6 +241,198 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="central_heating_pump_speed_percentage",
         translation_key="central_heating_pump_speed_percentage",
         data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.FlowCircuit1],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="flow_circuit1_temperature",
+        translation_key="flow_circuit1_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.CompressorInlet],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="compressor_inlet_temperature",
+        translation_key="compressor_inlet_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Pressure.CompressorInlet],
+        device_class=SensorDeviceClass.PRESSURE,
+        native_unit_of_measurement=UnitOfPressure.BAR,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="compressor_inlet_pressure",
+        translation_key="compressor_inlet_pressure",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.CompressorOutlet],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="compressor_outlet_temperature",
+        translation_key="compressor_outlet_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Pressure.CompressorOutlet],
+        device_class=SensorDeviceClass.PRESSURE,
+        native_unit_of_measurement=UnitOfPressure.BAR,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="compressor_outlet_pressure",
+        translation_key="compressor_outlet_pressure",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.Room1],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="room1_temperature",
+        translation_key="room1_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.Room2],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="room2_temperature",
+        translation_key="room2_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL,
+        entity_registry_enabled_default=False
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.Room3],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="room3_temperature",
+        translation_key="room3_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL,
+        entity_registry_enabled_default=False
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.Room4],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="room4_temperature",
+        translation_key="room4_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL,
+        entity_registry_enabled_default=False
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Position.ExpansionValve1],
+        device_class=SensorDeviceClass.POWER_FACTOR,
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="expansion_valve1_position",
+        translation_key="expansion_valve1_position",
+        data_retriever=SensorDataRetriever.RAW
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Position.ExpansionValve2],
+        device_class=SensorDeviceClass.POWER_FACTOR,
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="expansion_valve2_position",
+        translation_key="expansion_valve2_position",
+        data_retriever=SensorDataRetriever.RAW
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.State.Allengra],
+        device_class=SensorDeviceClass.VOLUME_FLOW_RATE,
+        native_unit_of_measurement=UnitOfVolumeFlowRate.CUBIC_METERS_PER_HOUR,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="allengra_flow_rate",
+        translation_key="allengra_flow_rate",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.State.Allengra],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="allengra_temperature",
+        translation_key="allengra_temperature",
+        data_retriever=SensorDataRetriever.TEMPERATURE
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.PrimaryInlet],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="primary_inlet_temperature",
+        translation_key="primary_inlet_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.EngineRoom],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="engine_room_temperature",
+        translation_key="engine_room_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.CompressorOil],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="compressor_oil_temperature",
+        translation_key="compressor_oil_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Power.Fan1],
+        device_class=SensorDeviceClass.POWER,
+        native_unit_of_measurement=UnitOfPower.WATT,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="fan1_power",
+        translation_key="fan1_power",
+        data_retriever=SensorDataRetriever.RAW
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Power.Fan2],
+        device_class=SensorDeviceClass.POWER,
+        native_unit_of_measurement=UnitOfPower.WATT,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="fan2_power",
+        translation_key="fan2_power",
+        data_retriever=SensorDataRetriever.RAW
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.EconomizerLiquid],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="economizer_liquid_temperature",
+        translation_key="economizer_liquid_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.EvaporationVapor],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="evaporation_vapor_temperature",
+        translation_key="evaporation_vapor_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Speed.Compressor],
+        device_class=SensorDeviceClass.POWER_FACTOR,
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="compressor_speed_percentage",
+        translation_key="compressor_speed_percentage",
+        data_retriever=SensorDataRetriever.RAW
     ),
 
     ##################

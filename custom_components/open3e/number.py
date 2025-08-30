@@ -48,7 +48,7 @@ class Open3eNumber(Open3eEntity, NumberEntity):
         if self.__programs is None:
             return None
 
-        return self.__programs[self.entity_description.program.name]
+        return self.__programs[self.entity_description.program.map_to_api()]
 
     @property
     def available(self):
@@ -57,7 +57,7 @@ class Open3eNumber(Open3eEntity, NumberEntity):
 
     async def async_set_native_value(self, value: float) -> None:
         """Set new value."""
-        self.__programs[self.entity_description.program.name] = value
+        self.__programs[self.entity_description.program.map_to_api()] = value
 
         await self.coordinator.async_set_program_temperature(
             set_programs_feature_id=self.entity_description.poll_data_features[0].id,

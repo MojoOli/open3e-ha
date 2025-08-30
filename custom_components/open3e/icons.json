@@ -1,0 +1,23 @@
+{
+  "entity": {
+    "climate": {
+      "climate_circuit_1": {
+        "state_attributes": {
+          "preset_mode": {
+            "state": {
+              "off_mode": "mdi:power",
+              "reduced": "mdi:leaf",
+              "normal": "mdi:home",
+              "comfort": "mdi:sofa",
+              "fixed_value": "mdi:tune",
+              "frost_protection": "mdi:snowflake-thermometer",
+              "eco_reduced": "mdi:leaf-circle",
+              "eco_normal": "mdi:home-circle",
+              "eco_comfort": "mdi:sofa"
+            }
+          }
+        }
+      }
+    }
+  }
+}

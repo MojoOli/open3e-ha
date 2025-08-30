@@ -20,6 +20,7 @@ from .ha_data import Open3eData, Open3eDataConfigEntry, Open3eDataUpdateCoordina
 
 PLATFORMS: list[Platform] = [
     Platform.SENSOR,
+    Platform.BINARY_SENSOR,
     Platform.CLIMATE,
     Platform.NUMBER,
     Platform.WATER_HEATER
