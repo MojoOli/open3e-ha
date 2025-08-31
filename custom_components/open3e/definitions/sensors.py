@@ -391,20 +391,22 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Power.Fan1],
-        device_class=SensorDeviceClass.POWER,
-        native_unit_of_measurement=UnitOfPower.WATT,
+        device_class=SensorDeviceClass.POWER_FACTOR,
+        native_unit_of_measurement=PERCENTAGE,
         state_class=SensorStateClass.MEASUREMENT,
         key="fan1_power",
         translation_key="fan1_power",
+        icon="mdi:fan",
         data_retriever=SensorDataRetriever.RAW
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Power.Fan2],
-        device_class=SensorDeviceClass.POWER,
-        native_unit_of_measurement=UnitOfPower.WATT,
+        device_class=SensorDeviceClass.POWER_FACTOR,
+        native_unit_of_measurement=PERCENTAGE,
         state_class=SensorStateClass.MEASUREMENT,
         key="fan2_power",
         translation_key="fan2_power",
+        icon="mdi:fan",
         data_retriever=SensorDataRetriever.RAW
     ),
     Open3eSensorEntityDescription(
