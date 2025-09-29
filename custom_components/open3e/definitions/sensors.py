@@ -645,4 +645,18 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         translation_key="pv_energy_production_total",
         data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_TOTAL
     ),
+
+    ##################
+    ### VitoAir ###
+    ##################
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.PV],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
+        suggested_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="pv_energy_production_total",
+        translation_key="pv_energy_production_total",
+        data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_TOTAL
+    ),
 )

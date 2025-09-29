@@ -41,6 +41,15 @@ class Features:
         CompressorOil = Feature(id=1772, refresh_interval=30)
         EconomizerLiquid = Feature(id=2333, refresh_interval=30)
         EvaporationVapor = Feature(id=2334, refresh_interval=30)
+        OutdoorAir = Feature(id=327, refresh_interval=5)
+        SupplyAir = Feature(id=328, refresh_interval=5)
+        ExtractAir = Feature(id=329, refresh_interval=5)
+        ExhaustAir = Feature(id=330, refresh_interval=5)
+
+    class Humidity:
+        SupplyAir = Feature(id=420, refresh_interval=5)
+        ExtractAir = Feature(id=421, refresh_interval=5)
+        ExhaustAir = Feature(id=422, refresh_interval=5)
 
     class Pressure:
         Water = Feature(id=318, refresh_interval=15)
