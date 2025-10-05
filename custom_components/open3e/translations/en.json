@@ -282,6 +282,9 @@
       },
       "circuit_4_reduced_temperature": {
         "name": "Climate circuit 4 Reduced temperature"
+      },
+      "heater_max_power": {
+        "name": "Electrical Heater Maximum Power"
       }
     },
     "water_heater": {

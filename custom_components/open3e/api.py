@@ -146,7 +146,7 @@ class Open3eMqttClient:
                 topic=self.__mqtt_cmd,
                 payload=self.__write_json_payload(
                     feature_id=set_programs_feature_id,
-                    sub_feature=program,
+                    sub_feature=program.map_to_api(),
                     data=temperature
                 )
             )
@@ -237,6 +237,25 @@ class Open3eMqttClient:
                         data=efficiency_payload
                     )
                 )
+        except Exception as exception:
+            raise Open3eError(exception)
+
+    async def async_set_max_power_electrical_heater(
+            self,
+            hass: HomeAssistant,
+            feature_id: int,
+            max_power: float
+    ):
+        try:
+            _LOGGER.debug(f"Setting max power of electrical heater of feature ID {feature_id}")
+            await mqtt.async_publish(
+                hass=hass,
+                topic=self.__mqtt_cmd,
+                payload=self.__write_json_payload(
+                    feature_id=feature_id,
+                    data=max_power
+                )
+            )
         except Exception as exception:
             raise Open3eError(exception)
 

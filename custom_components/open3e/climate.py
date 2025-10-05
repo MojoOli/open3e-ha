@@ -130,7 +130,7 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
 
         await self.coordinator.async_set_program_temperature(
             set_programs_feature_id=self.entity_description.programs_temperature_feature.id,
-            program=self.__current_program.map_to_api(),
+            program=self.__current_program,
             temperature=temperature
         )
 

@@ -43,29 +43,15 @@ class Open3eNumber(Open3eEntity, NumberEntity):
         super().__init__(coordinator, description)
 
     @property
-    def native_value(self) -> float | None:
-        """Return the value reported by the number."""
-        if self.__programs is None:
-            return None
-
-        return self.__programs[self.entity_description.program.map_to_api()]
-
-    @property
     def available(self):
         """Return True if entity is available."""
         return self.native_value is not None
 
     async def async_set_native_value(self, value: float) -> None:
         """Set new value."""
-        self.__programs[self.entity_description.program.map_to_api()] = value
-
-        await self.coordinator.async_set_program_temperature(
-            set_programs_feature_id=self.entity_description.poll_data_features[0].id,
-            program=self.entity_description.program,
-            temperature=value
-        )
+        await self.entity_description.set_native_value(value, self.coordinator)
 
     async def async_on_data(self, feature_id: int) -> None:
         """Handle updated data from MQTT."""
-        self.__programs = json_loads(self.data[feature_id])
+        self._attr_native_value = self.entity_description.get_native_value(json_loads(self.data[feature_id]))
         self.async_write_ha_state()

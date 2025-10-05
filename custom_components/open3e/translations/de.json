@@ -282,6 +282,9 @@
       },
       "circuit_4_reduced_temperature": {
         "name": "Heiz-Kühlkreis 4 Reduzierte Temperatur"
+      },
+      "heater_max_power": {
+        "name": "Heizstab Maximalleistung"
       }
     },
     "water_heater": {

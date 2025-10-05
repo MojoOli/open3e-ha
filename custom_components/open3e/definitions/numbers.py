@@ -1,12 +1,15 @@
 from dataclasses import dataclass
+from typing import Callable, Any, Awaitable
 
 from homeassistant.components.number import NumberEntityDescription, NumberDeviceClass
-from homeassistant.const import UnitOfTemperature
+from homeassistant.const import UnitOfTemperature, UnitOfPower
 
 from .entity_description import Open3eEntityDescription
 from .features import Features
 from .program import Program
-from ..const import VIESSMANN_TEMP_HEATING_MIN, VIESSMANN_TEMP_HEATING_MAX
+from .. import Open3eDataUpdateCoordinator
+from ..const import VIESSMANN_TEMP_HEATING_MIN, VIESSMANN_TEMP_HEATING_MAX, VIESSMANN_POWER_MAX_WATT_ELECTRICAL_HEATER, \
+    VIESSMANN_POWER_MIN_WATT_ELECTRICAL_HEATER, VIESSMANN_POWER_WATT_ELECTRICAL_HEATER_STEP
 
 
 @dataclass(frozen=True)
@@ -15,8 +18,8 @@ class Open3eNumberEntityDescription(
 ):
     """Default number entity description for open3e."""
     domain: str = "number"
-    program: Program | None = None
-    """Describes the key that is used"""
+    get_native_value: Callable[[Any], float] = None
+    set_native_value: Callable[[float, Open3eDataUpdateCoordinator], Awaitable[None]] = None
 
 
 NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
@@ -27,7 +30,12 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         native_min_value=VIESSMANN_TEMP_HEATING_MIN,
         native_max_value=VIESSMANN_TEMP_HEATING_MAX,
         native_step=1,
-        program=Program.Reduced,
+        get_native_value=lambda data: data[Program.Reduced.map_to_api()],
+        set_native_value=lambda value, coordinator: coordinator.async_set_program_temperature(
+            set_programs_feature_id=Features.Temperature.ProgramsCircuit1.id,
+            program=Program.Reduced,
+            temperature=value
+        ),
         key="circuit_1_reduced_temperature",
         translation_key="circuit_1_reduced_temperature"
     ),
@@ -38,7 +46,12 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         native_min_value=VIESSMANN_TEMP_HEATING_MIN,
         native_max_value=VIESSMANN_TEMP_HEATING_MAX,
         native_step=1,
-        program=Program.Normal,
+        get_native_value=lambda data: data[Program.Normal.map_to_api()],
+        set_native_value=lambda value, coordinator: coordinator.async_set_program_temperature(
+            set_programs_feature_id=Features.Temperature.ProgramsCircuit1.id,
+            program=Program.Normal,
+            temperature=value
+        ),
         key="circuit_1_standard_temperature",
         translation_key="circuit_1_standard_temperature"
     ),
@@ -49,7 +62,12 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         native_min_value=VIESSMANN_TEMP_HEATING_MIN,
         native_max_value=VIESSMANN_TEMP_HEATING_MAX,
         native_step=1,
-        program=Program.Comfort,
+        get_native_value=lambda data: data[Program.Comfort.map_to_api()],
+        set_native_value=lambda value, coordinator: coordinator.async_set_program_temperature(
+            set_programs_feature_id=Features.Temperature.ProgramsCircuit1.id,
+            program=Program.Comfort,
+            temperature=value
+        ),
         key="circuit_1_comfort_temperature",
         translation_key="circuit_1_comfort_temperature"
     ),
@@ -60,7 +78,12 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         native_min_value=VIESSMANN_TEMP_HEATING_MIN,
         native_max_value=VIESSMANN_TEMP_HEATING_MAX,
         native_step=1,
-        program=Program.Reduced,
+        get_native_value=lambda data: data[Program.Reduced.map_to_api()],
+        set_native_value=lambda value, coordinator: coordinator.async_set_program_temperature(
+            set_programs_feature_id=Features.Temperature.ProgramsCircuit2.id,
+            program=Program.Reduced,
+            temperature=value
+        ),
         key="circuit_2_reduced_temperature",
         translation_key="circuit_2_reduced_temperature",
         entity_registry_enabled_default=False
@@ -72,7 +95,12 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         native_min_value=VIESSMANN_TEMP_HEATING_MIN,
         native_max_value=VIESSMANN_TEMP_HEATING_MAX,
         native_step=1,
-        program=Program.Normal,
+        get_native_value=lambda data: data[Program.Normal.map_to_api()],
+        set_native_value=lambda value, coordinator: coordinator.async_set_program_temperature(
+            set_programs_feature_id=Features.Temperature.ProgramsCircuit2.id,
+            program=Program.Normal,
+            temperature=value
+        ),
         key="circuit_2_standard_temperature",
         translation_key="circuit_2_standard_temperature",
         entity_registry_enabled_default=False
@@ -84,7 +112,12 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         native_min_value=VIESSMANN_TEMP_HEATING_MIN,
         native_max_value=VIESSMANN_TEMP_HEATING_MAX,
         native_step=1,
-        program=Program.Comfort,
+        get_native_value=lambda data: data[Program.Comfort.map_to_api()],
+        set_native_value=lambda value, coordinator: coordinator.async_set_program_temperature(
+            set_programs_feature_id=Features.Temperature.ProgramsCircuit2.id,
+            program=Program.Comfort,
+            temperature=value
+        ),
         key="circuit_2_comfort_temperature",
         translation_key="circuit_2_comfort_temperature",
         entity_registry_enabled_default=False
@@ -96,7 +129,12 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         native_min_value=VIESSMANN_TEMP_HEATING_MIN,
         native_max_value=VIESSMANN_TEMP_HEATING_MAX,
         native_step=1,
-        program=Program.Reduced,
+        get_native_value=lambda data: data[Program.Reduced.map_to_api()],
+        set_native_value=lambda value, coordinator: coordinator.async_set_program_temperature(
+            set_programs_feature_id=Features.Temperature.ProgramsCircuit3.id,
+            program=Program.Reduced,
+            temperature=value
+        ),
         key="circuit_3_reduced_temperature",
         translation_key="circuit_3_reduced_temperature",
         entity_registry_enabled_default=False
@@ -108,7 +146,12 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         native_min_value=VIESSMANN_TEMP_HEATING_MIN,
         native_max_value=VIESSMANN_TEMP_HEATING_MAX,
         native_step=1,
-        program=Program.Normal,
+        get_native_value=lambda data: data[Program.Normal.map_to_api()],
+        set_native_value=lambda value, coordinator: coordinator.async_set_program_temperature(
+            set_programs_feature_id=Features.Temperature.ProgramsCircuit3.id,
+            program=Program.Normal,
+            temperature=value
+        ),
         key="circuit_3_standard_temperature",
         translation_key="circuit_3_standard_temperature",
         entity_registry_enabled_default=False
@@ -120,7 +163,12 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         native_min_value=VIESSMANN_TEMP_HEATING_MIN,
         native_max_value=VIESSMANN_TEMP_HEATING_MAX,
         native_step=1,
-        program=Program.Comfort,
+        get_native_value=lambda data: data[Program.Comfort.map_to_api()],
+        set_native_value=lambda value, coordinator: coordinator.async_set_program_temperature(
+            set_programs_feature_id=Features.Temperature.ProgramsCircuit3.id,
+            program=Program.Comfort,
+            temperature=value
+        ),
         key="circuit_3_comfort_temperature",
         translation_key="circuit_3_comfort_temperature",
         entity_registry_enabled_default=False
@@ -132,7 +180,12 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         native_min_value=VIESSMANN_TEMP_HEATING_MIN,
         native_max_value=VIESSMANN_TEMP_HEATING_MAX,
         native_step=1,
-        program=Program.Reduced,
+        get_native_value=lambda data: data[Program.Reduced.map_to_api()],
+        set_native_value=lambda value, coordinator: coordinator.async_set_program_temperature(
+            set_programs_feature_id=Features.Temperature.ProgramsCircuit4.id,
+            program=Program.Reduced,
+            temperature=value
+        ),
         key="circuit_4_reduced_temperature",
         translation_key="circuit_4_reduced_temperature",
         entity_registry_enabled_default=False
@@ -144,7 +197,12 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         native_min_value=VIESSMANN_TEMP_HEATING_MIN,
         native_max_value=VIESSMANN_TEMP_HEATING_MAX,
         native_step=1,
-        program=Program.Normal,
+        get_native_value=lambda data: data[Program.Normal.map_to_api()],
+        set_native_value=lambda value, coordinator: coordinator.async_set_program_temperature(
+            set_programs_feature_id=Features.Temperature.ProgramsCircuit4.id,
+            program=Program.Normal,
+            temperature=value
+        ),
         key="circuit_4_standard_temperature",
         translation_key="circuit_4_standard_temperature",
         entity_registry_enabled_default=False
@@ -156,9 +214,29 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         native_min_value=VIESSMANN_TEMP_HEATING_MIN,
         native_max_value=VIESSMANN_TEMP_HEATING_MAX,
         native_step=1,
-        program=Program.Comfort,
+        get_native_value=lambda data: data[Program.Comfort.map_to_api()],
+        set_native_value=lambda value, coordinator: coordinator.async_set_program_temperature(
+            set_programs_feature_id=Features.Temperature.ProgramsCircuit4.id,
+            program=Program.Comfort,
+            temperature=value
+        ),
         key="circuit_4_comfort_temperature",
         translation_key="circuit_4_comfort_temperature",
         entity_registry_enabled_default=False
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.Power.MaxElectricalHeater],
+        native_unit_of_measurement=UnitOfPower.WATT,
+        device_class=NumberDeviceClass.POWER,
+        native_min_value=VIESSMANN_POWER_MIN_WATT_ELECTRICAL_HEATER,
+        native_max_value=VIESSMANN_POWER_MAX_WATT_ELECTRICAL_HEATER,
+        native_step=VIESSMANN_POWER_WATT_ELECTRICAL_HEATER_STEP,
+        get_native_value=lambda data: data,
+        set_native_value=lambda value, coordinator: coordinator.async_set_max_power_electrical_heater(
+            feature_id=Features.Power.MaxElectricalHeater.id,
+            max_power=value
+        ),
+        key="heater_max_power",
+        translation_key="heater_max_power"
     ),
 )

@@ -238,3 +238,19 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
         await asyncio.sleep(2)
 
         await self.__client.async_request_data(self.hass, [dmw_state_feature_id, dmw_efficiency_mode_feature_id])
+
+    async def async_set_max_power_electrical_heater(
+            self,
+            feature_id: int,
+            max_power: float
+    ):
+        await self.__client.async_set_max_power_electrical_heater(
+            hass=self.hass,
+            feature_id=feature_id,
+            max_power=max_power
+        )
+
+        # Wait for 2 seconds to request new states
+        await asyncio.sleep(2)
+
+        await self.__client.async_request_data(self.hass, [feature_id])
