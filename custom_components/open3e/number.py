@@ -52,7 +52,7 @@ class Open3eNumber(Open3eEntity, NumberEntity):
         if self.entity_description.set_native_value is None:
             return
 
-        await self.entity_description.set_native_value(value, self.coordinator)
+        await self.entity_description.set_native_value(value, self.device, self.coordinator)
 
     async def async_on_data(self, feature_id: int) -> None:
         """Handle updated data from MQTT."""

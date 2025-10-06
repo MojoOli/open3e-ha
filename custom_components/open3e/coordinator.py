@@ -255,7 +255,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             device_id=device.id
         )
 
-        await self.async_refresh_feature([feature_id])
+        await self.async_refresh_feature(device, [feature_id])
 
     async def async_set_smart_grid_temperature_offset(
             self,
@@ -272,10 +272,10 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             device_id=device.id
         )
 
-        await self.async_refresh_feature([feature_id])
+        await self.async_refresh_feature(device, [feature_id])
 
     async def async_refresh_feature(self, device: Open3eDataDevice, feature_ids: list[int]):
         # Wait for 2 seconds to request new states
         await asyncio.sleep(2)
 
-        await self.__client.async_request_data(self.hass, device, {device.id: feature_ids})
+        await self.__client.async_request_data(self.hass, {device.id: feature_ids})
