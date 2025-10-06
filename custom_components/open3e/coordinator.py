@@ -14,7 +14,9 @@ from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
 from .api import Open3eMqttClient
 from .const import DOMAIN
+from .definitions.buffer import Buffer
 from .definitions.dmw_mode import DmwMode
+from .definitions.hysteresis import Hysteresis
 from .definitions.open3e_data import Open3eDataSystemInformation, Open3eDataDevice
 from .definitions.program import Program
 from .definitions.smart_grid_temperature_offsets import SmartGridTemperatureOffsets
@@ -268,6 +270,55 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             hass=self.hass,
             feature_id=feature_id,
             offset=offset,
+            value=value,
+            device_id=device.id
+        )
+
+        await self.async_refresh_feature(device, [feature_id])
+
+    async def async_set_temperature_cooling(
+            self,
+            feature_id: int,
+            value: float,
+            device: Open3eDataDevice
+    ):
+        await self.__client.async_set_temperature_cooling(
+            hass=self.hass,
+            feature_id=feature_id,
+            value=value,
+            device_id=device.id
+        )
+
+        await self.async_refresh_feature(device, [feature_id])
+
+    async def async_set_hysteresis(
+            self,
+            feature_id: int,
+            hysteresis: Hysteresis,
+            value: float,
+            device: Open3eDataDevice
+    ):
+        await self.__client.async_set_hysteresis(
+            hass=self.hass,
+            feature_id=feature_id,
+            hysteresis=hysteresis,
+            value=value,
+            device_id=device.id
+        )
+
+        await self.async_refresh_feature(device, [feature_id])
+
+    async def async_set_buffer_temperature(
+            self,
+            feature_id: int,
+            buffer: Buffer,
+            value: float,
+            device: Open3eDataDevice
+    ):
+        await self.__client.async_set_buffer_temperature(
+            hass=self.hass,
+            feature_id=feature_id,
+            buffer=buffer,
             value=value,
             device_id=device.id
         )

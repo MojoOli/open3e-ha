@@ -14,10 +14,13 @@ from homeassistant.helpers.json import json_dumps
 from homeassistant.util.json import json_loads
 
 from .const import MQTT_SYSTEM_TOPIC, MQTT_SYSTEM_PAYLOAD
+from .definitions.buffer import Buffer
 from .definitions.dmw_mode import DmwMode
+from .definitions.hysteresis import Hysteresis
 from .definitions.open3e_data import Open3eDataSystemInformation
 from .definitions.program import Program
 from .definitions.smart_grid_temperature_offsets import SmartGridTemperatureOffsets
+from .definitions.temperature_cooling import TemperatureCooling
 from .errors import Open3eServerTimeoutError, Open3eError, Open3eServerUnavailableError
 
 _LOGGER = logging.getLogger(__name__)
@@ -265,7 +268,8 @@ class Open3eMqttClient:
                 topic=self.__mqtt_cmd,
                 payload=self.__write_json_payload(
                     feature_id=feature_id,
-                    data=max_power
+                    data=max_power,
+                    device_id=device_id
                 )
             )
         except Exception as exception:
@@ -287,7 +291,76 @@ class Open3eMqttClient:
                 payload=self.__write_json_payload(
                     feature_id=feature_id,
                     data=value,
-                    sub_feature=offset
+                    sub_feature=offset,
+                    device_id=device_id
+                )
+            )
+        except Exception as exception:
+            raise Open3eError(exception)
+
+    async def async_set_temperature_cooling(
+            self,
+            hass: HomeAssistant,
+            feature_id: int,
+            value: float,
+            device_id: int
+    ):
+        try:
+            _LOGGER.debug(f"Setting {TemperatureCooling.EffectiveSetTemperature} of feature ID {feature_id}")
+            await mqtt.async_publish(
+                hass=hass,
+                topic=self.__mqtt_cmd,
+                payload=self.__write_json_payload(
+                    feature_id=feature_id,
+                    data=value,
+                    sub_feature=TemperatureCooling.EffectiveSetTemperature,
+                    device_id=device_id
+                )
+            )
+        except Exception as exception:
+            raise Open3eError(exception)
+
+    async def async_set_hysteresis(
+            self,
+            hass: HomeAssistant,
+            feature_id: int,
+            hysteresis: Hysteresis,
+            value: float,
+            device_id: int
+    ):
+        try:
+            _LOGGER.debug(f"Setting {hysteresis} of feature ID {feature_id}")
+            await mqtt.async_publish(
+                hass=hass,
+                topic=self.__mqtt_cmd,
+                payload=self.__write_json_payload(
+                    feature_id=feature_id,
+                    data=value,
+                    sub_feature=hysteresis,
+                    device_id=device_id
+                )
+            )
+        except Exception as exception:
+            raise Open3eError(exception)
+
+    async def async_set_buffer_temperature(
+            self,
+            hass: HomeAssistant,
+            feature_id: int,
+            buffer: Buffer,
+            value: float,
+            device_id: int
+    ):
+        try:
+            _LOGGER.debug(f"Setting {buffer} temperature of feature ID {feature_id}")
+            await mqtt.async_publish(
+                hass=hass,
+                topic=self.__mqtt_cmd,
+                payload=self.__write_json_payload(
+                    feature_id=feature_id,
+                    data=value,
+                    sub_feature=buffer,
+                    device_id=device_id
                 )
             )
         except Exception as exception:

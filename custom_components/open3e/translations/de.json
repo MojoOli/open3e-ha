@@ -302,13 +302,13 @@
         "name": "SmartGrid Erhöhung Warmwassertemperatur"
       },
       "heating_circuit_flow_setpoint_cooling": {
-        "name": "Heizkreis Vorlauftemperatur Soll Kühlen"
+        "name": "Vorlauftemperatur Soll Kühlen"
       },
       "heating_circuit_cooling_hysteresis_on": {
-        "name": "Heizkreis Kühlen Einschalthysterese"
+        "name": "Einschalthysterese Kühlen"
       },
       "heating_circuit_cooling_hysteresis_off": {
-        "name": "Heizkreis Kühlen Ausschalthysterese"
+        "name": "Ausschalthysterese Kühlen"
       },
       "buffer_min_temperature": {
         "name": "Pufferspeicher Minimaltemperatur"

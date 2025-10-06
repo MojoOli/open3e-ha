@@ -42,6 +42,9 @@ class Features:
         EconomizerLiquid = Feature(id=2333, refresh_interval=30)
         EvaporationVapor = Feature(id=2334, refresh_interval=30)
         SmartGridTemperatureOffsets = Feature(id=2543, refresh_interval=5)
+        FlowCircuit1Cooling = Feature(id=2405, refresh_interval=30)
+        FlowCircuit1Hysteresis = Feature(id=2413, refresh_interval=30)
+        Buffer = Feature(id=3106, refresh_interval=30)
 
     class Pressure:
         Water = Feature(id=318, refresh_interval=15)
