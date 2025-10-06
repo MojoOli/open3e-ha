@@ -11,7 +11,7 @@
     },
     "error": {
       "timeout": "Es wurde keine Antwort vom Open3e server empfangen.",
-      "unavailable": "Der Open3e Server is abgeschalten.",
+      "unavailable": "Der Open3e Server ist abgeschalten.",
       "general": "Die Kommunikation mit dem Open3e Server wurde nicht hergestellt. Vergewissere dich, dass das MQTT topic und cmnd korrekt sind, der MQTT Server läuft, der Open3e Server läuft und mit dem MQTT Client von HomeAssistant verbunden ist."
     }
   },
@@ -285,6 +285,36 @@
       },
       "heater_max_power": {
         "name": "Heizstab Maximalleistung"
+      },
+      "smartgrid_increase_heating_room_temperature": {
+        "name": "SmartGrid Heizen Erhöhung Raumtemperatur"
+      },
+      "smartgrid_decrease_cooling_room_temperature": {
+        "name": "SmartGrid Kühlen Verringerung Raumtemperatur"
+      },
+      "smartgrid_increase_heating_buffer_temperature": {
+        "name": "SmartGrid Heizen Erhöhung Puffertemperatur"
+      },
+      "smartgrid_decrease_cooling_buffer_temperature": {
+        "name": "SmartGrid Kühlen Verringerung Puffertemperatur"
+      },
+      "smartgrid_increase_dhw_temperature": {
+        "name": "SmartGrid Erhöhung Warmwassertemperatur"
+      },
+      "heating_circuit_flow_setpoint_cooling": {
+        "name": "Heizkreis Vorlauftemperatur Soll Kühlen"
+      },
+      "heating_circuit_cooling_hysteresis_on": {
+        "name": "Heizkreis Kühlen Einschalthysterese"
+      },
+      "heating_circuit_cooling_hysteresis_off": {
+        "name": "Heizkreis Kühlen Ausschalthysterese"
+      },
+      "buffer_min_temperature": {
+        "name": "Pufferspeicher Minimaltemperatur"
+      },
+      "buffer_max_temperature": {
+        "name": "Pufferspeicher Maximaltemperatur"
       }
     },
     "water_heater": {

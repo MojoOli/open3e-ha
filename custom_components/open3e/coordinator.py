@@ -17,6 +17,7 @@ from .const import DOMAIN
 from .definitions.dmw_mode import DmwMode
 from .definitions.open3e_data import Open3eDataSystemInformation
 from .definitions.program import Program
+from .definitions.smart_grid_temperature_offsets import SmartGridTemperatureOffsets
 from .errors import Open3eCoordinatorUpdateFailed
 
 _LOGGER = logging.getLogger(__name__)
@@ -190,10 +191,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             temperature=temperature
         )
 
-        # Wait for 2 seconds to request temperature
-        await asyncio.sleep(2)
-
-        await self.__client.async_request_data(self.hass, [set_programs_feature_id])
+        await self.async_refresh_feature([set_programs_feature_id])
 
     async def async_set_hot_water_temperature(
             self,
@@ -206,10 +204,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             temperature=temperature
         )
 
-        # Wait for 2 seconds to request temperature
-        await asyncio.sleep(2)
-
-        await self.__client.async_request_data(self.hass, [feature_id])
+        await self.async_refresh_feature([feature_id])
 
     async def async_turn_hvac_on(self, power_hvac_feature_id: int):
         await self.__client.async_turn_hvac_on(self.hass, power_hvac_feature_id)
@@ -234,10 +229,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             dmw_efficiency_mode_feature_id=dmw_efficiency_mode_feature_id
         )
 
-        # Wait for 2 seconds to request new states
-        await asyncio.sleep(2)
-
-        await self.__client.async_request_data(self.hass, [dmw_state_feature_id, dmw_efficiency_mode_feature_id])
+        await self.async_refresh_feature([dmw_state_feature_id, dmw_efficiency_mode_feature_id])
 
     async def async_set_max_power_electrical_heater(
             self,
@@ -250,7 +242,25 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             max_power=max_power
         )
 
+        await self.async_refresh_feature([feature_id])
+
+    async def async_set_smart_grid_temperature_offset(
+            self,
+            feature_id: int,
+            offset: SmartGridTemperatureOffsets,
+            value: float
+    ):
+        await self.__client.async_set_smart_grid_temperature_offset(
+            hass=self.hass,
+            feature_id=feature_id,
+            offset=offset,
+            value=value
+        )
+
+        await self.async_refresh_feature([feature_id])
+
+    async def async_refresh_feature(self, feature_ids: list[int]):
         # Wait for 2 seconds to request new states
         await asyncio.sleep(2)
 
-        await self.__client.async_request_data(self.hass, [feature_id])
+        await self.__client.async_request_data(self.hass, feature_ids)

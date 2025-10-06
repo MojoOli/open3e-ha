@@ -17,6 +17,7 @@ from .const import MQTT_SYSTEM_TOPIC, MQTT_SYSTEM_PAYLOAD
 from .definitions.dmw_mode import DmwMode
 from .definitions.open3e_data import Open3eDataSystemInformation
 from .definitions.program import Program
+from .definitions.smart_grid_temperature_offsets import SmartGridTemperatureOffsets
 from .errors import Open3eServerTimeoutError, Open3eError, Open3eServerUnavailableError
 
 _LOGGER = logging.getLogger(__name__)
@@ -254,6 +255,27 @@ class Open3eMqttClient:
                 payload=self.__write_json_payload(
                     feature_id=feature_id,
                     data=max_power
+                )
+            )
+        except Exception as exception:
+            raise Open3eError(exception)
+
+    async def async_set_smart_grid_temperature_offset(
+            self,
+            hass: HomeAssistant,
+            feature_id: int,
+            offset: SmartGridTemperatureOffsets,
+            value: float
+    ):
+        try:
+            _LOGGER.debug(f"Setting {offset} of feature ID {feature_id}")
+            await mqtt.async_publish(
+                hass=hass,
+                topic=self.__mqtt_cmd,
+                payload=self.__write_json_payload(
+                    feature_id=feature_id,
+                    data=value,
+                    sub_feature=offset
                 )
             )
         except Exception as exception:

@@ -239,4 +239,15 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         key="heater_max_power",
         translation_key="heater_max_power"
     ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.Temperature.SmartGridTemperatureOffsets],
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        device_class=NumberDeviceClass.TEMPERATURE,
+        native_min_value=VIESSMANN_TEMP_HEATING_MIN,
+        native_max_value=VIESSMANN_TEMP_HEATING_MAX,
+        get_native_value=lambda data: data,
+        key="smartgrid_increase_heating_room_temperature",
+        translation_key="smartgrid_increase_heating_room_temperature",
+        # entity_registry_enabled_default=False
+    ),
 )
