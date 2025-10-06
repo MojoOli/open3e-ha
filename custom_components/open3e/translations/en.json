@@ -210,6 +210,18 @@
       }
     },
     "binary_sensor": {
+      "circuit_frost_protection": {
+        "name": "Frost Protection Heating Circuit"
+      },
+      "circuit_pump": {
+        "name": "Heating Circuit Pump"
+      },
+      "hot_water_circulation_pump": {
+        "name": "Hot Water Circulation Pump"
+      },
+      "hot_water_circulation_pump_hygiene": {
+        "name": "Hot Water Legionella Protection"
+      },
       "heater_active": {
         "name": "Heater"
       },

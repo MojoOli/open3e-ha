@@ -76,6 +76,10 @@ class Features:
         Allengra = Feature(id=1043, refresh_interval=30)
         HeatPumpCompressor = Feature(id=2351, refresh_interval=30)
         Buffer = Feature(id=3070, refresh_interval=30)
+        CircuitFrostProtection = Feature(id=2855, refresh_interval=30)
+        CircuitPump = Feature(id=401, refresh_interval=30)
+        HotWaterCirculationPump = Feature(id=491, refresh_interval=30)
+        DomesticHotWaterCirculationPumpMode = Feature(id=497, refresh_interval=30)
 
     class Speed:
         CentralHeatingPump = Feature(id=381, refresh_interval=10)

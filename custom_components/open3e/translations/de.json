@@ -210,6 +210,18 @@
       }
     },
     "binary_sensor": {
+      "circuit_frost_protection": {
+        "name": "Frostschutz Heizkreis"
+      },
+      "circuit_pump": {
+        "name": "Heizkreispumpe"
+      },
+      "hot_water_circulation_pump": {
+        "name": "Warmwasser Zirkulationspumpe"
+      },
+      "hot_water_circulation_pump_hygiene": {
+        "name": "Warmwasser Legionellenschutz"
+      },
       "heater_active": {
         "name": "Heizung"
       },
