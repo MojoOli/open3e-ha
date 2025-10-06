@@ -60,7 +60,7 @@ class Open3eEntity(CoordinatorEntity, Entity):
     async def async_added_to_hass(self) -> None:
         """Run when entity about to be added to hass."""
         await super().async_added_to_hass()
-        await self.coordinator.on_entity_added(self.entity_description.poll_data_features)
+        await self.coordinator.on_entity_added(self.entity_description.poll_data_features, self.device)
 
         for mqtt_topic in self.__mqtt_topics:
             await self._async_register_callback(mqtt_topic=mqtt_topic)

@@ -15,7 +15,7 @@ from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 from .api import Open3eMqttClient
 from .const import DOMAIN
 from .definitions.dmw_mode import DmwMode
-from .definitions.open3e_data import Open3eDataSystemInformation
+from .definitions.open3e_data import Open3eDataSystemInformation, Open3eDataDevice
 from .definitions.program import Program
 from .definitions.smart_grid_temperature_offsets import SmartGridTemperatureOffsets
 from .errors import Open3eCoordinatorUpdateFailed
@@ -32,8 +32,9 @@ class CoordinatorEndpoint:
     __last_refresh: float = -1
     __entities_subscribed: int = 1
 
-    def __init__(self, refresh_interval: int):
+    def __init__(self, refresh_interval: int, device: Open3eDataDevice):
         self.refresh_interval = refresh_interval
+        self.device = device
 
     def add_entity_subscription(self):
         self.__entities_subscribed = self.__entities_subscribed + 1
@@ -107,8 +108,8 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
                 serial_number=device.serial_number,
                 sw_version=device.software_version,
                 hw_version=device.hardware_version,
-                name="Vitocal",
-                model="Vitocal",
+                name=device.name,
+                model=device.name,
             )
 
     def __on_availability_update(self, available: bool):
@@ -119,33 +120,37 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
         if self.__server_available is None:
             return True
 
-        if self.__server_available is False:
+        if not self.__server_available:
             raise Open3eCoordinatorUpdateFailed()
 
         now = time.time()
 
-        ids = list()
+        device_features: dict[int, list[int]] = {}
 
         for id in self._endpoints.keys():
             if self._endpoints[id].should_refresh(now):
-                ids.append(id)
+                if device_features.get(self._endpoints[id].device.id) is None:
+                    device_features[self._endpoints[id].device.id] = list()
+
+                device_features[self._endpoints[id].device.id].append(id)
                 self._endpoints[id].update_last_refresh(now)
 
-                if len(ids) == 0:
-                    return True
+        if device_features is None:
+            return True
 
-        _LOGGER.debug(f"Requesting data update for features {ids}")
+        _LOGGER.debug(f"Requesting data update for features {device_features}")
 
-        await self.__client.async_request_data(self.hass, ids)
+        await self.__client.async_request_data(self.hass, device_features)
 
         return True
 
-    async def on_entity_added(self, features: list[Feature]):
+    async def on_entity_added(self, features: list[Feature], device: Open3eDataDevice):
         _LOGGER.debug("Entity was added to Coordinator")
         for feature in features:
             if feature.id not in self._endpoints:
                 self._endpoints[feature.id] = CoordinatorEndpoint(
-                    refresh_interval=feature.refresh_interval
+                    refresh_interval=feature.refresh_interval,
+                    device=device
                 )
             else:
                 self._endpoints[feature.id].add_entity_subscription()
@@ -182,37 +187,41 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             self,
             set_programs_feature_id: int,
             program: Program,
-            temperature: float
+            temperature: float,
+            device: Open3eDataDevice
     ):
         await self.__client.async_set_program_temperature(
             hass=self.hass,
             set_programs_feature_id=set_programs_feature_id,
             program=program,
-            temperature=temperature
+            temperature=temperature,
+            device_id=device.id
         )
 
-        await self.async_refresh_feature([set_programs_feature_id])
+        await self.async_refresh_feature(device, [set_programs_feature_id])
 
     async def async_set_hot_water_temperature(
             self,
             feature_id: int,
-            temperature: float
+            temperature: float,
+            device: Open3eDataDevice
     ):
         await self.__client.async_set_hot_water_temperature(
             hass=self.hass,
             feature_id=feature_id,
-            temperature=temperature
+            temperature=temperature,
+            device_id=device.id
         )
 
-        await self.async_refresh_feature([feature_id])
+        await self.async_refresh_feature(device, [feature_id])
 
-    async def async_turn_hvac_on(self, power_hvac_feature_id: int):
-        await self.__client.async_turn_hvac_on(self.hass, power_hvac_feature_id)
+    async def async_turn_hvac_on(self, power_hvac_feature_id: int, device: Open3eDataDevice):
+        await self.__client.async_turn_hvac_on(self.hass, power_hvac_feature_id, device.id)
         # Wait for 2 seconds to request hvac state
         await asyncio.sleep(2)
 
-    async def async_turn_hvac_off(self, power_hvac_feature_id: int):
-        await self.__client.async_turn_hvac_off(self.hass, power_hvac_feature_id)
+    async def async_turn_hvac_off(self, power_hvac_feature_id: int, device: Open3eDataDevice):
+        await self.__client.async_turn_hvac_off(self.hass, power_hvac_feature_id, device.id)
         # Wait for 2 seconds to request hvac state
         await asyncio.sleep(2)
 
@@ -220,13 +229,15 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             self,
             mode: DmwMode,
             dmw_state_feature_id: int,
-            dmw_efficiency_mode_feature_id: int
+            dmw_efficiency_mode_feature_id: int,
+            device: Open3eDataDevice
     ):
         await self.__client.async_set_dmw_mode(
             hass=self.hass,
             mode=mode,
             dmw_state_feature_id=dmw_state_feature_id,
-            dmw_efficiency_mode_feature_id=dmw_efficiency_mode_feature_id
+            dmw_efficiency_mode_feature_id=dmw_efficiency_mode_feature_id,
+            device_id=device.id
         )
 
         await self.async_refresh_feature([dmw_state_feature_id, dmw_efficiency_mode_feature_id])
@@ -234,12 +245,14 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
     async def async_set_max_power_electrical_heater(
             self,
             feature_id: int,
-            max_power: float
+            max_power: float,
+            device: Open3eDataDevice
     ):
         await self.__client.async_set_max_power_electrical_heater(
             hass=self.hass,
             feature_id=feature_id,
-            max_power=max_power
+            max_power=max_power,
+            device_id=device.id
         )
 
         await self.async_refresh_feature([feature_id])
@@ -248,19 +261,21 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             self,
             feature_id: int,
             offset: SmartGridTemperatureOffsets,
-            value: float
+            value: float,
+            device: Open3eDataDevice
     ):
         await self.__client.async_set_smart_grid_temperature_offset(
             hass=self.hass,
             feature_id=feature_id,
             offset=offset,
-            value=value
+            value=value,
+            device_id=device.id
         )
 
         await self.async_refresh_feature([feature_id])
 
-    async def async_refresh_feature(self, feature_ids: list[int]):
+    async def async_refresh_feature(self, device: Open3eDataDevice, feature_ids: list[int]):
         # Wait for 2 seconds to request new states
         await asyncio.sleep(2)
 
-        await self.__client.async_request_data(self.hass, feature_ids)
+        await self.__client.async_request_data(self.hass, device, {device.id: feature_ids})

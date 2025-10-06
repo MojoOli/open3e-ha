@@ -131,16 +131,17 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
         await self.coordinator.async_set_program_temperature(
             set_programs_feature_id=self.entity_description.programs_temperature_feature.id,
             program=self.__current_program,
-            temperature=temperature
+            temperature=temperature,
+            device=self.device
         )
 
     async def async_turn_on(self):
         """Turn the entity on."""
-        await self.coordinator.async_turn_hvac_on(self.entity_description.hvac_mode_feature.id)
+        await self.coordinator.async_turn_hvac_on(self.entity_description.hvac_mode_feature.id, self.device)
 
     async def async_turn_off(self):
         """Turn the entity off."""
-        await self.coordinator.async_turn_hvac_off(self.entity_description.hvac_mode_feature.id)
+        await self.coordinator.async_turn_hvac_off(self.entity_description.hvac_mode_feature.id, self.device)
 
     async def async_set_hvac_mode(self, hvac_mode: HVACMode):
         """Set new target hvac mode."""
