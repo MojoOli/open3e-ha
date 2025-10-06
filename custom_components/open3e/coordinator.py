@@ -12,14 +12,15 @@ from typing import Any
 from homeassistant.helpers.device_registry import DeviceRegistry
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
-from .api import Open3eMqttClient
-from .const import DOMAIN
 from custom_components.open3e.definitions.subfeatures.buffer import Buffer
 from custom_components.open3e.definitions.subfeatures.dmw_mode import DmwMode
 from custom_components.open3e.definitions.subfeatures.hysteresis import Hysteresis
-from .definitions.open3e_data import Open3eDataSystemInformation, Open3eDataDevice
 from custom_components.open3e.definitions.subfeatures.program import Program
 from custom_components.open3e.definitions.subfeatures.smart_grid_temperature_offsets import SmartGridTemperatureOffsets
+from .api import Open3eMqttClient
+from .const import DOMAIN
+from .definitions.open3e_data import Open3eDataSystemInformation, Open3eDataDevice
+from .definitions.subfeatures.buffer_mode import BufferMode
 from .errors import Open3eCoordinatorUpdateFailed
 
 _LOGGER = logging.getLogger(__name__)
@@ -320,6 +321,21 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             feature_id=feature_id,
             buffer=buffer,
             value=value,
+            device_id=device.id
+        )
+
+        await self.async_refresh_feature(device, [feature_id])
+
+    async def async_set_buffer_mode(
+            self,
+            feature_id: int,
+            mode: BufferMode,
+            device: Open3eDataDevice
+    ):
+        await self.__client.async_set_buffer_mode(
+            hass=self.hass,
+            feature_id=feature_id,
+            mode=mode,
             device_id=device.id
         )
 

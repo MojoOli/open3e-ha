@@ -317,6 +317,15 @@
         "name": "Pufferspeicher Maximaltemperatur"
       }
     },
+    "select": {
+      "buffer_operation_mode": {
+        "name": "Pufferbetriebsmodus",
+        "state": {
+          "heating": "Heizen",
+          "cooling": "Kühlen"
+        }
+      }
+    },
     "water_heater": {
       "water_heater": {
         "name": "Wasserboiler"

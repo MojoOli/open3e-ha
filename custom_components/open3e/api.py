@@ -13,14 +13,15 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.json import json_dumps
 from homeassistant.util.json import json_loads
 
-from .const import MQTT_SYSTEM_TOPIC, MQTT_SYSTEM_PAYLOAD
 from custom_components.open3e.definitions.subfeatures.buffer import Buffer
 from custom_components.open3e.definitions.subfeatures.dmw_mode import DmwMode
 from custom_components.open3e.definitions.subfeatures.hysteresis import Hysteresis
-from .definitions.open3e_data import Open3eDataSystemInformation
 from custom_components.open3e.definitions.subfeatures.program import Program
 from custom_components.open3e.definitions.subfeatures.smart_grid_temperature_offsets import SmartGridTemperatureOffsets
 from custom_components.open3e.definitions.subfeatures.temperature_cooling import TemperatureCooling
+from .const import MQTT_SYSTEM_TOPIC, MQTT_SYSTEM_PAYLOAD
+from .definitions.open3e_data import Open3eDataSystemInformation
+from .definitions.subfeatures.buffer_mode import BufferMode
 from .errors import Open3eServerTimeoutError, Open3eError, Open3eServerUnavailableError
 
 _LOGGER = logging.getLogger(__name__)
@@ -360,6 +361,27 @@ class Open3eMqttClient:
                     feature_id=feature_id,
                     data=value,
                     sub_feature=buffer,
+                    device_id=device_id
+                )
+            )
+        except Exception as exception:
+            raise Open3eError(exception)
+
+    async def async_set_buffer_mode(
+            self,
+            hass: HomeAssistant,
+            feature_id: int,
+            mode: BufferMode,
+            device_id: int
+    ):
+        try:
+            _LOGGER.debug(f"Setting buffer mode to {mode} of feature ID {feature_id}")
+            await mqtt.async_publish(
+                hass=hass,
+                topic=self.__mqtt_cmd,
+                payload=self.__write_json_payload(
+                    feature_id=feature_id,
+                    data=mode.map_to_api(),
                     device_id=device_id
                 )
             )

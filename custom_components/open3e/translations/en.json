@@ -317,6 +317,15 @@
         "name": "Buffer Tank Max Temperature"
       }
     },
+    "select": {
+      "buffer_operation_mode": {
+        "name": "Buffer Tank mode",
+        "state": {
+          "heating": "Heating",
+          "cooling": "Cooling"
+        }
+      }
+    },
     "water_heater": {
       "water_heater": {
         "name": "Water heater"

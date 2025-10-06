@@ -75,6 +75,7 @@ class Features:
         Battery = Feature(id=1664, refresh_interval=30)
         Allengra = Feature(id=1043, refresh_interval=30)
         HeatPumpCompressor = Feature(id=2351, refresh_interval=30)
+        Buffer = Feature(id=3070, refresh_interval=30)
 
     class Speed:
         CentralHeatingPump = Feature(id=381, refresh_interval=10)
