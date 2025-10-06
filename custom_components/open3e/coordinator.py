@@ -14,12 +14,12 @@ from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
 from .api import Open3eMqttClient
 from .const import DOMAIN
-from .definitions.buffer import Buffer
-from .definitions.dmw_mode import DmwMode
-from .definitions.hysteresis import Hysteresis
+from custom_components.open3e.definitions.subfeatures.buffer import Buffer
+from custom_components.open3e.definitions.subfeatures.dmw_mode import DmwMode
+from custom_components.open3e.definitions.subfeatures.hysteresis import Hysteresis
 from .definitions.open3e_data import Open3eDataSystemInformation, Open3eDataDevice
-from .definitions.program import Program
-from .definitions.smart_grid_temperature_offsets import SmartGridTemperatureOffsets
+from custom_components.open3e.definitions.subfeatures.program import Program
+from custom_components.open3e.definitions.subfeatures.smart_grid_temperature_offsets import SmartGridTemperatureOffsets
 from .errors import Open3eCoordinatorUpdateFailed
 
 _LOGGER = logging.getLogger(__name__)

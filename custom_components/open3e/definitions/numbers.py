@@ -4,14 +4,14 @@ from typing import Callable, Any, Awaitable
 from homeassistant.components.number import NumberEntityDescription, NumberDeviceClass
 from homeassistant.const import UnitOfTemperature, UnitOfPower
 
-from .buffer import Buffer
+from custom_components.open3e.definitions.subfeatures.buffer import Buffer
 from .entity_description import Open3eEntityDescription
 from .features import Features
-from .hysteresis import Hysteresis
+from custom_components.open3e.definitions.subfeatures.hysteresis import Hysteresis
 from .open3e_data import Open3eDataDevice
-from .program import Program
-from .smart_grid_temperature_offsets import SmartGridTemperatureOffsets
-from .temperature_cooling import TemperatureCooling
+from custom_components.open3e.definitions.subfeatures.program import Program
+from custom_components.open3e.definitions.subfeatures.smart_grid_temperature_offsets import SmartGridTemperatureOffsets
+from custom_components.open3e.definitions.subfeatures.temperature_cooling import TemperatureCooling
 from .. import Open3eDataUpdateCoordinator
 from ..const import VIESSMANN_TEMP_HEATING_MIN, VIESSMANN_TEMP_HEATING_MAX, VIESSMANN_POWER_MAX_WATT_ELECTRICAL_HEATER, \
     VIESSMANN_POWER_MIN_WATT_ELECTRICAL_HEATER, VIESSMANN_POWER_WATT_ELECTRICAL_HEATER_STEP, \

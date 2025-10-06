@@ -14,13 +14,13 @@ from homeassistant.helpers.json import json_dumps
 from homeassistant.util.json import json_loads
 
 from .const import MQTT_SYSTEM_TOPIC, MQTT_SYSTEM_PAYLOAD
-from .definitions.buffer import Buffer
-from .definitions.dmw_mode import DmwMode
-from .definitions.hysteresis import Hysteresis
+from custom_components.open3e.definitions.subfeatures.buffer import Buffer
+from custom_components.open3e.definitions.subfeatures.dmw_mode import DmwMode
+from custom_components.open3e.definitions.subfeatures.hysteresis import Hysteresis
 from .definitions.open3e_data import Open3eDataSystemInformation
-from .definitions.program import Program
-from .definitions.smart_grid_temperature_offsets import SmartGridTemperatureOffsets
-from .definitions.temperature_cooling import TemperatureCooling
+from custom_components.open3e.definitions.subfeatures.program import Program
+from custom_components.open3e.definitions.subfeatures.smart_grid_temperature_offsets import SmartGridTemperatureOffsets
+from custom_components.open3e.definitions.subfeatures.temperature_cooling import TemperatureCooling
 from .errors import Open3eServerTimeoutError, Open3eError, Open3eServerUnavailableError
 
 _LOGGER = logging.getLogger(__name__)
