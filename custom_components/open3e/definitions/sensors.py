@@ -126,6 +126,28 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.RAW
     ),
     Open3eSensorEntityDescription(
+        poll_data_features=[Features.Power.RefrigerantCircuit],
+        device_class=SensorDeviceClass.POWER,
+        native_unit_of_measurement=UnitOfPower.WATT,
+        suggested_unit_of_measurement=UnitOfPower.KILO_WATT,
+        state_class=SensorStateClass.MEASUREMENT,
+        suggested_display_precision=2,
+        key="power_consumption_refrigerant_circuit",
+        translation_key="power_consumption_refrigerant_circuit",
+        data_retriever=SensorDataRetriever.RAW
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Power.ThermalCapacitySystem],
+        device_class=SensorDeviceClass.POWER,
+        native_unit_of_measurement=UnitOfPower.WATT,
+        suggested_unit_of_measurement=UnitOfPower.KILO_WATT,
+        state_class=SensorStateClass.MEASUREMENT,
+        suggested_display_precision=2,
+        key="thermal_power",
+        translation_key="thermal_power",
+        data_retriever=SensorDataRetriever.RAW
+    ),
+    Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.CentralHeating],
         device_class=SensorDeviceClass.ENERGY,
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
@@ -369,6 +391,15 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="primary_inlet_temperature",
         translation_key="primary_inlet_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.SecondaryOutlet],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="secondary_outlet_temperature",
+        translation_key="secondary_outlet_temperature",
         data_retriever=SensorDataRetriever.ACTUAL
     ),
     Open3eSensorEntityDescription(

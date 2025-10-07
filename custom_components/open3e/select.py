@@ -2,15 +2,13 @@
 
 from __future__ import annotations
 
-from typing import Any
-
-from homeassistant.components.number import NumberEntity
+from homeassistant.components.select import SelectEntity
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.util.json import json_loads
 
 from .coordinator import Open3eDataUpdateCoordinator
-from .definitions.numbers import Open3eNumberEntityDescription, NUMBERS
+from .definitions.select import Open3eSelectEntityDescription, SELECTS
 from .entity import Open3eEntity
 from .ha_data import Open3eDataConfigEntry
 
@@ -21,41 +19,42 @@ async def async_setup_entry(
         async_add_entities: AddEntitiesCallback,
 ) -> None:
     async_add_entities(
-        Open3eNumber(
+        Open3eSelect(
             coordinator=entry.runtime_data.coordinator,
             description=description
         )
-        for description in NUMBERS
+        for description in SELECTS
         if description.has_features(entry.runtime_data.coordinator.system_information)
     )
 
 
-class Open3eNumber(Open3eEntity, NumberEntity):
-    entity_description: Open3eNumberEntityDescription
+class Open3eSelect(Open3eEntity, SelectEntity):
+    entity_description: Open3eSelectEntityDescription
 
     def __init__(
             self,
             coordinator: Open3eDataUpdateCoordinator,
-            description: Open3eNumberEntityDescription
+            description: Open3eSelectEntityDescription
     ):
         super().__init__(coordinator, description)
+        self._attr_current_option = None
 
     @property
     def available(self):
         """Return True if entity is available."""
-        return self.native_value is not None
+        return self._attr_current_option is not None
 
-    async def async_set_native_value(self, value: float) -> None:
+    async def async_select_option(self, option: str) -> None:
         """Set new value."""
-        if self.entity_description.set_native_value is None:
+        if self.entity_description.set_option is None:
             return
 
-        await self.entity_description.set_native_value(value, self.device, self.coordinator)
+        await self.entity_description.set_option(option, self.device, self.coordinator)
 
     async def async_on_data(self, feature_id: int) -> None:
         """Handle updated data from MQTT."""
-        if self.entity_description.get_native_value is None:
+        if self.entity_description.get_option is None:
             return
 
-        self._attr_native_value = self.entity_description.get_native_value(json_loads(self.data[feature_id]))
+        self._attr_current_option = self.entity_description.get_option(json_loads(self.data[feature_id]))
         self.async_write_ha_state()

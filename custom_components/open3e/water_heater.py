@@ -13,7 +13,7 @@ from homeassistant.util.json import json_loads
 from .const import VIESSMANN_TEMP_DHW_MIN, \
     VIESSMANN_TEMP_DHW_MAX
 from .coordinator import Open3eDataUpdateCoordinator
-from .definitions.dmw_mode import DmwMode
+from custom_components.open3e.definitions.subfeatures.dmw_mode import DmwMode
 from .definitions.water_heater import WATER_HEATER, Open3eWaterHeaterEntityDescription
 from .entity import Open3eEntity
 from .ha_data import Open3eDataConfigEntry
@@ -94,7 +94,8 @@ class Open3eWaterHeater(Open3eEntity, WaterHeaterEntity):
         temperature = kwargs["temperature"]
         await self.coordinator.async_set_hot_water_temperature(
             feature_id=self.entity_description.temperature_target_feature.id,
-            temperature=temperature
+            temperature=temperature,
+            device=self.device
         )
 
     @property
@@ -112,5 +113,6 @@ class Open3eWaterHeater(Open3eEntity, WaterHeaterEntity):
         await self.coordinator.async_set_hot_water_mode(
             mode=DmwMode.from_ha_preset_mode(operation_mode),
             dmw_state_feature_id=self.entity_description.state_feature.id,
-            dmw_efficiency_mode_feature_id=self.entity_description.efficiency_mode_feature.id
+            dmw_efficiency_mode_feature_id=self.entity_description.efficiency_mode_feature.id,
+            device=self.device
         )

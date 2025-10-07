@@ -37,10 +37,15 @@ class Features:
         ProgramsCircuit3 = Feature(id=428, refresh_interval=30)
         ProgramsCircuit4 = Feature(id=430, refresh_interval=30)
         PrimaryInlet = Feature(id=1769, refresh_interval=5)
+        SecondaryOutlet = Feature(id=1769, refresh_interval=5)
         EngineRoom = Feature(id=1771, refresh_interval=30)
         CompressorOil = Feature(id=1772, refresh_interval=30)
         EconomizerLiquid = Feature(id=2333, refresh_interval=30)
         EvaporationVapor = Feature(id=2334, refresh_interval=30)
+        SmartGridTemperatureOffsets = Feature(id=2543, refresh_interval=5)
+        FlowCircuit1Cooling = Feature(id=2405, refresh_interval=30)
+        FlowCircuit1Hysteresis = Feature(id=2413, refresh_interval=30)
+        Buffer = Feature(id=3106, refresh_interval=30)
         OutdoorAir = Feature(id=327, refresh_interval=5)
         SupplyAir = Feature(id=328, refresh_interval=5)
         ExtractAir = Feature(id=329, refresh_interval=5)
@@ -66,10 +71,13 @@ class Features:
     class Power:
         Fan1 = Feature(id=1775, refresh_interval=5)
         Fan2 = Feature(id=1776, refresh_interval=5)
+        RefrigerantCircuit = Feature(id=2486, refresh_interval=5)
         ElectricalHeater = Feature(id=2487, refresh_interval=5)
         System = Feature(id=2488, refresh_interval=5)
+        ThermalCapacitySystem = Feature(id=2496, refresh_interval=5)
         Battery = Feature(id=1836, refresh_interval=5)
         PV = Feature(id=1831, refresh_interval=5)
+        MaxElectricalHeater = Feature(id=2626, refresh_interval=5)
 
     class State:
         Hvac = Feature(id=1415, refresh_interval=30)
@@ -79,6 +87,11 @@ class Features:
         Battery = Feature(id=1664, refresh_interval=30)
         Allengra = Feature(id=1043, refresh_interval=30)
         HeatPumpCompressor = Feature(id=2351, refresh_interval=30)
+        Buffer = Feature(id=3070, refresh_interval=30)
+        CircuitFrostProtection = Feature(id=2855, refresh_interval=30)
+        CircuitPump = Feature(id=401, refresh_interval=30)
+        HotWaterCirculationPump = Feature(id=491, refresh_interval=30)
+        DomesticHotWaterCirculationPumpMode = Feature(id=497, refresh_interval=30)
 
     class Speed:
         CentralHeatingPump = Feature(id=381, refresh_interval=10)
