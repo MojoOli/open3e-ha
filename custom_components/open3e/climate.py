@@ -13,7 +13,7 @@ from homeassistant.util.json import json_loads
 from .const import VIESSMANN_TEMP_HEATING_MIN, VIESSMANN_TEMP_HEATING_MAX
 from .coordinator import Open3eDataUpdateCoordinator
 from .definitions.climate import Open3eClimateEntityDescription, CLIMATE
-from .definitions.program import Program
+from custom_components.open3e.definitions.subfeatures.program import Program
 from .entity import Open3eEntity
 from .ha_data import Open3eDataConfigEntry
 
@@ -130,7 +130,7 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
 
         await self.coordinator.async_set_program_temperature(
             set_programs_feature_id=self.entity_description.programs_temperature_feature.id,
-            program=self.__current_program.map_to_api(),
+            program=self.__current_program,
             temperature=temperature,
             device=self.device
         )

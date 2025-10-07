@@ -11,7 +11,7 @@
     },
     "error": {
       "timeout": "Es wurde keine Antwort vom Open3e server empfangen.",
-      "unavailable": "Der Open3e Server is abgeschalten.",
+      "unavailable": "Der Open3e Server ist abgeschalten.",
       "general": "Die Kommunikation mit dem Open3e Server wurde nicht hergestellt. Vergewissere dich, dass das MQTT topic und cmnd korrekt sind, der MQTT Server läuft, der Open3e Server läuft und mit dem MQTT Client von HomeAssistant verbunden ist."
     }
   },
@@ -81,6 +81,12 @@
       },
       "power_consumption_electric_heater": {
         "name": "Stromverbrauch Zusatzheizung"
+      },
+      "power_consumption_refrigerant_circuit": {
+        "name": "Stromverbrauch Wärmepumpe"
+      },
+      "thermal_power": {
+        "name": "Thermische Leistung"
       },
       "battery_state_percentage": {
         "name": "Batterieladestand"
@@ -187,6 +193,9 @@
       "primary_inlet_temperature": {
         "name": "Primäreintrittstemperatur"
       },
+      "secondary_outlet_temperature": {
+        "name": "Sekundärauslasstemperatur"
+      },
       "engine_room_temperature": {
         "name": "Maschinenraumtemperatur"
       },
@@ -210,6 +219,18 @@
       }
     },
     "binary_sensor": {
+      "circuit_frost_protection": {
+        "name": "Frostschutz Heizkreis"
+      },
+      "circuit_pump": {
+        "name": "Heizkreispumpe"
+      },
+      "hot_water_circulation_pump": {
+        "name": "Warmwasser Zirkulationspumpe"
+      },
+      "hot_water_circulation_pump_hygiene": {
+        "name": "Warmwasser Legionellenschutz"
+      },
       "heater_active": {
         "name": "Heizung"
       },
@@ -282,6 +303,48 @@
       },
       "circuit_4_reduced_temperature": {
         "name": "Heiz-Kühlkreis 4 Reduzierte Temperatur"
+      },
+      "heater_max_power": {
+        "name": "Heizstab Maximalleistung"
+      },
+      "smartgrid_increase_heating_room_temperature": {
+        "name": "SmartGrid Heizen Erhöhung Raumtemperatur"
+      },
+      "smartgrid_decrease_cooling_room_temperature": {
+        "name": "SmartGrid Kühlen Verringerung Raumtemperatur"
+      },
+      "smartgrid_increase_heating_buffer_temperature": {
+        "name": "SmartGrid Heizen Erhöhung Puffertemperatur"
+      },
+      "smartgrid_decrease_cooling_buffer_temperature": {
+        "name": "SmartGrid Kühlen Verringerung Puffertemperatur"
+      },
+      "smartgrid_increase_dhw_temperature": {
+        "name": "SmartGrid Erhöhung Warmwassertemperatur"
+      },
+      "heating_circuit_flow_setpoint_cooling": {
+        "name": "Vorlauftemperatur Soll Kühlen"
+      },
+      "heating_circuit_cooling_hysteresis_on": {
+        "name": "Einschalthysterese Kühlen"
+      },
+      "heating_circuit_cooling_hysteresis_off": {
+        "name": "Ausschalthysterese Kühlen"
+      },
+      "buffer_min_temperature": {
+        "name": "Pufferspeicher Minimaltemperatur"
+      },
+      "buffer_max_temperature": {
+        "name": "Pufferspeicher Maximaltemperatur"
+      }
+    },
+    "select": {
+      "buffer_operation_mode": {
+        "name": "Pufferbetriebsmodus",
+        "state": {
+          "heating": "Heizen",
+          "cooling": "Kühlen"
+        }
       }
     },
     "water_heater": {

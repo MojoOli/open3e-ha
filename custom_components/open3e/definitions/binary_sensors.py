@@ -12,6 +12,8 @@ class BinarySensorDataTransform:
     """Data transform functions for MQTT binary on/off state."""
 
     POWERSTATE = lambda data: json_loads(data)["PowerState"] > 0
+    STATE = lambda data: json_loads(data)["State"] > 0
+    HYGIENE_ACTIVE = lambda data: json_loads(data)["HygenieActive"] > 0
     RAW = lambda data: data
     """The data state represents a raw value without any encapsulation."""
 
@@ -46,5 +48,37 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
         translation_key="heat_pump_compressor_active",
         icon="mdi:power",
         data_transform=BinarySensorDataTransform.POWERSTATE
+    ),
+    Open3eBinarySensorEntityDescription(
+        device_class=BinarySensorDeviceClass.POWER,
+        poll_data_features=[Features.State.CircuitFrostProtection],
+        key="circuit_frost_protection",
+        translation_key="circuit_frost_protection",
+        icon="mdi:snowflake-melt",
+        data_transform=BinarySensorDataTransform.STATE
+    ),
+    Open3eBinarySensorEntityDescription(
+        device_class=BinarySensorDeviceClass.POWER,
+        poll_data_features=[Features.State.CircuitPump],
+        key="circuit_pump",
+        translation_key="circuit_pump",
+        icon="mdi:water-sync",
+        data_transform=BinarySensorDataTransform.POWERSTATE
+    ),
+    Open3eBinarySensorEntityDescription(
+        device_class=BinarySensorDeviceClass.POWER,
+        poll_data_features=[Features.State.HotWaterCirculationPump],
+        key="hot_water_circulation_pump",
+        translation_key="hot_water_circulation_pump",
+        icon="mdi:water-sync",
+        data_transform=BinarySensorDataTransform.STATE
+    ),
+    Open3eBinarySensorEntityDescription(
+        device_class=BinarySensorDeviceClass.POWER,
+        poll_data_features=[Features.State.DomesticHotWaterCirculationPumpMode],
+        key="hot_water_circulation_pump_hygiene",
+        translation_key="hot_water_circulation_pump_hygiene",
+        icon="mdi:bacteria-outline",
+        data_transform=BinarySensorDataTransform.HYGIENE_ACTIVE
     ),
 )
