@@ -32,6 +32,8 @@ def map_devices_to_entities(
 
                 # Check that all poll_data_features of sensor exist in device features
                 if entity_feature_ids.issubset(device_feature_ids):
-                    result[device].append(entity)
+                    # If required_device is set, only include if the names match
+                    if entity.required_device is None or entity.required_device.display_name == device.name:
+                        result[device].append(entity)
 
     return result

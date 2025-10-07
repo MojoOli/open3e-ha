@@ -388,6 +388,27 @@ class Open3eMqttClient:
         except Exception as exception:
             raise Open3eError(exception)
 
+    async def async_set_hot_water_quickmode(
+            self,
+            hass: HomeAssistant,
+            feature_id: int,
+            is_on: bool,
+            device_id: int
+    ):
+        try:
+            _LOGGER.debug(f"Setting hot water quickmode to {is_on} of feature ID {feature_id}")
+            await mqtt.async_publish(
+                hass=hass,
+                topic=self.__mqtt_cmd,
+                payload=self.__write_json_payload(
+                    feature_id=feature_id,
+                    data={"OpMode": 2, "Required": "on" if is_on else "off", "Unknown": "0000"},
+                    device_id=device_id
+                )
+            )
+        except Exception as exception:
+            raise Open3eError(exception)
+
     @staticmethod
     def __write_json_payload(feature_id: int, data: any, device_id: int, sub_feature: str | None = None):
         if sub_feature is None:

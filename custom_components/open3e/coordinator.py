@@ -333,6 +333,21 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
 
         await self.async_refresh_feature(device, [feature_id])
 
+    async def async_set_hot_water_quickmode(
+            self,
+            feature_id: int,
+            is_on: bool,
+            device: Open3eDataDevice
+    ):
+        await self.__client.async_set_hot_water_quickmode(
+            hass=self.hass,
+            feature_id=feature_id,
+            is_on=is_on,
+            device_id=device.id
+        )
+
+        await self.async_refresh_feature(device, [feature_id])
+
     async def async_refresh_feature(self, device: Open3eDataDevice, feature_ids: list[int]):
         # Wait for 2 seconds to request new states
         await asyncio.sleep(2)

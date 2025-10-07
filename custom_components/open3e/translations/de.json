@@ -351,6 +351,11 @@
       "water_heater": {
         "name": "Wasserboiler"
       }
+    },
+    "switch": {
+      "i_want_hot_water": {
+        "name": "Kurzzeitig Warmwasser erzeugen"
+      }
     }
   }
 }
