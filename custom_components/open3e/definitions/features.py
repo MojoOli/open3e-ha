@@ -37,6 +37,7 @@ class Features:
         ProgramsCircuit3 = Feature(id=428, refresh_interval=30)
         ProgramsCircuit4 = Feature(id=430, refresh_interval=30)
         PrimaryInlet = Feature(id=1769, refresh_interval=5)
+        SecondaryOutlet = Feature(id=1769, refresh_interval=5)
         EngineRoom = Feature(id=1771, refresh_interval=30)
         CompressorOil = Feature(id=1772, refresh_interval=30)
         EconomizerLiquid = Feature(id=2333, refresh_interval=30)
@@ -61,8 +62,10 @@ class Features:
     class Power:
         Fan1 = Feature(id=1775, refresh_interval=5)
         Fan2 = Feature(id=1776, refresh_interval=5)
+        RefrigerantCircuit = Feature(id=2486, refresh_interval=5)
         ElectricalHeater = Feature(id=2487, refresh_interval=5)
         System = Feature(id=2488, refresh_interval=5)
+        ThermalCapacitySystem = Feature(id=2496, refresh_interval=5)
         Battery = Feature(id=1836, refresh_interval=5)
         PV = Feature(id=1831, refresh_interval=5)
         MaxElectricalHeater = Feature(id=2626, refresh_interval=5)

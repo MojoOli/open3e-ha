@@ -82,6 +82,12 @@
       "power_consumption_electric_heater": {
         "name": "Stromverbrauch Zusatzheizung"
       },
+      "power_consumption_refrigerant_circuit": {
+        "name": "Stromverbrauch Wärmepumpe"
+      },
+      "thermal_power": {
+        "name": "Thermische Leistung"
+      },
       "battery_state_percentage": {
         "name": "Batterieladestand"
       },
@@ -186,6 +192,9 @@
       },
       "primary_inlet_temperature": {
         "name": "Primäreintrittstemperatur"
+      },
+      "secondary_outlet_temperature": {
+        "name": "Sekundärauslasstemperatur"
       },
       "engine_room_temperature": {
         "name": "Maschinenraumtemperatur"

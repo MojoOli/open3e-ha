@@ -82,6 +82,12 @@
       "power_consumption_electric_heater": {
         "name": "Power consumption electrical heater"
       },
+      "power_consumption_refrigerant_circuit": {
+        "name": "Power consumption heat pump"
+      },
+      "thermal_power": {
+        "name": "Thermal power"
+      },
       "battery_state_percentage": {
         "name": "Battery State of Charge"
       },
@@ -186,6 +192,9 @@
       },
       "primary_inlet_temperature": {
         "name": "Primary Inlet Temperature"
+      },
+      "secondary_outlet_temperature": {
+        "name": "Secondary Outlet Temperature"
       },
       "engine_room_temperature": {
         "name": "Engine Room Temperature"
