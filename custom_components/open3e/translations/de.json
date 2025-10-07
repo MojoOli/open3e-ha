@@ -124,6 +124,9 @@
       "battery_power_current": {
         "name": "Aktuelle Batterieleistung"
       },
+      "grid_power_current": {
+        "name": "Aktuelle Netzleistung"
+      },
       "pv_power_string_1_current": {
         "name": "PV-Leistung String1"
       },

@@ -17,6 +17,7 @@ class SensorDataRetriever:
     MINIMUM = lambda data: json_loads(data)["Minimum"]
     MAXIMUM = lambda data: json_loads(data)["Maximum"]
     AVERAGE = lambda data: json_loads(data)["Average"]
+    ACTIVE_POWER = lambda data: json_loads(data)["ActivePower"]
     TODAY = lambda data: json_loads(data)["Today"]
     CURRENT_MONTH = lambda data: json_loads(data)["CurrentMonth"]
     CURRENT_YEAR = lambda data: json_loads(data)["CurrentYear"]
@@ -591,6 +592,15 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="battery_discharge_total",
         translation_key="battery_discharge_total",
         data_retriever=SensorDataRetriever.BATTERY_DISCHARGE_TOTAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Power.GRID],
+        device_class=SensorDeviceClass.POWER,
+        native_unit_of_measurement=UnitOfPower.WATT,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="grid_power_current",
+        translation_key="grid_power_current",
+        data_retriever=SensorDataRetriever.ACTIVE_POWER
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Power.Battery],
