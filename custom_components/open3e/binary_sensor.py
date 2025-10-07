@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, cast
 
 from homeassistant.components.binary_sensor import BinarySensorEntity
 from homeassistant.core import HomeAssistant
@@ -10,8 +10,10 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from .coordinator import Open3eDataUpdateCoordinator
 from .definitions.binary_sensors import BINARY_SENSORS, Open3eBinarySensorEntityDescription
+from .definitions.open3e_data import Open3eDataDevice
 from .entity import Open3eEntity
 from .ha_data import Open3eDataConfigEntry
+from .util import map_devices_to_entities
 
 
 async def async_setup_entry(
@@ -19,14 +21,20 @@ async def async_setup_entry(
         entry: Open3eDataConfigEntry,
         async_add_entities: AddEntitiesCallback,
 ) -> None:
-    async_add_entities(
-        Open3eBinarySensor(
-            coordinator=entry.runtime_data.coordinator,
-            description=description
-        )
-        for description in BINARY_SENSORS
-        if description.has_features(entry.runtime_data.coordinator.system_information)
+    device_binary_sensor_map = map_devices_to_entities(
+        entry.runtime_data.coordinator,
+        BINARY_SENSORS
     )
+
+    for device, binary_sensors in device_binary_sensor_map.items():
+        async_add_entities(
+            Open3eBinarySensor(
+                coordinator=entry.runtime_data.coordinator,
+                description=cast(Open3eBinarySensorEntityDescription, bs),
+                device=device
+            )
+            for bs in binary_sensors
+        )
 
 
 class Open3eBinarySensor(Open3eEntity, BinarySensorEntity):
@@ -35,9 +43,10 @@ class Open3eBinarySensor(Open3eEntity, BinarySensorEntity):
     def __init__(
             self,
             coordinator: Open3eDataUpdateCoordinator,
-            description: Open3eBinarySensorEntityDescription
+            description: Open3eBinarySensorEntityDescription,
+            device: Open3eDataDevice
     ):
-        super().__init__(coordinator, description)
+        super().__init__(coordinator, description, device)
 
     @property
     def available(self):

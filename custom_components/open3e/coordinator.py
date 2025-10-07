@@ -178,14 +178,6 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
 
         return mqtt_topics
 
-    def get_device_for_features(self, features: list[Feature]):
-        for feature in features:
-            for device in self.system_information.devices:
-                if feature.id in map(lambda entity: entity.id, device.features):
-                    return device
-
-        return None
-
     async def async_set_program_temperature(
             self,
             set_programs_feature_id: int,

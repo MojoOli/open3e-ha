@@ -2,7 +2,7 @@
 from dataclasses import dataclass
 from typing import Any
 
-from .devices import OPEN3E_DEVICES
+from .devices import Open3eDevices
 
 
 @dataclass(frozen=True)
@@ -22,24 +22,25 @@ class Open3eDataDevice:
     serial_number: str | None
     software_version: str | None
     hardware_version: str | None
-    features: list[Open3eDataDeviceFeature]
+    features: tuple[Open3eDataDeviceFeature, ...]
     manufacturer: str = "Viessmann"
 
     @staticmethod
     def from_dict(data: dict[str, Any]):
         name = data.pop("name")
 
-        device = next((device for key, device in OPEN3E_DEVICES.items() if key in name), None)
+        device = next((dev for dev in Open3eDevices if dev.id in name), None)
 
         if device is None:
             return None
 
         features_dict = data.pop("features")
-        features: list[Open3eDataDeviceFeature] = []
-        for feature_dict in features_dict:
-            features.append(Open3eDataDeviceFeature.from_dict(feature_dict))
+        features = tuple(
+            Open3eDataDeviceFeature.from_dict(feature_dict)
+            for feature_dict in features_dict
+        )
 
-        device = Open3eDataDevice(data.pop("id"), device.name, data.pop("serial_number"), data.pop("software_version"),
+        device = Open3eDataDevice(data.pop("id"), device.display_name, data.pop("serial_number"), data.pop("software_version"),
                                   data.pop("hardware_version"), features)
 
         return device

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, cast
 
 from homeassistant.components.climate import ClimateEntity, ClimateEntityFeature, HVACMode, HVACAction
 from homeassistant.const import UnitOfTemperature, PRECISION_TENTHS, PRECISION_WHOLE
@@ -10,12 +10,14 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.util.json import json_loads
 
+from custom_components.open3e.definitions.subfeatures.program import Program
 from .const import VIESSMANN_TEMP_HEATING_MIN, VIESSMANN_TEMP_HEATING_MAX
 from .coordinator import Open3eDataUpdateCoordinator
 from .definitions.climate import Open3eClimateEntityDescription, CLIMATE
-from custom_components.open3e.definitions.subfeatures.program import Program
+from .definitions.open3e_data import Open3eDataDevice
 from .entity import Open3eEntity
 from .ha_data import Open3eDataConfigEntry
+from .util import map_devices_to_entities
 
 
 async def async_setup_entry(
@@ -23,14 +25,20 @@ async def async_setup_entry(
         entry: Open3eDataConfigEntry,
         async_add_entities: AddEntitiesCallback,
 ) -> None:
-    async_add_entities(
-        Open3eClimate(
-            coordinator=entry.runtime_data.coordinator,
-            description=description
-        )
-        for description in CLIMATE
-        if description.has_features(entry.runtime_data.coordinator.system_information)
+    device_climate_map = map_devices_to_entities(
+        entry.runtime_data.coordinator,
+        CLIMATE
     )
+
+    for device, climates in device_climate_map.items():
+        async_add_entities(
+            Open3eClimate(
+                coordinator=entry.runtime_data.coordinator,
+                description=cast(Open3eClimateEntityDescription, climate),
+                device=device
+            )
+            for climate in climates
+        )
 
 
 class Open3eClimate(Open3eEntity, ClimateEntity):
@@ -60,9 +68,10 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
     def __init__(
             self,
             coordinator: Open3eDataUpdateCoordinator,
-            description: Open3eClimateEntityDescription
+            description: Open3eClimateEntityDescription,
+            device: Open3eDataDevice
     ):
-        super().__init__(coordinator, description)
+        super().__init__(coordinator, description, device)
 
         self._attr_preset_modes = list(Program)
         self._attr_preset_mode = Program.Normal

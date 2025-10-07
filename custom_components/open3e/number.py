@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any
+from typing import cast
 
 from homeassistant.components.number import NumberEntity
 from homeassistant.core import HomeAssistant
@@ -11,8 +11,10 @@ from homeassistant.util.json import json_loads
 
 from .coordinator import Open3eDataUpdateCoordinator
 from .definitions.numbers import Open3eNumberEntityDescription, NUMBERS
+from .definitions.open3e_data import Open3eDataDevice
 from .entity import Open3eEntity
 from .ha_data import Open3eDataConfigEntry
+from .util import map_devices_to_entities
 
 
 async def async_setup_entry(
@@ -20,14 +22,20 @@ async def async_setup_entry(
         entry: Open3eDataConfigEntry,
         async_add_entities: AddEntitiesCallback,
 ) -> None:
-    async_add_entities(
-        Open3eNumber(
-            coordinator=entry.runtime_data.coordinator,
-            description=description
-        )
-        for description in NUMBERS
-        if description.has_features(entry.runtime_data.coordinator.system_information)
+    device_number_map = map_devices_to_entities(
+        entry.runtime_data.coordinator,
+        NUMBERS
     )
+
+    for device, numbers in device_number_map.items():
+        async_add_entities(
+            Open3eNumber(
+                coordinator=entry.runtime_data.coordinator,
+                description=cast(Open3eNumberEntityDescription, number),
+                device=device
+            )
+            for number in numbers
+        )
 
 
 class Open3eNumber(Open3eEntity, NumberEntity):
@@ -36,9 +44,10 @@ class Open3eNumber(Open3eEntity, NumberEntity):
     def __init__(
             self,
             coordinator: Open3eDataUpdateCoordinator,
-            description: Open3eNumberEntityDescription
+            description: Open3eNumberEntityDescription,
+            device: Open3eDataDevice
     ):
-        super().__init__(coordinator, description)
+        super().__init__(coordinator, description, device)
 
     @property
     def available(self):

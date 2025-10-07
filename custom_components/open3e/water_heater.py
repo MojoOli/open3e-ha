@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, cast
 
 from homeassistant.components.water_heater import WaterHeaterEntity, WaterHeaterEntityFeature
 from homeassistant.const import UnitOfTemperature, PRECISION_TENTHS
@@ -10,13 +10,15 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.util.json import json_loads
 
+from custom_components.open3e.definitions.subfeatures.dmw_mode import DmwMode
 from .const import VIESSMANN_TEMP_DHW_MIN, \
     VIESSMANN_TEMP_DHW_MAX
 from .coordinator import Open3eDataUpdateCoordinator
-from custom_components.open3e.definitions.subfeatures.dmw_mode import DmwMode
+from .definitions.open3e_data import Open3eDataDevice
 from .definitions.water_heater import WATER_HEATER, Open3eWaterHeaterEntityDescription
 from .entity import Open3eEntity
 from .ha_data import Open3eDataConfigEntry
+from .util import map_devices_to_entities
 
 
 async def async_setup_entry(
@@ -24,14 +26,21 @@ async def async_setup_entry(
         entry: Open3eDataConfigEntry,
         async_add_entities: AddEntitiesCallback,
 ) -> None:
-    async_add_entities(
-        Open3eWaterHeater(
-            coordinator=entry.runtime_data.coordinator,
-            description=description
-        )
-        for description in WATER_HEATER
-        if description.has_features(entry.runtime_data.coordinator.system_information)
+    device_water_heater_map = map_devices_to_entities(
+        entry.runtime_data.coordinator,
+        WATER_HEATER
     )
+
+    # Add entities for each device
+    for device, water_heaters in device_water_heater_map.items():
+        async_add_entities(
+            Open3eWaterHeater(
+                coordinator=entry.runtime_data.coordinator,
+                description=cast(Open3eWaterHeaterEntityDescription, wh),
+                device=device
+            )
+            for wh in water_heaters
+        )
 
 
 class Open3eWaterHeater(Open3eEntity, WaterHeaterEntity):
@@ -53,9 +62,10 @@ class Open3eWaterHeater(Open3eEntity, WaterHeaterEntity):
     def __init__(
             self,
             coordinator: Open3eDataUpdateCoordinator,
-            description: Open3eWaterHeaterEntityDescription
+            description: Open3eWaterHeaterEntityDescription,
+            device: Open3eDataDevice
     ):
-        super().__init__(coordinator, description)
+        super().__init__(coordinator, description, device)
         self._attr_current_operation = DmwMode.Eco.to_ha_preset_mode()
         self._attr_operation_list = [
             DmwMode.Eco.to_ha_preset_mode(),

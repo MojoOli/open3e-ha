@@ -33,16 +33,15 @@ class Open3eEntity(CoordinatorEntity, Entity):
     def __init__(
             self,
             coordinator: Open3eDataUpdateCoordinator,
-            description: Open3eEntityDescription
+            description: Open3eEntityDescription,
+            device: Open3eDataDevice
     ) -> None:
         """Initialize the sensor."""
         super().__init__(coordinator)
 
         self.coordinator = coordinator
 
-        self.device = coordinator.get_device_for_features(
-            features=description.poll_data_features
-        )
+        self.device = device
 
         self.__mqtt_topics = coordinator.get_mqtt_topics_for_features(
             features=description.poll_data_features
