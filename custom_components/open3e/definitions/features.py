@@ -77,7 +77,7 @@ class Features:
         System = Feature(id=2488, refresh_interval=5)
         ThermalCapacitySystem = Feature(id=2496, refresh_interval=5)
         Battery = Feature(id=1836, refresh_interval=5)
-        PV = Feature(id=1831, refresh_interval=5)
+        PV = Feature(id=1690, refresh_interval=5)
         MaxElectricalHeater = Feature(id=2626, refresh_interval=5)
         GRID = Feature(id=1603, refresh_interval=5)
 

@@ -127,6 +127,9 @@
       "grid_power_current": {
         "name": "Grid Power"
       },
+      "pv_power_current": {
+        "name": "PV Power"
+      },
       "pv_power_string_1_current": {
         "name": "PV Power String1"
       },
