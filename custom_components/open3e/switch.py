@@ -2,16 +2,16 @@
 
 from __future__ import annotations
 
-from typing import cast
+from typing import cast, Any
 
-from homeassistant.components.number import NumberEntity
+from homeassistant.components.switch import SwitchEntity
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.util.json import json_loads
 
 from .coordinator import Open3eDataUpdateCoordinator
-from .definitions.numbers import Open3eNumberEntityDescription, NUMBERS
 from .definitions.open3e_data import Open3eDataDevice
+from .definitions.switches import Open3eSwitchEntityDescription, SWITCHES
 from .entity import Open3eEntity
 from .ha_data import Open3eDataConfigEntry
 from .util import map_devices_to_entities
@@ -24,27 +24,27 @@ async def async_setup_entry(
 ) -> None:
     device_number_map = map_devices_to_entities(
         entry.runtime_data.coordinator,
-        NUMBERS
+        SWITCHES
     )
 
-    for device, numbers in device_number_map.items():
+    for device, switches in device_number_map.items():
         async_add_entities(
-            Open3eNumber(
+            Open3eSwitch(
                 coordinator=entry.runtime_data.coordinator,
-                description=cast(Open3eNumberEntityDescription, number),
+                description=cast(Open3eSwitchEntityDescription, switch),
                 device=device
             )
-            for number in numbers
+            for switch in switches
         )
 
 
-class Open3eNumber(Open3eEntity, NumberEntity):
-    entity_description: Open3eNumberEntityDescription
+class Open3eSwitch(Open3eEntity, SwitchEntity):
+    entity_description: Open3eSwitchEntityDescription
 
     def __init__(
             self,
             coordinator: Open3eDataUpdateCoordinator,
-            description: Open3eNumberEntityDescription,
+            description: Open3eSwitchEntityDescription,
             device: Open3eDataDevice
     ):
         super().__init__(coordinator, description, device)
@@ -52,19 +52,26 @@ class Open3eNumber(Open3eEntity, NumberEntity):
     @property
     def available(self):
         """Return True if entity is available."""
-        return self.native_value is not None
+        return self._attr_is_on is not None
 
-    async def async_set_native_value(self, value: float) -> None:
-        """Set new value."""
-        if self.entity_description.set_native_value is None:
+    async def async_turn_on(self, **kwargs: Any) -> None:
+        """Turn the entity on."""
+        if self.entity_description.turn_on is None:
             return
 
-        await self.entity_description.set_native_value(value, self.device, self.coordinator)
+        await self.entity_description.turn_on(self.device, self.coordinator)
+
+    async def async_turn_off(self, **kwargs: Any) -> None:
+        """Turn the entity off."""
+        if self.entity_description.turn_off is None:
+            return
+
+        await self.entity_description.turn_off(self.device, self.coordinator)
 
     async def async_on_data(self, feature_id: int) -> None:
         """Handle updated data from MQTT."""
-        if self.entity_description.get_native_value is None:
+        if self.entity_description.is_on_state is None:
             return
 
-        self._attr_native_value = self.entity_description.get_native_value(json_loads(self.data[feature_id]))
+        self._attr_is_on = self.entity_description.is_on_state(json_loads(self.data[feature_id]))
         self.async_write_ha_state()

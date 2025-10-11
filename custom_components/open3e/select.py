@@ -2,15 +2,19 @@
 
 from __future__ import annotations
 
+from typing import cast
+
 from homeassistant.components.select import SelectEntity
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.util.json import json_loads
 
 from .coordinator import Open3eDataUpdateCoordinator
+from .definitions.open3e_data import Open3eDataDevice
 from .definitions.select import Open3eSelectEntityDescription, SELECTS
 from .entity import Open3eEntity
 from .ha_data import Open3eDataConfigEntry
+from .util import map_devices_to_entities
 
 
 async def async_setup_entry(
@@ -18,14 +22,20 @@ async def async_setup_entry(
         entry: Open3eDataConfigEntry,
         async_add_entities: AddEntitiesCallback,
 ) -> None:
-    async_add_entities(
-        Open3eSelect(
-            coordinator=entry.runtime_data.coordinator,
-            description=description
-        )
-        for description in SELECTS
-        if description.has_features(entry.runtime_data.coordinator.system_information)
+    device_select_map = map_devices_to_entities(
+        entry.runtime_data.coordinator,
+        SELECTS
     )
+
+    for device, selects in device_select_map.items():
+        async_add_entities(
+            Open3eSelect(
+                coordinator=entry.runtime_data.coordinator,
+                description=cast(Open3eSelectEntityDescription, select),
+                device=device
+            )
+            for select in selects
+        )
 
 
 class Open3eSelect(Open3eEntity, SelectEntity):
@@ -34,9 +44,10 @@ class Open3eSelect(Open3eEntity, SelectEntity):
     def __init__(
             self,
             coordinator: Open3eDataUpdateCoordinator,
-            description: Open3eSelectEntityDescription
+            description: Open3eSelectEntityDescription,
+            device: Open3eDataDevice
     ):
-        super().__init__(coordinator, description)
+        super().__init__(coordinator, description, device)
         self._attr_current_option = None
 
     @property

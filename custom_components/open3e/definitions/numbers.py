@@ -5,13 +5,13 @@ from homeassistant.components.number import NumberEntityDescription, NumberDevic
 from homeassistant.const import UnitOfTemperature, UnitOfPower
 
 from custom_components.open3e.definitions.subfeatures.buffer import Buffer
-from .entity_description import Open3eEntityDescription
-from .features import Features
 from custom_components.open3e.definitions.subfeatures.hysteresis import Hysteresis
-from .open3e_data import Open3eDataDevice
 from custom_components.open3e.definitions.subfeatures.program import Program
 from custom_components.open3e.definitions.subfeatures.smart_grid_temperature_offsets import SmartGridTemperatureOffsets
 from custom_components.open3e.definitions.subfeatures.temperature_cooling import TemperatureCooling
+from .entity_description import Open3eEntityDescription
+from .features import Features
+from .open3e_data import Open3eDataDevice
 from .. import Open3eDataUpdateCoordinator
 from ..const import VIESSMANN_TEMP_HEATING_MIN, VIESSMANN_TEMP_HEATING_MAX, VIESSMANN_POWER_MAX_WATT_ELECTRICAL_HEATER, \
     VIESSMANN_POWER_MIN_WATT_ELECTRICAL_HEATER, VIESSMANN_POWER_WATT_ELECTRICAL_HEATER_STEP, \
@@ -29,6 +29,11 @@ class Open3eNumberEntityDescription(
 
 
 NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
+
+    ###############
+    ### VITOCAL ###
+    ###############
+
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.ProgramsCircuit1],
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,

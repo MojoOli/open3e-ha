@@ -2,17 +2,19 @@
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, cast
 
 from homeassistant.components.sensor import SensorEntity
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from .coordinator import Open3eDataUpdateCoordinator
+from .definitions.open3e_data import Open3eDataDevice
 from .definitions.sensors import Open3eSensorEntityDescription
 from .definitions.sensors import SENSORS
 from .entity import Open3eEntity
 from .ha_data import Open3eDataConfigEntry
+from .util import map_devices_to_entities
 
 
 async def async_setup_entry(
@@ -20,14 +22,20 @@ async def async_setup_entry(
         entry: Open3eDataConfigEntry,
         async_add_entities: AddEntitiesCallback,
 ) -> None:
-    async_add_entities(
-        Open3eSensor(
-            coordinator=entry.runtime_data.coordinator,
-            description=description
-        )
-        for description in SENSORS
-        if description.has_features(entry.runtime_data.coordinator.system_information)
+    device_sensor_map = map_devices_to_entities(
+        entry.runtime_data.coordinator,
+        SENSORS
     )
+
+    for device, sensors in device_sensor_map.items():
+        async_add_entities(
+            Open3eSensor(
+                coordinator=entry.runtime_data.coordinator,
+                description=cast(Open3eSensorEntityDescription, sensor),
+                device=device
+            )
+            for sensor in sensors
+        )
 
 
 class Open3eSensor(Open3eEntity, SensorEntity):
@@ -36,18 +44,19 @@ class Open3eSensor(Open3eEntity, SensorEntity):
     def __init__(
             self,
             coordinator: Open3eDataUpdateCoordinator,
-            description: Open3eSensorEntityDescription
+            description: Open3eSensorEntityDescription,
+            device: Open3eDataDevice
     ):
-        super().__init__(coordinator, description)
+        super().__init__(coordinator, description, device)
 
     @property
     def available(self):
         """Return True if entity is available."""
-        return self._attr_native_value is not None
+        return self._attr_native_value is not None and self.entity_description.is_available(self._attr_native_value)
 
     async def async_on_data(self, feature_id: int) -> None:
         """Handle updated data from MQTT."""
-        self._attr_native_value = self.__filter_data(self.data[feature_id])
+        self._attr_native_value = float(self.__filter_data(self.data[feature_id]))
         self.async_write_ha_state()
 
     def __filter_data(self, data: Any):

@@ -178,14 +178,6 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
 
         return mqtt_topics
 
-    def get_device_for_features(self, features: list[Feature]):
-        for feature in features:
-            for device in self.system_information.devices:
-                if feature.id in map(lambda entity: entity.id, device.features):
-                    return device
-
-        return None
-
     async def async_set_program_temperature(
             self,
             set_programs_feature_id: int,
@@ -336,6 +328,21 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             hass=self.hass,
             feature_id=feature_id,
             mode=mode,
+            device_id=device.id
+        )
+
+        await self.async_refresh_feature(device, [feature_id])
+
+    async def async_set_hot_water_quickmode(
+            self,
+            feature_id: int,
+            is_on: bool,
+            device: Open3eDataDevice
+    ):
+        await self.__client.async_set_hot_water_quickmode(
+            hass=self.hass,
+            feature_id=feature_id,
+            is_on=is_on,
             device_id=device.id
         )
 

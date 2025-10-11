@@ -375,6 +375,11 @@
       "water_heater": {
         "name": "Water heater"
       }
+    },
+    "switch": {
+      "i_want_hot_water": {
+        "name": "Shortly generate hot water"
+      }
     }
   }
 }
