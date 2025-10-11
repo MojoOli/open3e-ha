@@ -260,6 +260,9 @@
       },
       "heat_pump_compressor_active": {
         "name": "Wärmepumpenkompressor"
+      },
+      "frost_protection": {
+        "name": "Frostschutz"
       }
     },
     "climate": {

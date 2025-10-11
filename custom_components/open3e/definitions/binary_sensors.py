@@ -14,6 +14,7 @@ class BinarySensorDataTransform:
     POWERSTATE = lambda data: json_loads(data)["PowerState"] > 0
     STATE = lambda data: json_loads(data)["State"] > 0
     HYGIENE_ACTIVE = lambda data: json_loads(data)["HygenieActive"] > 0
+    HEX_ON = lambda data: data == "011400"  # on
     RAW = lambda data: data
     """The data state represents a raw value without any encapsulation."""
 
@@ -80,5 +81,18 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
         translation_key="hot_water_circulation_pump_hygiene",
         icon="mdi:bacteria-outline",
         data_transform=BinarySensorDataTransform.HYGIENE_ACTIVE
+    ),
+
+    ###############
+    ### VitoAir ###
+    ###############
+
+    Open3eBinarySensorEntityDescription(
+        device_class=BinarySensorDeviceClass.POWER,
+        poll_data_features=[Features.State.FrostProtection],
+        key="frost_protection",
+        translation_key="frost_protection",
+        icon="mdi:snowflake-melt",
+        data_transform=BinarySensorDataTransform.HEX_ON
     ),
 )

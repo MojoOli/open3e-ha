@@ -682,9 +682,10 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_TOTAL
     ),
 
-    ##################
+    ###############
     ### VitoAir ###
-    ##################
+    ###############
+
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.OutdoorAir],
         device_class=SensorDeviceClass.TEMPERATURE,

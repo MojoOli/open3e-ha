@@ -94,7 +94,7 @@ class Features:
         HotWaterCirculationPump = Feature(id=491, refresh_interval=30)
         DomesticHotWaterCirculationPumpMode = Feature(id=497, refresh_interval=30)
         TargetQuickMode = Feature(id=1006, refresh_interval=30)
-
+        FrostProtection = Feature(id=2489, refresh_interval=30)
 
     class Speed:
         CentralHeatingPump = Feature(id=381, refresh_interval=10)
