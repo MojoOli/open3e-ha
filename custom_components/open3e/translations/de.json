@@ -216,6 +216,30 @@
       },
       "compressor_speed_percentage": {
         "name": "Verdichterdrehzahl"
+      },
+      "outdoor_air_temperature": {
+        "name": "Temperatur Außenluft"
+      },
+      "supply_air_temperature": {
+        "name": "Temperatur Zuluft"
+      },
+      "extract_air_temperature": {
+        "name": "Temperatur Abluft"
+      },
+      "exhaust_air_temperature": {
+        "name": "Temperatur Fortluft"
+      },
+      "outdoor_air_humidity": {
+        "name": "Feuchtigkeit Außenluft"
+      },
+      "supply_air_humidity": {
+        "name": "Feuchtigkeit Zuluft"
+      },
+      "extract_air_humidity": {
+        "name": "Feuchtigkeit Abluft"
+      },
+      "exhaust_air_humidity": {
+        "name": "Feuchtigkeit Fortluft"
       }
     },
     "binary_sensor": {
@@ -236,6 +260,9 @@
       },
       "heat_pump_compressor_active": {
         "name": "Wärmepumpenkompressor"
+      },
+      "frost_protection": {
+        "name": "Frostschutz"
       }
     },
     "climate": {

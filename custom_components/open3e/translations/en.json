@@ -216,6 +216,30 @@
       },
       "compressor_speed_percentage": {
         "name": "Compressor Speed"
+      },
+      "outdoor_air_temperature": {
+        "name": "Outdoor Air Temperature"
+      },
+      "supply_air_temperature": {
+        "name": "Supply Air Temperature"
+      },
+      "extract_air_temperature": {
+        "name": "Extract Air Temperature"
+      },
+      "exhaust_air_temperature": {
+        "name": "Exhaust Air Temperature"
+      },
+      "outdoor_air_humidity": {
+        "name": "Outdoor Air Humidity"
+      },
+      "supply_air_humidity": {
+        "name": "Supply Air Humidity"
+      },
+      "extract_air_humidity": {
+        "name": "Extract Air Humidity"
+      },
+      "exhaust_air_humidity": {
+        "name": "Exhaust Air Humidity"
       }
     },
     "binary_sensor": {
@@ -236,6 +260,9 @@
       },
       "heat_pump_compressor_active": {
         "name": "Heat Pump Compressor"
+      },
+      "frost_protection": {
+        "name": "Frost protection"
       }
     },
     "climate": {

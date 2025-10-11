@@ -46,6 +46,16 @@ class Features:
         FlowCircuit1Cooling = Feature(id=2405, refresh_interval=30)
         FlowCircuit1Hysteresis = Feature(id=2413, refresh_interval=30)
         Buffer = Feature(id=3106, refresh_interval=30)
+        OutdoorAir = Feature(id=327, refresh_interval=5)
+        SupplyAir = Feature(id=328, refresh_interval=5)
+        ExtractAir = Feature(id=329, refresh_interval=5)
+        ExhaustAir = Feature(id=330, refresh_interval=5)
+
+    class Humidity:
+        Outdoor = Feature(id=419, refresh_interval=5)
+        SupplyAir = Feature(id=420, refresh_interval=5)
+        ExtractAir = Feature(id=421, refresh_interval=5)
+        ExhaustAir = Feature(id=422, refresh_interval=5)
 
     class Pressure:
         Water = Feature(id=318, refresh_interval=15)
@@ -84,7 +94,7 @@ class Features:
         HotWaterCirculationPump = Feature(id=491, refresh_interval=30)
         DomesticHotWaterCirculationPumpMode = Feature(id=497, refresh_interval=30)
         TargetQuickMode = Feature(id=1006, refresh_interval=30)
-
+        FrostProtection = Feature(id=2489, refresh_interval=30)
 
     class Speed:
         CentralHeatingPump = Feature(id=381, refresh_interval=10)

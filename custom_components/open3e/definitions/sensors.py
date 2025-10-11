@@ -681,4 +681,81 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         translation_key="pv_energy_production_total",
         data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_TOTAL
     ),
+
+    ###############
+    ### VitoAir ###
+    ###############
+
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.OutdoorAir],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="outdoor_air_temperature",
+        translation_key="outdoor_air_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.SupplyAir],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="supply_air_temperature",
+        translation_key="supply_air_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.ExtractAir],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="extract_air_temperature",
+        translation_key="extract_air_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.ExhaustAir],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="exhaust_air_temperature",
+        translation_key="exhaust_air_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Humidity.Outdoor],
+        device_class=SensorDeviceClass.HUMIDITY,
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="outdoor_air_humidity",
+        translation_key="outdoor_air_humidity",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Humidity.SupplyAir],
+        device_class=SensorDeviceClass.HUMIDITY,
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="supply_air_humidity",
+        translation_key="supply_air_humidity",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Humidity.ExtractAir],
+        device_class=SensorDeviceClass.HUMIDITY,
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="extract_air_humidity",
+        translation_key="extract_air_humidity",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Humidity.ExhaustAir],
+        device_class=SensorDeviceClass.HUMIDITY,
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="exhaust_air_humidity",
+        translation_key="exhaust_air_humidity",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
 )
