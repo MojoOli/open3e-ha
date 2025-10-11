@@ -18,7 +18,7 @@ sent by Open3e. Data is then automatically refreshed.
 ## Supported devices
 
 - [x] Vitocal
-- [x] Vitoair (In-Progress)
+- [x] Vitoair (Partially)
 - [ ] Vitodens
 - [x] Vitocharge
 
