@@ -246,6 +246,12 @@
       },
       "exhaust_air_humidity": {
         "name": "Feuchtigkeit Fortluft"
+      },
+      "inverter_ambient_temperature": {
+        "name": "Umgebungstemperatur"
+      },
+      "battery_temperature": {
+        "name": "Batterie Temperatur"
       }
     },
     "binary_sensor": {

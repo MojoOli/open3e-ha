@@ -246,6 +246,12 @@
       },
       "exhaust_air_humidity": {
         "name": "Exhaust Air Humidity"
+      },
+      "inverter_ambient_temperature": {
+        "name": "Ambient Temperature"
+      },
+      "battery_temperature": {
+        "name": "Battery Temperature"
       }
     },
     "binary_sensor": {

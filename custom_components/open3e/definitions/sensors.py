@@ -3,7 +3,7 @@ from typing import Callable, Any
 
 from homeassistant.components.sensor import SensorEntityDescription, SensorDeviceClass, SensorStateClass
 from homeassistant.const import UnitOfTemperature, UnitOfPressure, UnitOfEnergy, PERCENTAGE, UnitOfPower, \
-    UnitOfVolumeFlowRate
+    UnitOfVolumeFlowRate, EntityCategory
 from homeassistant.util.json import json_loads
 
 from .entity_description import Open3eEntityDescription
@@ -700,6 +700,26 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="pv_energy_production_total",
         translation_key="pv_energy_production_total",
         data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_TOTAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.InverterAmbient],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        key="inverter_ambient_temperature",
+        translation_key="inverter_ambient_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.Battery],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        key="battery_temperature",
+        translation_key="battery_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL
     ),
 
     ###############

@@ -50,6 +50,8 @@ class Features:
         SupplyAir = Feature(id=328, refresh_interval=5)
         ExtractAir = Feature(id=329, refresh_interval=5)
         ExhaustAir = Feature(id=330, refresh_interval=5)
+        InverterAmbient = Feature(id=1684, refresh_interval=30)
+        Battery = Feature(id=2240, refresh_interval=30)
 
     class Humidity:
         Outdoor = Feature(id=419, refresh_interval=5)
