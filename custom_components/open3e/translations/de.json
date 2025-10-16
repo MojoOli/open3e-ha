@@ -124,6 +124,12 @@
       "battery_power_current": {
         "name": "Aktuelle Batterieleistung"
       },
+      "grid_power_current": {
+        "name": "Aktuelle Netzleistung"
+      },
+      "pv_power_current": {
+        "name": "PV-Leistung"
+      },
       "pv_power_string_1_current": {
         "name": "PV-Leistung String1"
       },
@@ -240,6 +246,12 @@
       },
       "exhaust_air_humidity": {
         "name": "Feuchtigkeit Fortluft"
+      },
+      "inverter_ambient_temperature": {
+        "name": "Umgebungstemperatur"
+      },
+      "battery_temperature": {
+        "name": "Batterie Temperatur"
       }
     },
     "binary_sensor": {

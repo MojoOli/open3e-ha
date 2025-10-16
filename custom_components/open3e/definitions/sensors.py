@@ -3,7 +3,7 @@ from typing import Callable, Any
 
 from homeassistant.components.sensor import SensorEntityDescription, SensorDeviceClass, SensorStateClass
 from homeassistant.const import UnitOfTemperature, UnitOfPressure, UnitOfEnergy, PERCENTAGE, UnitOfPower, \
-    UnitOfVolumeFlowRate
+    UnitOfVolumeFlowRate, EntityCategory
 from homeassistant.util.json import json_loads
 
 from .entity_description import Open3eEntityDescription
@@ -17,6 +17,7 @@ class SensorDataRetriever:
     MINIMUM = lambda data: json_loads(data)["Minimum"]
     MAXIMUM = lambda data: json_loads(data)["Maximum"]
     AVERAGE = lambda data: json_loads(data)["Average"]
+    ACTIVE_POWER = lambda data: json_loads(data)["ActivePower"]
     TODAY = lambda data: json_loads(data)["Today"]
     CURRENT_MONTH = lambda data: json_loads(data)["CurrentMonth"]
     CURRENT_YEAR = lambda data: json_loads(data)["CurrentYear"]
@@ -36,9 +37,10 @@ class SensorDataRetriever:
     PV_ENERGY_PRODUCTION_YEAR = lambda data: json_loads(data)["PhotovoltaicProductionYear"]
     PV_ENERGY_PRODUCTION_TOTAL = lambda data: json_loads(data)["PhotovoltaicProductionTotal"]
     TEMPERATURE = lambda data: json_loads(data)["Temperature"]
-    PV_POWER_STRING_1 = lambda data: (lambda val: val if val < 65000 else 0)(json_loads(data)["String1"])
-    PV_POWER_STRING_2 = lambda data: (lambda val: val if val < 65000 else 0)(json_loads(data)["String2"])
-    PV_POWER_STRING_3 = lambda data: (lambda val: val if val < 65000 else 0)(json_loads(data)["String3"])
+    PV_POWER_CUMULATED = lambda data: json_loads(data)["ActivePower cumulated"]
+    PV_POWER_STRING_1 = lambda data: json_loads(data)["ActivePower String A"]
+    PV_POWER_STRING_2 = lambda data: json_loads(data)["ActivePower String B"]
+    PV_POWER_STRING_3 = lambda data: json_loads(data)["ActivePower String C"]
     RAW = lambda data: data
     """The data state represents a raw value without any encapsulation."""
 
@@ -593,6 +595,15 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.BATTERY_DISCHARGE_TOTAL
     ),
     Open3eSensorEntityDescription(
+        poll_data_features=[Features.Power.Grid],
+        device_class=SensorDeviceClass.POWER,
+        native_unit_of_measurement=UnitOfPower.WATT,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="grid_power_current",
+        translation_key="grid_power_current",
+        data_retriever=SensorDataRetriever.ACTIVE_POWER
+    ),
+    Open3eSensorEntityDescription(
         poll_data_features=[Features.Power.Battery],
         device_class=SensorDeviceClass.POWER,
         native_unit_of_measurement=UnitOfPower.WATT,
@@ -600,6 +611,15 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="battery_power_current",
         translation_key="battery_power_current",
         data_retriever=SensorDataRetriever.RAW
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Power.PV],
+        device_class=SensorDeviceClass.POWER,
+        native_unit_of_measurement=UnitOfPower.WATT,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="pv_power_current",
+        translation_key="pv_power_current",
+        data_retriever=SensorDataRetriever.PV_POWER_CUMULATED
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Power.PV],
@@ -680,6 +700,26 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="pv_energy_production_total",
         translation_key="pv_energy_production_total",
         data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_TOTAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.InverterAmbient],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        key="inverter_ambient_temperature",
+        translation_key="inverter_ambient_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.Battery],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        key="battery_temperature",
+        translation_key="battery_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL
     ),
 
     ###############

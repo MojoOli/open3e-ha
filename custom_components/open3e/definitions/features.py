@@ -8,7 +8,7 @@ class Feature:
     refresh_interval: int | None
     """Represent the refresh interval in seconds.
     The minimum and step size is 5 seconds.
-    
+
     If its set to None, the feature will not be refreshed and only be used for setting data.
     """
 
@@ -50,6 +50,8 @@ class Features:
         SupplyAir = Feature(id=328, refresh_interval=5)
         ExtractAir = Feature(id=329, refresh_interval=5)
         ExhaustAir = Feature(id=330, refresh_interval=5)
+        InverterAmbient = Feature(id=1684, refresh_interval=30)
+        Battery = Feature(id=2240, refresh_interval=30)
 
     class Humidity:
         Outdoor = Feature(id=419, refresh_interval=5)
@@ -77,8 +79,9 @@ class Features:
         System = Feature(id=2488, refresh_interval=5)
         ThermalCapacitySystem = Feature(id=2496, refresh_interval=5)
         Battery = Feature(id=1836, refresh_interval=5)
-        PV = Feature(id=1831, refresh_interval=5)
+        PV = Feature(id=1690, refresh_interval=5)
         MaxElectricalHeater = Feature(id=2626, refresh_interval=5)
+        Grid = Feature(id=1603, refresh_interval=5)
 
     class State:
         Hvac = Feature(id=1415, refresh_interval=30)
