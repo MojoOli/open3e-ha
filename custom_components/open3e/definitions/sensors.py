@@ -595,7 +595,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.BATTERY_DISCHARGE_TOTAL
     ),
     Open3eSensorEntityDescription(
-        poll_data_features=[Features.Power.GRID],
+        poll_data_features=[Features.Power.Grid],
         device_class=SensorDeviceClass.POWER,
         native_unit_of_measurement=UnitOfPower.WATT,
         state_class=SensorStateClass.MEASUREMENT,

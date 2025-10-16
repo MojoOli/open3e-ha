@@ -81,7 +81,7 @@ class Features:
         Battery = Feature(id=1836, refresh_interval=5)
         PV = Feature(id=1690, refresh_interval=5)
         MaxElectricalHeater = Feature(id=2626, refresh_interval=5)
-        GRID = Feature(id=1603, refresh_interval=5)
+        Grid = Feature(id=1603, refresh_interval=5)
 
     class State:
         Hvac = Feature(id=1415, refresh_interval=30)
