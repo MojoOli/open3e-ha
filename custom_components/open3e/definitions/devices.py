@@ -9,6 +9,8 @@ class Device:
 
 
 class Open3eDevices(Device, Enum):
+    VitocalMaster = ("HPMUMASTER", "VitocalMaster")
+    VitocalSlave = ("HPMUSLAVE", "VitocalSlave")
     Vitocal = ("HPMU", "Vitocal")
     Vitoair = ("VCU", "Vitoair")
     Vitodens = ("HMU", "Vitodens")

@@ -47,7 +47,7 @@ class Open3eEntity(CoordinatorEntity, Entity):
             features=description.poll_data_features
         )
 
-        slug = slugify(f'{DOMAIN}_{description.key}'.replace("-", "_"))
+        slug = slugify(f'{DOMAIN}_{device.id}_{description.key}'.replace("-", "_"))
         self.entity_id = f'{description.domain}.{slug}'
         self._attr_unique_id = slug
         self._attr_device_info = DeviceInfo(
