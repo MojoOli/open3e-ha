@@ -1,6 +1,6 @@
 {
     "name": "open3e",
-    "image": "mcr.microsoft.com/devcontainers/python:3.12",
+    "image": "mcr.microsoft.com/devcontainers/python:3.13",
     "postCreateCommand": "scripts/setup",
     "forwardPorts": [
         8123
@@ -39,7 +39,7 @@
     "remoteUser": "vscode",
     "features": {
         "ghcr.io/devcontainers-extra/features/apt-packages:1": {
-            "packages": []
+            "packages": "ffmpeg,libturbojpeg0,libpcap-dev"
         }
     }
 }
