@@ -44,7 +44,8 @@ class Open3eEntity(CoordinatorEntity, Entity):
         self.device = device
 
         self.__mqtt_topics = coordinator.get_mqtt_topics_for_features(
-            features=description.poll_data_features
+            features=description.poll_data_features,
+            device=device
         )
 
         slug = slugify(f'{DOMAIN}_{device.id}_{description.key}'.replace("-", "_"))

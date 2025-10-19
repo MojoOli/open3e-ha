@@ -166,15 +166,14 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
                 if self._endpoints[feature.id].remove_entity_subscription():
                     del self._endpoints[feature.id]
 
-    def get_mqtt_topics_for_features(self, features: list[Feature]):
+    def get_mqtt_topics_for_features(self, features: list[Feature], device: Open3eDataDevice):
         mqtt_topics: list[Open3eDataDeviceFeature] = []
 
         for feature in features:
-            for device in self.system_information.devices:
-                for mqtt_topic in device.features:
-                    if mqtt_topic.id == feature.id:
-                        mqtt_topics.append(mqtt_topic)
-                        break
+            for mqtt_topic in device.features:
+                if mqtt_topic.id == feature.id:
+                    mqtt_topics.append(mqtt_topic)
+                    break
 
         return mqtt_topics
 
