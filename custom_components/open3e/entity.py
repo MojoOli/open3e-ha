@@ -79,7 +79,7 @@ class Open3eEntity(CoordinatorEntity, Entity):
 
     async def async_will_remove_from_hass(self) -> None:
         """Run when entity about to be added to hass."""
-        self.coordinator.on_entity_removed(self.entity_description.poll_data_features)
+        self.coordinator.on_entity_removed(self.entity_description.poll_data_features, self.device)
 
         for sub in self.__mqtt_subscriptions:
             sub()
