@@ -48,11 +48,16 @@ class Open3eEntity(CoordinatorEntity, Entity):
             device=device
         )
 
-        slug = slugify(f'{DOMAIN}_{device.id}_{description.key}'.replace("-", "_"))
+        # slug = slugify(f"{device.name}_{device.serial_number}_{description.key}".replace("-", "_"))
+        # self.entity_id = f'{description.domain}.{slug}'
+        # self._attr_unique_id = f'{DOMAIN}_{slug}'
+
+        slug = slugify(f'{DOMAIN}_{description.key}'.replace("-", "_"))
         self.entity_id = f'{description.domain}.{slug}'
         self._attr_unique_id = slug
+
         self._attr_device_info = DeviceInfo(
-            identifiers={(DOMAIN, self.device.name)},
+            identifiers={(DOMAIN, self.device.serial_number), (DOMAIN, self.device.name)},
         )
         self._attr_has_entity_name = True
         self.entity_description = description

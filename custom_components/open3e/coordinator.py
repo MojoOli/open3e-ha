@@ -106,7 +106,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
         for device in self.system_information.devices:
             self.__device_registry.async_get_or_create(
                 config_entry_id=self.__entry_id,
-                identifiers={(DOMAIN, device.name)},
+                identifiers={(DOMAIN, device.serial_number), (DOMAIN, device.name)},
                 manufacturer=device.manufacturer,
                 serial_number=device.serial_number,
                 sw_version=device.software_version,
