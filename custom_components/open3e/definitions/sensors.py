@@ -6,6 +6,8 @@ from homeassistant.const import UnitOfTemperature, UnitOfPressure, UnitOfEnergy,
     UnitOfVolumeFlowRate, EntityCategory
 from homeassistant.util.json import json_loads
 
+from ..const import VIESSMANN_UNAVAILABLE_NUMBER
+
 from .entity_description import Open3eEntityDescription
 from .features import Features
 
@@ -44,7 +46,6 @@ class SensorDataRetriever:
     RAW = lambda data: data
     """The data state represents a raw value without any encapsulation."""
 
-
 @dataclass(frozen=True)
 class Open3eSensorEntityDescription(
     Open3eEntityDescription, SensorEntityDescription
@@ -52,8 +53,13 @@ class Open3eSensorEntityDescription(
     """Default sensor entity description for open3e."""
     domain: str = "sensor"
     data_retriever: Callable[[Any], float] | None = None
-    is_available: Callable[[Any], bool] = lambda data: True
+    is_available: Callable[[Any, Any], bool] = lambda data, desc: is_available(data, desc)
 
+def is_available(data: Any, desc: Open3eSensorEntityDescription) -> bool:
+    """Default availability checker for sensor entities."""
+    if desc.device_class == SensorDeviceClass.TEMPERATURE:
+        return data != VIESSMANN_UNAVAILABLE_NUMBER
+    return True
 
 SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
 
