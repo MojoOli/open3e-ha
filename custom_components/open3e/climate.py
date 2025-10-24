@@ -11,7 +11,7 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.util.json import json_loads
 
 from custom_components.open3e.definitions.subfeatures.program import Program
-from .const import VIESSMANN_TEMP_HEATING_MIN, VIESSMANN_TEMP_HEATING_MAX
+from .const import VIESSMANN_TEMP_HEATING_MIN, VIESSMANN_TEMP_HEATING_MAX, VIESSMANN_UNAVAILABLE_NUMBER
 from .coordinator import Open3eDataUpdateCoordinator
 from .definitions.climate import Open3eClimateEntityDescription, CLIMATE
 from .definitions.open3e_data import Open3eDataDevice
@@ -83,7 +83,7 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
         """Return True if the current flow temperature
         is not -3276.8 which is used when the circuit is not connected
         """
-        return self.__current_flow_temperature is not None and self.__current_flow_temperature > -1000
+        return self.__current_flow_temperature is not None and self.__current_flow_temperature != VIESSMANN_UNAVAILABLE_NUMBER
 
     @property
     def hvac_action(self) -> HVACAction:

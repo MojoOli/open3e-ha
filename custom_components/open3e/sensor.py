@@ -52,7 +52,7 @@ class Open3eSensor(Open3eEntity, SensorEntity):
     @property
     def available(self):
         """Return True if entity is available."""
-        return self._attr_native_value is not None and self.entity_description.is_available(self._attr_native_value)
+        return self._attr_native_value is not None and self.entity_description.is_available(self._attr_native_value, self.entity_description)
 
     async def async_on_data(self, feature_id: int) -> None:
         """Handle updated data from MQTT."""
