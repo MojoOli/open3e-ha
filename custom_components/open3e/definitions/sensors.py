@@ -259,7 +259,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.ACTUAL
     ),
     Open3eSensorEntityDescription(
-        poll_data_features=[Features.Speed.CentralHeatingPump],
+        poll_data_features=[Features.State.CentralHeatingPump],
         device_class=SensorDeviceClass.POWER_FACTOR,
         native_unit_of_measurement=PERCENTAGE,
         state_class=SensorStateClass.MEASUREMENT,
