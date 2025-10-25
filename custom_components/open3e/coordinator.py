@@ -241,7 +241,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             device_id=device.id
         )
 
-        await self.async_refresh_feature([dmw_state_feature_id, dmw_efficiency_mode_feature_id])
+        await self.async_refresh_feature(device, [dmw_state_feature_id, dmw_efficiency_mode_feature_id])
 
     async def async_set_max_power_electrical_heater(
             self,
