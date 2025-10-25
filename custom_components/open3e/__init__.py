@@ -10,7 +10,7 @@ from __future__ import annotations
 import logging
 from typing import TYPE_CHECKING
 
-from homeassistant.const import Platform, EVENT_HOMEASSISTANT_STARTED
+from homeassistant.const import Platform
 from homeassistant.helpers.device_registry import DeviceEntry
 from homeassistant.util import slugify
 
@@ -112,12 +112,11 @@ async def async_migrate_entry(
             if identifier and not identifier.isdigit():
                 new_id = device.serial_number
 
-                # Include BOTH old + new identifiers temporarily
-                new_identifiers.add((DOMAIN, identifier))  # old
-                new_identifiers.add((DOMAIN, new_id))  # new
+                # Use the new serial_number identifier going forward
+                new_identifiers.add((DOMAIN, new_id))
 
                 _LOGGER.debug(
-                    "Migrating device %s identifiers: keeping '%s', adding '%s'",
+                    "Migrating device %s identifiers: replacing '%s' with '%s'",
                     device.id,
                     identifier,
                     new_id,
