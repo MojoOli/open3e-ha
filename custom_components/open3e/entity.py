@@ -53,7 +53,7 @@ class Open3eEntity(CoordinatorEntity, Entity):
         self._attr_unique_id = f'{DOMAIN}_{slug}'
 
         self._attr_device_info = DeviceInfo(
-            identifiers={(DOMAIN, self.device.serial_number), (DOMAIN, self.device.name)},
+            identifiers={(DOMAIN, self.device.serial_number)},
         )
         self._attr_has_entity_name = True
         self.entity_description = description

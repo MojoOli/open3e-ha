@@ -104,16 +104,16 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
 
         self.system_information = await self.__client.async_get_system_information(self.hass)
         for device in self.system_information.devices:
-            self.__device_registry.async_get_or_create(
+            print(self.__device_registry.async_get_or_create(
                 config_entry_id=self.__entry_id,
-                identifiers={(DOMAIN, device.serial_number), (DOMAIN, device.name)},
+                identifiers={(DOMAIN, device.serial_number)},
                 manufacturer=device.manufacturer,
                 serial_number=device.serial_number,
                 sw_version=device.software_version,
                 hw_version=device.hardware_version,
                 name=device.name,
                 model=device.name,
-            )
+            ))
 
     def __on_availability_update(self, available: bool):
         self.__server_available = available
