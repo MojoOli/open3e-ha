@@ -60,11 +60,11 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
     ),
     Open3eBinarySensorEntityDescription(
         device_class=BinarySensorDeviceClass.POWER,
-        poll_data_features=[Features.State.CircuitPump],
+        poll_data_features=[Features.State.CentralHeatingPump],
         key="circuit_pump",
         translation_key="circuit_pump",
         icon="mdi:water-sync",
-        data_transform=BinarySensorDataTransform.POWERSTATE
+        data_transform=BinarySensorDataTransform.STATE
     ),
     Open3eBinarySensorEntityDescription(
         device_class=BinarySensorDeviceClass.POWER,
