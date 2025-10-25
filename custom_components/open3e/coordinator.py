@@ -7,7 +7,6 @@ import logging
 import time
 from dataclasses import dataclass
 from datetime import timedelta
-from typing import Any
 
 from homeassistant.helpers.device_registry import DeviceRegistry
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
@@ -26,7 +25,6 @@ from .errors import Open3eCoordinatorUpdateFailed
 _LOGGER = logging.getLogger(__name__)
 
 from homeassistant.helpers import device_registry
-from .definitions.open3e_data import Open3eDataDeviceFeature
 from .definitions.features import Feature
 
 
@@ -35,19 +33,15 @@ class CoordinatorEndpoint:
     __last_refresh: float = -1
     __entities_subscribed: int = 1
 
-    def __init__(self, refresh_interval: int, device: Open3eDataDevice):
+    def __init__(self, refresh_interval: int):
         self.refresh_interval = refresh_interval
-        self.device = device
 
     def add_entity_subscription(self):
-        self.__entities_subscribed = self.__entities_subscribed + 1
+        self.__entities_subscribed += 1
 
     def remove_entity_subscription(self):
-        self.__entities_subscribed = self.__entities_subscribed - 1
-        if self.__entities_subscribed <= 0:
-            return True
-        else:
-            return False
+        self.__entities_subscribed -= 1
+        return self.__entities_subscribed <= 0
 
     def set_refresh_interval(self, refresh_interval):
         if refresh_interval < self.refresh_interval:
@@ -73,7 +67,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
     __device_registry: DeviceRegistry
     __entry_id: str
 
-    _endpoints: dict[int, dict[int, CoordinatorEndpoint]] = {}
+    __endpoints: dict[tuple[int, int], CoordinatorEndpoint] = {}
 
     def __init__(self, hass, client: Open3eMqttClient, entry_id: str):
         super().__init__(
@@ -126,7 +120,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
     def __on_availability_update(self, available: bool):
         self.__server_available = available
 
-    async def _async_update_data(self) -> Any:
+    async def _async_update_data(self) -> bool:
         """Update data."""
         if self.__server_available is None:
             return True
@@ -135,62 +129,51 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             raise Open3eCoordinatorUpdateFailed()
 
         now = time.time()
-
         device_features: dict[int, list[int]] = {}
 
-        for deviceId in self._endpoints.keys():
-            endpointsPerDevice = self._endpoints[deviceId]
-            for endpointId in endpointsPerDevice.keys():
-                endpoint = endpointsPerDevice[endpointId]
-                if endpoint.should_refresh(now):
-                    if device_features.get(deviceId) is None:
-                        device_features[deviceId] = list()
+        for (device_id, feature_id), endpoint in self.__endpoints.items():
+            if endpoint.should_refresh(now):
+                device_features.setdefault(device_id, []).append(feature_id)
+                endpoint.update_last_refresh(now)
 
-                    device_features[deviceId].append(endpointId)
-                    endpoint.update_last_refresh(now)
-
-        if device_features is None:
+        if not device_features:
             return True
 
         _LOGGER.debug(f"Requesting data update for features {device_features}")
-
         await self.__client.async_request_data(self.hass, device_features)
 
         return True
 
     async def on_entity_added(self, features: list[Feature], device: Open3eDataDevice):
+        """Called when an entity is added."""
         _LOGGER.debug("Entity was added to Coordinator")
         for feature in features:
-            if device.id not in self._endpoints:
-                self._endpoints[device.id] = {}
-            if feature.id not in self._endpoints[device.id]:
-                self._endpoints[device.id][feature.id] = CoordinatorEndpoint(
-                    refresh_interval=feature.refresh_interval,
-                    device=device
+            key = (device.id, feature.id)
+            endpoint = self.__endpoints.get(key)
+            if endpoint is None:
+                self.__endpoints[key] = CoordinatorEndpoint(
+                    refresh_interval=feature.refresh_interval
                 )
             else:
-                self._endpoints[device.id][feature.id].add_entity_subscription()
-                self._endpoints[device.id][feature.id].set_refresh_interval(feature.refresh_interval)
+                endpoint.add_entity_subscription()
+                endpoint.set_refresh_interval(feature.refresh_interval)
 
     def on_entity_removed(self, features: list[Feature], device: Open3eDataDevice):
+        """Called when an entity is removed."""
         _LOGGER.debug("Entity was removed from Coordinator")
-        if device.id not in self._endpoints:
-            return
         for feature in features:
-            if feature.id in self._endpoints[device.id]:
-                if self._endpoints[device.id][feature.id].remove_entity_subscription():
-                    del self._endpoints[device.id][feature.id]
+            key = (device.id, feature.id)
+            endpoint = self.__endpoints.get(key)
+            if endpoint and endpoint.remove_entity_subscription():
+                del self.__endpoints[key]
 
     def get_mqtt_topics_for_features(self, features: list[Feature], device: Open3eDataDevice):
-        mqtt_topics: list[Open3eDataDeviceFeature] = []
-
-        for feature in features:
-            for mqtt_topic in device.features:
-                if mqtt_topic.id == feature.id:
-                    mqtt_topics.append(mqtt_topic)
-                    break
-
-        return mqtt_topics
+        """Return MQTT topics matching a list of features for a device."""
+        return [
+            mqtt_topic for feature in features
+            for mqtt_topic in device.features
+            if mqtt_topic.id == feature.id
+        ]
 
     async def async_set_program_temperature(
             self,
