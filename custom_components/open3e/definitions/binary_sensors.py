@@ -36,9 +36,9 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
 
     Open3eBinarySensorEntityDescription(
         device_class=BinarySensorDeviceClass.POWER,
-        poll_data_features=[Features.State.Heater],
-        key="heater_active",
-        translation_key="heater_active",
+        poll_data_features=[Features.State.AdditionalHeater],
+        key="additional_heater_active",
+        translation_key="additional_heater_active",
         icon="mdi:power",
         data_transform=BinarySensorDataTransform.POWERSTATE
     ),

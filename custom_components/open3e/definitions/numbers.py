@@ -12,6 +12,7 @@ from custom_components.open3e.definitions.subfeatures.temperature_cooling import
 from .entity_description import Open3eEntityDescription
 from .features import Features
 from .open3e_data import Open3eDataDevice
+from .subfeatures.heating_curve import HeatingCurve
 from .. import Open3eDataUpdateCoordinator
 from ..const import VIESSMANN_TEMP_HEATING_MIN, VIESSMANN_TEMP_HEATING_MAX, VIESSMANN_POWER_MAX_WATT_ELECTRICAL_HEATER, \
     VIESSMANN_POWER_MIN_WATT_ELECTRICAL_HEATER, VIESSMANN_POWER_WATT_ELECTRICAL_HEATER_STEP, \
@@ -399,7 +400,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         translation_key="heating_circuit_cooling_hysteresis_off"
     ),
     Open3eNumberEntityDescription(
-        poll_data_features=[Features.Temperature.Buffer],
+        poll_data_features=[Features.Temperature.BufferMinMax],
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=NumberDeviceClass.TEMPERATURE,
         icon="mdi:thermometer-low",
@@ -407,7 +408,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         native_max_value=25,
         get_native_value=lambda data: data[Buffer.Min],
         set_native_value=lambda value, device, coordinator: coordinator.async_set_buffer_temperature(
-            feature_id=Features.Temperature.Buffer.id,
+            feature_id=Features.Temperature.BufferMinMax.id,
             buffer=Buffer.Min,
             value=value,
             device=device
@@ -416,7 +417,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         translation_key="buffer_min_temperature"
     ),
     Open3eNumberEntityDescription(
-        poll_data_features=[Features.Temperature.Buffer],
+        poll_data_features=[Features.Temperature.BufferMinMax],
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=NumberDeviceClass.TEMPERATURE,
         icon="mdi:thermometer-high",
@@ -424,7 +425,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         native_max_value=75,
         get_native_value=lambda data: data[Buffer.Max],
         set_native_value=lambda value, device, coordinator: coordinator.async_set_buffer_temperature(
-            feature_id=Features.Temperature.Buffer.id,
+            feature_id=Features.Temperature.BufferMinMax.id,
             buffer=Buffer.Max,
             value=value,
             device=device
@@ -432,4 +433,154 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         key="buffer_max_temperature",
         translation_key="buffer_max_temperature"
     ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.State.CircuitFrostProtection],
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        device_class=NumberDeviceClass.TEMPERATURE,
+        icon="mdi:snowflake-melt",
+        native_min_value=-9,
+        native_max_value=3,
+        get_native_value=lambda data: data["Temperature"],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_frost_protection_temperature(
+            feature_id=Features.State.CircuitFrostProtection.id,
+            value=value,
+            device=device
+        ),
+        key="frost_protection_temperature",
+        translation_key="frost_protection_temperature"
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.State.FlowCircuit1HeatingCurve],
+        icon="mdi:slope-uphill",
+        native_min_value=0.2,
+        native_max_value=3.5,
+        native_step=0.1,
+        get_native_value=lambda data: data[HeatingCurve.Gradient],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_heating_curve(
+            feature_id=Features.State.FlowCircuit1HeatingCurve.id,
+            heating_curve=HeatingCurve.Gradient,
+            value=value,
+            device=device
+        ),
+        key="circuit_1_heating_curve_slope",
+        translation_key="circuit_1_heating_curve_slope"
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.State.FlowCircuit2HeatingCurve],
+        icon="mdi:slope-uphill",
+        native_min_value=0.2,
+        native_max_value=3.5,
+        native_step=0.1,
+        get_native_value=lambda data: data[HeatingCurve.Gradient],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_heating_curve(
+            feature_id=Features.State.FlowCircuit2HeatingCurve.id,
+            heating_curve=HeatingCurve.Gradient,
+            value=value,
+            device=device
+        ),
+        key="circuit_2_heating_curve_slope",
+        translation_key="circuit_2_heating_curve_slope",
+        entity_registry_enabled_default=False
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.State.FlowCircuit3HeatingCurve],
+        icon="mdi:slope-uphill",
+        native_min_value=0.2,
+        native_max_value=3.5,
+        native_step=0.1,
+        get_native_value=lambda data: data[HeatingCurve.Gradient],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_heating_curve(
+            feature_id=Features.State.FlowCircuit3HeatingCurve.id,
+            heating_curve=HeatingCurve.Gradient,
+            value=value,
+            device=device
+        ),
+        key="circuit_3_heating_curve_slope",
+        translation_key="circuit_3_heating_curve_slope",
+        entity_registry_enabled_default=False
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.State.FlowCircuit4HeatingCurve],
+        icon="mdi:slope-uphill",
+        native_min_value=0.2,
+        native_max_value=3.5,
+        native_step=0.1,
+        get_native_value=lambda data: data[HeatingCurve.Gradient],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_heating_curve(
+            feature_id=Features.State.FlowCircuit4HeatingCurve.id,
+            heating_curve=HeatingCurve.Gradient,
+            value=value,
+            device=device
+        ),
+        key="circuit_4_heating_curve_slope",
+        translation_key="circuit_4_heating_curve_slope",
+        entity_registry_enabled_default=False
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.State.FlowCircuit1HeatingCurve],
+        icon="mdi:plus-minus-variant",
+        native_min_value=-13,
+        native_max_value=40,
+        native_step=1,
+        get_native_value=lambda data: data[HeatingCurve.Level],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_heating_curve(
+            feature_id=Features.State.FlowCircuit1HeatingCurve.id,
+            heating_curve=HeatingCurve.Level,
+            value=value,
+            device=device
+        ),
+        key="circuit_1_heating_curve_level",
+        translation_key="circuit_1_heating_curve_level"
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.State.FlowCircuit2HeatingCurve],
+        icon="mdi:plus-minus-variant",
+        native_min_value=-13,
+        native_max_value=40,
+        native_step=1,
+        get_native_value=lambda data: data[HeatingCurve.Level],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_heating_curve(
+            feature_id=Features.State.FlowCircuit2HeatingCurve.id,
+            heating_curve=HeatingCurve.Level,
+            value=value,
+            device=device
+        ),
+        key="circuit_2_heating_curve_level",
+        translation_key="circuit_2_heating_curve_level",
+        entity_registry_enabled_default=False
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.State.FlowCircuit3HeatingCurve],
+        icon="mdi:plus-minus-variant",
+        native_min_value=-13,
+        native_max_value=40,
+        native_step=1,
+        get_native_value=lambda data: data[HeatingCurve.Level],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_heating_curve(
+            feature_id=Features.State.FlowCircuit3HeatingCurve.id,
+            heating_curve=HeatingCurve.Level,
+            value=value,
+            device=device
+        ),
+        key="circuit_3_heating_curve_level",
+        translation_key="circuit_3_heating_curve_level",
+        entity_registry_enabled_default=False
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.State.FlowCircuit4HeatingCurve],
+        icon="mdi:plus-minus-variant",
+        native_min_value=-13,
+        native_max_value=40,
+        native_step=1,
+        get_native_value=lambda data: data[HeatingCurve.Level],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_heating_curve(
+            feature_id=Features.State.FlowCircuit4HeatingCurve.id,
+            heating_curve=HeatingCurve.Level,
+            value=value,
+            device=device
+        ),
+        key="circuit_4_heating_curve_level",
+        translation_key="circuit_4_heating_curve_level",
+        entity_registry_enabled_default=False
+    )
 )

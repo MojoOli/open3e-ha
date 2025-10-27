@@ -46,6 +46,9 @@
       "energy_consumption_central_heating_current_year": {
         "name": "Energy consumption central heating current year"
       },
+      "energy_consumption_central_heating_past_year": {
+        "name": "Energy consumption central heating past year"
+      },
       "energy_consumption_domestic_hot_water_today": {
         "name": "Energy consumption domestic hot water today"
       },
@@ -55,6 +58,9 @@
       "energy_consumption_domestic_hot_water_current_year": {
         "name": "Energy consumption domestic hot water current year"
       },
+      "energy_consumption_domestic_hot_water_past_year": {
+        "name": "Energy consumption domestic hot water past year"
+      },
       "energy_consumption_cooling_today": {
         "name": "Energy consumption cooling today"
       },
@@ -63,6 +69,9 @@
       },
       "energy_consumption_cooling_current_year": {
         "name": "Energy consumption cooling current year"
+      },
+      "energy_consumption_cooling_past_year": {
+        "name": "Energy consumption cooling past year"
       },
       "outside_temperature": {
         "name": "Outside temperature"
@@ -221,6 +230,9 @@
         "name": "Evaporation Vapor Temperature"
       },
       "compressor_speed_percentage": {
+        "name": "Compressor Speed Percentage"
+      },
+      "compressor_speed_rpm": {
         "name": "Compressor Speed"
       },
       "outdoor_air_temperature": {
@@ -252,6 +264,53 @@
       },
       "battery_temperature": {
         "name": "Battery Temperature"
+      },
+      "thermal_output_today": {
+        "name": "Thermal Output Today"
+      },
+      "cooling_output_today": {
+        "name": "Cooling Output Today"
+      },
+      "warm_water_output_today": {
+        "name": "Warm Water Output Today"
+      },
+      "flow_circuit_1_supply_temp_setpoint": {
+        "name": "Flow Circuit 1 Supply Temperature Setpoint"
+      },
+      "flow_circuit_2_supply_temp_setpoint": {
+        "name": "Flow Circuit 2 Supply Temperature Setpoint"
+      },
+      "flow_circuit_3_supply_temp_setpoint": {
+        "name": "Flow Circuit 3 Supply Temperature Setpoint"
+      },
+      "flow_circuit_4_supply_temp_setpoint": {
+        "name": "Flow Circuit 4 Supply Temperature Setpoint"
+      },
+      "heating_cooling_buffer_temperature": {
+        "name": "Heating/Cooling Buffer Temperature"
+      },
+      "energy_management_mode": {
+        "name": "SmartGrid Operating State",
+        "state": {
+          "shutdown_mode": "Shutdown Mode",
+          "normal_mode": "Normal Mode",
+          "preferred_mode": "Preferred Mode",
+          "forced_mode": "Forced Mode"
+        }
+      },
+      "four_three_way_valve_position": {
+        "name": "4/3-Way Valve Position",
+        "state": {
+          "buffer": "Buffer",
+          "idle": "Idle",
+          "hot_water": "Hot Water"
+        }
+      },
+      "desired_thermal_capacity": {
+        "name": "Desired Thermal Power"
+      },
+      "desired_thermal_energy_defrost": {
+        "name": "Desired Thermal Power Defrost"
       }
     },
     "binary_sensor": {
@@ -267,8 +326,8 @@
       "hot_water_circulation_pump_hygiene": {
         "name": "Hot Water Legionella Protection"
       },
-      "heater_active": {
-        "name": "Heater"
+      "additional_heater_active": {
+        "name": "Additional Heater"
       },
       "heat_pump_compressor_active": {
         "name": "Heat Pump Compressor"
@@ -375,6 +434,33 @@
       },
       "buffer_max_temperature": {
         "name": "Buffer Tank Max Temperature"
+      },
+      "frost_protection_temperature": {
+        "name": "Frost Protection Temperature Heating Circuit"
+      },
+      "circuit_1_heating_curve_slope": {
+        "name": "Heating Curve 1 Slope"
+      },
+      "circuit_2_heating_curve_slope": {
+        "name": "Heating Curve 2 Slope"
+      },
+      "circuit_3_heating_curve_slope": {
+        "name": "Heating Curve 3 Slope"
+      },
+      "circuit_4_heating_curve_slope": {
+        "name": "Heating Curve 4 Slope"
+      },
+      "circuit_1_heating_curve_level": {
+        "name": "Heating Curve 1 Level"
+      },
+      "circuit_2_heating_curve_level": {
+        "name": "Heating Curve 2 Level"
+      },
+      "circuit_3_heating_curve_level": {
+        "name": "Heating Curve 3 Level"
+      },
+      "circuit_4_heating_curve_level": {
+        "name": "Heating Curve 4 Level"
       }
     },
     "select": {

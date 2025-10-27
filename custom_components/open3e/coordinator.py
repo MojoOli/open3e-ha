@@ -21,6 +21,7 @@ from .api import Open3eMqttClient
 from .const import DOMAIN
 from .definitions.open3e_data import Open3eDataSystemInformation, Open3eDataDevice
 from .definitions.subfeatures.buffer_mode import BufferMode
+from .definitions.subfeatures.heating_curve import HeatingCurve
 from .errors import Open3eCoordinatorUpdateFailed
 
 _LOGGER = logging.getLogger(__name__)
@@ -312,6 +313,38 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             hass=self.hass,
             feature_id=feature_id,
             buffer=buffer,
+            value=value,
+            device_id=device.id
+        )
+
+        await self.async_refresh_feature(device, [feature_id])
+
+    async def async_set_frost_protection_temperature(
+            self,
+            feature_id: int,
+            value: float,
+            device: Open3eDataDevice
+    ):
+        await self.__client.async_set_frost_protection_temperature(
+            hass=self.hass,
+            feature_id=feature_id,
+            value=value,
+            device_id=device.id
+        )
+
+        await self.async_refresh_feature(device, [feature_id])
+
+    async def async_set_heating_curve(
+            self,
+            feature_id: int,
+            heating_curve: HeatingCurve,
+            value: float,
+            device: Open3eDataDevice
+    ):
+        await self.__client.async_set_heating_curve(
+            hass=self.hass,
+            feature_id=feature_id,
+            heating_curve=heating_curve,
             value=value,
             device_id=device.id
         )

@@ -56,7 +56,7 @@ class Open3eSensor(Open3eEntity, SensorEntity):
 
     async def async_on_data(self, feature_id: int) -> None:
         """Handle updated data from MQTT."""
-        self._attr_native_value = float(self.__filter_data(self.data[feature_id]))
+        self._attr_native_value = self.__filter_data(self.data[feature_id])
         self.async_write_ha_state()
 
     def __filter_data(self, data: Any):

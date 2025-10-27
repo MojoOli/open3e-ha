@@ -46,6 +46,9 @@
       "energy_consumption_central_heating_current_year": {
         "name": "Energieverbrauch Heizung Jahr"
       },
+      "energy_consumption_central_heating_past_year": {
+        "name": "Energieverbrauch Heizung letztes Jahr"
+      },
       "energy_consumption_domestic_hot_water_today": {
         "name": "Energieverbrauch Warmwasser heute"
       },
@@ -55,6 +58,9 @@
       "energy_consumption_domestic_hot_water_current_year": {
         "name": "Energieverbrauch Warmwasser Jahr"
       },
+      "energy_consumption_domestic_hot_water_past_year": {
+        "name": "Energieverbrauch Warmwasser letztes Jahr"
+      },
       "energy_consumption_cooling_today": {
         "name": "Energieverbrauch Kühlung heute"
       },
@@ -63,6 +69,9 @@
       },
       "energy_consumption_cooling_current_year": {
         "name": "Energieverbrauch Kühlung Jahr"
+      },
+      "energy_consumption_cooling_past_year": {
+        "name": "Energieverbrauch Kühlung letztes Jahr"
       },
       "outside_temperature": {
         "name": "Außentemperatur"
@@ -221,6 +230,9 @@
         "name": "Verdampfungstemperatur"
       },
       "compressor_speed_percentage": {
+        "name": "Verdichterdrehzahl Prozent"
+      },
+      "compressor_speed_rpm": {
         "name": "Verdichterdrehzahl"
       },
       "outdoor_air_temperature": {
@@ -252,6 +264,53 @@
       },
       "battery_temperature": {
         "name": "Batterie Temperatur"
+      },
+      "thermal_output_today": {
+        "name": "Thermische Leistung Heute"
+      },
+      "cooling_output_today": {
+        "name": "Kühlleistung Heute"
+      },
+      "warm_water_output_today": {
+        "name": "Warmwasserleistung Heute"
+      },
+      "flow_circuit_1_supply_temp_setpoint": {
+        "name": "Heizkreis 1 Vorlauftemperatur Soll"
+      },
+      "flow_circuit_2_supply_temp_setpoint": {
+        "name": "Heizkreis 2 Vorlauftemperatur Soll"
+      },
+      "flow_circuit_3_supply_temp_setpoint": {
+        "name": "Heizkreis 3 Vorlauftemperatur Soll"
+      },
+      "flow_circuit_4_supply_temp_setpoint": {
+        "name": "Heizkreis 4 Vorlauftemperatur Soll"
+      },
+      "heating_cooling_buffer_temperature": {
+        "name": "Heiz-/Kühlpuffertemperatur"
+      },
+      "energy_management_mode": {
+        "name": "SmartGrid Betriebszustand",
+        "state": {
+          "shutdown_mode": "Abschaltbetrieb",
+          "normal_mode": "Normalbetrieb",
+          "preferred_mode": "Bevorzugter Betrieb",
+          "forced_mode": "Erzwungener Betrieb"
+        }
+      },
+      "four_three_way_valve_position": {
+        "name": "4/3-Wege-Ventil Position",
+        "state": {
+          "buffer": "Pufferspeicher",
+          "idle": "Leerlauf",
+          "hot_water": "Warmwasser"
+        }
+      },
+      "desired_thermal_capacity": {
+        "name": "Angeforderte Wärmeleistung"
+      },
+      "desired_thermal_energy_defrost": {
+        "name": "Angeforderte Wärmeleistung Abtauen"
       }
     },
     "binary_sensor": {
@@ -267,8 +326,8 @@
       "hot_water_circulation_pump_hygiene": {
         "name": "Warmwasser Legionellenschutz"
       },
-      "heater_active": {
-        "name": "Heizung"
+      "additional_heater_active": {
+        "name": "Zusatzheizung"
       },
       "heat_pump_compressor_active": {
         "name": "Wärmepumpenkompressor"
@@ -375,6 +434,33 @@
       },
       "buffer_max_temperature": {
         "name": "Pufferspeicher Maximaltemperatur"
+      },
+      "frost_protection_temperature": {
+        "name": "Frostschutztemperatur Heizkreis"
+      },
+      "circuit_1_heating_curve_slope": {
+        "name": "Heizkurve 1 Steigung"
+      },
+      "circuit_2_heating_curve_slope": {
+        "name": "Heizkurve 2 Steigung"
+      },
+      "circuit_3_heating_curve_slope": {
+        "name": "Heizkurve 3 Steigung"
+      },
+      "circuit_4_heating_curve_slope": {
+        "name": "Heizkurve 4 Steigung"
+      },
+      "circuit_1_heating_curve_level": {
+        "name": "Heizkurve 1 Verschiebung"
+      },
+      "circuit_2_heating_curve_level": {
+        "name": "Heizkurve 2 Verschiebung"
+      },
+      "circuit_3_heating_curve_level": {
+        "name": "Heizkurve 3 Verschiebung"
+      },
+      "circuit_4_heating_curve_level": {
+        "name": "Heizkurve 4 Verschiebung"
       }
     },
     "select": {
