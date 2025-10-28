@@ -64,6 +64,46 @@ class Open3eSensorEntityDescription(
 SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
 
     ###############
+    ### GENERAL ###
+    ###############
+
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.ServiceManagerIsRequired],
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:account-wrench",
+        key="service_manager_required",
+        translation_key="service_manager_required",
+        data_retriever=lambda data: bool(int(data))
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.MalfunctionIdentification],
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:file-document-alert",
+        key="malfunction_id",
+        translation_key="malfunction_id",
+        data_retriever=lambda data: int(data)
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.ErrorDtcList],
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:file-document-alert",
+        key="error_dtc_list",
+        translation_key="error_dtc_list",
+        data_retriever=lambda data: ", ".join(
+            {e["Error"]["Text"] for e in json_loads(data).get("ListEntries", [])}) or "-",
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.BackendConnectionStatus],
+        device_class=SensorDeviceClass.ENUM,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:lan-connect",
+        key="connection_status",
+        translation_key="connection_status",
+        data_retriever=lambda data: get_connection_status(int(data)),
+        options=[mode for mode in ConnectionStatus]
+    ),
+
+    ###############
     ### VITOCAL ###
     ###############
 
@@ -673,41 +713,6 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="compressor_starts",
         translation_key="compressor_starts",
         data_retriever=SensorDataRetriever.STARTS
-    ),
-    Open3eSensorEntityDescription(
-        poll_data_features=[Features.Misc.ServiceManagerIsRequired],
-        entity_category=EntityCategory.DIAGNOSTIC,
-        icon="mdi:account-wrench",
-        key="service_manager_required",
-        translation_key="service_manager_required",
-        data_retriever=lambda data: bool(int(data))
-    ),
-    Open3eSensorEntityDescription(
-        poll_data_features=[Features.Misc.MalfunctionIdentification],
-        entity_category=EntityCategory.DIAGNOSTIC,
-        icon="mdi:file-document-alert",
-        key="malfunction_id",
-        translation_key="malfunction_id",
-        data_retriever=lambda data: int(data)
-    ),
-    Open3eSensorEntityDescription(
-        poll_data_features=[Features.Misc.ErrorDtcList],
-        entity_category=EntityCategory.DIAGNOSTIC,
-        icon="mdi:file-document-alert",
-        key="error_dtc_list",
-        translation_key="error_dtc_list",
-        data_retriever=lambda data: ", ".join(
-            {e["Error"]["Text"] for e in json_loads(data).get("ListEntries", [])}) or "-",
-    ),
-    Open3eSensorEntityDescription(
-        poll_data_features=[Features.Misc.BackendConnectionStatus],
-        device_class=SensorDeviceClass.ENUM,
-        entity_category=EntityCategory.DIAGNOSTIC,
-        icon="mdi:lan-connect",
-        key="connection_status",
-        translation_key="connection_status",
-        data_retriever=lambda data: get_connection_status(int(data)),
-        options=[mode for mode in ConnectionStatus]
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.Cop],
