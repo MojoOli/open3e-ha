@@ -12,6 +12,7 @@ from custom_components.open3e.definitions.subfeatures.temperature_cooling import
 from .entity_description import Open3eEntityDescription
 from .features import Features
 from .open3e_data import Open3eDataDevice
+from .subfeatures.dhw_hysteresis import DhwHysteresis
 from .subfeatures.heating_curve import HeatingCurve
 from .. import Open3eDataUpdateCoordinator
 from ..const import VIESSMANN_TEMP_HEATING_MIN, VIESSMANN_TEMP_HEATING_MAX, VIESSMANN_POWER_MAX_WATT_ELECTRICAL_HEATER, \
@@ -518,6 +519,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.State.FlowCircuit1HeatingCurve],
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        device_class=NumberDeviceClass.TEMPERATURE,
         icon="mdi:plus-minus-variant",
         native_min_value=-13,
         native_max_value=40,
@@ -534,6 +537,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.State.FlowCircuit2HeatingCurve],
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        device_class=NumberDeviceClass.TEMPERATURE,
         icon="mdi:plus-minus-variant",
         native_min_value=-13,
         native_max_value=40,
@@ -551,6 +556,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.State.FlowCircuit3HeatingCurve],
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        device_class=NumberDeviceClass.TEMPERATURE,
         icon="mdi:plus-minus-variant",
         native_min_value=-13,
         native_max_value=40,
@@ -568,6 +575,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.State.FlowCircuit4HeatingCurve],
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        device_class=NumberDeviceClass.TEMPERATURE,
         icon="mdi:plus-minus-variant",
         native_min_value=-13,
         native_max_value=40,
@@ -582,5 +591,41 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         key="circuit_4_heating_curve_level",
         translation_key="circuit_4_heating_curve_level",
         entity_registry_enabled_default=False
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.Temperature.DomesticHotWaterHysteresis],
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        device_class=NumberDeviceClass.TEMPERATURE,
+        icon="mdi:thermometer-chevron-up",
+        native_min_value=0,
+        native_max_value=10,
+        native_step=1,
+        get_native_value=lambda data: data[DhwHysteresis.On],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_dhw_hysteresis(
+            feature_id=Features.Temperature.DomesticHotWaterHysteresis.id,
+            hysteresis=DhwHysteresis.On,
+            value=value,
+            device=device
+        ),
+        key="dhw_hysteresis_on",
+        translation_key="dhw_hysteresis_on"
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.Temperature.DomesticHotWaterHysteresis],
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        device_class=NumberDeviceClass.TEMPERATURE,
+        icon="mdi:thermometer-chevron-down",
+        native_min_value=0,
+        native_max_value=10,
+        native_step=1,
+        get_native_value=lambda data: data[DhwHysteresis.Off],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_dhw_hysteresis(
+            feature_id=Features.Temperature.DomesticHotWaterHysteresis.id,
+            hysteresis=DhwHysteresis.Off,
+            value=value,
+            device=device
+        ),
+        key="dhw_hysteresis_off",
+        translation_key="dhw_hysteresis_off"
     )
 )

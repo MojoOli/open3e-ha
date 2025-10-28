@@ -311,6 +311,18 @@
       },
       "desired_thermal_energy_defrost": {
         "name": "Desired Thermal Power Defrost"
+      },
+      "additional_heater_operating_hours": {
+        "name": "Additional Heater Operating Hours"
+      },
+      "additional_heater_starts": {
+        "name": "Additional Heater Starts"
+      },
+      "compressor_operating_hours": {
+        "name": "Compressor Operating Hours"
+      },
+      "compressor_starts": {
+        "name": "Compressor Starts"
       }
     },
     "binary_sensor": {
@@ -461,6 +473,12 @@
       },
       "circuit_4_heating_curve_level": {
         "name": "Heating Curve 4 Level"
+      },
+      "dhw_hysteresis_on": {
+        "name": "Warm Water Hysteresis On"
+      },
+      "dhw_hysteresis_off": {
+        "name": "Warm Water Hysteresis Off"
       }
     },
     "select": {

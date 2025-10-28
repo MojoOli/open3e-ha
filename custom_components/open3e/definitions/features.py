@@ -57,6 +57,7 @@ class Features:
         InverterAmbient = Feature(id=1684, refresh_interval=30)
         Battery = Feature(id=2240, refresh_interval=30)
         HeatingCoolingBuffer = Feature(id=3018, refresh_interval=30)
+        DomesticHotWaterHysteresis = Feature(id=1085, refresh_interval=30)
 
     class Humidity:
         Outdoor = Feature(id=419, refresh_interval=5)
@@ -122,3 +123,7 @@ class Features:
         ExpansionValve1 = Feature(id=389, refresh_interval=30)
         ExpansionValve2 = Feature(id=391, refresh_interval=30)
         FourThreeWayValve = Feature(id=2735, refresh_interval=30)
+
+    class Misc:
+        CompressorStatistics = Feature(id=2369, refresh_interval=120)
+        AdditionalHeaterStatistics = Feature(id=2370, refresh_interval=120)

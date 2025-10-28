@@ -21,6 +21,7 @@ from .api import Open3eMqttClient
 from .const import DOMAIN
 from .definitions.open3e_data import Open3eDataSystemInformation, Open3eDataDevice
 from .definitions.subfeatures.buffer_mode import BufferMode
+from .definitions.subfeatures.dhw_hysteresis import DhwHysteresis
 from .definitions.subfeatures.heating_curve import HeatingCurve
 from .errors import Open3eCoordinatorUpdateFailed
 
@@ -345,6 +346,23 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             hass=self.hass,
             feature_id=feature_id,
             heating_curve=heating_curve,
+            value=value,
+            device_id=device.id
+        )
+
+        await self.async_refresh_feature(device, [feature_id])
+
+    async def async_set_dhw_hysteresis(
+            self,
+            feature_id: int,
+            hysteresis: DhwHysteresis,
+            value: float,
+            device: Open3eDataDevice
+    ):
+        await self.__client.async_set_dhw_hysteresis(
+            hass=self.hass,
+            feature_id=feature_id,
+            hysteresis=hysteresis,
             value=value,
             device_id=device.id
         )

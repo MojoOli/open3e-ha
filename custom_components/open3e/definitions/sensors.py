@@ -3,7 +3,7 @@ from typing import Callable, Any
 
 from homeassistant.components.sensor import SensorEntityDescription, SensorDeviceClass, SensorStateClass
 from homeassistant.const import UnitOfTemperature, UnitOfEnergy, PERCENTAGE, UnitOfPower, \
-    EntityCategory, UnitOfPressure, UnitOfVolumeFlowRate
+    EntityCategory, UnitOfPressure, UnitOfVolumeFlowRate, UnitOfTime
 from homeassistant.util.json import json_loads
 
 from .entity_description import Open3eEntityDescription
@@ -44,6 +44,8 @@ class SensorDataRetriever:
     PV_POWER_STRING_1 = lambda data: float(json_loads(data)["ActivePower String A"])
     PV_POWER_STRING_2 = lambda data: float(json_loads(data)["ActivePower String B"])
     PV_POWER_STRING_3 = lambda data: float(json_loads(data)["ActivePower String C"])
+    STARTS = lambda data: int(json_loads(data)["starts"])
+    HOURS = lambda data: int(json_loads(data)["hours"])
     RAW = lambda data: float(data)
     """The data state represents a raw value without any encapsulation."""
 
@@ -603,6 +605,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
     Open3eSensorEntityDescription(
         poll_data_features=[Features.State.EnergyManagement],
         device_class=SensorDeviceClass.ENUM,
+        icon="mdi:home-battery-outline",
         key="energy_management_mode",
         translation_key="energy_management_mode",
         data_retriever=lambda data: ENERGY_MANAGEMENT_MODES_MAP.get(int(data)),
@@ -638,6 +641,44 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         translation_key="desired_thermal_energy_defrost",
         icon="mdi:snowflake-melt",
         data_retriever=SensorDataRetriever.RAW
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.AdditionalHeaterStatistics],
+        device_class=SensorDeviceClass.DURATION,
+        native_unit_of_measurement=UnitOfTime.HOURS,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        key="additional_heater_operating_hours",
+        translation_key="additional_heater_operating_hours",
+        data_retriever=SensorDataRetriever.HOURS
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.AdditionalHeaterStatistics],
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:counter",
+        key="additional_heater_starts",
+        translation_key="additional_heater_starts",
+        data_retriever=SensorDataRetriever.STARTS
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.CompressorStatistics],
+        device_class=SensorDeviceClass.DURATION,
+        native_unit_of_measurement=UnitOfTime.HOURS,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        key="compressor_operating_hours",
+        translation_key="compressor_operating_hours",
+        data_retriever=SensorDataRetriever.HOURS
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.CompressorStatistics],
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:counter",
+        key="compressor_starts",
+        translation_key="compressor_starts",
+        data_retriever=SensorDataRetriever.STARTS
     ),
 
     ##################

@@ -311,6 +311,18 @@
       },
       "desired_thermal_energy_defrost": {
         "name": "Angeforderte Wärmeleistung Abtauen"
+      },
+      "additional_heater_operating_hours": {
+        "name": "Heizstab Betriebsstunden"
+      },
+      "additional_heater_starts": {
+        "name": "Heizstab Starts"
+      },
+      "compressor_operating_hours": {
+        "name": "Kompressor Betriebsstunden"
+      },
+      "compressor_starts": {
+        "name": "Kompressor Starts"
       }
     },
     "binary_sensor": {
@@ -327,7 +339,7 @@
         "name": "Warmwasser Legionellenschutz"
       },
       "additional_heater_active": {
-        "name": "Zusatzheizung"
+        "name": "Heizstab"
       },
       "heat_pump_compressor_active": {
         "name": "Wärmepumpenkompressor"
@@ -461,6 +473,12 @@
       },
       "circuit_4_heating_curve_level": {
         "name": "Heizkurve 4 Verschiebung"
+      },
+      "dhw_hysteresis_on": {
+        "name": "Warmwasser Hysterese an"
+      },
+      "dhw_hysteresis_off": {
+        "name": "Warmwasser Hysterese aus"
       }
     },
     "select": {

@@ -22,6 +22,7 @@ from custom_components.open3e.definitions.subfeatures.temperature_cooling import
 from .const import MQTT_SYSTEM_TOPIC, MQTT_SYSTEM_PAYLOAD
 from .definitions.open3e_data import Open3eDataSystemInformation
 from .definitions.subfeatures.buffer_mode import BufferMode
+from .definitions.subfeatures.dhw_hysteresis import DhwHysteresis
 from .definitions.subfeatures.heating_curve import HeatingCurve
 from .errors import Open3eServerTimeoutError, Open3eError, Open3eServerUnavailableError
 
@@ -407,6 +408,29 @@ class Open3eMqttClient:
                     feature_id=feature_id,
                     data=value,
                     sub_feature=heating_curve,
+                    device_id=device_id
+                )
+            )
+        except Exception as exception:
+            raise Open3eError(exception)
+
+    async def async_set_dhw_hysteresis(
+            self,
+            hass: HomeAssistant,
+            feature_id: int,
+            hysteresis: DhwHysteresis,
+            value: float,
+            device_id: int
+    ):
+        try:
+            _LOGGER.debug(f"Setting {hysteresis} of feature ID {feature_id}")
+            await mqtt.async_publish(
+                hass=hass,
+                topic=self.__mqtt_cmd,
+                payload=self.__write_json_payload(
+                    feature_id=feature_id,
+                    data=value,
+                    sub_feature=hysteresis,
                     device_id=device_id
                 )
             )
