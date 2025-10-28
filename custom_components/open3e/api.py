@@ -156,7 +156,30 @@ class Open3eMqttClient:
                 topic=self.__mqtt_cmd,
                 payload=self.__write_json_payload(
                     feature_id=set_programs_feature_id,
-                    sub_feature=program.map_to_api(),
+                    sub_feature=program.map_to_api_heating(),
+                    data=temperature,
+                    device_id=device_id
+                )
+            )
+        except Exception as exception:
+            raise Open3eError(exception)
+
+    async def async_set_program_temperature_cooling(
+            self,
+            hass: HomeAssistant,
+            set_programs_feature_id: int,
+            program: Program,
+            temperature: float,
+            device_id: int
+    ):
+        try:
+            _LOGGER.debug(f"Setting programs of feature ID {set_programs_feature_id}")
+            await mqtt.async_publish(
+                hass=hass,
+                topic=self.__mqtt_cmd,
+                payload=self.__write_json_payload(
+                    feature_id=set_programs_feature_id,
+                    sub_feature=program.map_to_api_cooling(),
                     data=temperature,
                     device_id=device_id
                 )

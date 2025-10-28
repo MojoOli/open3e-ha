@@ -40,6 +40,10 @@ class Features:
         ProgramsCircuit2 = Feature(id=426, refresh_interval=30)
         ProgramsCircuit3 = Feature(id=428, refresh_interval=30)
         ProgramsCircuit4 = Feature(id=430, refresh_interval=30)
+        CoolingProgramsCircuit1 = Feature(id=2546, refresh_interval=30)
+        CoolingProgramsCircuit2 = Feature(id=2547, refresh_interval=30)
+        CoolingProgramsCircuit3 = Feature(id=2548, refresh_interval=30)
+        CoolingProgramsCircuit4 = Feature(id=2549, refresh_interval=30)
         PrimaryInlet = Feature(id=1769, refresh_interval=5)
         SecondaryOutlet = Feature(id=1769, refresh_interval=5)
         EngineRoom = Feature(id=1771, refresh_interval=30)
@@ -81,6 +85,9 @@ class Features:
         CoolingOutput = Feature(id=2529, refresh_interval=30)
         DesiredThermalCapacity = Feature(id=2629, refresh_interval=30)
         DesiredThermalEnergyDefrost = Feature(id=2256, refresh_interval=30)
+        Cop = Feature(id=2625, refresh_interval=300)
+        CopHeating = Feature(id=2622, refresh_interval=300)
+        CopDhw = Feature(id=2624, refresh_interval=300)
 
     class Power:
         Fan1 = Feature(id=1775, refresh_interval=5)
@@ -127,3 +134,7 @@ class Features:
     class Misc:
         CompressorStatistics = Feature(id=2369, refresh_interval=120)
         AdditionalHeaterStatistics = Feature(id=2370, refresh_interval=120)
+        ServiceManagerIsRequired = Feature(id=901, refresh_interval=30)
+        MalfunctionIdentification = Feature(id=902, refresh_interval=30)
+        ErrorDtcList = Feature(id=265, refresh_interval=30)
+        BackendConnectionStatus = Feature(id=1165, refresh_interval=30)

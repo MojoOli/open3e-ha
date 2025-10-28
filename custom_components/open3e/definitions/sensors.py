@@ -8,6 +8,7 @@ from homeassistant.util.json import json_loads
 
 from .entity_description import Open3eEntityDescription
 from .features import Features
+from .subfeatures.connection_status import ConnectionStatus, get_connection_status
 from .subfeatures.energy_management_mode import ENERGY_MANAGEMENT_MODES_MAP, EnergyManagementMode
 from .subfeatures.four_three_way_valve_position import FOUR_THREE_WAY_VALVE_POSITION_MAP, FourThreeWayValvePosition
 
@@ -679,6 +680,65 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="compressor_starts",
         translation_key="compressor_starts",
         data_retriever=SensorDataRetriever.STARTS
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.ServiceManagerIsRequired],
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:account-wrench",
+        key="service_manager_required",
+        translation_key="service_manager_required",
+        data_retriever=lambda data: bool(int(data))
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.MalfunctionIdentification],
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:file-document-alert",
+        key="malfunction_id",
+        translation_key="malfunction_id",
+        data_retriever=lambda data: int(data)
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.ErrorDtcList],
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:file-document-alert",
+        key="error_dtc_list",
+        translation_key="error_dtc_list",
+        data_retriever=lambda data: ", ".join(
+            {e["Error"]["Text"] for e in json_loads(data).get("ListEntries", [])}) or "-",
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.BackendConnectionStatus],
+        device_class=SensorDeviceClass.ENUM,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:lan-connect",
+        key="connection_status",
+        translation_key="connection_status",
+        data_retriever=lambda data: get_connection_status(int(data)),
+        options=[mode for mode in ConnectionStatus]
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.Cop],
+        native_unit_of_measurement="COP",
+        icon="mdi:leaf",
+        key="cop_total_current_year",
+        translation_key="cop_total_current_year",
+        data_retriever=SensorDataRetriever.CURRENT_YEAR
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.CopHeating],
+        native_unit_of_measurement="COP",
+        icon="mdi:leaf",
+        key="cop_heating_current_year",
+        translation_key="cop_heating_current_year",
+        data_retriever=SensorDataRetriever.CURRENT_YEAR
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.CopDhw],
+        native_unit_of_measurement="COP",
+        icon="mdi:leaf",
+        key="cop_dhw_current_year",
+        translation_key="cop_dhw_current_year",
+        data_retriever=SensorDataRetriever.CURRENT_YEAR
     ),
 
     ##################

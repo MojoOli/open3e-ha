@@ -83,7 +83,7 @@
         "name": "Secondary heat exchanger temperature"
       },
       "central_heating_pump_speed_percentage": {
-        "name": "Central heating pump speed percentage"
+        "name": "Central heating pump"
       },
       "power_consumption_system": {
         "name": "Power consumption system"
@@ -323,6 +323,31 @@
       },
       "compressor_starts": {
         "name": "Compressor Starts"
+      },
+      "service_manager_required": {
+        "name": "Service required"
+      },
+      "malfunction_id": {
+        "name": "Malfunction Identification"
+      },
+      "error_dtc_list": {
+        "name": "Errors"
+      },
+      "connection_status": {
+        "name": "Connection status",
+        "state": {
+          "connected": "Connected",
+          "not_connected": "Disconnected"
+        }
+      },
+      "cop_total_current_year": {
+        "name": "COP total year"
+      },
+      "cop_heating_current_year": {
+        "name": "COP heating year"
+      },
+      "cop_dhw_current_year": {
+        "name": "COP warm water year"
       }
     },
     "binary_sensor": {
@@ -379,40 +404,76 @@
     },
     "number": {
       "circuit_1_comfort_temperature": {
-        "name": "Climate circuit 1 Comfort temperature"
+        "name": "Climate circuit 1 heating Comfort"
       },
       "circuit_1_standard_temperature": {
-        "name": "Climate circuit 1 Standard temperature"
+        "name": "Climate circuit 1 heating Standard"
       },
       "circuit_1_reduced_temperature": {
-        "name": "Climate circuit 1 Reduced temperature"
+        "name": "Climate circuit 1 heating Reduced"
       },
       "circuit_2_comfort_temperature": {
-        "name": "Climate circuit 2 Comfort temperature"
+        "name": "Climate circuit 2 heating Comfort"
       },
       "circuit_2_standard_temperature": {
-        "name": "Climate circuit 2 Standard temperature"
+        "name": "Climate circuit 2 heating Standard"
       },
       "circuit_2_reduced_temperature": {
-        "name": "Climate circuit 2 Reduced temperature"
+        "name": "Climate circuit 2 heating Reduced"
       },
       "circuit_3_comfort_temperature": {
-        "name": "Climate circuit 3 Comfort temperature"
+        "name": "Climate circuit 3 heating Comfort"
       },
       "circuit_3_standard_temperature": {
-        "name": "Climate circuit 3 Standard temperature"
+        "name": "Climate circuit 3 heating Standard"
       },
       "circuit_3_reduced_temperature": {
-        "name": "Climate circuit 3 Reduced temperature"
+        "name": "Climate circuit 3 heating Reduced"
       },
       "circuit_4_comfort_temperature": {
-        "name": "Climate circuit 4 Comfort temperature"
+        "name": "Climate circuit 4 heating Comfort"
       },
       "circuit_4_standard_temperature": {
-        "name": "Climate circuit 4 Standard temperature"
+        "name": "Climate circuit 4 heating Standard"
       },
       "circuit_4_reduced_temperature": {
-        "name": "Climate circuit 4 Reduced temperature"
+        "name": "Climate circuit 4 heating Reduced"
+      },
+      "circuit_1_comfort_cooling": {
+        "name": "Climate circuit 1 cooling Comfort"
+      },
+      "circuit_1_standard_cooling": {
+        "name": "Climate circuit 1 cooling Standard"
+      },
+      "circuit_1_reduced_cooling": {
+        "name": "Climate circuit 1 cooling Reduced"
+      },
+      "circuit_2_comfort_cooling": {
+        "name": "Climate circuit 2 cooling Comfort"
+      },
+      "circuit_2_standard_cooling": {
+        "name": "Climate circuit 2 cooling Standard"
+      },
+      "circuit_2_reduced_cooling": {
+        "name": "Climate circuit 2 cooling Reduced"
+      },
+      "circuit_3_comfort_cooling": {
+        "name": "Climate circuit 3 cooling Comfort"
+      },
+      "circuit_3_standard_cooling": {
+        "name": "Climate circuit 3 cooling Standard"
+      },
+      "circuit_3_reduced_cooling": {
+        "name": "Climate circuit 3 cooling Reduced"
+      },
+      "circuit_4_comfort_cooling": {
+        "name": "Climate circuit 4 cooling Comfort"
+      },
+      "circuit_4_standard_cooling": {
+        "name": "Climate circuit 4 cooling Standard"
+      },
+      "circuit_4_reduced_cooling": {
+        "name": "Climate circuit 4 cooling Reduced"
       },
       "heater_max_power": {
         "name": "Electrical Heater Maximum Power"

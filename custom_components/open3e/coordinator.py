@@ -197,6 +197,23 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
 
         await self.async_refresh_feature(device, [set_programs_feature_id])
 
+    async def async_set_program_temperature_cooling(
+            self,
+            set_programs_feature_id: int,
+            program: Program,
+            temperature: float,
+            device: Open3eDataDevice
+    ):
+        await self.__client.async_set_program_temperature_cooling(
+            hass=self.hass,
+            set_programs_feature_id=set_programs_feature_id,
+            program=program,
+            temperature=temperature,
+            device_id=device.id
+        )
+
+        await self.async_refresh_feature(device, [set_programs_feature_id])
+
     async def async_set_hot_water_temperature(
             self,
             feature_id: int,
