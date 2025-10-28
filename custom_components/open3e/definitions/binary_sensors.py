@@ -68,14 +68,6 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
     ),
     Open3eBinarySensorEntityDescription(
         device_class=BinarySensorDeviceClass.POWER,
-        poll_data_features=[Features.State.HotWaterCirculationPump],
-        key="hot_water_circulation_pump",
-        translation_key="hot_water_circulation_pump",
-        icon="mdi:water-sync",
-        data_transform=BinarySensorDataTransform.STATE
-    ),
-    Open3eBinarySensorEntityDescription(
-        device_class=BinarySensorDeviceClass.POWER,
         poll_data_features=[Features.State.DomesticHotWaterCirculationPumpMode],
         key="hot_water_circulation_pump_hygiene",
         translation_key="hot_water_circulation_pump_hygiene",

@@ -357,9 +357,6 @@
       "circuit_pump": {
         "name": "Heizkreispumpe"
       },
-      "hot_water_circulation_pump": {
-        "name": "Warmwasser Zirkulationspumpe"
-      },
       "hot_water_circulation_pump_hygiene": {
         "name": "Warmwasser Legionellenschutz"
       },
@@ -559,6 +556,9 @@
     "switch": {
       "i_want_hot_water": {
         "name": "Kurzzeitig Warmwasser erzeugen"
+      },
+      "hot_water_circulation_pump": {
+        "name": "Warmwasser Zirkulationspumpe"
       }
     }
   }
