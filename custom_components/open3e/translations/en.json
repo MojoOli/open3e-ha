@@ -73,6 +73,9 @@
       "energy_consumption_cooling_past_year": {
         "name": "Energy consumption cooling past year"
       },
+      "energy_consumption_total_today": {
+        "name": "Energy consumption total today"
+      },
       "outside_temperature": {
         "name": "Outside temperature"
       },
@@ -348,6 +351,21 @@
       },
       "cop_dhw_current_year": {
         "name": "COP warm water year"
+      },
+      "cop_currently": {
+        "name": "COP currently"
+      },
+      "cop_heating_today": {
+        "name": "COP heating today"
+      },
+      "cop_cooling_today": {
+        "name": "COP cooling today"
+      },
+      "cop_dhw_today": {
+        "name": "COP warm water today"
+      },
+      "cop_total_today": {
+        "name": "COP total today"
       }
     },
     "binary_sensor": {
