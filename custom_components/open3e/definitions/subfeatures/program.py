@@ -36,7 +36,7 @@ class Program(StrEnum):
 
         return None
 
-    def map_to_api(self):
+    def map_to_api_heating(self):
         match self:
             case Program.Off:
                 return "Reduced"
@@ -48,3 +48,16 @@ class Program(StrEnum):
                 return "Comfort"
 
         return "Standard"
+
+    def map_to_api_cooling(self):
+        match self:
+            case Program.Off:
+                return "Reduced"
+            case Program.Reduced:
+                return "Reduced"
+            case Program.FrostProtection:
+                return "Reduced"
+            case Program.Comfort:
+                return "Comfort"
+
+        return "Normal"

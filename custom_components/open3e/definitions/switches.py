@@ -47,4 +47,22 @@ SWITCHES: tuple[Open3eSwitchEntityDescription, ...] = (
             device=device
         )
     ),
+    Open3eSwitchEntityDescription(
+        poll_data_features=[Features.State.HotWaterCirculationPump],
+        device_class=SwitchDeviceClass.SWITCH,
+        key="hot_water_circulation_pump",
+        translation_key="hot_water_circulation_pump",
+        icon="mdi:water-sync",
+        is_on_state=lambda data: data["State"] == 1,
+        turn_on=lambda device, coordinator: coordinator.async_set_hot_water_circulation_pump(
+            feature_id=Features.State.HotWaterCirculationPump.id,
+            is_on=True,
+            device=device
+        ),
+        turn_off=lambda device, coordinator: coordinator.async_set_hot_water_circulation_pump(
+            feature_id=Features.State.HotWaterCirculationPump.id,
+            is_on=False,
+            device=device
+        )
+    ),
 )

@@ -127,7 +127,7 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
         if self.__current_program is None or self.__programs is None:
             return None
 
-        return self.__programs[self.__current_program.map_to_api()]
+        return self.__programs[self.__current_program.map_to_api_heating()]
 
     def set_preset_mode(self, preset_mode: str) -> None:
         """Setting the preset mode is not supported."""
@@ -135,7 +135,7 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
     async def async_set_temperature(self, **kwargs: Any) -> None:
         """Set new target temperature."""
         temperature = kwargs["temperature"]
-        self.__programs[self.__current_program.map_to_api()] = temperature
+        self.__programs[self.__current_program.map_to_api_heating()] = temperature
 
         await self.coordinator.async_set_program_temperature(
             set_programs_feature_id=self.entity_description.programs_temperature_feature.id,
