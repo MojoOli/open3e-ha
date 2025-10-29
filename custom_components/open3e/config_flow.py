@@ -21,7 +21,7 @@ class Open3eFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
     """Config flow for Blueprint."""
     _errors = {}
 
-    VERSION = 1
+    VERSION = 2
 
     async def async_step_user(
             self,

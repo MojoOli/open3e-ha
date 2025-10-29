@@ -7,7 +7,6 @@ import logging
 import time
 from dataclasses import dataclass
 from datetime import timedelta
-from typing import Any
 
 from homeassistant.helpers.device_registry import DeviceRegistry
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
@@ -26,7 +25,6 @@ from .errors import Open3eCoordinatorUpdateFailed
 _LOGGER = logging.getLogger(__name__)
 
 from homeassistant.helpers import device_registry
-from .definitions.open3e_data import Open3eDataDeviceFeature
 from .definitions.features import Feature
 
 
@@ -35,19 +33,15 @@ class CoordinatorEndpoint:
     __last_refresh: float = -1
     __entities_subscribed: int = 1
 
-    def __init__(self, refresh_interval: int, device: Open3eDataDevice):
+    def __init__(self, refresh_interval: int):
         self.refresh_interval = refresh_interval
-        self.device = device
 
     def add_entity_subscription(self):
-        self.__entities_subscribed = self.__entities_subscribed + 1
+        self.__entities_subscribed += 1
 
     def remove_entity_subscription(self):
-        self.__entities_subscribed = self.__entities_subscribed - 1
-        if self.__entities_subscribed <= 0:
-            return True
-        else:
-            return False
+        self.__entities_subscribed -= 1
+        return self.__entities_subscribed <= 0
 
     def set_refresh_interval(self, refresh_interval):
         if refresh_interval < self.refresh_interval:
@@ -73,7 +67,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
     __device_registry: DeviceRegistry
     __entry_id: str
 
-    _endpoints: dict[int, CoordinatorEndpoint] = {}
+    __endpoints: dict[tuple[int, int], CoordinatorEndpoint] = {}
 
     def __init__(self, hass, client: Open3eMqttClient, entry_id: str):
         super().__init__(
@@ -104,21 +98,29 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
 
         self.system_information = await self.__client.async_get_system_information(self.hass)
         for device in self.system_information.devices:
+
+            # Check if multiple devices have the same name
+            duplicate_count = sum(1 for d in self.system_information.devices if d.name == device.name)
+            name_suffix = ""
+            if duplicate_count > 1:
+                # Add last 4 digits of serial number to differentiate in UI
+                name_suffix = f" ({device.serial_number[-4:]})"
+
             self.__device_registry.async_get_or_create(
                 config_entry_id=self.__entry_id,
-                identifiers={(DOMAIN, device.name)},
+                identifiers={(DOMAIN, device.serial_number)},
                 manufacturer=device.manufacturer,
                 serial_number=device.serial_number,
                 sw_version=device.software_version,
                 hw_version=device.hardware_version,
-                name=device.name,
+                name=device.name + name_suffix,
                 model=device.name,
             )
 
     def __on_availability_update(self, available: bool):
         self.__server_available = available
 
-    async def _async_update_data(self) -> Any:
+    async def _async_update_data(self) -> bool:
         """Update data."""
         if self.__server_available is None:
             return True
@@ -127,56 +129,51 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             raise Open3eCoordinatorUpdateFailed()
 
         now = time.time()
-
         device_features: dict[int, list[int]] = {}
 
-        for id in self._endpoints.keys():
-            if self._endpoints[id].should_refresh(now):
-                if device_features.get(self._endpoints[id].device.id) is None:
-                    device_features[self._endpoints[id].device.id] = list()
+        for (device_id, feature_id), endpoint in self.__endpoints.items():
+            if endpoint.should_refresh(now):
+                device_features.setdefault(device_id, []).append(feature_id)
+                endpoint.update_last_refresh(now)
 
-                device_features[self._endpoints[id].device.id].append(id)
-                self._endpoints[id].update_last_refresh(now)
-
-        if device_features is None:
+        if not device_features:
             return True
 
         _LOGGER.debug(f"Requesting data update for features {device_features}")
-
         await self.__client.async_request_data(self.hass, device_features)
 
         return True
 
     async def on_entity_added(self, features: list[Feature], device: Open3eDataDevice):
+        """Called when an entity is added."""
         _LOGGER.debug("Entity was added to Coordinator")
         for feature in features:
-            if feature.id not in self._endpoints:
-                self._endpoints[feature.id] = CoordinatorEndpoint(
-                    refresh_interval=feature.refresh_interval,
-                    device=device
+            key = (device.id, feature.id)
+            endpoint = self.__endpoints.get(key)
+            if endpoint is None:
+                self.__endpoints[key] = CoordinatorEndpoint(
+                    refresh_interval=feature.refresh_interval
                 )
             else:
-                self._endpoints[feature.id].add_entity_subscription()
-                self._endpoints[feature.id].set_refresh_interval(feature.refresh_interval)
+                endpoint.add_entity_subscription()
+                endpoint.set_refresh_interval(feature.refresh_interval)
 
-    def on_entity_removed(self, features: list[Feature]):
+    def on_entity_removed(self, features: list[Feature], device: Open3eDataDevice):
+        """Called when an entity is removed."""
         _LOGGER.debug("Entity was removed from Coordinator")
         for feature in features:
-            if feature.id in self._endpoints:
-                if self._endpoints[feature.id].remove_entity_subscription():
-                    del self._endpoints[feature.id]
+            key = (device.id, feature.id)
+            endpoint = self.__endpoints.get(key)
+            if endpoint and endpoint.remove_entity_subscription():
+                del self.__endpoints[key]
 
-    def get_mqtt_topics_for_features(self, features: list[Feature]):
-        mqtt_topics: list[Open3eDataDeviceFeature] = []
-
-        for feature in features:
-            for device in self.system_information.devices:
-                for mqtt_topic in device.features:
-                    if mqtt_topic.id == feature.id:
-                        mqtt_topics.append(mqtt_topic)
-                        break
-
-        return mqtt_topics
+    def get_mqtt_topics_for_features(self, features: list[Feature], device: Open3eDataDevice):
+        """Return MQTT topics matching a list of features for a device."""
+        return [
+            mqtt_topic for feature in features
+            for mqtt_topic in device.features
+            if mqtt_topic.id == feature.id
+        ]
 
     async def async_set_program_temperature(
             self,
@@ -235,7 +232,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             device_id=device.id
         )
 
-        await self.async_refresh_feature([dmw_state_feature_id, dmw_efficiency_mode_feature_id])
+        await self.async_refresh_feature(device, [dmw_state_feature_id, dmw_efficiency_mode_feature_id])
 
     async def async_set_max_power_electrical_heater(
             self,
