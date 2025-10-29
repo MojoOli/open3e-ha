@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Callable, Any
+from typing import Callable, Any, List
 
 from homeassistant.components.sensor import SensorEntityDescription, SensorDeviceClass, SensorStateClass
 from homeassistant.const import UnitOfTemperature, UnitOfEnergy, PERCENTAGE, UnitOfPower, \
@@ -51,6 +51,19 @@ class SensorDataRetriever:
     """The data state represents a raw value without any encapsulation."""
 
 
+class SensorDataDeriver:
+
+    @staticmethod
+    def _calculate_cop(thermals: tuple[float, ...], electrics: tuple[float, ...]) -> float:
+        total_thermal = sum(thermals)
+        total_electric = sum(electrics)
+
+        if total_thermal <= 0 or total_electric <= 0:
+            return 0.0
+
+        return round(min(total_thermal / total_electric, 10.0), 1)
+
+
 @dataclass(frozen=True)
 class Open3eSensorEntityDescription(
     Open3eEntityDescription, SensorEntityDescription
@@ -59,6 +72,36 @@ class Open3eSensorEntityDescription(
     domain: str = "sensor"
     data_retriever: Callable[[Any], Any] | None = None
     is_available: Callable[[Any], bool] = lambda data: True
+
+
+@dataclass(frozen=True)
+class Open3eDerivedSensorEntityDescription(
+    Open3eEntityDescription, SensorEntityDescription
+):
+    """
+    Derived sensor entity description for open3e.
+
+    Attributes:
+        data_retrievers: A list of callables that each take the data object
+                         and return a feature value. Allows multiple
+                         component sensors to feed into the derived computation.
+        compute_value: A callable that receives all values returned by
+                       data_retrievers (via *args) and computes the final
+                       derived sensor value.
+    """
+    domain: str = "sensor"
+    data_retrievers: List[Callable[[Any], Any]] | None = None
+    """
+        List of functions to retrieve feature values. Each function takes
+        the data object and returns a value to be used in the derived computation.
+        This list needs to be aligned with poll_data_features.
+        """
+    compute_value: Callable[..., Any] | None = None
+    """
+        Function to compute the derived sensor value. Receives *args corresponding
+        to the outputs of data_retrievers. Can handle any number of parameters.
+        The params need to aligned with poll_data_features.
+        """
 
 
 SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
@@ -1053,4 +1096,96 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         translation_key="exhaust_air_humidity",
         data_retriever=SensorDataRetriever.ACTUAL
     ),
+)
+
+## Sensors which are derived by calculation
+DERIVED_SENSORS: tuple[Open3eDerivedSensorEntityDescription, ...] = (
+
+    ###############
+    ### VITOCAL ###
+    ###############
+
+    Open3eDerivedSensorEntityDescription(
+        poll_data_features=[Features.Energy.CentralHeating, Features.Energy.Cooling, Features.Energy.DomesticHotWater],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="energy_consumption_total_today",
+        translation_key="energy_consumption_total_today",
+        data_retrievers=[SensorDataRetriever.TODAY] * 3,
+        compute_value=lambda heating, cooling, dhw: heating + cooling + dhw
+    ),
+    Open3eDerivedSensorEntityDescription(
+        poll_data_features=[Features.Power.ThermalCapacitySystem, Features.Power.System],
+        native_unit_of_measurement="COP",
+        state_class=SensorStateClass.MEASUREMENT,
+        key="cop_currently",
+        translation_key="cop_currently",
+        icon="mdi:leaf",
+        data_retrievers=[SensorDataRetriever.RAW] * 2,
+        compute_value=lambda thermal, electric: SensorDataDeriver._calculate_cop(
+            thermals=(thermal,),
+            electrics=(electric,)
+        )
+    ),
+    Open3eDerivedSensorEntityDescription(
+        poll_data_features=[Features.Energy.HeatingOutput, Features.Energy.CentralHeating],
+        native_unit_of_measurement="COP",
+        state_class=SensorStateClass.MEASUREMENT,
+        key="cop_heating_today",
+        translation_key="cop_heating_today",
+        icon="mdi:leaf",
+        data_retrievers=[SensorDataRetriever.TODAY] * 2,
+        compute_value=lambda thermal, electric: SensorDataDeriver._calculate_cop(
+            thermals=(thermal,),
+            electrics=(electric,)
+        ),
+    ),
+    Open3eDerivedSensorEntityDescription(
+        poll_data_features=[Features.Energy.CoolingOutput, Features.Energy.Cooling],
+        native_unit_of_measurement="COP",
+        state_class=SensorStateClass.MEASUREMENT,
+        key="cop_cooling_today",
+        translation_key="cop_cooling_today",
+        icon="mdi:leaf",
+        data_retrievers=[SensorDataRetriever.TODAY] * 2,
+        compute_value=lambda thermal, electric: SensorDataDeriver._calculate_cop(
+            thermals=(thermal,),
+            electrics=(electric,)
+        ),
+        entity_registry_enabled_default=False
+    ),
+    Open3eDerivedSensorEntityDescription(
+        poll_data_features=[Features.Energy.WarmWaterOutput, Features.Energy.DomesticHotWater],
+        native_unit_of_measurement="COP",
+        state_class=SensorStateClass.MEASUREMENT,
+        key="cop_dhw_today",
+        translation_key="cop_dhw_today",
+        icon="mdi:leaf",
+        data_retrievers=[SensorDataRetriever.TODAY] * 2,
+        compute_value=lambda thermal, electric: SensorDataDeriver._calculate_cop(
+            thermals=(thermal,),
+            electrics=(electric,)
+        )
+    ),
+    Open3eDerivedSensorEntityDescription(
+        poll_data_features=[
+            Features.Energy.HeatingOutput,
+            Features.Energy.CoolingOutput,
+            Features.Energy.WarmWaterOutput,
+            Features.Energy.CentralHeating,
+            Features.Energy.Cooling,
+            Features.Energy.DomesticHotWater
+        ],
+        native_unit_of_measurement="COP",
+        state_class=SensorStateClass.MEASUREMENT,
+        key="cop_total_today",
+        translation_key="cop_total_today",
+        icon="mdi:leaf",
+        data_retrievers=[SensorDataRetriever.TODAY] * 6,
+        compute_value=lambda heating_t, cooling_t, dhw_t, heating_e, cooling_e, dhw_e: SensorDataDeriver._calculate_cop(
+            thermals=(heating_t, cooling_t, dhw_t),
+            electrics=(heating_e, cooling_e, dhw_e)
+        )
+    )
 )
