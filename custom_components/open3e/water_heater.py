@@ -12,7 +12,7 @@ from homeassistant.util.json import json_loads
 
 from custom_components.open3e.definitions.subfeatures.dmw_mode import DmwMode
 from .const import VIESSMANN_TEMP_DHW_MIN, \
-    VIESSMANN_TEMP_DHW_MAX, VIESSMANN_UNAVAILABLE_NUMBER
+    VIESSMANN_TEMP_DHW_MAX, VIESSMANN_UNAVAILABLE_VALUE
 from .coordinator import Open3eDataUpdateCoordinator
 from .definitions.open3e_data import Open3eDataDevice
 from .definitions.water_heater import WATER_HEATER, Open3eWaterHeaterEntityDescription
@@ -78,9 +78,9 @@ class Open3eWaterHeater(Open3eEntity, WaterHeaterEntity):
         """Return True if entity has a target and current temperature and they are higher than -3276.8"""
         return (
             self.target_temperature is not None and
-            self.target_temperature != VIESSMANN_UNAVAILABLE_NUMBER and
+            self.target_temperature > VIESSMANN_UNAVAILABLE_VALUE and
             self.current_temperature is not None and
-            self.current_temperature != VIESSMANN_UNAVAILABLE_NUMBER
+            self.current_temperature > VIESSMANN_UNAVAILABLE_VALUE
         )
 
     async def async_on_data(self, feature_id: int):
