@@ -44,14 +44,16 @@ class Open3eEntity(CoordinatorEntity, Entity):
         self.device = device
 
         self.__mqtt_topics = coordinator.get_mqtt_topics_for_features(
-            features=description.poll_data_features
+            features=description.poll_data_features,
+            device=device
         )
 
-        slug = slugify(f'{DOMAIN}_{description.key}'.replace("-", "_"))
+        slug = slugify(f"{device.name}_{device.serial_number}_{description.key}".replace("-", "_"))
         self.entity_id = f'{description.domain}.{slug}'
-        self._attr_unique_id = slug
+        self._attr_unique_id = f'{DOMAIN}_{slug}'
+
         self._attr_device_info = DeviceInfo(
-            identifiers={(DOMAIN, self.device.name)},
+            identifiers={(DOMAIN, self.device.serial_number)},
         )
         self._attr_has_entity_name = True
         self.entity_description = description
@@ -78,7 +80,7 @@ class Open3eEntity(CoordinatorEntity, Entity):
 
     async def async_will_remove_from_hass(self) -> None:
         """Run when entity about to be added to hass."""
-        self.coordinator.on_entity_removed(self.entity_description.poll_data_features)
+        self.coordinator.on_entity_removed(self.entity_description.poll_data_features, self.device)
 
         for sub in self.__mqtt_subscriptions:
             sub()
