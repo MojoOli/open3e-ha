@@ -4,9 +4,11 @@ from __future__ import annotations
 
 from typing import Any, cast
 
-from homeassistant.components.sensor import SensorEntity
+from homeassistant.components.sensor import SensorEntity, SensorDeviceClass
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
+
+from .const import VIESSMANN_UNAVAILABLE_VALUE
 
 from .coordinator import Open3eDataUpdateCoordinator
 from .definitions.open3e_data import Open3eDataDevice
@@ -52,7 +54,14 @@ class Open3eSensor(Open3eEntity, SensorEntity):
     @property
     def available(self):
         """Return True if entity is available."""
-        return self._attr_native_value is not None and self.entity_description.is_available(self._attr_native_value)
+        if self._attr_native_value is None:
+            return False
+
+        if isinstance(self._attr_native_value, (int, float)):
+            if self.entity_description.device_class == SensorDeviceClass.TEMPERATURE and self._attr_native_value <= VIESSMANN_UNAVAILABLE_VALUE:
+                return False
+
+        return True
 
     async def async_on_data(self, feature_id: int) -> None:
         """Handle updated data from MQTT."""
