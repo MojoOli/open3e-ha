@@ -1,0 +1,65 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      rollover:
+        description: "Whether the patch number should roll over to the next minor version (true/false)"
+        required: true
+
+jobs:
+  bump-version:
+    name: Create new release
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write  # Needed to push tags and create releases
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Needed to get all tags
+
+      - name: Get latest tag
+        id: get_tag
+        run: |
+          latest_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          echo "Latest tag: $latest_tag"
+          echo "tag=$latest_tag" >> $GITHUB_OUTPUT
+
+      - name: Calculate next version
+        id: next_version
+        run: |
+          version="${{ steps.get_tag.outputs.tag#v }}"
+          IFS='.' read -r major minor patch <<< "$version"
+
+          # Increment patch
+          patch=$((patch + 1))
+
+          # Roll over if the input flag is true
+          rollover="${{ github.event.inputs.rollover }}"
+          if [ "$rollover" = "true" ] && [ "$patch" -ge 10 ]; then
+            patch=0
+            minor=$((minor + 1))
+          fi
+
+          new_version="v${major}.${minor}.${patch}"
+          echo "New version: $new_version"
+          echo "new_version=$new_version" >> $GITHUB_OUTPUT
+
+      - name: Create new Git tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag ${{ steps.next_version.outputs.new_version }}
+          git push origin ${{ steps.next_version.outputs.new_version }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.next_version.outputs.new_version }}
+          name: Release ${{ steps.next_version.outputs.new_version }}
+          body: |
+            Manual release created by workflow dispatch.
+            Rollover enabled: ${{ github.event.inputs.rollover }}
