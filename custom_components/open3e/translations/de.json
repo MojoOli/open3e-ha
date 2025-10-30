@@ -289,6 +289,12 @@
       "flow_circuit_4_supply_temp_setpoint": {
         "name": "Heizkreis 4 Vorlauftemperatur Soll"
       },
+      "heating_buffer_temperature": {
+        "name": "Heizpuffertemperatur"
+      },
+      "cooling_buffer_temperature": {
+        "name": "Kühlpuffertemperatur"
+      },
       "heating_cooling_buffer_temperature": {
         "name": "Heiz-/Kühlpuffertemperatur"
       },

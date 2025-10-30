@@ -671,6 +671,24 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.RAW
     ),
     Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.HeatingBuffer],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="heating_buffer_temperature",
+        translation_key="heating_buffer_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.CoolingBuffer],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="cooling_buffer_temperature",
+        translation_key="cooling_buffer_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.HeatingCoolingBuffer],
         device_class=SensorDeviceClass.TEMPERATURE,
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
