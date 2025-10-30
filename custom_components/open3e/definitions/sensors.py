@@ -51,7 +51,6 @@ class Open3eSensorEntityDescription(
     """Default sensor entity description for open3e."""
     domain: str = "sensor"
     data_retriever: Callable[[Any], float] | None = None
-    is_available: Callable[[Any], bool] = lambda data: True
 
 SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
 
@@ -317,8 +316,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="room1_temperature",
         translation_key="room1_temperature",
-        data_retriever=SensorDataRetriever.ACTUAL,
-        is_available=lambda data: -1000 < data < 1000
+        data_retriever=SensorDataRetriever.ACTUAL
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.Room2],
@@ -328,8 +326,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="room2_temperature",
         translation_key="room2_temperature",
         data_retriever=SensorDataRetriever.ACTUAL,
-        entity_registry_enabled_default=False,
-        is_available=lambda data: -1000 < data < 1000
+        entity_registry_enabled_default=False
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.Room3],
@@ -339,8 +336,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="room3_temperature",
         translation_key="room3_temperature",
         data_retriever=SensorDataRetriever.ACTUAL,
-        entity_registry_enabled_default=False,
-        is_available=lambda data: -1000 < data < 1000
+        entity_registry_enabled_default=False
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.Room4],
@@ -350,8 +346,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="room4_temperature",
         translation_key="room4_temperature",
         data_retriever=SensorDataRetriever.ACTUAL,
-        entity_registry_enabled_default=False,
-        is_available=lambda data: -1000 < data < 1000
+        entity_registry_enabled_default=False
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Position.ExpansionValve1],

@@ -60,7 +60,8 @@ class Open3eSensor(Open3eEntity, SensorEntity):
         if isinstance(self._attr_native_value, (int, float)):
             if self.entity_description.device_class == SensorDeviceClass.TEMPERATURE and self._attr_native_value <= VIESSMANN_UNAVAILABLE_VALUE:
                 return False
-        return self.entity_description.is_available(self._attr_native_value)
+
+        return True
 
     async def async_on_data(self, feature_id: int) -> None:
         """Handle updated data from MQTT."""
