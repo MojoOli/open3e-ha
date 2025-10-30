@@ -289,6 +289,12 @@
       "flow_circuit_4_supply_temp_setpoint": {
         "name": "Flow Circuit 4 Supply Temperature Setpoint"
       },
+      "heating_buffer_temperature": {
+        "name": "Heating Buffer Temperature"
+      },
+      "cooling_buffer_temperature": {
+        "name": "Cooling Buffer Temperature"
+      },
       "heating_cooling_buffer_temperature": {
         "name": "Heating/Cooling Buffer Temperature"
       },

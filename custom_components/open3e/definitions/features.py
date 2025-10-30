@@ -60,6 +60,8 @@ class Features:
         ExhaustAir = Feature(id=330, refresh_interval=5)
         InverterAmbient = Feature(id=1684, refresh_interval=30)
         Battery = Feature(id=2240, refresh_interval=30)
+        HeatingBuffer = Feature(id=3016, refresh_interval=30)
+        CoolingBuffer = Feature(id=3017, refresh_interval=30)
         HeatingCoolingBuffer = Feature(id=3018, refresh_interval=30)
         DomesticHotWaterHysteresis = Feature(id=1085, refresh_interval=30)
 
