@@ -46,6 +46,9 @@
       "energy_consumption_central_heating_current_year": {
         "name": "Energieverbrauch Heizung Jahr"
       },
+      "energy_consumption_central_heating_past_year": {
+        "name": "Energieverbrauch Heizung letztes Jahr"
+      },
       "energy_consumption_domestic_hot_water_today": {
         "name": "Energieverbrauch Warmwasser heute"
       },
@@ -55,6 +58,9 @@
       "energy_consumption_domestic_hot_water_current_year": {
         "name": "Energieverbrauch Warmwasser Jahr"
       },
+      "energy_consumption_domestic_hot_water_past_year": {
+        "name": "Energieverbrauch Warmwasser letztes Jahr"
+      },
       "energy_consumption_cooling_today": {
         "name": "Energieverbrauch Kühlung heute"
       },
@@ -63,6 +69,12 @@
       },
       "energy_consumption_cooling_current_year": {
         "name": "Energieverbrauch Kühlung Jahr"
+      },
+      "energy_consumption_cooling_past_year": {
+        "name": "Energieverbrauch Kühlung letztes Jahr"
+      },
+      "energy_consumption_total_today": {
+        "name": "Energieverbrauch Gesamt heute"
       },
       "outside_temperature": {
         "name": "Außentemperatur"
@@ -74,7 +86,7 @@
         "name": "Sekundärer Wärmetauscher Temperatur"
       },
       "central_heating_pump_speed_percentage": {
-        "name": "Primärpumpe Drehzahl Prozent"
+        "name": "Primärpumpe"
       },
       "power_consumption_system": {
         "name": "Stromverbrauch System"
@@ -221,6 +233,9 @@
         "name": "Verdampfungstemperatur"
       },
       "compressor_speed_percentage": {
+        "name": "Verdichterdrehzahl Prozent"
+      },
+      "compressor_speed_rpm": {
         "name": "Verdichterdrehzahl"
       },
       "outdoor_air_temperature": {
@@ -252,6 +267,111 @@
       },
       "battery_temperature": {
         "name": "Batterie Temperatur"
+      },
+      "thermal_output_today": {
+        "name": "Thermische Leistung Heute"
+      },
+      "cooling_output_today": {
+        "name": "Kühlleistung Heute"
+      },
+      "warm_water_output_today": {
+        "name": "Warmwasserleistung Heute"
+      },
+      "flow_circuit_1_supply_temp_setpoint": {
+        "name": "Heizkreis 1 Vorlauftemperatur Soll"
+      },
+      "flow_circuit_2_supply_temp_setpoint": {
+        "name": "Heizkreis 2 Vorlauftemperatur Soll"
+      },
+      "flow_circuit_3_supply_temp_setpoint": {
+        "name": "Heizkreis 3 Vorlauftemperatur Soll"
+      },
+      "flow_circuit_4_supply_temp_setpoint": {
+        "name": "Heizkreis 4 Vorlauftemperatur Soll"
+      },
+      "heating_buffer_temperature": {
+        "name": "Heizpuffertemperatur"
+      },
+      "cooling_buffer_temperature": {
+        "name": "Kühlpuffertemperatur"
+      },
+      "heating_cooling_buffer_temperature": {
+        "name": "Heiz-/Kühlpuffertemperatur"
+      },
+      "energy_management_mode": {
+        "name": "SmartGrid Betriebszustand",
+        "state": {
+          "shutdown_mode": "Abschaltbetrieb",
+          "normal_mode": "Normalbetrieb",
+          "preferred_mode": "Bevorzugter Betrieb",
+          "forced_mode": "Erzwungener Betrieb"
+        }
+      },
+      "four_three_way_valve_position": {
+        "name": "4/3-Wege-Ventil Position",
+        "state": {
+          "buffer": "Pufferspeicher",
+          "idle": "Leerlauf",
+          "hot_water": "Warmwasser"
+        }
+      },
+      "desired_thermal_capacity": {
+        "name": "Angeforderte Wärmeleistung"
+      },
+      "desired_thermal_energy_defrost": {
+        "name": "Angeforderte Wärmeleistung Abtauen"
+      },
+      "additional_heater_operating_hours": {
+        "name": "Heizstab Betriebsstunden"
+      },
+      "additional_heater_starts": {
+        "name": "Heizstab Starts"
+      },
+      "compressor_operating_hours": {
+        "name": "Kompressor Betriebsstunden"
+      },
+      "compressor_starts": {
+        "name": "Kompressor Starts"
+      },
+      "service_manager_required": {
+        "name": "Wartung erforderlich"
+      },
+      "malfunction_id": {
+        "name": "Fehlererkennung"
+      },
+      "error_dtc_list": {
+        "name": "Fehler"
+      },
+      "connection_status": {
+        "name": "Verbindungsstatus",
+        "state": {
+          "connected": "Verbunden",
+          "not_connected": "Nicht verbunden"
+        }
+      },
+      "cop_total_current_year": {
+        "name": "COP Gesamt Jahr"
+      },
+      "cop_heating_current_year": {
+        "name": "COP Heizung Jahr"
+      },
+      "cop_dhw_current_year": {
+        "name": "COP Warmwasser Jahr"
+      },
+      "cop_currently": {
+        "name": "COP aktuell"
+      },
+      "cop_heating_today": {
+        "name": "COP Heizen heute"
+      },
+      "cop_cooling_today": {
+        "name": "COP Kühlen heute"
+      },
+      "cop_dhw_today": {
+        "name": "COP Warmwasser heute"
+      },
+      "cop_total_today": {
+        "name": "COP Gesamt heute"
       }
     },
     "binary_sensor": {
@@ -261,14 +381,11 @@
       "circuit_pump": {
         "name": "Heizkreispumpe"
       },
-      "hot_water_circulation_pump": {
-        "name": "Warmwasser Zirkulationspumpe"
-      },
       "hot_water_circulation_pump_hygiene": {
         "name": "Warmwasser Legionellenschutz"
       },
-      "heater_active": {
-        "name": "Heizung"
+      "additional_heater_active": {
+        "name": "Heizstab"
       },
       "heat_pump_compressor_active": {
         "name": "Wärmepumpenkompressor"
@@ -308,40 +425,76 @@
     },
     "number": {
       "circuit_1_comfort_temperature": {
-        "name": "Heiz-Kühlkreis 1 Komfort Temperatur"
+        "name": "Heiz-Kühlkreis 1 Heizen Komfort"
       },
       "circuit_1_standard_temperature": {
-        "name": "Heiz-Kühlkreis 1 Standard Temperatur"
+        "name": "Heiz-Kühlkreis 1 Heizen Standard"
       },
       "circuit_1_reduced_temperature": {
-        "name": "Heiz-Kühlkreis 1 Reduzierte Temperatur"
+        "name": "Heiz-Kühlkreis 1 Heizen Reduziert"
       },
       "circuit_2_comfort_temperature": {
-        "name": "Heiz-Kühlkreis 2 Komfort Temperatur"
+        "name": "Heiz-Kühlkreis 2 Heizen Komfort"
       },
       "circuit_2_standard_temperature": {
-        "name": "Heiz-Kühlkreis 2 Standard Temperatur"
+        "name": "Heiz-Kühlkreis 2 Heizen Standard"
       },
       "circuit_2_reduced_temperature": {
-        "name": "Heiz-Kühlkreis 2 Reduzierte Temperatur"
+        "name": "Heiz-Kühlkreis 2 Heizen Reduziert"
       },
       "circuit_3_comfort_temperature": {
-        "name": "Heiz-Kühlkreis 3 Komfort Temperatur"
+        "name": "Heiz-Kühlkreis 3 Heizen Komfort"
       },
       "circuit_3_standard_temperature": {
-        "name": "Heiz-Kühlkreis 3 Standard Temperatur"
+        "name": "Heiz-Kühlkreis 3 Heizen Standard"
       },
       "circuit_3_reduced_temperature": {
-        "name": "Heiz-Kühlkreis 3 Reduzierte Temperatur"
+        "name": "Heiz-Kühlkreis 3 Heizen Reduziert"
       },
       "circuit_4_comfort_temperature": {
-        "name": "Heiz-Kühlkreis 4 Komfort Temperatur"
+        "name": "Heiz-Kühlkreis 4 Heizen Komfort"
       },
       "circuit_4_standard_temperature": {
-        "name": "Heiz-Kühlkreis 4 Standard Temperatur"
+        "name": "Heiz-Kühlkreis 4 Heizen Standard"
       },
       "circuit_4_reduced_temperature": {
-        "name": "Heiz-Kühlkreis 4 Reduzierte Temperatur"
+        "name": "Heiz-Kühlkreis 4 Heizen Reduziert"
+      },
+      "circuit_1_comfort_cooling": {
+        "name": "Heiz-Kühlkreis 1 Kühlen Komfort"
+      },
+      "circuit_1_standard_cooling": {
+        "name": "Heiz-Kühlkreis 1 Kühlen Standard"
+      },
+      "circuit_1_reduced_cooling": {
+        "name": "Heiz-Kühlkreis 1 Kühlen Reduziert"
+      },
+      "circuit_2_comfort_cooling": {
+        "name": "Heiz-Kühlkreis 2 Kühlen Komfort"
+      },
+      "circuit_2_standard_cooling": {
+        "name": "Heiz-Kühlkreis 2 Kühlen Standard"
+      },
+      "circuit_2_reduced_cooling": {
+        "name": "Heiz-Kühlkreis 2 Kühlen Reduziert"
+      },
+      "circuit_3_comfort_cooling": {
+        "name": "Heiz-Kühlkreis 3 Kühlen Komfort"
+      },
+      "circuit_3_standard_cooling": {
+        "name": "Heiz-Kühlkreis 3 Kühlen Standard"
+      },
+      "circuit_3_reduced_cooling": {
+        "name": "Heiz-Kühlkreis 3 Kühlen Reduziert"
+      },
+      "circuit_4_comfort_cooling": {
+        "name": "Heiz-Kühlkreis 4 Kühlen Komfort"
+      },
+      "circuit_4_standard_cooling": {
+        "name": "Heiz-Kühlkreis 4 Kühlen Standard"
+      },
+      "circuit_4_reduced_cooling": {
+        "name": "Heiz-Kühlkreis 4 Kühlen Reduziert"
       },
       "heater_max_power": {
         "name": "Heizstab Maximalleistung"
@@ -375,6 +528,39 @@
       },
       "buffer_max_temperature": {
         "name": "Pufferspeicher Maximaltemperatur"
+      },
+      "frost_protection_temperature": {
+        "name": "Frostschutztemperatur Heizkreis"
+      },
+      "circuit_1_heating_curve_slope": {
+        "name": "Heizkurve 1 Steigung"
+      },
+      "circuit_2_heating_curve_slope": {
+        "name": "Heizkurve 2 Steigung"
+      },
+      "circuit_3_heating_curve_slope": {
+        "name": "Heizkurve 3 Steigung"
+      },
+      "circuit_4_heating_curve_slope": {
+        "name": "Heizkurve 4 Steigung"
+      },
+      "circuit_1_heating_curve_level": {
+        "name": "Heizkurve 1 Verschiebung"
+      },
+      "circuit_2_heating_curve_level": {
+        "name": "Heizkurve 2 Verschiebung"
+      },
+      "circuit_3_heating_curve_level": {
+        "name": "Heizkurve 3 Verschiebung"
+      },
+      "circuit_4_heating_curve_level": {
+        "name": "Heizkurve 4 Verschiebung"
+      },
+      "dhw_hysteresis_on": {
+        "name": "Warmwasser Hysterese an"
+      },
+      "dhw_hysteresis_off": {
+        "name": "Warmwasser Hysterese aus"
       }
     },
     "select": {
@@ -394,6 +580,9 @@
     "switch": {
       "i_want_hot_water": {
         "name": "Kurzzeitig Warmwasser erzeugen"
+      },
+      "hot_water_circulation_pump": {
+        "name": "Warmwasser Zirkulationspumpe"
       }
     }
   }

@@ -1,48 +1,68 @@
 from dataclasses import dataclass
-from typing import Callable, Any
+from typing import Callable, Any, List
 
 from homeassistant.components.sensor import SensorEntityDescription, SensorDeviceClass, SensorStateClass
-from homeassistant.const import UnitOfTemperature, UnitOfPressure, UnitOfEnergy, PERCENTAGE, UnitOfPower, \
-    UnitOfVolumeFlowRate, EntityCategory
+from homeassistant.const import UnitOfTemperature, UnitOfEnergy, PERCENTAGE, UnitOfPower, \
+    EntityCategory, UnitOfPressure, UnitOfVolumeFlowRate, UnitOfTime
 from homeassistant.util.json import json_loads
 
 from .entity_description import Open3eEntityDescription
 from .features import Features
+from .subfeatures.connection_status import ConnectionStatus, get_connection_status
+from .subfeatures.energy_management_mode import ENERGY_MANAGEMENT_MODES_MAP, EnergyManagementMode
+from .subfeatures.four_three_way_valve_position import FOUR_THREE_WAY_VALVE_POSITION_MAP, FourThreeWayValvePosition
 
 
 class SensorDataRetriever:
     """Retriever functions for MQTT sensor data."""
 
-    ACTUAL = lambda data: json_loads(data)["Actual"]
-    MINIMUM = lambda data: json_loads(data)["Minimum"]
-    MAXIMUM = lambda data: json_loads(data)["Maximum"]
-    AVERAGE = lambda data: json_loads(data)["Average"]
-    ACTIVE_POWER = lambda data: json_loads(data)["ActivePower"]
-    TODAY = lambda data: json_loads(data)["Today"]
-    CURRENT_MONTH = lambda data: json_loads(data)["CurrentMonth"]
-    CURRENT_YEAR = lambda data: json_loads(data)["CurrentYear"]
-    BATTERY_CHARGE_TODAY = lambda data: json_loads(data)["BatteryChargeToday"]
-    BATTERY_CHARGE_WEEK = lambda data: json_loads(data)["BatteryChargeWeek"]
-    BATTERY_CHARGE_MONTH = lambda data: json_loads(data)["BatteryChargeMonth"]
-    BATTERY_CHARGE_YEAR = lambda data: json_loads(data)["BatteryChargeYear"]
-    BATTERY_CHARGE_TOTAL = lambda data: json_loads(data)["BatteryChargeTotal"]
-    BATTERY_DISCHARGE_TODAY = lambda data: json_loads(data)["BatteryDischargeToday"]
-    BATTERY_DISCHARGE_WEEK = lambda data: json_loads(data)["BatteryDischargeWeek"]
-    BATTERY_DISCHARGE_MONTH = lambda data: json_loads(data)["BatteryDischargeMonth"]
-    BATTERY_DISCHARGE_YEAR = lambda data: json_loads(data)["BatteryDischargeYear"]
-    BATTERY_DISCHARGE_TOTAL = lambda data: json_loads(data)["BatteryDischargeTotal"]
-    PV_ENERGY_PRODUCTION_TODAY = lambda data: json_loads(data)["PhotovoltaicProductionToday"]
-    PV_ENERGY_PRODUCTION_WEEK = lambda data: json_loads(data)["PhotovoltaicProductionWeek"]
-    PV_ENERGY_PRODUCTION_MONTH = lambda data: json_loads(data)["PhotovoltaicProductionMonth"]
-    PV_ENERGY_PRODUCTION_YEAR = lambda data: json_loads(data)["PhotovoltaicProductionYear"]
-    PV_ENERGY_PRODUCTION_TOTAL = lambda data: json_loads(data)["PhotovoltaicProductionTotal"]
-    TEMPERATURE = lambda data: json_loads(data)["Temperature"]
-    PV_POWER_CUMULATED = lambda data: json_loads(data)["ActivePower cumulated"]
-    PV_POWER_STRING_1 = lambda data: json_loads(data)["ActivePower String A"]
-    PV_POWER_STRING_2 = lambda data: json_loads(data)["ActivePower String B"]
-    PV_POWER_STRING_3 = lambda data: json_loads(data)["ActivePower String C"]
-    RAW = lambda data: data
+    ACTUAL = lambda data: float(json_loads(data)["Actual"])
+    MINIMUM = lambda data: float(json_loads(data)["Minimum"])
+    MAXIMUM = lambda data: float(json_loads(data)["Maximum"])
+    AVERAGE = lambda data: float(json_loads(data)["Average"])
+    ACTIVE_POWER = lambda data: float(json_loads(data)["ActivePower"])
+    TODAY = lambda data: float(json_loads(data)["Today"])
+    CURRENT_MONTH = lambda data: float(json_loads(data)["CurrentMonth"])
+    CURRENT_YEAR = lambda data: float(json_loads(data)["CurrentYear"])
+    PAST_YEAR = lambda data: float(json_loads(data)["PastYear"])
+    BATTERY_CHARGE_TODAY = lambda data: float(json_loads(data)["BatteryChargeToday"])
+    BATTERY_CHARGE_WEEK = lambda data: float(json_loads(data)["BatteryChargeWeek"])
+    BATTERY_CHARGE_MONTH = lambda data: float(json_loads(data)["BatteryChargeMonth"])
+    BATTERY_CHARGE_YEAR = lambda data: float(json_loads(data)["BatteryChargeYear"])
+    BATTERY_CHARGE_TOTAL = lambda data: float(json_loads(data)["BatteryChargeTotal"])
+    BATTERY_DISCHARGE_TODAY = lambda data: float(json_loads(data)["BatteryDischargeToday"])
+    BATTERY_DISCHARGE_WEEK = lambda data: float(json_loads(data)["BatteryDischargeWeek"])
+    BATTERY_DISCHARGE_MONTH = lambda data: float(json_loads(data)["BatteryDischargeMonth"])
+    BATTERY_DISCHARGE_YEAR = lambda data: float(json_loads(data)["BatteryDischargeYear"])
+    BATTERY_DISCHARGE_TOTAL = lambda data: float(json_loads(data)["BatteryDischargeTotal"])
+    PV_ENERGY_PRODUCTION_TODAY = lambda data: float(json_loads(data)["PhotovoltaicProductionToday"])
+    PV_ENERGY_PRODUCTION_WEEK = lambda data: float(json_loads(data)["PhotovoltaicProductionWeek"])
+    PV_ENERGY_PRODUCTION_MONTH = lambda data: float(json_loads(data)["PhotovoltaicProductionMonth"])
+    PV_ENERGY_PRODUCTION_YEAR = lambda data: float(json_loads(data)["PhotovoltaicProductionYear"])
+    PV_ENERGY_PRODUCTION_TOTAL = lambda data: float(json_loads(data)["PhotovoltaicProductionTotal"])
+    TEMPERATURE = lambda data: float(json_loads(data)["Temperature"])
+    PV_POWER_CUMULATED = lambda data: float(json_loads(data)["ActivePower cumulated"])
+    PV_POWER_STRING_1 = lambda data: float(json_loads(data)["ActivePower String A"])
+    PV_POWER_STRING_2 = lambda data: float(json_loads(data)["ActivePower String B"])
+    PV_POWER_STRING_3 = lambda data: float(json_loads(data)["ActivePower String C"])
+    STARTS = lambda data: int(json_loads(data)["starts"])
+    HOURS = lambda data: int(json_loads(data)["hours"])
+    RAW = lambda data: float(data)
     """The data state represents a raw value without any encapsulation."""
+
+
+class SensorDataDeriver:
+
+    @staticmethod
+    def _calculate_cop(thermals: tuple[float, ...], electrics: tuple[float, ...]) -> float:
+        total_thermal = sum(thermals)
+        total_electric = sum(electrics)
+
+        if total_thermal <= 0 or total_electric <= 0:
+            return 0.0
+
+        return round(min(total_thermal / total_electric, 10.0), 1)
+
 
 @dataclass(frozen=True)
 class Open3eSensorEntityDescription(
@@ -50,9 +70,79 @@ class Open3eSensorEntityDescription(
 ):
     """Default sensor entity description for open3e."""
     domain: str = "sensor"
-    data_retriever: Callable[[Any], float] | None = None
+    data_retriever: Callable[[Any], Any] | None = None
+
+@dataclass(frozen=True)
+class Open3eDerivedSensorEntityDescription(
+    Open3eEntityDescription, SensorEntityDescription
+):
+    """
+    Derived sensor entity description for open3e.
+
+    Attributes:
+        data_retrievers: A list of callables that each take the data object
+                         and return a feature value. Allows multiple
+                         component sensors to feed into the derived computation.
+        compute_value: A callable that receives all values returned by
+                       data_retrievers (via *args) and computes the final
+                       derived sensor value.
+    """
+    domain: str = "sensor"
+    data_retrievers: List[Callable[[Any], Any]] | None = None
+    """
+        List of functions to retrieve feature values. Each function takes
+        the data object and returns a value to be used in the derived computation.
+        This list needs to be aligned with poll_data_features.
+        """
+    compute_value: Callable[..., Any] | None = None
+    """
+        Function to compute the derived sensor value. Receives *args corresponding
+        to the outputs of data_retrievers. Can handle any number of parameters.
+        The params need to aligned with poll_data_features.
+        """
+
 
 SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
+
+    ###############
+    ### GENERAL ###
+    ###############
+
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.ServiceManagerIsRequired],
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:account-wrench",
+        key="service_manager_required",
+        translation_key="service_manager_required",
+        data_retriever=lambda data: bool(int(data))
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.MalfunctionIdentification],
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:file-document-alert",
+        key="malfunction_id",
+        translation_key="malfunction_id",
+        data_retriever=lambda data: int(data)
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.ErrorDtcList],
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:file-document-alert",
+        key="error_dtc_list",
+        translation_key="error_dtc_list",
+        data_retriever=lambda data: ", ".join(
+            {e["Error"]["Text"] for e in json_loads(data).get("ListEntries", [])}) or "-",
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.BackendConnectionStatus],
+        device_class=SensorDeviceClass.ENUM,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:lan-connect",
+        key="connection_status",
+        translation_key="connection_status",
+        data_retriever=lambda data: get_connection_status(int(data)),
+        options=[mode for mode in ConnectionStatus]
+    ),
 
     ###############
     ### VITOCAL ###
@@ -175,6 +265,16 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.CURRENT_YEAR
     ),
     Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.CentralHeating],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="energy_consumption_central_heating_past_year",
+        translation_key="energy_consumption_central_heating_past_year",
+        data_retriever=SensorDataRetriever.PAST_YEAR,
+        entity_registry_enabled_default=False
+    ),
+    Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.DomesticHotWater],
         device_class=SensorDeviceClass.ENERGY,
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
@@ -202,6 +302,16 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.CURRENT_YEAR
     ),
     Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.DomesticHotWater],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="energy_consumption_domestic_hot_water_past_year",
+        translation_key="energy_consumption_domestic_hot_water_past_year",
+        data_retriever=SensorDataRetriever.PAST_YEAR,
+        entity_registry_enabled_default=False
+    ),
+    Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.Cooling],
         device_class=SensorDeviceClass.ENERGY,
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
@@ -227,6 +337,16 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="energy_consumption_cooling_current_year",
         translation_key="energy_consumption_cooling_current_year",
         data_retriever=SensorDataRetriever.CURRENT_YEAR
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.Cooling],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="energy_consumption_cooling_past_year",
+        translation_key="energy_consumption_cooling_past_year",
+        data_retriever=SensorDataRetriever.PAST_YEAR,
+        entity_registry_enabled_default=False
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.Outside],
@@ -316,7 +436,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="room1_temperature",
         translation_key="room1_temperature",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        entity_registry_enabled_default=False
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.Room2],
@@ -407,6 +528,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         device_class=SensorDeviceClass.TEMPERATURE,
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         state_class=SensorStateClass.MEASUREMENT,
+        entity_category=EntityCategory.DIAGNOSTIC,
         key="engine_room_temperature",
         translation_key="engine_room_temperature",
         data_retriever=SensorDataRetriever.ACTUAL
@@ -459,13 +581,217 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.ACTUAL
     ),
     Open3eSensorEntityDescription(
-        poll_data_features=[Features.Speed.Compressor],
+        poll_data_features=[Features.Speed.CompressorPercent],
         device_class=SensorDeviceClass.POWER_FACTOR,
         native_unit_of_measurement=PERCENTAGE,
         state_class=SensorStateClass.MEASUREMENT,
         key="compressor_speed_percentage",
         translation_key="compressor_speed_percentage",
         data_retriever=SensorDataRetriever.RAW
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.HeatingOutput],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="thermal_output_today",
+        translation_key="thermal_output_today",
+        data_retriever=SensorDataRetriever.TODAY
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.CoolingOutput],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="cooling_output_today",
+        translation_key="cooling_output_today",
+        data_retriever=SensorDataRetriever.TODAY
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.WarmWaterOutput],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="warm_water_output_today",
+        translation_key="warm_water_output_today",
+        data_retriever=SensorDataRetriever.TODAY
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.FlowCircuit1Target],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="flow_circuit_1_supply_temp_setpoint",
+        translation_key="flow_circuit_1_supply_temp_setpoint",
+        data_retriever=SensorDataRetriever.RAW
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.FlowCircuit2Target],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="flow_circuit_2_supply_temp_setpoint",
+        translation_key="flow_circuit_2_supply_temp_setpoint",
+        data_retriever=SensorDataRetriever.RAW,
+        entity_registry_enabled_default=False
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.FlowCircuit3Target],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="flow_circuit_3_supply_temp_setpoint",
+        translation_key="flow_circuit_3_supply_temp_setpoint",
+        data_retriever=SensorDataRetriever.RAW,
+        entity_registry_enabled_default=False
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.FlowCircuit4Target],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="flow_circuit_4_supply_temp_setpoint",
+        translation_key="flow_circuit_4_supply_temp_setpoint",
+        data_retriever=SensorDataRetriever.RAW,
+        entity_registry_enabled_default=False
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Speed.CompressorRps],
+        native_unit_of_measurement="rpm",
+        state_class=SensorStateClass.MEASUREMENT,
+        icon="mdi:fan",
+        key="compressor_speed_rpm",
+        translation_key="compressor_speed_rpm",
+        data_retriever=SensorDataRetriever.RAW
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.HeatingBuffer],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="heating_buffer_temperature",
+        translation_key="heating_buffer_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.CoolingBuffer],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="cooling_buffer_temperature",
+        translation_key="cooling_buffer_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.HeatingCoolingBuffer],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="heating_cooling_buffer_temperature",
+        translation_key="heating_cooling_buffer_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.State.EnergyManagement],
+        device_class=SensorDeviceClass.ENUM,
+        icon="mdi:home-battery-outline",
+        key="energy_management_mode",
+        translation_key="energy_management_mode",
+        data_retriever=lambda data: ENERGY_MANAGEMENT_MODES_MAP.get(int(data)),
+        options=[mode for mode in EnergyManagementMode]
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Position.FourThreeWayValve],
+        device_class=SensorDeviceClass.ENUM,
+        key="four_three_way_valve_position",
+        translation_key="four_three_way_valve_position",
+        icon="mdi:valve",
+        data_retriever=lambda data: FOUR_THREE_WAY_VALVE_POSITION_MAP.get(int(data)),
+        options=[mode for mode in FourThreeWayValvePosition]
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.DesiredThermalCapacity],
+        device_class=SensorDeviceClass.POWER,
+        native_unit_of_measurement=UnitOfPower.WATT,
+        suggested_unit_of_measurement=UnitOfPower.KILO_WATT,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="desired_thermal_capacity",
+        translation_key="desired_thermal_capacity",
+        icon="mdi:heat-wave",
+        data_retriever=SensorDataRetriever.RAW
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.DesiredThermalEnergyDefrost],
+        device_class=SensorDeviceClass.POWER,
+        native_unit_of_measurement=UnitOfPower.WATT,
+        suggested_unit_of_measurement=UnitOfPower.KILO_WATT,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="desired_thermal_energy_defrost",
+        translation_key="desired_thermal_energy_defrost",
+        icon="mdi:snowflake-melt",
+        data_retriever=SensorDataRetriever.RAW
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.AdditionalHeaterStatistics],
+        device_class=SensorDeviceClass.DURATION,
+        native_unit_of_measurement=UnitOfTime.HOURS,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        key="additional_heater_operating_hours",
+        translation_key="additional_heater_operating_hours",
+        data_retriever=SensorDataRetriever.HOURS
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.AdditionalHeaterStatistics],
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:counter",
+        key="additional_heater_starts",
+        translation_key="additional_heater_starts",
+        data_retriever=SensorDataRetriever.STARTS
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.CompressorStatistics],
+        device_class=SensorDeviceClass.DURATION,
+        native_unit_of_measurement=UnitOfTime.HOURS,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        key="compressor_operating_hours",
+        translation_key="compressor_operating_hours",
+        data_retriever=SensorDataRetriever.HOURS
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.CompressorStatistics],
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:counter",
+        key="compressor_starts",
+        translation_key="compressor_starts",
+        data_retriever=SensorDataRetriever.STARTS
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.Cop],
+        native_unit_of_measurement="COP",
+        icon="mdi:leaf",
+        key="cop_total_current_year",
+        translation_key="cop_total_current_year",
+        data_retriever=SensorDataRetriever.CURRENT_YEAR
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.CopHeating],
+        native_unit_of_measurement="COP",
+        icon="mdi:leaf",
+        key="cop_heating_current_year",
+        translation_key="cop_heating_current_year",
+        data_retriever=SensorDataRetriever.CURRENT_YEAR
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.CopDhw],
+        native_unit_of_measurement="COP",
+        icon="mdi:leaf",
+        key="cop_dhw_current_year",
+        translation_key="cop_dhw_current_year",
+        data_retriever=SensorDataRetriever.CURRENT_YEAR
     ),
 
     ##################
@@ -499,8 +825,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="battery_charge_week",
         translation_key="battery_charge_week",
-        data_retriever=SensorDataRetriever.BATTERY_CHARGE_WEEK,
-        entity_registry_enabled_default=False
+        data_retriever=SensorDataRetriever.BATTERY_CHARGE_WEEK
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.Battery],
@@ -510,8 +835,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="battery_charge_month",
         translation_key="battery_charge_month",
-        data_retriever=SensorDataRetriever.BATTERY_CHARGE_MONTH,
-        entity_registry_enabled_default=False
+        data_retriever=SensorDataRetriever.BATTERY_CHARGE_MONTH
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.Battery],
@@ -521,8 +845,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="battery_charge_year",
         translation_key="battery_charge_year",
-        data_retriever=SensorDataRetriever.BATTERY_CHARGE_YEAR,
-        entity_registry_enabled_default=False
+        data_retriever=SensorDataRetriever.BATTERY_CHARGE_YEAR
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.Battery],
@@ -552,8 +875,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="battery_discharge_week",
         translation_key="battery_discharge_week",
-        data_retriever=SensorDataRetriever.BATTERY_DISCHARGE_WEEK,
-        entity_registry_enabled_default=False
+        data_retriever=SensorDataRetriever.BATTERY_DISCHARGE_WEEK
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.Battery],
@@ -563,8 +885,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="battery_discharge_month",
         translation_key="battery_discharge_month",
-        data_retriever=SensorDataRetriever.BATTERY_DISCHARGE_MONTH,
-        entity_registry_enabled_default=False
+        data_retriever=SensorDataRetriever.BATTERY_DISCHARGE_MONTH
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.Battery],
@@ -574,8 +895,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="battery_discharge_year",
         translation_key="battery_discharge_year",
-        data_retriever=SensorDataRetriever.BATTERY_DISCHARGE_YEAR,
-        entity_registry_enabled_default=False
+        data_retriever=SensorDataRetriever.BATTERY_DISCHARGE_YEAR
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.Battery],
@@ -659,8 +979,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="pv_energy_production_week",
         translation_key="pv_energy_production_week",
-        data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_WEEK,
-        entity_registry_enabled_default=False
+        data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_WEEK
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.PV],
@@ -670,8 +989,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="pv_energy_production_month",
         translation_key="pv_energy_production_month",
-        data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_MONTH,
-        entity_registry_enabled_default=False
+        data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_MONTH
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.PV],
@@ -681,8 +999,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="pv_energy_production_year",
         translation_key="pv_energy_production_year",
-        data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_YEAR,
-        entity_registry_enabled_default=False
+        data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_YEAR
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.PV],
@@ -791,4 +1108,96 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         translation_key="exhaust_air_humidity",
         data_retriever=SensorDataRetriever.ACTUAL
     ),
+)
+
+## Sensors which are derived by calculation
+DERIVED_SENSORS: tuple[Open3eDerivedSensorEntityDescription, ...] = (
+
+    ###############
+    ### VITOCAL ###
+    ###############
+
+    Open3eDerivedSensorEntityDescription(
+        poll_data_features=[Features.Energy.CentralHeating, Features.Energy.Cooling, Features.Energy.DomesticHotWater],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="energy_consumption_total_today",
+        translation_key="energy_consumption_total_today",
+        data_retrievers=[SensorDataRetriever.TODAY] * 3,
+        compute_value=lambda heating, cooling, dhw: heating + cooling + dhw
+    ),
+    Open3eDerivedSensorEntityDescription(
+        poll_data_features=[Features.Power.ThermalCapacitySystem, Features.Power.System],
+        native_unit_of_measurement="COP",
+        state_class=SensorStateClass.MEASUREMENT,
+        key="cop_currently",
+        translation_key="cop_currently",
+        icon="mdi:leaf",
+        data_retrievers=[SensorDataRetriever.RAW] * 2,
+        compute_value=lambda thermal, electric: SensorDataDeriver._calculate_cop(
+            thermals=(thermal,),
+            electrics=(electric,)
+        )
+    ),
+    Open3eDerivedSensorEntityDescription(
+        poll_data_features=[Features.Energy.HeatingOutput, Features.Energy.CentralHeating],
+        native_unit_of_measurement="COP",
+        state_class=SensorStateClass.MEASUREMENT,
+        key="cop_heating_today",
+        translation_key="cop_heating_today",
+        icon="mdi:leaf",
+        data_retrievers=[SensorDataRetriever.TODAY] * 2,
+        compute_value=lambda thermal, electric: SensorDataDeriver._calculate_cop(
+            thermals=(thermal,),
+            electrics=(electric,)
+        ),
+    ),
+    Open3eDerivedSensorEntityDescription(
+        poll_data_features=[Features.Energy.CoolingOutput, Features.Energy.Cooling],
+        native_unit_of_measurement="COP",
+        state_class=SensorStateClass.MEASUREMENT,
+        key="cop_cooling_today",
+        translation_key="cop_cooling_today",
+        icon="mdi:leaf",
+        data_retrievers=[SensorDataRetriever.TODAY] * 2,
+        compute_value=lambda thermal, electric: SensorDataDeriver._calculate_cop(
+            thermals=(thermal,),
+            electrics=(electric,)
+        ),
+        entity_registry_enabled_default=False
+    ),
+    Open3eDerivedSensorEntityDescription(
+        poll_data_features=[Features.Energy.WarmWaterOutput, Features.Energy.DomesticHotWater],
+        native_unit_of_measurement="COP",
+        state_class=SensorStateClass.MEASUREMENT,
+        key="cop_dhw_today",
+        translation_key="cop_dhw_today",
+        icon="mdi:leaf",
+        data_retrievers=[SensorDataRetriever.TODAY] * 2,
+        compute_value=lambda thermal, electric: SensorDataDeriver._calculate_cop(
+            thermals=(thermal,),
+            electrics=(electric,)
+        )
+    ),
+    Open3eDerivedSensorEntityDescription(
+        poll_data_features=[
+            Features.Energy.HeatingOutput,
+            Features.Energy.CoolingOutput,
+            Features.Energy.WarmWaterOutput,
+            Features.Energy.CentralHeating,
+            Features.Energy.Cooling,
+            Features.Energy.DomesticHotWater
+        ],
+        native_unit_of_measurement="COP",
+        state_class=SensorStateClass.MEASUREMENT,
+        key="cop_total_today",
+        translation_key="cop_total_today",
+        icon="mdi:leaf",
+        data_retrievers=[SensorDataRetriever.TODAY] * 6,
+        compute_value=lambda heating_t, cooling_t, dhw_t, heating_e, cooling_e, dhw_e: SensorDataDeriver._calculate_cop(
+            thermals=(heating_t, cooling_t, dhw_t),
+            electrics=(heating_e, cooling_e, dhw_e)
+        )
+    )
 )

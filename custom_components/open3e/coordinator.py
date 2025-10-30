@@ -20,6 +20,8 @@ from .api import Open3eMqttClient
 from .const import DOMAIN
 from .definitions.open3e_data import Open3eDataSystemInformation, Open3eDataDevice
 from .definitions.subfeatures.buffer_mode import BufferMode
+from .definitions.subfeatures.dhw_hysteresis import DhwHysteresis
+from .definitions.subfeatures.heating_curve import HeatingCurve
 from .errors import Open3eCoordinatorUpdateFailed
 
 _LOGGER = logging.getLogger(__name__)
@@ -192,6 +194,23 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
 
         await self.async_refresh_feature(device, [set_programs_feature_id])
 
+    async def async_set_program_temperature_cooling(
+            self,
+            set_programs_feature_id: int,
+            program: Program,
+            temperature: float,
+            device: Open3eDataDevice
+    ):
+        await self.__client.async_set_program_temperature_cooling(
+            hass=self.hass,
+            set_programs_feature_id=set_programs_feature_id,
+            program=program,
+            temperature=temperature,
+            device_id=device.id
+        )
+
+        await self.async_refresh_feature(device, [set_programs_feature_id])
+
     async def async_set_hot_water_temperature(
             self,
             feature_id: int,
@@ -315,6 +334,55 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
 
         await self.async_refresh_feature(device, [feature_id])
 
+    async def async_set_frost_protection_temperature(
+            self,
+            feature_id: int,
+            value: float,
+            device: Open3eDataDevice
+    ):
+        await self.__client.async_set_frost_protection_temperature(
+            hass=self.hass,
+            feature_id=feature_id,
+            value=value,
+            device_id=device.id
+        )
+
+        await self.async_refresh_feature(device, [feature_id])
+
+    async def async_set_heating_curve(
+            self,
+            feature_id: int,
+            heating_curve: HeatingCurve,
+            value: float,
+            device: Open3eDataDevice
+    ):
+        await self.__client.async_set_heating_curve(
+            hass=self.hass,
+            feature_id=feature_id,
+            heating_curve=heating_curve,
+            value=value,
+            device_id=device.id
+        )
+
+        await self.async_refresh_feature(device, [feature_id])
+
+    async def async_set_dhw_hysteresis(
+            self,
+            feature_id: int,
+            hysteresis: DhwHysteresis,
+            value: float,
+            device: Open3eDataDevice
+    ):
+        await self.__client.async_set_dhw_hysteresis(
+            hass=self.hass,
+            feature_id=feature_id,
+            hysteresis=hysteresis,
+            value=value,
+            device_id=device.id
+        )
+
+        await self.async_refresh_feature(device, [feature_id])
+
     async def async_set_buffer_mode(
             self,
             feature_id: int,
@@ -337,6 +405,21 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             device: Open3eDataDevice
     ):
         await self.__client.async_set_hot_water_quickmode(
+            hass=self.hass,
+            feature_id=feature_id,
+            is_on=is_on,
+            device_id=device.id
+        )
+
+        await self.async_refresh_feature(device, [feature_id])
+
+    async def async_set_hot_water_circulation_pump(
+            self,
+            feature_id: int,
+            is_on: bool,
+            device: Open3eDataDevice
+    ):
+        await self.__client.async_set_hot_water_circulation_pump(
             hass=self.hass,
             feature_id=feature_id,
             is_on=is_on,

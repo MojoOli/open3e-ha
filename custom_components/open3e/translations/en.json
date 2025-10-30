@@ -46,6 +46,9 @@
       "energy_consumption_central_heating_current_year": {
         "name": "Energy consumption central heating current year"
       },
+      "energy_consumption_central_heating_past_year": {
+        "name": "Energy consumption central heating past year"
+      },
       "energy_consumption_domestic_hot_water_today": {
         "name": "Energy consumption domestic hot water today"
       },
@@ -55,6 +58,9 @@
       "energy_consumption_domestic_hot_water_current_year": {
         "name": "Energy consumption domestic hot water current year"
       },
+      "energy_consumption_domestic_hot_water_past_year": {
+        "name": "Energy consumption domestic hot water past year"
+      },
       "energy_consumption_cooling_today": {
         "name": "Energy consumption cooling today"
       },
@@ -63,6 +69,12 @@
       },
       "energy_consumption_cooling_current_year": {
         "name": "Energy consumption cooling current year"
+      },
+      "energy_consumption_cooling_past_year": {
+        "name": "Energy consumption cooling past year"
+      },
+      "energy_consumption_total_today": {
+        "name": "Energy consumption total today"
       },
       "outside_temperature": {
         "name": "Outside temperature"
@@ -74,7 +86,7 @@
         "name": "Secondary heat exchanger temperature"
       },
       "central_heating_pump_speed_percentage": {
-        "name": "Central heating pump speed percentage"
+        "name": "Central heating pump"
       },
       "power_consumption_system": {
         "name": "Power consumption system"
@@ -221,6 +233,9 @@
         "name": "Evaporation Vapor Temperature"
       },
       "compressor_speed_percentage": {
+        "name": "Compressor Speed Percentage"
+      },
+      "compressor_speed_rpm": {
         "name": "Compressor Speed"
       },
       "outdoor_air_temperature": {
@@ -252,6 +267,111 @@
       },
       "battery_temperature": {
         "name": "Battery Temperature"
+      },
+      "thermal_output_today": {
+        "name": "Thermal Output Today"
+      },
+      "cooling_output_today": {
+        "name": "Cooling Output Today"
+      },
+      "warm_water_output_today": {
+        "name": "Warm Water Output Today"
+      },
+      "flow_circuit_1_supply_temp_setpoint": {
+        "name": "Flow Circuit 1 Supply Temperature Setpoint"
+      },
+      "flow_circuit_2_supply_temp_setpoint": {
+        "name": "Flow Circuit 2 Supply Temperature Setpoint"
+      },
+      "flow_circuit_3_supply_temp_setpoint": {
+        "name": "Flow Circuit 3 Supply Temperature Setpoint"
+      },
+      "flow_circuit_4_supply_temp_setpoint": {
+        "name": "Flow Circuit 4 Supply Temperature Setpoint"
+      },
+      "heating_buffer_temperature": {
+        "name": "Heating Buffer Temperature"
+      },
+      "cooling_buffer_temperature": {
+        "name": "Cooling Buffer Temperature"
+      },
+      "heating_cooling_buffer_temperature": {
+        "name": "Heating/Cooling Buffer Temperature"
+      },
+      "energy_management_mode": {
+        "name": "SmartGrid Operating State",
+        "state": {
+          "shutdown_mode": "Shutdown Mode",
+          "normal_mode": "Normal Mode",
+          "preferred_mode": "Preferred Mode",
+          "forced_mode": "Forced Mode"
+        }
+      },
+      "four_three_way_valve_position": {
+        "name": "4/3-Way Valve Position",
+        "state": {
+          "buffer": "Buffer",
+          "idle": "Idle",
+          "hot_water": "Hot Water"
+        }
+      },
+      "desired_thermal_capacity": {
+        "name": "Desired Thermal Power"
+      },
+      "desired_thermal_energy_defrost": {
+        "name": "Desired Thermal Power Defrost"
+      },
+      "additional_heater_operating_hours": {
+        "name": "Additional Heater Operating Hours"
+      },
+      "additional_heater_starts": {
+        "name": "Additional Heater Starts"
+      },
+      "compressor_operating_hours": {
+        "name": "Compressor Operating Hours"
+      },
+      "compressor_starts": {
+        "name": "Compressor Starts"
+      },
+      "service_manager_required": {
+        "name": "Service required"
+      },
+      "malfunction_id": {
+        "name": "Malfunction Identification"
+      },
+      "error_dtc_list": {
+        "name": "Errors"
+      },
+      "connection_status": {
+        "name": "Connection status",
+        "state": {
+          "connected": "Connected",
+          "not_connected": "Disconnected"
+        }
+      },
+      "cop_total_current_year": {
+        "name": "COP total year"
+      },
+      "cop_heating_current_year": {
+        "name": "COP heating year"
+      },
+      "cop_dhw_current_year": {
+        "name": "COP warm water year"
+      },
+      "cop_currently": {
+        "name": "COP currently"
+      },
+      "cop_heating_today": {
+        "name": "COP heating today"
+      },
+      "cop_cooling_today": {
+        "name": "COP cooling today"
+      },
+      "cop_dhw_today": {
+        "name": "COP warm water today"
+      },
+      "cop_total_today": {
+        "name": "COP total today"
       }
     },
     "binary_sensor": {
@@ -261,14 +381,11 @@
       "circuit_pump": {
         "name": "Heating Circuit Pump"
       },
-      "hot_water_circulation_pump": {
-        "name": "Hot Water Circulation Pump"
-      },
       "hot_water_circulation_pump_hygiene": {
         "name": "Hot Water Legionella Protection"
       },
-      "heater_active": {
-        "name": "Heater"
+      "additional_heater_active": {
+        "name": "Additional Heater"
       },
       "heat_pump_compressor_active": {
         "name": "Heat Pump Compressor"
@@ -308,40 +425,76 @@
     },
     "number": {
       "circuit_1_comfort_temperature": {
-        "name": "Climate circuit 1 Comfort temperature"
+        "name": "Climate circuit 1 heating Comfort"
       },
       "circuit_1_standard_temperature": {
-        "name": "Climate circuit 1 Standard temperature"
+        "name": "Climate circuit 1 heating Standard"
       },
       "circuit_1_reduced_temperature": {
-        "name": "Climate circuit 1 Reduced temperature"
+        "name": "Climate circuit 1 heating Reduced"
       },
       "circuit_2_comfort_temperature": {
-        "name": "Climate circuit 2 Comfort temperature"
+        "name": "Climate circuit 2 heating Comfort"
       },
       "circuit_2_standard_temperature": {
-        "name": "Climate circuit 2 Standard temperature"
+        "name": "Climate circuit 2 heating Standard"
       },
       "circuit_2_reduced_temperature": {
-        "name": "Climate circuit 2 Reduced temperature"
+        "name": "Climate circuit 2 heating Reduced"
       },
       "circuit_3_comfort_temperature": {
-        "name": "Climate circuit 3 Comfort temperature"
+        "name": "Climate circuit 3 heating Comfort"
       },
       "circuit_3_standard_temperature": {
-        "name": "Climate circuit 3 Standard temperature"
+        "name": "Climate circuit 3 heating Standard"
       },
       "circuit_3_reduced_temperature": {
-        "name": "Climate circuit 3 Reduced temperature"
+        "name": "Climate circuit 3 heating Reduced"
       },
       "circuit_4_comfort_temperature": {
-        "name": "Climate circuit 4 Comfort temperature"
+        "name": "Climate circuit 4 heating Comfort"
       },
       "circuit_4_standard_temperature": {
-        "name": "Climate circuit 4 Standard temperature"
+        "name": "Climate circuit 4 heating Standard"
       },
       "circuit_4_reduced_temperature": {
-        "name": "Climate circuit 4 Reduced temperature"
+        "name": "Climate circuit 4 heating Reduced"
+      },
+      "circuit_1_comfort_cooling": {
+        "name": "Climate circuit 1 cooling Comfort"
+      },
+      "circuit_1_standard_cooling": {
+        "name": "Climate circuit 1 cooling Standard"
+      },
+      "circuit_1_reduced_cooling": {
+        "name": "Climate circuit 1 cooling Reduced"
+      },
+      "circuit_2_comfort_cooling": {
+        "name": "Climate circuit 2 cooling Comfort"
+      },
+      "circuit_2_standard_cooling": {
+        "name": "Climate circuit 2 cooling Standard"
+      },
+      "circuit_2_reduced_cooling": {
+        "name": "Climate circuit 2 cooling Reduced"
+      },
+      "circuit_3_comfort_cooling": {
+        "name": "Climate circuit 3 cooling Comfort"
+      },
+      "circuit_3_standard_cooling": {
+        "name": "Climate circuit 3 cooling Standard"
+      },
+      "circuit_3_reduced_cooling": {
+        "name": "Climate circuit 3 cooling Reduced"
+      },
+      "circuit_4_comfort_cooling": {
+        "name": "Climate circuit 4 cooling Comfort"
+      },
+      "circuit_4_standard_cooling": {
+        "name": "Climate circuit 4 cooling Standard"
+      },
+      "circuit_4_reduced_cooling": {
+        "name": "Climate circuit 4 cooling Reduced"
       },
       "heater_max_power": {
         "name": "Electrical Heater Maximum Power"
@@ -375,6 +528,39 @@
       },
       "buffer_max_temperature": {
         "name": "Buffer Tank Max Temperature"
+      },
+      "frost_protection_temperature": {
+        "name": "Frost Protection Temperature Heating Circuit"
+      },
+      "circuit_1_heating_curve_slope": {
+        "name": "Heating Curve 1 Slope"
+      },
+      "circuit_2_heating_curve_slope": {
+        "name": "Heating Curve 2 Slope"
+      },
+      "circuit_3_heating_curve_slope": {
+        "name": "Heating Curve 3 Slope"
+      },
+      "circuit_4_heating_curve_slope": {
+        "name": "Heating Curve 4 Slope"
+      },
+      "circuit_1_heating_curve_level": {
+        "name": "Heating Curve 1 Level"
+      },
+      "circuit_2_heating_curve_level": {
+        "name": "Heating Curve 2 Level"
+      },
+      "circuit_3_heating_curve_level": {
+        "name": "Heating Curve 3 Level"
+      },
+      "circuit_4_heating_curve_level": {
+        "name": "Heating Curve 4 Level"
+      },
+      "dhw_hysteresis_on": {
+        "name": "Warm Water Hysteresis On"
+      },
+      "dhw_hysteresis_off": {
+        "name": "Warm Water Hysteresis Off"
       }
     },
     "select": {
@@ -394,6 +580,9 @@
     "switch": {
       "i_want_hot_water": {
         "name": "Shortly generate hot water"
+      },
+      "hot_water_circulation_pump": {
+        "name": "Hot Water Circulation Pump"
       }
     }
   }
