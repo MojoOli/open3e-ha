@@ -31,7 +31,13 @@ jobs:
       - name: Calculate next version
         id: next_version
         run: |
-          version="${{ steps.get_tag.outputs.tag#v }}"
+          # Get latest tag
+          version="${{ steps.get_tag.outputs.tag }}"
+          
+          # Strip leading 'v'
+          version="${version#v}"
+
+          # Split into major, minor, patch
           IFS='.' read -r major minor patch <<< "$version"
 
           # Increment patch
