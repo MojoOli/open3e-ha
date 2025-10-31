@@ -24,6 +24,7 @@ from .definitions.open3e_data import Open3eDataSystemInformation
 from .definitions.subfeatures.buffer_mode import BufferMode
 from .definitions.subfeatures.dhw_hysteresis import DhwHysteresis
 from .definitions.subfeatures.heating_curve import HeatingCurve
+from .definitions.subfeatures.vitoair_quick_mode import VitoairQuickMode
 from .errors import Open3eServerTimeoutError, Open3eError, Open3eServerUnavailableError
 
 _LOGGER = logging.getLogger(__name__)
@@ -496,6 +497,27 @@ class Open3eMqttClient:
                 payload=self.__write_json_payload(
                     feature_id=feature_id,
                     data={"OpMode": 2, "Required": "on" if is_on else "off", "Unknown": "0000"},
+                    device_id=device_id
+                )
+            )
+        except Exception as exception:
+            raise Open3eError(exception)
+
+    async def async_set_vitoair_quick_mode(
+            self,
+            hass: HomeAssistant,
+            feature_id: int,
+            mode: VitoairQuickMode,
+            device_id: int
+    ):
+        try:
+            _LOGGER.debug(f"Setting quickmode to {mode} of feature ID {feature_id}")
+            await mqtt.async_publish(
+                hass=hass,
+                topic=self.__mqtt_cmd,
+                payload=self.__write_json_payload(
+                    feature_id=feature_id,
+                    data={"OpMode": mode.map_to_api(), "Required": "on", "Unknown": "3c00"},  # 3c00 -> 60mins
                     device_id=device_id
                 )
             )

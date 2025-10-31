@@ -372,6 +372,12 @@
       },
       "cop_total_today": {
         "name": "COP total today"
+      },
+      "supply_air_fan_speed": {
+        "name": "Supply Air Fan"
+      },
+      "exhaust_air_fan_speed": {
+        "name": "Exhaust Air Fan"
       }
     },
     "binary_sensor": {
@@ -569,6 +575,15 @@
         "state": {
           "heating": "Heating",
           "cooling": "Cooling"
+        }
+      },
+      "quick_operation_mode": {
+        "name": "Quick mode",
+        "state": {
+          "none": "-",
+          "intensive": "Intensive Ventilation",
+          "reduced_noise": "Reduced Noise",
+          "off": "Turn Off"
         }
       }
     },

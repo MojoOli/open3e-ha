@@ -1108,6 +1108,26 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         translation_key="exhaust_air_humidity",
         data_retriever=SensorDataRetriever.ACTUAL
     ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Speed.SupplyAirFan],
+        device_class=SensorDeviceClass.POWER_FACTOR,
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        icon="mdi:fan",
+        key="supply_air_fan_speed",
+        translation_key="supply_air_fan_speed",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Speed.ExhaustAirFan],
+        device_class=SensorDeviceClass.POWER_FACTOR,
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        icon="mdi:fan",
+        key="exhaust_air_fan_speed",
+        translation_key="exhaust_air_fan_speed",
+        data_retriever=SensorDataRetriever.ACTUAL
+    ),
 )
 
 ## Sensors which are derived by calculation

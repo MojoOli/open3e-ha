@@ -372,6 +372,12 @@
       },
       "cop_total_today": {
         "name": "COP Gesamt heute"
+      },
+      "supply_air_fan_speed": {
+        "name": "Zuluftventilator"
+      },
+      "exhaust_air_fan_speed": {
+        "name": "Abluftventilator"
       }
     },
     "binary_sensor": {
@@ -569,6 +575,15 @@
         "state": {
           "heating": "Heizen",
           "cooling": "Kühlen"
+        }
+      },
+      "quick_operation_mode": {
+        "name": "Schnellmodus",
+        "state": {
+          "none": "-",
+          "intensive": "Intensivlüftung",
+          "reduced_noise": "Reduzierte Lüftung",
+          "off": "Anlagenabschaltung"
         }
       }
     },

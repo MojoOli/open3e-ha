@@ -117,6 +117,7 @@ class Features:
         HotWaterCirculationPump = Feature(id=491, refresh_interval=30)
         DomesticHotWaterCirculationPumpMode = Feature(id=497, refresh_interval=30)
         TargetQuickMode = Feature(id=1006, refresh_interval=30)
+        CurrentQuickMode = Feature(id=1007, refresh_interval=30)
         FrostProtection = Feature(id=2489, refresh_interval=30)
         EnergyManagement = Feature(id=2350, refresh_interval=30)
         FlowCircuit1HeatingCurve = Feature(id=880, refresh_interval=30)
@@ -127,6 +128,8 @@ class Features:
     class Speed:
         CompressorPercent = Feature(id=2346, refresh_interval=10)
         CompressorRps = Feature(id=2569, refresh_interval=10)
+        SupplyAirFan = Feature(id=1040, refresh_interval=10)
+        ExhaustAirFan = Feature(id=1041, refresh_interval=10)
 
     class Position:
         ExpansionValve1 = Feature(id=389, refresh_interval=30)
