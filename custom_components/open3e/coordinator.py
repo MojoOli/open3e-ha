@@ -84,7 +84,6 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
         self.__entry_id = entry_id
         self.__endpoints = {}
         self.__server_available = None
-        _LOGGER.debug(f"Initializing Open3eDataUpdateCoordinator")
 
     async def _async_setup(self):
         """Set up the coordinator
