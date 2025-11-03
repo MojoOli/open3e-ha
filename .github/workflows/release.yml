@@ -14,13 +14,13 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write  # Needed to push tags and create releases
+      contents: write
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
         with:
-          fetch-depth: 0  # Needed to get all tags
+          fetch-depth: 0
 
       - name: Get latest tag
         id: get_tag
@@ -32,20 +32,12 @@ jobs:
       - name: Calculate next version
         id: next_version
         run: |
-          # Get latest tag
           version="${{ steps.get_tag.outputs.tag }}"
-          
-          # Strip leading 'v'
           version="${version#v}"
-
-          # Split into major, minor, patch
           IFS='.' read -r major minor patch <<< "$version"
-
-          # Increment patch
           patch=$((patch + 1))
 
-          # Roll over if the input flag is true
-          rollover="${{ github.event.inputs.rollover }}"
+          rollover="${{ github.event.inputs.rollover || 'false' }}"
           if [ "$rollover" = "true" ] && [ "$patch" -ge 10 ]; then
             patch=0
             minor=$((minor + 1))
@@ -54,6 +46,26 @@ jobs:
           new_version="v${major}.${minor}.${patch}"
           echo "New version: $new_version"
           echo "new_version=$new_version" >> $GITHUB_OUTPUT
+
+      - name: Generate release notes
+        id: release_notes
+        run: |
+          latest_tag="${{ steps.get_tag.outputs.tag }}"
+          new_version="${{ steps.next_version.outputs.new_version }}"
+
+          # Get commit messages since last tag
+          if [ "$latest_tag" = "v0.0.0" ]; then
+            notes=$(git log --oneline)
+          else
+            notes=$(git log "$latest_tag"..HEAD --oneline)
+          fi
+
+          # Fallback if no commits
+          if [ -z "$notes" ]; then
+            notes="No changes since last release."
+          fi
+
+          echo "release_notes=$notes" >> $GITHUB_OUTPUT
 
       - name: Create new Git tag
         run: |
@@ -67,6 +79,4 @@ jobs:
         with:
           tag_name: ${{ steps.next_version.outputs.new_version }}
           name: ${{ steps.next_version.outputs.new_version }}
-          body: |
-            Manual release created by workflow dispatch.
-            Rollover enabled: ${{ github.event.inputs.rollover }}
+          body: ${{ steps.release_notes.outputs.release_notes }}
