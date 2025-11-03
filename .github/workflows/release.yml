@@ -5,7 +5,7 @@ on:
     inputs:
       rollover:
         description: "Whether the patch number should roll over to the next minor version (true/false)"
-        required: true
+        required: false
         default: "false"
 
 jobs:
@@ -26,7 +26,6 @@ jobs:
         id: get_tag
         run: |
           latest_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
-          echo "Latest tag: $latest_tag"
           echo "tag=$latest_tag" >> $GITHUB_OUTPUT
 
       - name: Calculate next version
@@ -44,27 +43,43 @@ jobs:
           fi
 
           new_version="v${major}.${minor}.${patch}"
-          echo "New version: $new_version"
           echo "new_version=$new_version" >> $GITHUB_OUTPUT
 
       - name: Generate release notes
         id: release_notes
         run: |
           latest_tag="${{ steps.get_tag.outputs.tag }}"
-          new_version="${{ steps.next_version.outputs.new_version }}"
-          
+          new_tag="${{ steps.next_version.outputs.new_version }}"
+
           if [ "$latest_tag" = "v0.0.0" ]; then
-            notes=$(git log --oneline)
+            prs=$(gh pr list --state merged --limit 100 --json number,title,author --jq '.[] | "- \(.title) by @\(.author.login) in #\(.number)"')
           else
-            notes=$(git log "$latest_tag"..HEAD --oneline)
+            last_commit_date=$(git log -1 --format=%cI "$latest_tag")
+            prs=$(gh pr list --state merged --limit 100 --json number,title,author,mergedAt \
+                  --jq ".[] | select(.mergedAt > \"$last_commit_date\") | \"- \(.title) by @\(.author.login) in #\(.number)\"")
           fi
-          
-          if [ -z "$notes" ]; then
-            notes="No changes since last release."
+
+          if [ -z "$prs" ]; then
+            prs="- No merged pull requests since last release."
           fi
-          
+
+          # New Contributors
+          if [ "$latest_tag" = "v0.0.0" ]; then
+            contributors=$(gh pr list --state merged --limit 100 --json author --jq '.[] | "- @\(.author.login) made their first contribution"')
+          else
+            last_commit_date=$(git log -1 --format=%cI "$latest_tag")
+            contributors=$(gh pr list --state merged --limit 100 --json author,mergedAt \
+                           --jq ".[] | select(.mergedAt > \"$last_commit_date\") | \"- @\(.author.login) made their first contribution\"")
+          fi
+
+          if [ -z "$contributors" ]; then
+            contributors="- No new contributors."
+          fi
+
+          release_notes="## What's Changed\n$prs\n\n## New Contributors\n$contributors\n\nFull Changelog: https://github.com/${GITHUB_REPOSITORY}/compare/$latest_tag...$new_tag"
+
           echo "release_notes<<EOF" >> $GITHUB_OUTPUT
-          echo "$notes" >> $GITHUB_OUTPUT
+          echo "$release_notes" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Create new Git tag
