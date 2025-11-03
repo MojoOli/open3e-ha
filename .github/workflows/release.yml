@@ -6,6 +6,7 @@ on:
       rollover:
         description: "Whether the patch number should roll over to the next minor version (true/false)"
         required: true
+        default: "false"
 
 jobs:
   bump-version:
@@ -65,7 +66,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.next_version.outputs.new_version }}
-          name: Release ${{ steps.next_version.outputs.new_version }}
+          name: ${{ steps.next_version.outputs.new_version }}
           body: |
             Manual release created by workflow dispatch.
             Rollover enabled: ${{ github.event.inputs.rollover }}
