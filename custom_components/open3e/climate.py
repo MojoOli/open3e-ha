@@ -42,26 +42,13 @@ async def async_setup_entry(
 
 
 class Open3eClimate(Open3eEntity, ClimateEntity):
-    _attr_precision = PRECISION_TENTHS
-    _attr_supported_features = (
-            ClimateEntityFeature.TARGET_TEMPERATURE
-            | ClimateEntityFeature.PRESET_MODE
-            | ClimateEntityFeature.TURN_OFF
-            | ClimateEntityFeature.TURN_ON
-    )
-    _attr_temperature_unit = UnitOfTemperature.CELSIUS
-    _attr_min_temp = VIESSMANN_TEMP_HEATING_MIN
-    _attr_max_temp = VIESSMANN_TEMP_HEATING_MAX
-    _attr_target_temperature_step = PRECISION_WHOLE
-    _attr_hvac_modes = [HVACMode.OFF, HVACMode.AUTO]
-
     __current_hvac_actions: list[HVACAction]
 
-    __current_room_temperature: float | None = None
-    __current_flow_temperature: float | None = None
+    __current_room_temperature: float | None
+    __current_flow_temperature: float | None
 
-    __current_program: Program | None = None
-    __programs: Any | None = None
+    __current_program: Program | None
+    __programs: Any | None
 
     entity_description: Open3eClimateEntityDescription
 
@@ -77,6 +64,25 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
         self._attr_preset_mode = Program.Normal
         self._attr_hvac_mode = HVACMode.AUTO
         self.__current_hvac_actions = [HVACAction.IDLE]
+
+        self._attr_precision = PRECISION_TENTHS
+        self._attr_supported_features = (
+                ClimateEntityFeature.TARGET_TEMPERATURE
+                | ClimateEntityFeature.PRESET_MODE
+                | ClimateEntityFeature.TURN_OFF
+                | ClimateEntityFeature.TURN_ON
+        )
+        self._attr_temperature_unit = UnitOfTemperature.CELSIUS
+        self._attr_min_temp = VIESSMANN_TEMP_HEATING_MIN
+        self._attr_max_temp = VIESSMANN_TEMP_HEATING_MAX
+        self._attr_target_temperature_step = PRECISION_WHOLE
+        self._attr_hvac_modes = [HVACMode.OFF, HVACMode.AUTO]
+
+        self.__current_room_temperature = None
+        self.__current_flow_temperature = None
+
+        self.__current_program = None
+        self.__programs = None
 
     @property
     def available(self):

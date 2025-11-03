@@ -4,6 +4,7 @@ about: Add new entities to a device
 title: ''
 labels: enhancement
 assignees: ''
+
 ---
 
 ## Entity Description
