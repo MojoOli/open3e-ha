@@ -63,13 +63,13 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
     """
 
     __client: Open3eMqttClient
-    __server_available = None
+    __server_available: bool | None
 
     system_information: Open3eDataSystemInformation
     __device_registry: DeviceRegistry
     __entry_id: str
 
-    __endpoints: dict[tuple[int, int], CoordinatorEndpoint] = {}
+    __endpoints: dict[tuple[int, int], CoordinatorEndpoint]
 
     def __init__(self, hass, client: Open3eMqttClient, entry_id: str):
         super().__init__(
@@ -82,6 +82,9 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
         self.__client = client
         self.__device_registry = device_registry.async_get(hass)
         self.__entry_id = entry_id
+        self.__endpoints = {}
+        self.__server_available = None
+        _LOGGER.debug(f"Initializing Open3eDataUpdateCoordinator")
 
     async def _async_setup(self):
         """Set up the coordinator
@@ -148,7 +151,6 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
 
     async def on_entity_added(self, features: list[Feature], device: Open3eDataDevice):
         """Called when an entity is added."""
-        _LOGGER.debug("Entity was added to Coordinator")
         for feature in features:
             key = (device.id, feature.id)
             endpoint = self.__endpoints.get(key)

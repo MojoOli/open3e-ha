@@ -40,9 +40,14 @@ class Open3eDataDevice:
             for feature_dict in features_dict
         )
 
-        device = Open3eDataDevice(data.pop("id"), device.display_name, data.pop("serial_number"),
-                                  data.pop("software_version"),
-                                  data.pop("hardware_version"), features)
+        device = Open3eDataDevice(
+            data.pop("id"),
+            device.display_name,
+            data.pop("serial_number"),
+            data.pop("software_version"),
+            data.pop("hardware_version"),
+            features
+        )
 
         return device
 

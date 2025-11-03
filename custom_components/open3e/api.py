@@ -34,7 +34,7 @@ class Open3eMqttClient:
 
     __mqtt_cmd: str
     __mqtt_topic: str
-    __system_information: Open3eDataSystemInformation = {}
+    __system_information: Open3eDataSystemInformation | None
 
     def __init__(
             self,
@@ -43,6 +43,7 @@ class Open3eMqttClient:
     ) -> None:
         self.__mqtt_topic = mqtt_topic
         self.__mqtt_cmd = mqtt_cmd
+        self.__system_information = None
 
     __available = None
     """Only used to return availability"""

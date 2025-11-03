@@ -26,9 +26,9 @@ class Open3eEntity(CoordinatorEntity, Entity):
 
     device: Open3eDataDevice
     __mqtt_topics: list[Open3eDataDeviceFeature]
-    __mqtt_subscriptions: list[Callable] = []
+    __mqtt_subscriptions: list[Callable]
 
-    data: dict[int, Any] = {}
+    data: dict[int, Any]
 
     def __init__(
             self,
@@ -39,8 +39,6 @@ class Open3eEntity(CoordinatorEntity, Entity):
         """Initialize the sensor."""
         super().__init__(coordinator)
 
-        self.coordinator = coordinator
-
         self.device = device
 
         self.__mqtt_topics = coordinator.get_mqtt_topics_for_features(
@@ -48,7 +46,8 @@ class Open3eEntity(CoordinatorEntity, Entity):
             device=device
         )
 
-        slug = slugify(f"{device.name}_{device.serial_number}_{description.key}".replace("-", "_"))
+        slug = slugify(
+            f"{device.name}_{device.serial_number}_{description.key}".replace("-", "_"))
         self.entity_id = f'{description.domain}.{slug}'
         self._attr_unique_id = f'{DOMAIN}_{slug}'
 
@@ -57,6 +56,8 @@ class Open3eEntity(CoordinatorEntity, Entity):
         )
         self._attr_has_entity_name = True
         self.entity_description = description
+        self.__mqtt_subscriptions = []
+        self.data = {}
 
     async def async_added_to_hass(self) -> None:
         """Run when entity about to be added to hass."""
