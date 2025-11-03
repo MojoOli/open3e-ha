@@ -52,20 +52,20 @@ jobs:
         run: |
           latest_tag="${{ steps.get_tag.outputs.tag }}"
           new_version="${{ steps.next_version.outputs.new_version }}"
-
-          # Get commit messages since last tag
+          
           if [ "$latest_tag" = "v0.0.0" ]; then
             notes=$(git log --oneline)
           else
             notes=$(git log "$latest_tag"..HEAD --oneline)
           fi
-
-          # Fallback if no commits
+          
           if [ -z "$notes" ]; then
             notes="No changes since last release."
           fi
-
-          echo "release_notes=$notes" >> $GITHUB_OUTPUT
+          
+          echo "release_notes<<EOF" >> $GITHUB_OUTPUT
+          echo "$notes" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Create new Git tag
         run: |
