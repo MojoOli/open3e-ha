@@ -56,29 +56,18 @@ jobs:
           if [ "$latest_tag" = "v0.0.0" ]; then
             prs=$(gh pr list --state merged --limit 100 --json number,title,author \
                   --jq '.[] | "- \(.title) by @\(.author.login) in #\(.number)"')
-            contributors=$(gh pr list --state merged --limit 100 --json author \
-                  --jq '.[] | "- @\(.author.login) made their first contribution"')
           else
             last_commit_date=$(git log -1 --format=%cI "$latest_tag")
             prs=$(gh pr list --state merged --limit 100 --json number,title,author,mergedAt \
                   --jq ".[] | select(.mergedAt > \"$last_commit_date\") | \"- \(.title) by @\(.author.login) in #\(.number)\"")
-            contributors=$(gh pr list --state merged --limit 100 --json author,mergedAt \
-                  --jq ".[] | select(.mergedAt > \"$last_commit_date\") | \"- @\(.author.login) made their first contribution\"")
           fi
 
           if [ -z "$prs" ]; then
             prs="- No merged pull requests since last release."
           fi
 
-          if [ -z "$contributors" ]; then
-            contributors="- No new contributors."
-          fi
-
           release_notes="## What's Changed
           $prs
-          
-          ## New Contributors
-          $contributors
           
           Full Changelog: https://github.com/${GITHUB_REPOSITORY}/compare/$latest_tag...$new_tag"
 
