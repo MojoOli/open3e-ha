@@ -47,6 +47,8 @@ jobs:
 
       - name: Generate release notes
         id: release_notes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           latest_tag="${{ steps.get_tag.outputs.tag }}"
           new_tag="${{ steps.next_version.outputs.new_version }}"
