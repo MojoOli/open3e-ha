@@ -24,6 +24,7 @@ from .definitions.open3e_data import Open3eDataSystemInformation
 from .definitions.subfeatures.buffer_mode import BufferMode
 from .definitions.subfeatures.dhw_hysteresis import DhwHysteresis
 from .definitions.subfeatures.heating_curve import HeatingCurve
+from .definitions.subfeatures.hvac_mode import HvacMode
 from .errors import Open3eServerTimeoutError, Open3eError, Open3eServerUnavailableError
 
 _LOGGER = logging.getLogger(__name__)
@@ -209,30 +210,21 @@ class Open3eMqttClient:
         except Exception as exception:
             raise Open3eError(exception)
 
-    async def async_turn_hvac_on(self, hass: HomeAssistant, power_hvac_feature_id: int, device_id: int):
+    async def async_set_hvac_mode(
+            self,
+            hass: HomeAssistant,
+            mode: HvacMode,
+            hvac_mode_feature_id: int,
+            device_id: int
+    ):
         try:
-            _LOGGER.debug(f"Turning HVAC off with feature ID {power_hvac_feature_id}")
+            _LOGGER.debug(f"Setting HVAC mode {mode} of feature ID {hvac_mode_feature_id}")
             await mqtt.async_publish(
                 hass=hass,
                 topic=self.__mqtt_cmd,
-                payload=self.__write_raw_payload(
-                    feature_id=power_hvac_feature_id,
-                    data="0102",
-                    device_id=device_id
-                )
-            )
-        except Exception as exception:
-            raise Open3eError(exception)
-
-    async def async_turn_hvac_off(self, hass: HomeAssistant, power_hvac_feature_id: int, device_id: int):
-        try:
-            _LOGGER.debug(f"Turning HVAC off with feature ID {power_hvac_feature_id}")
-            await mqtt.async_publish(
-                hass=hass,
-                topic=self.__mqtt_cmd,
-                payload=self.__write_raw_payload(
-                    feature_id=power_hvac_feature_id,
-                    data="0000",
+                payload=self.__write_json_payload(
+                    feature_id=hvac_mode_feature_id,
+                    data=mode.to_api(),
                     device_id=device_id
                 )
             )

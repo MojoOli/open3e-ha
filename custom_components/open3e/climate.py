@@ -15,6 +15,7 @@ from .const import VIESSMANN_TEMP_HEATING_MIN, VIESSMANN_TEMP_HEATING_MAX, VIESS
 from .coordinator import Open3eDataUpdateCoordinator
 from .definitions.climate import Open3eClimateEntityDescription, CLIMATE
 from .definitions.open3e_data import Open3eDataDevice
+from .definitions.subfeatures.hvac_mode import HvacMode
 from .entity import Open3eEntity
 from .ha_data import Open3eDataConfigEntry
 from .util import map_devices_to_entities
@@ -42,8 +43,6 @@ async def async_setup_entry(
 
 
 class Open3eClimate(Open3eEntity, ClimateEntity):
-    __current_hvac_actions: list[HVACAction]
-
     __current_room_temperature: float | None
     __current_flow_temperature: float | None
 
@@ -63,7 +62,7 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
         self._attr_preset_modes = list(Program)
         self._attr_preset_mode = Program.Normal
         self._attr_hvac_mode = HVACMode.AUTO
-        self.__current_hvac_actions = [HVACAction.IDLE]
+        self._attr_hvac_action = HVACAction.IDLE
 
         self._attr_precision = PRECISION_TENTHS
         self._attr_supported_features = (
@@ -76,7 +75,7 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
         self._attr_min_temp = VIESSMANN_TEMP_HEATING_MIN
         self._attr_max_temp = VIESSMANN_TEMP_HEATING_MAX
         self._attr_target_temperature_step = PRECISION_WHOLE
-        self._attr_hvac_modes = [HVACMode.OFF, HVACMode.AUTO]
+        self._attr_hvac_modes = [HVACMode.OFF, HVACMode.HEAT, HVACMode.COOL]
 
         self.__current_room_temperature = None
         self.__current_flow_temperature = None
@@ -92,27 +91,10 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
         return self.__current_flow_temperature is not None and self.__current_flow_temperature > VIESSMANN_UNAVAILABLE_VALUE
 
     @property
-    def hvac_action(self) -> HVACAction:
-        """Return the current running hvac operation if supported."""
-        if HVACAction.OFF in self.__current_hvac_actions:
-            return HVACAction.OFF
-
-        if HVACAction.HEATING in self.__current_hvac_actions:
-            return HVACAction.HEATING
-
-        if HVACAction.FAN in self.__current_hvac_actions:
-            return HVACAction.FAN
-
-        return HVACAction.IDLE
-
-    @property
     def current_temperature(self) -> float | None:
         """Return the current temperature."""
         if self.__current_room_temperature is not None and self.__current_room_temperature > -100:
             return self.__current_room_temperature
-
-        if self.__current_flow_temperature is not None and self.__current_flow_temperature > -100:
-            return self.__current_flow_temperature
 
         return None
 
@@ -150,35 +132,35 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
             device=self.device
         )
 
-    async def async_turn_on(self):
-        """Turn the entity on."""
-        await self.coordinator.async_turn_hvac_on(self.entity_description.hvac_mode_feature.id, self.device)
-
-    async def async_turn_off(self):
-        """Turn the entity off."""
-        await self.coordinator.async_turn_hvac_off(self.entity_description.hvac_mode_feature.id, self.device)
-
     async def async_set_hvac_mode(self, hvac_mode: HVACMode):
         """Set new target hvac mode."""
-        if hvac_mode == HVACMode.OFF:
-            await self.async_turn_off()
-        else:
-            await self.async_turn_on()
+        await self.coordinator.async_set_hvac_mode(
+            mode=HvacMode.from_ha_hvac_mode(hvac_mode),
+            hvac_mode_feature_id=self.entity_description.hvac_mode_feature.id,
+            device=self.device
+        )
 
     async def async_on_data(self, feature_id: int):
         """Handle updated data from MQTT."""
         match feature_id:
             case self.entity_description.hvac_mode_feature.id:
-                hvac_mode = json_loads(self.data[feature_id])
+                response = json_loads(self.data[feature_id])
+                hvac_state = Program.from_operation_mode(response["State"]["ID"])
+                hvac_mode = HvacMode.from_api(int(response["Mode"]["ID"]))
 
-                self.__current_program = Program.from_operation_mode(hvac_mode["State"]["ID"])
+                self.__current_program = hvac_state
+                self._attr_hvac_mode = HvacMode.to_ha_hvac_mode(hvac_mode)
 
-                if hvac_mode["Mode"]["ID"] == 0:
-                    self._attr_hvac_mode = HVACMode.OFF
-                    self.__add_hvac_action(HVACAction.OFF)
+                if hvac_mode == HvacMode.Off:
+                    self._attr_hvac_action = HVACAction.OFF
+
+            case self.entity_description.compressor_state_feature.id:
+                power_state = json_loads(self.data[feature_id])["PowerState"]
+
+                if self._attr_hvac_mode == HvacMode.Off:
+                    self._attr_hvac_action = HVACAction.OFF
                 else:
-                    self._attr_hvac_mode = HVACMode.AUTO
-                    self.__remove_hvac_action(HVACAction.OFF)
+                    self._attr_hvac_action = HVACAction.IDLE if power_state == 0 else HVACAction.HEATING
 
             case self.entity_description.flow_temperature_feature.id:
                 self.__current_flow_temperature = json_loads(self.data[feature_id])["Actual"]
@@ -186,31 +168,7 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
             case self.entity_description.room_temperature_feature.id:
                 self.__current_room_temperature = json_loads(self.data[feature_id])["Actual"]
 
-            case self.entity_description.fan_power_state_feature.id:
-                power_state = float(self.data[feature_id])
-
-                if power_state == 0:
-                    self.__remove_hvac_action(HVACAction.FAN)
-                else:
-                    self.__add_hvac_action(HVACAction.FAN)
-
-            case self.entity_description.heater_state_feature.id:
-                power_state = json_loads(self.data[feature_id])["PowerState"]
-
-                if power_state == 0:
-                    self.__remove_hvac_action(HVACAction.HEATING)
-                else:
-                    self.__add_hvac_action(HVACAction.HEATING)
-
             case self.entity_description.programs_temperature_feature.id:
                 self.__programs = json_loads(self.data[feature_id])
 
         self.async_write_ha_state()
-
-    def __remove_hvac_action(self, hvac_action: HVACAction):
-        if hvac_action in self.__current_hvac_actions:
-            self.__current_hvac_actions.remove(hvac_action)
-
-    def __add_hvac_action(self, hvac_action: HVACAction):
-        if hvac_action not in self.__current_hvac_actions:
-            self.__current_hvac_actions.append(hvac_action)

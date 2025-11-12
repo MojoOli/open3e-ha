@@ -408,7 +408,9 @@
               "frost_protection": "Frost protection",
               "eco_reduced": "Eco reduced",
               "eco_normal": "Eco normal",
-              "eco_comfort": "Eco comfort"
+              "eco_comfort": "Eco comfort",
+              "cooling_normal": "Cooling normal",
+              "cooling_comfort": "Cooling comfort"
             }
           }
         }
