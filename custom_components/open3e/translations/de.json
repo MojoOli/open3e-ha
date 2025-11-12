@@ -408,7 +408,9 @@
               "frost_protection": "Frostschutz",
               "eco_reduced": "Energiesparen Reduziert",
               "eco_normal": "Energiesparen Normal",
-              "eco_comfort": "Energiesparen Komfort"
+              "eco_comfort": "Energiesparen Komfort",
+              "cooling_normal": "Kühlen Normal",
+              "cooling_comfort": "Kühlen Komfort"
             }
           }
         }

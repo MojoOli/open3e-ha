@@ -22,6 +22,7 @@ from .definitions.open3e_data import Open3eDataSystemInformation, Open3eDataDevi
 from .definitions.subfeatures.buffer_mode import BufferMode
 from .definitions.subfeatures.dhw_hysteresis import DhwHysteresis
 from .definitions.subfeatures.heating_curve import HeatingCurve
+from .definitions.subfeatures.hvac_mode import HvacMode
 from .errors import Open3eCoordinatorUpdateFailed
 
 _LOGGER = logging.getLogger(__name__)
@@ -227,15 +228,12 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
 
         await self.async_refresh_feature(device, [feature_id])
 
-    async def async_turn_hvac_on(self, power_hvac_feature_id: int, device: Open3eDataDevice):
-        await self.__client.async_turn_hvac_on(self.hass, power_hvac_feature_id, device.id)
-        # Wait for 2 seconds to request hvac state
-        await asyncio.sleep(2)
+    async def async_set_hvac_mode(self, mode: HvacMode, hvac_mode_feature_id: int, device: Open3eDataDevice):
+        await self.__client.async_set_hvac_mode(self.hass, mode, hvac_mode_feature_id, device.id)
+        # Wait for 4 seconds to request hvac mode
+        # this takes a bit longer hence the longer wait time
 
-    async def async_turn_hvac_off(self, power_hvac_feature_id: int, device: Open3eDataDevice):
-        await self.__client.async_turn_hvac_off(self.hass, power_hvac_feature_id, device.id)
-        # Wait for 2 seconds to request hvac state
-        await asyncio.sleep(2)
+        await self.async_refresh_feature(device, [hvac_mode_feature_id])
 
     async def async_set_hot_water_mode(
             self,
