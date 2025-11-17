@@ -571,7 +571,7 @@ class Open3eMqttClient:
 
             # Evaluate using the CapabilityFeature
             if cap_feature.evaluate(json_loads(payload)):
-                device.add_capability(cap_feature.capability)
+                device.capabilities.add(cap_feature.capability)
                 _LOGGER.info(
                     "Added capability '%s' to '%s'",
                     cap_feature.capability, device.name

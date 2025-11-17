@@ -88,7 +88,7 @@ async def async_migrate_entry(
 ):
     """Migrate Open3e devices to use serial_number identifiers safely."""
     current_version = entry.version or 1
-    new_version = 2  # Increment for future migrations
+    new_version = 3  # Increment for future migrations
 
     if current_version >= new_version:
         return True
@@ -156,6 +156,15 @@ def async_migrate_entities(
 
     for entity in device_entities:
         unique_id = entity.unique_id
+
+        if ("heating_circuit_flow_setpoint_cooling" in entity.entity_id
+                or "heating_circuit_cooling_hysteresis_on" in entity.entity_id
+                or "heating_circuit_cooling_hysteresis_off" in entity.entity_id
+        ):
+            ent_reg.async_remove(entity_id=entity.entity_id)
+
+            _LOGGER.debug("Removed entity %s as it got a new ID", entity.entity_id)
+            continue
 
         if device.serial_number in unique_id:
             continue

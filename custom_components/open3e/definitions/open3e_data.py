@@ -23,7 +23,7 @@ class Open3eDataDevice:
     software_version: str | None
     hardware_version: str | None
     features: tuple[Open3eDataDeviceFeature, ...]
-    capabilities: tuple[Capability, ...]
+    capabilities: set[Capability]
 
     def __init__(
             self,
@@ -41,10 +41,7 @@ class Open3eDataDevice:
         self.hardware_version = hardware_version
         self.features = features
         self.manufacturer = "Viessmann"
-        self.capabilities = tuple()
-
-    def add_capability(self, capability: Capability):
-        self.capabilities += (capability,)
+        self.capabilities = set()
 
     @staticmethod
     def from_dict(data: dict[str, Any]):

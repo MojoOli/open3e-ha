@@ -172,6 +172,15 @@
       "flow_circuit1_temperature": {
         "name": "Flow Circuit 1 Temperature"
       },
+      "flow_circuit2_temperature": {
+        "name": "Flow Circuit 2 Temperature"
+      },
+      "flow_circuit3_temperature": {
+        "name": "Flow Circuit 3 Temperature"
+      },
+      "flow_circuit4_temperature": {
+        "name": "Flow Circuit 4 Temperature"
+      },
       "compressor_inlet_temperature": {
         "name": "Compressor Inlet Temperature"
       },
@@ -516,14 +525,41 @@
       "smartgrid_increase_dhw_temperature": {
         "name": "SmartGrid Increase DHW Temperature"
       },
-      "heating_circuit_flow_setpoint_cooling": {
-        "name": "Setpoint Cooling"
+      "heating_circuit_1_flow_setpoint_cooling": {
+        "name": "Setpoint Cooling Circuit 1"
       },
-      "heating_circuit_cooling_hysteresis_on": {
-        "name": "Hysteresis On Cooling"
+      "heating_circuit_2_flow_setpoint_cooling": {
+        "name": "Setpoint Cooling Circuit 2"
       },
-      "heating_circuit_cooling_hysteresis_off": {
-        "name": "Hysteresis Off Cooling"
+      "heating_circuit_3_flow_setpoint_cooling": {
+        "name": "Setpoint Cooling Circuit 3"
+      },
+      "heating_circuit_4_flow_setpoint_cooling": {
+        "name": "Setpoint Cooling Circuit 4"
+      },
+      "heating_circuit_1_cooling_hysteresis_on": {
+        "name": "Hysteresis On Cooling Circuit 1"
+      },
+      "heating_circuit_2_cooling_hysteresis_on": {
+        "name": "Hysteresis On Cooling Circuit 2"
+      },
+      "heating_circuit_3_cooling_hysteresis_on": {
+        "name": "Hysteresis On Cooling Circuit 3"
+      },
+      "heating_circuit_4_cooling_hysteresis_on": {
+        "name": "Hysteresis On Cooling Circuit 4"
+      },
+      "heating_circuit_1_cooling_hysteresis_off": {
+        "name": "Hysteresis Off Cooling Circuit 1"
+      },
+      "heating_circuit_2_cooling_hysteresis_off": {
+        "name": "Hysteresis Off Cooling Circuit 2"
+      },
+      "heating_circuit_3_cooling_hysteresis_off": {
+        "name": "Hysteresis Off Cooling Circuit 3"
+      },
+      "heating_circuit_4_cooling_hysteresis_off": {
+        "name": "Hysteresis Off Cooling Circuit 4"
       },
       "buffer_min_temperature": {
         "name": "Buffer Tank Min Temperature"
