@@ -4,6 +4,7 @@ from homeassistant.components.climate import ClimateEntityDescription
 
 from .entity_description import Open3eEntityDescription
 from .features import Features, Feature
+from ..capability.capability import Capability
 
 
 @dataclass(frozen=True)
@@ -34,7 +35,8 @@ CLIMATE: tuple[Open3eClimateEntityDescription, ...] = (
         programs_temperature_feature=Features.Temperature.ProgramsCircuit1,
         compressor_state_feature=Features.State.HeatPumpCompressor,
         key="climate_circuit_1",
-        translation_key="climate_circuit_1"
+        translation_key="climate_circuit_1",
+        required_capabilities=[Capability.Circuit1]
     ),
     Open3eClimateEntityDescription(
         poll_data_features=[
@@ -50,7 +52,8 @@ CLIMATE: tuple[Open3eClimateEntityDescription, ...] = (
         compressor_state_feature=Features.State.HeatPumpCompressor,
         key="climate_circuit_2",
         translation_key="climate_circuit_2",
-        entity_registry_enabled_default=False
+        entity_registry_enabled_default=False,
+        required_capabilities=[Capability.Circuit2]
     ),
     Open3eClimateEntityDescription(
         poll_data_features=[
@@ -66,7 +69,8 @@ CLIMATE: tuple[Open3eClimateEntityDescription, ...] = (
         compressor_state_feature=Features.State.HeatPumpCompressor,
         key="climate_circuit_3",
         translation_key="climate_circuit_3",
-        entity_registry_enabled_default=False
+        entity_registry_enabled_default=False,
+        required_capabilities=[Capability.Circuit3]
     ),
     Open3eClimateEntityDescription(
         poll_data_features=[
@@ -82,6 +86,7 @@ CLIMATE: tuple[Open3eClimateEntityDescription, ...] = (
         compressor_state_feature=Features.State.HeatPumpCompressor,
         key="climate_circuit_4",
         translation_key="climate_circuit_4",
-        entity_registry_enabled_default=False
+        entity_registry_enabled_default=False,
+        required_capabilities=[Capability.Circuit4]
     ),
 )

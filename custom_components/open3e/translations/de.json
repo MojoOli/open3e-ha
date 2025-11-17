@@ -172,6 +172,15 @@
       "flow_circuit1_temperature": {
         "name": "Vorlaufkreis 1 Temperatur"
       },
+      "flow_circuit2_temperature": {
+        "name": "Vorlaufkreis 2 Temperatur"
+      },
+      "flow_circuit3_temperature": {
+        "name": "Vorlaufkreis 3 Temperatur"
+      },
+      "flow_circuit4_temperature": {
+        "name": "Vorlaufkreis 4 Temperatur"
+      },
       "compressor_inlet_temperature": {
         "name": "Verdichtereintrittstemperatur"
       },
@@ -516,14 +525,41 @@
       "smartgrid_increase_dhw_temperature": {
         "name": "SmartGrid Erhöhung Warmwassertemperatur"
       },
-      "heating_circuit_flow_setpoint_cooling": {
-        "name": "Vorlauftemperatur Soll Kühlen"
+      "heating_circuit_1_flow_setpoint_cooling": {
+        "name": "Vorlauftemperatur Soll Kühlen Kreislauf 1"
       },
-      "heating_circuit_cooling_hysteresis_on": {
-        "name": "Einschalthysterese Kühlen"
+      "heating_circuit_2_flow_setpoint_cooling": {
+        "name": "Vorlauftemperatur Soll Kühlen Kreislauf 2"
       },
-      "heating_circuit_cooling_hysteresis_off": {
-        "name": "Ausschalthysterese Kühlen"
+      "heating_circuit_3_flow_setpoint_cooling": {
+        "name": "Vorlauftemperatur Soll Kühlen Kreislauf 3"
+      },
+      "heating_circuit_4_flow_setpoint_cooling": {
+        "name": "Vorlauftemperatur Soll Kühlen Kreislauf 4"
+      },
+      "heating_circuit_1_cooling_hysteresis_on": {
+        "name": "Einschalthysterese Kühlen Kreislauf 1"
+      },
+      "heating_circuit_2_cooling_hysteresis_on": {
+        "name": "Einschalthysterese Kühlen Kreislauf 2"
+      },
+      "heating_circuit_3_cooling_hysteresis_on": {
+        "name": "Einschalthysterese Kühlen Kreislauf 3"
+      },
+      "heating_circuit_4_cooling_hysteresis_on": {
+        "name": "Einschalthysterese Kühlen Kreislauf 4"
+      },
+      "heating_circuit_1_cooling_hysteresis_off": {
+        "name": "Ausschalthysterese Kühlen Kreislauf 1"
+      },
+      "heating_circuit_2_cooling_hysteresis_off": {
+        "name": "Ausschalthysterese Kühlen Kreislauf 2"
+      },
+      "heating_circuit_3_cooling_hysteresis_off": {
+        "name": "Ausschalthysterese Kühlen Kreislauf 3"
+      },
+      "heating_circuit_4_cooling_hysteresis_off": {
+        "name": "Ausschalthysterese Kühlen Kreislauf 4"
       },
       "buffer_min_temperature": {
         "name": "Pufferspeicher Minimaltemperatur"

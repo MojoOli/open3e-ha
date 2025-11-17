@@ -11,29 +11,28 @@ def map_devices_to_entities(
         entities: Iterable[Open3eEntityDescription]
 ) -> Dict[Open3eDataDevice, List[Open3eEntityDescription]]:
     """
-    Returns a defaultdict mapping each device to a list of entities
-    that fully match all their poll_data_features.
-
-    Args:
-        coordinator: The Open3eDataUpdateCoordinator instance.
-        entities: Iterable of Open3eEntityDescription to match against devices.
-
-    Returns:
-        Dict mapping each Open3eDataDevice to a list of matching entities.
+    Maps each device to a list of entities that match all their poll_data_features,
+    required capabilities, and optional required_device.
     """
     result: Dict[Open3eDataDevice, List[Open3eEntityDescription]] = defaultdict(list)
 
     for device in coordinator.system_information.devices:
-        device_feature_ids = {feature.id for feature in device.features}
+        device_feature_ids = {f.id for f in device.features}
 
         for entity in entities:
-            if entity.poll_data_features:
-                entity_feature_ids = {f.id for f in entity.poll_data_features}
+            # Skip if required_device is set and doesn't match
+            if entity.required_device and entity.required_device.display_name != device.name:
+                continue
 
-                # Check that all poll_data_features of sensor exist in device features
-                if entity_feature_ids.issubset(device_feature_ids):
-                    # If required_device is set, only include if the names match
-                    if entity.required_device is None or entity.required_device.display_name == device.name:
-                        result[device].append(entity)
+            # Skip if poll_data_features are missing
+            if entity.poll_data_features and not {f.id for f in entity.poll_data_features}.issubset(device_feature_ids):
+                continue
+
+            # Skip if required_capabilities are missing
+            if entity.required_capabilities and not set(entity.required_capabilities).issubset(device.capabilities):
+                continue
+
+            # All checks passed
+            result[device].append(entity)
 
     return result

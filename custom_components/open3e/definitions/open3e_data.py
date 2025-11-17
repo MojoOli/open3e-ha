@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from .devices import Open3eDevices
+from ..capability.capability import Capability
 
 
 @dataclass(frozen=True)
@@ -15,7 +16,6 @@ class Open3eDataDeviceFeature:
         return Open3eDataDeviceFeature(data.pop("id"), data.pop("topic"))
 
 
-@dataclass(frozen=True)
 class Open3eDataDevice:
     id: int
     name: str
@@ -23,7 +23,25 @@ class Open3eDataDevice:
     software_version: str | None
     hardware_version: str | None
     features: tuple[Open3eDataDeviceFeature, ...]
-    manufacturer: str = "Viessmann"
+    capabilities: set[Capability]
+
+    def __init__(
+            self,
+            id: int,
+            name: str,
+            serial_number: str,
+            software_version: str,
+            hardware_version: str,
+            features: tuple[Open3eDataDeviceFeature, ...]
+    ):
+        self.id = id
+        self.name = name
+        self.serial_number = serial_number
+        self.software_version = software_version
+        self.hardware_version = hardware_version
+        self.features = features
+        self.manufacturer = "Viessmann"
+        self.capabilities = set()
 
     @staticmethod
     def from_dict(data: dict[str, Any]):
@@ -41,12 +59,12 @@ class Open3eDataDevice:
         )
 
         device = Open3eDataDevice(
-            data.pop("id"),
-            device.display_name,
-            data.pop("serial_number"),
-            data.pop("software_version"),
-            data.pop("hardware_version"),
-            features
+            id=data.pop("id"),
+            name=device.display_name,
+            serial_number=data.pop("serial_number"),
+            software_version=data.pop("software_version"),
+            hardware_version=data.pop("hardware_version"),
+            features=features
         )
 
         return device
