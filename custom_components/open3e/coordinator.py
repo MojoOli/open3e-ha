@@ -22,6 +22,7 @@ from .definitions.open3e_data import Open3eDataSystemInformation, Open3eDataDevi
 from .definitions.subfeatures.buffer_mode import BufferMode
 from .definitions.subfeatures.dhw_hysteresis import DhwHysteresis
 from .definitions.subfeatures.heating_curve import HeatingCurve
+from .definitions.subfeatures.hvac_mode import HvacMode
 from .definitions.subfeatures.vitoair_quick_mode import VitoairQuickMode
 from .errors import Open3eCoordinatorUpdateFailed
 
@@ -64,13 +65,13 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
     """
 
     __client: Open3eMqttClient
-    __server_available = None
+    __server_available: bool | None
 
     system_information: Open3eDataSystemInformation
     __device_registry: DeviceRegistry
     __entry_id: str
 
-    __endpoints: dict[tuple[int, int], CoordinatorEndpoint] = {}
+    __endpoints: dict[tuple[int, int], CoordinatorEndpoint]
 
     def __init__(self, hass, client: Open3eMqttClient, entry_id: str):
         super().__init__(
@@ -83,6 +84,8 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
         self.__client = client
         self.__device_registry = device_registry.async_get(hass)
         self.__entry_id = entry_id
+        self.__endpoints = {}
+        self.__server_available = None
 
     async def _async_setup(self):
         """Set up the coordinator
@@ -149,7 +152,6 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
 
     async def on_entity_added(self, features: list[Feature], device: Open3eDataDevice):
         """Called when an entity is added."""
-        _LOGGER.debug("Entity was added to Coordinator")
         for feature in features:
             key = (device.id, feature.id)
             endpoint = self.__endpoints.get(key)
@@ -227,15 +229,12 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
 
         await self.async_refresh_feature(device, [feature_id])
 
-    async def async_turn_hvac_on(self, power_hvac_feature_id: int, device: Open3eDataDevice):
-        await self.__client.async_turn_hvac_on(self.hass, power_hvac_feature_id, device.id)
-        # Wait for 2 seconds to request hvac state
-        await asyncio.sleep(2)
+    async def async_set_hvac_mode(self, mode: HvacMode, hvac_mode_feature_id: int, device: Open3eDataDevice):
+        await self.__client.async_set_hvac_mode(self.hass, mode, hvac_mode_feature_id, device.id)
+        # Wait for 4 seconds to request hvac mode
+        # this takes a bit longer hence the longer wait time
 
-    async def async_turn_hvac_off(self, power_hvac_feature_id: int, device: Open3eDataDevice):
-        await self.__client.async_turn_hvac_off(self.hass, power_hvac_feature_id, device.id)
-        # Wait for 2 seconds to request hvac state
-        await asyncio.sleep(2)
+        await self.async_refresh_feature(device, [hvac_mode_feature_id])
 
     async def async_set_hot_water_mode(
             self,

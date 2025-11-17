@@ -45,19 +45,10 @@ async def async_setup_entry(
 
 class Open3eWaterHeater(Open3eEntity, WaterHeaterEntity):
     """Open3e Water Heater"""
-    _attr_precision = PRECISION_TENTHS
-    _attr_supported_features = (
-            WaterHeaterEntityFeature.TARGET_TEMPERATURE
-            | WaterHeaterEntityFeature.OPERATION_MODE
-    )
-    _attr_temperature_unit = UnitOfTemperature.CELSIUS
-    _attr_min_temp = VIESSMANN_TEMP_DHW_MIN
-    _attr_max_temp = VIESSMANN_TEMP_DHW_MAX
-
     entity_description: Open3eWaterHeaterEntityDescription
 
-    __currently_on: bool = True
-    __current_efficiency_mode: int = 0
+    __currently_on: bool
+    __current_efficiency_mode: int
 
     def __init__(
             self,
@@ -72,15 +63,26 @@ class Open3eWaterHeater(Open3eEntity, WaterHeaterEntity):
             DmwMode.Comfort.to_ha_preset_mode(),
             DmwMode.Off.to_ha_preset_mode()
         ]
+        self._attr_precision = PRECISION_TENTHS
+        self._attr_supported_features = (
+                WaterHeaterEntityFeature.TARGET_TEMPERATURE
+                | WaterHeaterEntityFeature.OPERATION_MODE
+        )
+        self._attr_temperature_unit = UnitOfTemperature.CELSIUS
+        self._attr_min_temp = VIESSMANN_TEMP_DHW_MIN
+        self._attr_max_temp = VIESSMANN_TEMP_DHW_MAX
+
+        self.__currently_on = True
+        self.__current_efficiency_mode = 0
 
     @property
     def available(self):
         """Return True if entity has a target and current temperature and they are higher than -3276.8"""
         return (
-            self.target_temperature is not None and
-            self.target_temperature > VIESSMANN_UNAVAILABLE_VALUE and
-            self.current_temperature is not None and
-            self.current_temperature > VIESSMANN_UNAVAILABLE_VALUE
+                self.target_temperature is not None and
+                self.target_temperature > VIESSMANN_UNAVAILABLE_VALUE and
+                self.current_temperature is not None and
+                self.current_temperature > VIESSMANN_UNAVAILABLE_VALUE
         )
 
     async def async_on_data(self, feature_id: int):

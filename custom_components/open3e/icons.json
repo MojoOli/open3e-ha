@@ -13,7 +13,9 @@
               "frost_protection": "mdi:snowflake-thermometer",
               "eco_reduced": "mdi:leaf-circle",
               "eco_normal": "mdi:home-circle",
-              "eco_comfort": "mdi:sofa"
+              "eco_comfort": "mdi:sofa",
+              "cooling_normal": "mdi:snowflake-thermometer",
+              "cooling_comfort": "mdi:snowflake-thermometer"
             }
           }
         }

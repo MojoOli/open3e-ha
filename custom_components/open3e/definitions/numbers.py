@@ -15,6 +15,7 @@ from .open3e_data import Open3eDataDevice
 from .subfeatures.dhw_hysteresis import DhwHysteresis
 from .subfeatures.heating_curve import HeatingCurve
 from .. import Open3eDataUpdateCoordinator
+from ..capability.capability import Capability
 from ..const import VIESSMANN_TEMP_HEATING_MIN, VIESSMANN_TEMP_HEATING_MAX, VIESSMANN_POWER_MAX_WATT_ELECTRICAL_HEATER, \
     VIESSMANN_POWER_MIN_WATT_ELECTRICAL_HEATER, VIESSMANN_POWER_WATT_ELECTRICAL_HEATER_STEP, \
     VIESSMANN_SMART_GRID_TEMP_MIN, VIESSMANN_SMART_GRID_TEMP_MAX, VIESSMANN_HYSTERESIS_MIN, VIESSMANN_HYSTERESIS_MAX
@@ -51,7 +52,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
             device=device
         ),
         key="circuit_1_reduced_temperature",
-        translation_key="circuit_1_reduced_temperature"
+        translation_key="circuit_1_reduced_temperature",
+        required_capabilities=[Capability.Circuit1]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.ProgramsCircuit1],
@@ -68,7 +70,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
             device=device
         ),
         key="circuit_1_standard_temperature",
-        translation_key="circuit_1_standard_temperature"
+        translation_key="circuit_1_standard_temperature",
+        required_capabilities=[Capability.Circuit1]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.ProgramsCircuit1],
@@ -85,7 +88,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
             device=device
         ),
         key="circuit_1_comfort_temperature",
-        translation_key="circuit_1_comfort_temperature"
+        translation_key="circuit_1_comfort_temperature",
+        required_capabilities=[Capability.Circuit1]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.ProgramsCircuit2],
@@ -103,7 +107,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_2_reduced_temperature",
         translation_key="circuit_2_reduced_temperature",
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit2]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.ProgramsCircuit2],
@@ -121,7 +125,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_2_standard_temperature",
         translation_key="circuit_2_standard_temperature",
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit2]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.ProgramsCircuit2],
@@ -139,7 +143,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_2_comfort_temperature",
         translation_key="circuit_2_comfort_temperature",
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit2]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.ProgramsCircuit3],
@@ -157,7 +161,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_3_reduced_temperature",
         translation_key="circuit_3_reduced_temperature",
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit3]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.ProgramsCircuit3],
@@ -175,7 +179,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_3_standard_temperature",
         translation_key="circuit_3_standard_temperature",
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit3]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.ProgramsCircuit3],
@@ -193,7 +197,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_3_comfort_temperature",
         translation_key="circuit_3_comfort_temperature",
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit3]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.ProgramsCircuit4],
@@ -211,7 +215,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_4_reduced_temperature",
         translation_key="circuit_4_reduced_temperature",
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit4]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.ProgramsCircuit4],
@@ -229,7 +233,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_4_standard_temperature",
         translation_key="circuit_4_standard_temperature",
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit4]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.ProgramsCircuit4],
@@ -247,7 +251,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_4_comfort_temperature",
         translation_key="circuit_4_comfort_temperature",
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit4]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.CoolingProgramsCircuit1],
@@ -265,7 +269,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_1_reduced_cooling",
         translation_key="circuit_1_reduced_cooling",
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit1]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.CoolingProgramsCircuit1],
@@ -283,7 +287,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_1_standard_cooling",
         translation_key="circuit_1_standard_cooling",
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit1]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.CoolingProgramsCircuit1],
@@ -301,7 +305,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_1_comfort_cooling",
         translation_key="circuit_1_comfort_cooling",
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit1]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.CoolingProgramsCircuit2],
@@ -319,7 +323,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_2_reduced_cooling",
         translation_key="circuit_2_reduced_cooling",
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit2]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.CoolingProgramsCircuit2],
@@ -337,7 +341,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_2_standard_cooling",
         translation_key="circuit_2_standard_cooling",
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit2]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.CoolingProgramsCircuit2],
@@ -355,7 +359,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_2_comfort_cooling",
         translation_key="circuit_2_comfort_cooling",
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit2]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.CoolingProgramsCircuit3],
@@ -373,7 +377,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_3_reduced_cooling",
         translation_key="circuit_3_reduced_cooling",
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit3]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.CoolingProgramsCircuit3],
@@ -391,7 +395,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_3_standard_cooling",
         translation_key="circuit_3_standard_cooling",
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit3]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.CoolingProgramsCircuit3],
@@ -409,7 +413,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_3_comfort_cooling",
         translation_key="circuit_3_comfort_cooling",
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit3]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.CoolingProgramsCircuit4],
@@ -427,7 +431,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_4_reduced_cooling",
         translation_key="circuit_4_reduced_cooling",
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit4]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.CoolingProgramsCircuit4],
@@ -445,7 +449,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_4_standard_cooling",
         translation_key="circuit_4_standard_cooling",
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit4]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.CoolingProgramsCircuit4],
@@ -463,7 +467,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_4_comfort_cooling",
         translation_key="circuit_4_comfort_cooling",
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit4]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Power.MaxElectricalHeater],
@@ -579,11 +583,63 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
             value=value,
             device=device
         ),
-        key="heating_circuit_flow_setpoint_cooling",
-        translation_key="heating_circuit_flow_setpoint_cooling"
+        key="heating_circuit_1_flow_setpoint_cooling",
+        translation_key="heating_circuit_1_flow_setpoint_cooling",
+        required_capabilities=[Capability.Circuit1]
     ),
     Open3eNumberEntityDescription(
-        poll_data_features=[Features.Temperature.FlowCircuit1Hysteresis],
+        poll_data_features=[Features.Temperature.FlowCircuit2Cooling],
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        device_class=NumberDeviceClass.TEMPERATURE,
+        icon="mdi:snowflake-thermometer",
+        native_min_value=10,
+        native_max_value=25,
+        get_native_value=lambda data: data[TemperatureCooling.EffectiveSetTemperature],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_temperature_cooling(
+            feature_id=Features.Temperature.FlowCircuit2Cooling.id,
+            value=value,
+            device=device
+        ),
+        key="heating_circuit_2_flow_setpoint_cooling",
+        translation_key="heating_circuit_2_flow_setpoint_cooling",
+        required_capabilities=[Capability.Circuit2]
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.Temperature.FlowCircuit3Cooling],
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        device_class=NumberDeviceClass.TEMPERATURE,
+        icon="mdi:snowflake-thermometer",
+        native_min_value=10,
+        native_max_value=25,
+        get_native_value=lambda data: data[TemperatureCooling.EffectiveSetTemperature],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_temperature_cooling(
+            feature_id=Features.Temperature.FlowCircuit3Cooling.id,
+            value=value,
+            device=device
+        ),
+        key="heating_circuit_3_flow_setpoint_cooling",
+        translation_key="heating_circuit_3_flow_setpoint_cooling",
+        required_capabilities=[Capability.Circuit3]
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.Temperature.FlowCircuit4Cooling],
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        device_class=NumberDeviceClass.TEMPERATURE,
+        icon="mdi:snowflake-thermometer",
+        native_min_value=10,
+        native_max_value=25,
+        get_native_value=lambda data: data[TemperatureCooling.EffectiveSetTemperature],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_temperature_cooling(
+            feature_id=Features.Temperature.FlowCircuit4Cooling.id,
+            value=value,
+            device=device
+        ),
+        key="heating_circuit_4_flow_setpoint_cooling",
+        translation_key="heating_circuit_4_flow_setpoint_cooling",
+        required_capabilities=[Capability.Circuit4]
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.Temperature.FlowCircuit1CoolingHysteresis],
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=NumberDeviceClass.TEMPERATURE,
         icon="mdi:thermometer-chevron-up",
@@ -591,16 +647,71 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         native_max_value=VIESSMANN_HYSTERESIS_MAX,
         get_native_value=lambda data: data[Hysteresis.On],
         set_native_value=lambda value, device, coordinator: coordinator.async_set_hysteresis(
-            feature_id=Features.Temperature.FlowCircuit1Hysteresis.id,
+            feature_id=Features.Temperature.FlowCircuit1CoolingHysteresis.id,
             hysteresis=Hysteresis.On,
             value=value,
             device=device
         ),
-        key="heating_circuit_cooling_hysteresis_on",
-        translation_key="heating_circuit_cooling_hysteresis_on"
+        key="heating_circuit_1_cooling_hysteresis_on",
+        translation_key="heating_circuit_1_cooling_hysteresis_on",
+        required_capabilities=[Capability.Circuit1]
     ),
     Open3eNumberEntityDescription(
-        poll_data_features=[Features.Temperature.FlowCircuit1Hysteresis],
+        poll_data_features=[Features.Temperature.FlowCircuit2CoolingHysteresis],
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        device_class=NumberDeviceClass.TEMPERATURE,
+        icon="mdi:thermometer-chevron-up",
+        native_min_value=VIESSMANN_HYSTERESIS_MIN,
+        native_max_value=VIESSMANN_HYSTERESIS_MAX,
+        get_native_value=lambda data: data[Hysteresis.On],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_hysteresis(
+            feature_id=Features.Temperature.FlowCircuit2CoolingHysteresis.id,
+            hysteresis=Hysteresis.On,
+            value=value,
+            device=device
+        ),
+        key="heating_circuit_2_cooling_hysteresis_on",
+        translation_key="heating_circuit_2_cooling_hysteresis_on",
+        required_capabilities=[Capability.Circuit2]
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.Temperature.FlowCircuit3CoolingHysteresis],
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        device_class=NumberDeviceClass.TEMPERATURE,
+        icon="mdi:thermometer-chevron-up",
+        native_min_value=VIESSMANN_HYSTERESIS_MIN,
+        native_max_value=VIESSMANN_HYSTERESIS_MAX,
+        get_native_value=lambda data: data[Hysteresis.On],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_hysteresis(
+            feature_id=Features.Temperature.FlowCircuit3CoolingHysteresis.id,
+            hysteresis=Hysteresis.On,
+            value=value,
+            device=device
+        ),
+        key="heating_circuit_3_cooling_hysteresis_on",
+        translation_key="heating_circuit_3_cooling_hysteresis_on",
+        required_capabilities=[Capability.Circuit3]
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.Temperature.FlowCircuit4CoolingHysteresis],
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        device_class=NumberDeviceClass.TEMPERATURE,
+        icon="mdi:thermometer-chevron-up",
+        native_min_value=VIESSMANN_HYSTERESIS_MIN,
+        native_max_value=VIESSMANN_HYSTERESIS_MAX,
+        get_native_value=lambda data: data[Hysteresis.On],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_hysteresis(
+            feature_id=Features.Temperature.FlowCircuit4CoolingHysteresis.id,
+            hysteresis=Hysteresis.On,
+            value=value,
+            device=device
+        ),
+        key="heating_circuit_4_cooling_hysteresis_on",
+        translation_key="heating_circuit_4_cooling_hysteresis_on",
+        required_capabilities=[Capability.Circuit4]
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.Temperature.FlowCircuit1CoolingHysteresis],
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         device_class=NumberDeviceClass.TEMPERATURE,
         icon="mdi:thermometer-lines",
@@ -608,13 +719,68 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         native_max_value=VIESSMANN_HYSTERESIS_MAX,
         get_native_value=lambda data: data[Hysteresis.Off],
         set_native_value=lambda value, device, coordinator: coordinator.async_set_hysteresis(
-            feature_id=Features.Temperature.FlowCircuit1Hysteresis.id,
+            feature_id=Features.Temperature.FlowCircuit1CoolingHysteresis.id,
             hysteresis=Hysteresis.Off,
             value=value,
             device=device
         ),
-        key="heating_circuit_cooling_hysteresis_off",
-        translation_key="heating_circuit_cooling_hysteresis_off"
+        key="heating_circuit_1_cooling_hysteresis_off",
+        translation_key="heating_circuit_1_cooling_hysteresis_off",
+        required_capabilities=[Capability.Circuit1]
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.Temperature.FlowCircuit2CoolingHysteresis],
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        device_class=NumberDeviceClass.TEMPERATURE,
+        icon="mdi:thermometer-lines",
+        native_min_value=VIESSMANN_HYSTERESIS_MIN,
+        native_max_value=VIESSMANN_HYSTERESIS_MAX,
+        get_native_value=lambda data: data[Hysteresis.Off],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_hysteresis(
+            feature_id=Features.Temperature.FlowCircuit2CoolingHysteresis.id,
+            hysteresis=Hysteresis.Off,
+            value=value,
+            device=device
+        ),
+        key="heating_circuit_2_cooling_hysteresis_off",
+        translation_key="heating_circuit_2_cooling_hysteresis_off",
+        required_capabilities=[Capability.Circuit2]
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.Temperature.FlowCircuit3CoolingHysteresis],
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        device_class=NumberDeviceClass.TEMPERATURE,
+        icon="mdi:thermometer-lines",
+        native_min_value=VIESSMANN_HYSTERESIS_MIN,
+        native_max_value=VIESSMANN_HYSTERESIS_MAX,
+        get_native_value=lambda data: data[Hysteresis.Off],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_hysteresis(
+            feature_id=Features.Temperature.FlowCircuit3CoolingHysteresis.id,
+            hysteresis=Hysteresis.Off,
+            value=value,
+            device=device
+        ),
+        key="heating_circuit_3_cooling_hysteresis_off",
+        translation_key="heating_circuit_3_cooling_hysteresis_off",
+        required_capabilities=[Capability.Circuit3]
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.Temperature.FlowCircuit4CoolingHysteresis],
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        device_class=NumberDeviceClass.TEMPERATURE,
+        icon="mdi:thermometer-lines",
+        native_min_value=VIESSMANN_HYSTERESIS_MIN,
+        native_max_value=VIESSMANN_HYSTERESIS_MAX,
+        get_native_value=lambda data: data[Hysteresis.Off],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_hysteresis(
+            feature_id=Features.Temperature.FlowCircuit4CoolingHysteresis.id,
+            hysteresis=Hysteresis.Off,
+            value=value,
+            device=device
+        ),
+        key="heating_circuit_4_cooling_hysteresis_off",
+        translation_key="heating_circuit_4_cooling_hysteresis_off",
+        required_capabilities=[Capability.Circuit4]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.BufferMinMax],
@@ -680,7 +846,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
             device=device
         ),
         key="circuit_1_heating_curve_slope",
-        translation_key="circuit_1_heating_curve_slope"
+        translation_key="circuit_1_heating_curve_slope",
+        required_capabilities=[Capability.Circuit1]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.State.FlowCircuit2HeatingCurve],
@@ -697,7 +864,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_2_heating_curve_slope",
         translation_key="circuit_2_heating_curve_slope",
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit2]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.State.FlowCircuit3HeatingCurve],
@@ -714,7 +881,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_3_heating_curve_slope",
         translation_key="circuit_3_heating_curve_slope",
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit3]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.State.FlowCircuit4HeatingCurve],
@@ -731,7 +898,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_4_heating_curve_slope",
         translation_key="circuit_4_heating_curve_slope",
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit4]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.State.FlowCircuit1HeatingCurve],
@@ -749,7 +916,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
             device=device
         ),
         key="circuit_1_heating_curve_level",
-        translation_key="circuit_1_heating_curve_level"
+        translation_key="circuit_1_heating_curve_level",
+        required_capabilities=[Capability.Circuit1]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.State.FlowCircuit2HeatingCurve],
@@ -768,7 +936,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_2_heating_curve_level",
         translation_key="circuit_2_heating_curve_level",
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit2]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.State.FlowCircuit3HeatingCurve],
@@ -787,7 +955,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_3_heating_curve_level",
         translation_key="circuit_3_heating_curve_level",
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit3]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.State.FlowCircuit4HeatingCurve],
@@ -806,7 +974,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_4_heating_curve_level",
         translation_key="circuit_4_heating_curve_level",
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit4]
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.DomesticHotWaterHysteresis],

@@ -6,6 +6,7 @@ on:
       rollover:
         description: "Whether the patch number should roll over to the next minor version (true/false)"
         required: true
+        default: "false"
 
 jobs:
   bump-version:
@@ -13,40 +14,66 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write  # Needed to push tags and create releases
+      contents: write
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
-          fetch-depth: 0  # Needed to get all tags
+          fetch-depth: 0
 
       - name: Get latest tag
         id: get_tag
         run: |
           latest_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
-          echo "Latest tag: $latest_tag"
           echo "tag=$latest_tag" >> $GITHUB_OUTPUT
 
       - name: Calculate next version
         id: next_version
         run: |
-          version="${{ steps.get_tag.outputs.tag#v }}"
+          version="${{ steps.get_tag.outputs.tag }}"
+          version="${version#v}"
           IFS='.' read -r major minor patch <<< "$version"
-
-          # Increment patch
           patch=$((patch + 1))
 
-          # Roll over if the input flag is true
-          rollover="${{ github.event.inputs.rollover }}"
+          rollover="${{ github.event.inputs.rollover || 'false' }}"
           if [ "$rollover" = "true" ] && [ "$patch" -ge 10 ]; then
             patch=0
             minor=$((minor + 1))
           fi
 
           new_version="v${major}.${minor}.${patch}"
-          echo "New version: $new_version"
           echo "new_version=$new_version" >> $GITHUB_OUTPUT
+
+      - name: Generate release notes
+        id: release_notes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          latest_tag="${{ steps.get_tag.outputs.tag }}"
+          new_tag="${{ steps.next_version.outputs.new_version }}"
+
+          if [ "$latest_tag" = "v0.0.0" ]; then
+            prs=$(gh pr list --state merged --limit 100 --json number,title,author \
+                  --jq '.[] | "- \(.title) by @\(.author.login) in #\(.number)"')
+          else
+            last_commit_date=$(git log -1 --format=%cI "$latest_tag")
+            prs=$(gh pr list --state merged --limit 100 --json number,title,author,mergedAt \
+                  --jq ".[] | select(.mergedAt > \"$last_commit_date\") | \"- \(.title) by @\(.author.login) in #\(.number)\"")
+          fi
+
+          if [ -z "$prs" ]; then
+            prs="- No merged pull requests since last release."
+          fi
+
+          release_notes="## What's Changed
+          $prs
+          
+          Full Changelog: https://github.com/${GITHUB_REPOSITORY}/compare/$latest_tag...$new_tag"
+
+          echo "release_notes<<EOF" >> $GITHUB_OUTPUT
+          echo "$release_notes" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Create new Git tag
         run: |
@@ -59,7 +86,5 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.next_version.outputs.new_version }}
-          name: Release ${{ steps.next_version.outputs.new_version }}
-          body: |
-            Manual release created by workflow dispatch.
-            Rollover enabled: ${{ github.event.inputs.rollover }}
+          name: ${{ steps.next_version.outputs.new_version }}
+          body: ${{ steps.release_notes.outputs.release_notes }}

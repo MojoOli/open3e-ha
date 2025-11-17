@@ -11,6 +11,7 @@ from .features import Features
 from .subfeatures.connection_status import ConnectionStatus, get_connection_status
 from .subfeatures.energy_management_mode import ENERGY_MANAGEMENT_MODES_MAP, EnergyManagementMode
 from .subfeatures.four_three_way_valve_position import FOUR_THREE_WAY_VALVE_POSITION_MAP, FourThreeWayValvePosition
+from ..capability.capability import Capability
 
 
 class SensorDataRetriever:
@@ -54,7 +55,7 @@ class SensorDataRetriever:
 class SensorDataDeriver:
 
     @staticmethod
-    def _calculate_cop(thermals: tuple[float, ...], electrics: tuple[float, ...]) -> float:
+    def calculate_cop(thermals: tuple[float, ...], electrics: tuple[float, ...]) -> float:
         total_thermal = sum(thermals)
         total_electric = sum(electrics)
 
@@ -71,6 +72,7 @@ class Open3eSensorEntityDescription(
     """Default sensor entity description for open3e."""
     domain: str = "sensor"
     data_retriever: Callable[[Any], Any] | None = None
+
 
 @dataclass(frozen=True)
 class Open3eDerivedSensorEntityDescription(
@@ -391,7 +393,38 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="flow_circuit1_temperature",
         translation_key="flow_circuit1_temperature",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_capabilities=[Capability.Circuit1]
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.FlowCircuit2],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="flow_circuit2_temperature",
+        translation_key="flow_circuit2_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_capabilities=[Capability.Circuit2]
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.FlowCircuit3],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="flow_circuit3_temperature",
+        translation_key="flow_circuit3_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_capabilities=[Capability.Circuit3]
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.FlowCircuit4],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="flow_circuit4_temperature",
+        translation_key="flow_circuit4_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_capabilities=[Capability.Circuit4]
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.CompressorInlet],
@@ -437,7 +470,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="room1_temperature",
         translation_key="room1_temperature",
         data_retriever=SensorDataRetriever.ACTUAL,
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Room1Temperature]
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.Room2],
@@ -447,7 +480,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="room2_temperature",
         translation_key="room2_temperature",
         data_retriever=SensorDataRetriever.ACTUAL,
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Room2Temperature]
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.Room3],
@@ -457,7 +490,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="room3_temperature",
         translation_key="room3_temperature",
         data_retriever=SensorDataRetriever.ACTUAL,
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Room3Temperature]
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.Room4],
@@ -467,7 +500,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="room4_temperature",
         translation_key="room4_temperature",
         data_retriever=SensorDataRetriever.ACTUAL,
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Room4Temperature]
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Position.ExpansionValve1],
@@ -560,7 +593,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="fan2_power",
         translation_key="fan2_power",
         icon="mdi:fan",
-        data_retriever=SensorDataRetriever.RAW
+        data_retriever=SensorDataRetriever.RAW,
+        required_capabilities=[Capability.Fan2]
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.EconomizerLiquid],
@@ -623,7 +657,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="flow_circuit_1_supply_temp_setpoint",
         translation_key="flow_circuit_1_supply_temp_setpoint",
-        data_retriever=SensorDataRetriever.RAW
+        data_retriever=SensorDataRetriever.RAW,
+        required_capabilities=[Capability.Circuit1]
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.FlowCircuit2Target],
@@ -633,7 +668,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="flow_circuit_2_supply_temp_setpoint",
         translation_key="flow_circuit_2_supply_temp_setpoint",
         data_retriever=SensorDataRetriever.RAW,
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit2]
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.FlowCircuit3Target],
@@ -643,7 +678,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="flow_circuit_3_supply_temp_setpoint",
         translation_key="flow_circuit_3_supply_temp_setpoint",
         data_retriever=SensorDataRetriever.RAW,
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit3]
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.FlowCircuit4Target],
@@ -653,7 +688,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="flow_circuit_4_supply_temp_setpoint",
         translation_key="flow_circuit_4_supply_temp_setpoint",
         data_retriever=SensorDataRetriever.RAW,
-        entity_registry_enabled_default=False
+        required_capabilities=[Capability.Circuit4]
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Speed.CompressorRps],
@@ -1155,7 +1190,7 @@ DERIVED_SENSORS: tuple[Open3eDerivedSensorEntityDescription, ...] = (
         translation_key="cop_currently",
         icon="mdi:leaf",
         data_retrievers=[SensorDataRetriever.RAW] * 2,
-        compute_value=lambda thermal, electric: SensorDataDeriver._calculate_cop(
+        compute_value=lambda thermal, electric: SensorDataDeriver.calculate_cop(
             thermals=(thermal,),
             electrics=(electric,)
         )
@@ -1168,7 +1203,7 @@ DERIVED_SENSORS: tuple[Open3eDerivedSensorEntityDescription, ...] = (
         translation_key="cop_heating_today",
         icon="mdi:leaf",
         data_retrievers=[SensorDataRetriever.TODAY] * 2,
-        compute_value=lambda thermal, electric: SensorDataDeriver._calculate_cop(
+        compute_value=lambda thermal, electric: SensorDataDeriver.calculate_cop(
             thermals=(thermal,),
             electrics=(electric,)
         ),
@@ -1181,11 +1216,10 @@ DERIVED_SENSORS: tuple[Open3eDerivedSensorEntityDescription, ...] = (
         translation_key="cop_cooling_today",
         icon="mdi:leaf",
         data_retrievers=[SensorDataRetriever.TODAY] * 2,
-        compute_value=lambda thermal, electric: SensorDataDeriver._calculate_cop(
+        compute_value=lambda thermal, electric: SensorDataDeriver.calculate_cop(
             thermals=(thermal,),
             electrics=(electric,)
-        ),
-        entity_registry_enabled_default=False
+        )
     ),
     Open3eDerivedSensorEntityDescription(
         poll_data_features=[Features.Energy.WarmWaterOutput, Features.Energy.DomesticHotWater],
@@ -1195,7 +1229,7 @@ DERIVED_SENSORS: tuple[Open3eDerivedSensorEntityDescription, ...] = (
         translation_key="cop_dhw_today",
         icon="mdi:leaf",
         data_retrievers=[SensorDataRetriever.TODAY] * 2,
-        compute_value=lambda thermal, electric: SensorDataDeriver._calculate_cop(
+        compute_value=lambda thermal, electric: SensorDataDeriver.calculate_cop(
             thermals=(thermal,),
             electrics=(electric,)
         )
@@ -1215,7 +1249,7 @@ DERIVED_SENSORS: tuple[Open3eDerivedSensorEntityDescription, ...] = (
         translation_key="cop_total_today",
         icon="mdi:leaf",
         data_retrievers=[SensorDataRetriever.TODAY] * 6,
-        compute_value=lambda heating_t, cooling_t, dhw_t, heating_e, cooling_e, dhw_e: SensorDataDeriver._calculate_cop(
+        compute_value=lambda heating_t, cooling_t, dhw_t, heating_e, cooling_e, dhw_e: SensorDataDeriver.calculate_cop(
             thermals=(heating_t, cooling_t, dhw_t),
             electrics=(heating_e, cooling_e, dhw_e)
         )
