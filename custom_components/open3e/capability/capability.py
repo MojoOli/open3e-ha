@@ -15,6 +15,7 @@ class Capability(Enum):
     Room3Temperature = auto()
     Room4Temperature = auto()
     Fan2 = auto()
+    HeatingCircuit1 = auto()
     HeatingCircuit2 = auto()
     HeatingCircuit3 = auto()
     HeatingCircuit4 = auto()
@@ -71,6 +72,12 @@ DEVICE_CAPABILITIES: dict[Device, list[CapabilityFeature]] = {
             feature=Features.Power.Fan2,
             path=None,
             invalid_value=255
+        ),
+        CapabilityFeature(
+            capability=Capability.HeatingCircuit1,
+            feature=Features.Temperature.FlowCircuit1,
+            path="Actual",
+            invalid_value=VIESSMANN_UNAVAILABLE_VALUE
         ),
         CapabilityFeature(
             capability=Capability.HeatingCircuit2,
