@@ -104,7 +104,10 @@ class Features:
         Grid = Feature(id=1603, refresh_interval=5)
 
     class State:
-        Hvac = Feature(id=1415, refresh_interval=30)
+        HvacCircuit1 = Feature(id=1415, refresh_interval=30)
+        HvacCircuit2 = Feature(id=1416, refresh_interval=30)
+        HvacCircuit3 = Feature(id=1417, refresh_interval=30)
+        HvacCircuit4 = Feature(id=1418, refresh_interval=30)
         AdditionalHeater = Feature(id=2352, refresh_interval=30)
         DomesticHotWater = Feature(id=531, refresh_interval=30)
         DomesticHotWaterEfficiency = Feature(id=3029, refresh_interval=30)
