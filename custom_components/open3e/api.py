@@ -19,8 +19,8 @@ from custom_components.open3e.definitions.subfeatures.hysteresis import Hysteres
 from custom_components.open3e.definitions.subfeatures.program import Program
 from custom_components.open3e.definitions.subfeatures.smart_grid_temperature_offsets import SmartGridTemperatureOffsets
 from custom_components.open3e.definitions.subfeatures.temperature_cooling import TemperatureCooling
-from .capability.capability import DEVICE_CAPABILITIES, CAPABILITY_FEATURE_MAP, Capability
-from .const import MQTT_SYSTEM_TOPIC, MQTT_SYSTEM_PAYLOAD, VIESSMANN_UNAVAILABLE_VALUE
+from .capability.capability import DEVICE_CAPABILITIES, CapabilityFeature
+from .const import MQTT_SYSTEM_TOPIC, MQTT_SYSTEM_PAYLOAD
 from .definitions.devices import Open3eDevices
 from .definitions.open3e_data import Open3eDataSystemInformation, Open3eDataDeviceFeature
 from .definitions.subfeatures.buffer_mode import BufferMode
@@ -558,49 +558,50 @@ class Open3eMqttClient:
         toward completion.
         """
         event = asyncio.Event()
-        # Map topic -> tuple(feature, capability)
-        pending_features: dict[str, tuple[Open3eDataDeviceFeature, Capability]] = {}
+        pending_features: dict[str, tuple[Open3eDataDeviceFeature, CapabilityFeature]] = {}
         subscriptions: list[Any] = []
 
         def message_callback(message: ReceiveMessage):
             topic = message.topic
             payload = message.payload
-            _LOGGER.debug("Received message on topic '%s': %s", topic, payload)
 
             entry = pending_features.get(topic)
             if not entry:
                 _LOGGER.warning("Received message for unknown topic '%s'", topic)
-                return  # Ignore unknown topics
+                return
 
-            feature, capability = entry
-            # Remove the feature from pending_features immediately
+            feature, cap_feature = entry
             del pending_features[topic]
-            _LOGGER.debug("Processing feature '%s' for capability '%s'", feature.id, capability)
 
-            # Only add capability if payload is valid
-            if payload not in (VIESSMANN_UNAVAILABLE_VALUE, 255):
+            # Evaluate using the CapabilityFeature
+            if cap_feature.evaluate(json_loads(payload)):
                 device = next(
-                    (dev for dev in system_information.devices if feature.id in [f.id for f in dev.features]),
+                    (dev for dev in system_information.devices
+                     if feature.id in [f.id for f in dev.features]),
                     None
                 )
                 if device:
-                    device.add_capability(capability)
+                    device.add_capability(cap_feature.capability)
                     _LOGGER.info(
-                        "Added capability '%s' to device '%s' (feature '%s')",
-                        capability, device.name, feature.id
+                        "Added capability '%s' to '%s'",
+                        cap_feature.capability, device.name
                     )
                 else:
-                    _LOGGER.warning("Feature '%s' received but device not found", feature.id)
+                    _LOGGER.warning(
+                        "Feature '%s' received but device not found", feature.id
+                    )
             else:
-                _LOGGER.info("Ignoring invalid/unavailable payload '%s' for feature '%s'", payload, feature.id)
+                _LOGGER.info(
+                    "'%s' not capable of %s; payload '%s'",
+                    cap_feature.capability, payload
+                )
 
-            # Signal when all features have been processed
             if not pending_features:
-                _LOGGER.debug("All features processed, setting event")
                 hass.loop.call_soon_threadsafe(event.set)
 
         try:
             for device in system_information.devices:
+                # Find the capability device enum
                 capability_device = next(
                     (dev for dev in Open3eDevices if dev.display_name in device.name),
                     None
@@ -609,25 +610,20 @@ class Open3eMqttClient:
                     _LOGGER.debug("No capability device found for system device '%s'", device.name)
                     continue
 
-                capabilities = DEVICE_CAPABILITIES[capability_device]
                 device_features: list[Open3eDataDeviceFeature] = []
 
-                for capability in capabilities:
-                    feature_enum = CAPABILITY_FEATURE_MAP[capability]
+                for cap_feature in DEVICE_CAPABILITIES.get(capability_device, []):
+                    feature_enum = cap_feature.feature
                     feature = next((f for f in device.features if f.id == feature_enum.id), None)
                     if feature is None:
                         _LOGGER.warning(
                             "Feature '%s' for capability '%s' not found in device '%s'",
-                            feature_enum.id, capability, device.name
+                            feature_enum.id, cap_feature.capability, device.name
                         )
                         continue
 
                     device_features.append(feature)
-                    pending_features[feature.topic] = (feature, capability)
-                    _LOGGER.debug(
-                        "Subscribing to topic '%s' for feature '%s' and capability '%s'",
-                        feature.topic, feature.id, capability
-                    )
+                    pending_features[feature.topic] = (feature, cap_feature)
 
                     subscription = await mqtt.async_subscribe(
                         hass=hass,
@@ -636,32 +632,28 @@ class Open3eMqttClient:
                     )
                     subscriptions.append(subscription)
 
-                # Ensure subscriptions are active
-                await asyncio.sleep(1)
-
-                # Request initial data
-                _LOGGER.debug(
-                    "Requesting data for device '%s', features: %s",
-                    device.id, [f.id for f in device_features]
-                )
-                await self.async_request_data(
-                    hass=hass,
-                    device_features={device.id: [f.id for f in device_features]}
-                )
+                if device_features:
+                    # Give subscriptions time to be ready
+                    await asyncio.sleep(1)
+                    _LOGGER.debug(
+                        "Checking capabilities for device '%s'",
+                        device.name
+                    )
+                    await self.async_request_data(
+                        hass=hass,
+                        device_features={device.id: [f.id for f in device_features]}
+                    )
 
             if pending_features:
-                # Wait until all features have been processed or timeout after 10 seconds
-                _LOGGER.debug("Waiting for all features to be processed...")
+                _LOGGER.debug("Waiting for all capabilities to be processed...")
                 await asyncio.wait_for(event.wait(), timeout=10)
-                _LOGGER.info("All device features processed successfully")
+                _LOGGER.info("All device capabilities processed successfully")
 
         except asyncio.TimeoutError:
             raise Open3eServerTimeoutError()
-
         except Exception as exc:
             raise Open3eError(exc)
-
         finally:
-            # Clean up all subscriptions
-            for subscription in subscriptions:
-                subscription()
+            # Clean up subscriptions
+            for unsubscribe in subscriptions:
+                unsubscribe()
