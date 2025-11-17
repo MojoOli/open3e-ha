@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
-from typing import Callable
+from typing import Callable, Any
 
 import async_timeout
 from homeassistant.components import mqtt
@@ -19,8 +19,10 @@ from custom_components.open3e.definitions.subfeatures.hysteresis import Hysteres
 from custom_components.open3e.definitions.subfeatures.program import Program
 from custom_components.open3e.definitions.subfeatures.smart_grid_temperature_offsets import SmartGridTemperatureOffsets
 from custom_components.open3e.definitions.subfeatures.temperature_cooling import TemperatureCooling
-from .const import MQTT_SYSTEM_TOPIC, MQTT_SYSTEM_PAYLOAD
-from .definitions.open3e_data import Open3eDataSystemInformation
+from .capability.capability import DEVICE_CAPABILITIES, CAPABILITY_FEATURE_MAP, Capability
+from .const import MQTT_SYSTEM_TOPIC, MQTT_SYSTEM_PAYLOAD, VIESSMANN_UNAVAILABLE_VALUE
+from .definitions.devices import Open3eDevices
+from .definitions.open3e_data import Open3eDataSystemInformation, Open3eDataDeviceFeature
 from .definitions.subfeatures.buffer_mode import BufferMode
 from .definitions.subfeatures.dhw_hysteresis import DhwHysteresis
 from .definitions.subfeatures.heating_curve import HeatingCurve
@@ -101,36 +103,52 @@ class Open3eMqttClient:
         if self.__system_information:
             return self.__system_information
 
-        subscription = None
+        event = asyncio.Event()
+        _LOGGER.debug("Creating event to wait for system information")
 
+        def message_callback(message: ReceiveMessage):
+            self.__system_information = Open3eDataSystemInformation.from_dict(
+                json_loads(message.payload)
+            )
+            hass.loop.call_soon_threadsafe(event.set)  # Signal that data has been received
+
+        subscription = None
         try:
+            _LOGGER.debug("Subscribing to system topic '%s/%s'", self.__mqtt_topic, MQTT_SYSTEM_TOPIC)
             subscription = await mqtt.async_subscribe(
                 hass=hass,
                 topic=f"{self.__mqtt_topic}/{MQTT_SYSTEM_TOPIC}",
-                msg_callback=self.__set_system
+                msg_callback=message_callback
             )
 
-            # Subscribing takes a bit longer than waiting for the async method,
-            # so wait for 1 second just to be sure that we are subscribed
+            # Ensure subscription is active
             await asyncio.sleep(1)
 
-            await mqtt.async_publish(hass=hass, topic=self.__mqtt_cmd, payload=MQTT_SYSTEM_PAYLOAD)
+            _LOGGER.debug("Publishing system info request to topic '%s'", self.__mqtt_cmd)
+            await mqtt.async_publish(
+                hass=hass,
+                topic=self.__mqtt_cmd,
+                payload=MQTT_SYSTEM_PAYLOAD
+            )
 
-            # Wait until data was sent, or we time out after 10 seconds
-            async with async_timeout.timeout(10):
-                while not self.__system_information:
-                    await asyncio.sleep(0.25)
+            _LOGGER.debug("Waiting for system information to arrive (timeout 10s)")
+            await asyncio.wait_for(event.wait(), timeout=10)
+            _LOGGER.info("System information successfully received")
+
+            _LOGGER.debug("Setting device capabilities for received system information")
+            await self.__set_devices_capabilities(hass=hass, system_information=self.__system_information)
 
             return self.__system_information
 
         except asyncio.TimeoutError:
             raise Open3eServerTimeoutError()
 
-        except Exception as exception:
-            raise Open3eError(exception)
+        except Exception as exc:
+            raise Open3eError(exc)
 
         finally:
             if subscription is not None:
+                _LOGGER.debug("Unsubscribing from system topic")
                 subscription()
 
     async def async_request_data(self, hass: HomeAssistant, device_features: dict[int, list[int]]):
@@ -529,5 +547,121 @@ class Open3eMqttClient:
     def __write_raw_payload(feature_id: int, data: str, device_id: int):
         return json_dumps({"mode": "write-raw", "addr": device_id, "data": [[feature_id, data]]})
 
-    def __set_system(self, message: ReceiveMessage):
-        self.__system_information = Open3eDataSystemInformation.from_dict(json_loads(message.payload))
+    async def __set_devices_capabilities(
+            self,
+            hass: HomeAssistant,
+            system_information: Open3eDataSystemInformation
+    ):
+        """
+        Subscribe to all device feature topics, request data, and populate device capabilities
+        when valid data is received. Invalid or unavailable values are skipped but still counted
+        toward completion.
+        """
+        event = asyncio.Event()
+        # Map topic -> tuple(feature, capability)
+        pending_features: dict[str, tuple[Open3eDataDeviceFeature, Capability]] = {}
+        subscriptions: list[Any] = []
+
+        def message_callback(message: ReceiveMessage):
+            topic = message.topic
+            payload = message.payload
+            _LOGGER.debug("Received message on topic '%s': %s", topic, payload)
+
+            entry = pending_features.get(topic)
+            if not entry:
+                _LOGGER.warning("Received message for unknown topic '%s'", topic)
+                return  # Ignore unknown topics
+
+            feature, capability = entry
+            # Remove the feature from pending_features immediately
+            del pending_features[topic]
+            _LOGGER.debug("Processing feature '%s' for capability '%s'", feature.id, capability)
+
+            # Only add capability if payload is valid
+            if payload not in (VIESSMANN_UNAVAILABLE_VALUE, 255):
+                device = next(
+                    (dev for dev in system_information.devices if feature.id in [f.id for f in dev.features]),
+                    None
+                )
+                if device:
+                    device.add_capability(capability)
+                    _LOGGER.info(
+                        "Added capability '%s' to device '%s' (feature '%s')",
+                        capability, device.name, feature.id
+                    )
+                else:
+                    _LOGGER.warning("Feature '%s' received but device not found", feature.id)
+            else:
+                _LOGGER.info("Ignoring invalid/unavailable payload '%s' for feature '%s'", payload, feature.id)
+
+            # Signal when all features have been processed
+            if not pending_features:
+                _LOGGER.debug("All features processed, setting event")
+                hass.loop.call_soon_threadsafe(event.set)
+
+        try:
+            for device in system_information.devices:
+                capability_device = next(
+                    (dev for dev in Open3eDevices if dev.display_name in device.name),
+                    None
+                )
+                if not capability_device:
+                    _LOGGER.debug("No capability device found for system device '%s'", device.name)
+                    continue
+
+                capabilities = DEVICE_CAPABILITIES[capability_device]
+                device_features: list[Open3eDataDeviceFeature] = []
+
+                for capability in capabilities:
+                    feature_enum = CAPABILITY_FEATURE_MAP[capability]
+                    feature = next((f for f in device.features if f.id == feature_enum.id), None)
+                    if feature is None:
+                        _LOGGER.warning(
+                            "Feature '%s' for capability '%s' not found in device '%s'",
+                            feature_enum.id, capability, device.name
+                        )
+                        continue
+
+                    device_features.append(feature)
+                    pending_features[feature.topic] = (feature, capability)
+                    _LOGGER.debug(
+                        "Subscribing to topic '%s' for feature '%s' and capability '%s'",
+                        feature.topic, feature.id, capability
+                    )
+
+                    subscription = await mqtt.async_subscribe(
+                        hass=hass,
+                        topic=feature.topic,
+                        msg_callback=message_callback
+                    )
+                    subscriptions.append(subscription)
+
+                # Ensure subscriptions are active
+                await asyncio.sleep(1)
+
+                # Request initial data
+                _LOGGER.debug(
+                    "Requesting data for device '%s', features: %s",
+                    device.id, [f.id for f in device_features]
+                )
+                await self.async_request_data(
+                    hass=hass,
+                    device_features={device.id: [f.id for f in device_features]}
+                )
+
+            if pending_features:
+                # Wait until all features have been processed or timeout after 10 seconds
+                _LOGGER.debug("Waiting for all features to be processed...")
+                await asyncio.wait_for(event.wait(), timeout=10)
+                _LOGGER.info("All device features processed successfully")
+
+        except asyncio.TimeoutError:
+            raise Open3eServerTimeoutError()
+
+        except Exception as exc:
+            raise Open3eError(exc)
+
+        finally:
+            # Clean up all subscriptions
+            for subscription in subscriptions:
+                subscription()
