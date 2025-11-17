@@ -24,11 +24,11 @@ CLIMATE: tuple[Open3eClimateEntityDescription, ...] = (
         poll_data_features=[
             Features.Temperature.FlowCircuit1,
             Features.Temperature.Room1,
-            Features.State.Hvac,
+            Features.State.HvacCircuit1,
             Features.Temperature.ProgramsCircuit1,
             Features.State.HeatPumpCompressor
         ],
-        hvac_mode_feature=Features.State.Hvac,
+        hvac_mode_feature=Features.State.HvacCircuit1,
         flow_temperature_feature=Features.Temperature.FlowCircuit1,
         room_temperature_feature=Features.Temperature.Room1,
         programs_temperature_feature=Features.Temperature.ProgramsCircuit1,
@@ -40,10 +40,10 @@ CLIMATE: tuple[Open3eClimateEntityDescription, ...] = (
         poll_data_features=[
             Features.Temperature.FlowCircuit2,
             Features.Temperature.Room2,
-            Features.State.Hvac,
+            Features.State.HvacCircuit2,
             Features.Temperature.ProgramsCircuit2
         ],
-        hvac_mode_feature=Features.State.Hvac,
+        hvac_mode_feature=Features.State.HvacCircuit2,
         flow_temperature_feature=Features.Temperature.FlowCircuit2,
         room_temperature_feature=Features.Temperature.Room2,
         programs_temperature_feature=Features.Temperature.ProgramsCircuit2,
@@ -56,10 +56,10 @@ CLIMATE: tuple[Open3eClimateEntityDescription, ...] = (
         poll_data_features=[
             Features.Temperature.FlowCircuit3,
             Features.Temperature.Room3,
-            Features.State.Hvac,
+            Features.State.HvacCircuit3,
             Features.Temperature.ProgramsCircuit3
         ],
-        hvac_mode_feature=Features.State.Hvac,
+        hvac_mode_feature=Features.State.HvacCircuit3,
         flow_temperature_feature=Features.Temperature.FlowCircuit3,
         room_temperature_feature=Features.Temperature.Room3,
         programs_temperature_feature=Features.Temperature.ProgramsCircuit3,
@@ -72,10 +72,10 @@ CLIMATE: tuple[Open3eClimateEntityDescription, ...] = (
         poll_data_features=[
             Features.Temperature.FlowCircuit4,
             Features.Temperature.Room4,
-            Features.State.Hvac,
+            Features.State.HvacCircuit4,
             Features.Temperature.ProgramsCircuit4
         ],
-        hvac_mode_feature=Features.State.Hvac,
+        hvac_mode_feature=Features.State.HvacCircuit4,
         flow_temperature_feature=Features.Temperature.FlowCircuit4,
         room_temperature_feature=Features.Temperature.Room4,
         programs_temperature_feature=Features.Temperature.ProgramsCircuit4,
