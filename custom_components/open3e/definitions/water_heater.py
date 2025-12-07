@@ -15,7 +15,7 @@ else:
 class Open3eWaterHeaterEntityDescription(
     Open3eEntityDescription, WaterHeaterEntityDescription
 ):
-    """Default climate entity description for open3e."""
+    """Default water heater entity description for open3e."""
     domain: str = "water_heater"
     temperature_feature: Feature | None = None
     temperature_target_feature: Feature | None = None

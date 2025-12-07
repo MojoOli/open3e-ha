@@ -14,7 +14,7 @@ class BinarySensorDataTransform:
     POWERSTATE = lambda data: json_loads(data)["PowerState"] > 0
     STATE = lambda data: json_loads(data)["State"] > 0
     HYGIENE_ACTIVE = lambda data: json_loads(data)["HygenieActive"] > 0
-    HEX_ON = lambda data: data == "011400"  # on
+    HEX_ON = lambda data: data != "000000"  # on
     RAW = lambda data: data
     """The data state represents a raw value without any encapsulation."""
 

@@ -381,6 +381,12 @@
       },
       "cop_total_today": {
         "name": "COP total today"
+      },
+      "supply_air_fan_speed": {
+        "name": "Supply Air Fan"
+      },
+      "exhaust_air_fan_speed": {
+        "name": "Exhaust Air Fan"
       }
     },
     "binary_sensor": {
@@ -608,6 +614,15 @@
           "heating": "Heating",
           "cooling": "Cooling"
         }
+      },
+      "quick_operation_mode": {
+        "name": "Quick mode",
+        "state": {
+          "none": "-",
+          "intensive": "Intensive Ventilation",
+          "reduced_noise": "Reduced Noise",
+          "off": "Off"
+        }
       }
     },
     "water_heater": {
@@ -621,6 +636,21 @@
       },
       "hot_water_circulation_pump": {
         "name": "Hot Water Circulation Pump"
+      }
+    },
+    "fan": {
+      "ventilation": {
+        "name": "Ventilation",
+        "state_attributes": {
+          "preset_mode": {
+            "state": {
+              "continuous": "Continuous",
+              "timed": "Timed",
+              "timed_sensor": "Timed with sensor priority",
+              "sensor_auto": "Sensor automatic"
+            }
+          }
+        }
       }
     }
   }

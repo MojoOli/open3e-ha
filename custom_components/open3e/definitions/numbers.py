@@ -9,6 +9,7 @@ from custom_components.open3e.definitions.subfeatures.hysteresis import Hysteres
 from custom_components.open3e.definitions.subfeatures.program import Program
 from custom_components.open3e.definitions.subfeatures.smart_grid_temperature_offsets import SmartGridTemperatureOffsets
 from custom_components.open3e.definitions.subfeatures.temperature_cooling import TemperatureCooling
+from .devices import Open3eDevices
 from .entity_description import Open3eEntityDescription
 from .features import Features
 from .open3e_data import Open3eDataDevice
@@ -53,7 +54,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_1_reduced_temperature",
         translation_key="circuit_1_reduced_temperature",
-        required_capabilities=[Capability.Circuit1]
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.ProgramsCircuit1],
@@ -71,7 +73,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_1_standard_temperature",
         translation_key="circuit_1_standard_temperature",
-        required_capabilities=[Capability.Circuit1]
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.ProgramsCircuit1],
@@ -89,7 +92,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_1_comfort_temperature",
         translation_key="circuit_1_comfort_temperature",
-        required_capabilities=[Capability.Circuit1]
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.ProgramsCircuit2],

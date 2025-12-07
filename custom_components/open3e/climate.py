@@ -118,7 +118,7 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
         return self.__programs[self.__current_program.map_to_api_heating()]
 
     def set_preset_mode(self, preset_mode: str) -> None:
-        """Setting the preset mode is not capability."""
+        """Setting the preset mode is not possible."""
 
     async def async_set_temperature(self, **kwargs: Any) -> None:
         """Set new target temperature."""

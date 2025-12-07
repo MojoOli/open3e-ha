@@ -381,6 +381,12 @@
       },
       "cop_total_today": {
         "name": "COP Gesamt heute"
+      },
+      "supply_air_fan_speed": {
+        "name": "Zuluftventilator"
+      },
+      "exhaust_air_fan_speed": {
+        "name": "Abluftventilator"
       }
     },
     "binary_sensor": {
@@ -608,6 +614,15 @@
           "heating": "Heizen",
           "cooling": "Kühlen"
         }
+      },
+      "quick_operation_mode": {
+        "name": "Schnellmodus",
+        "state": {
+          "none": "-",
+          "intensive": "Intensivlüftung",
+          "reduced_noise": "Reduzierte Lüftung",
+          "off": "Aus"
+        }
       }
     },
     "water_heater": {
@@ -621,6 +636,21 @@
       },
       "hot_water_circulation_pump": {
         "name": "Warmwasser Zirkulationspumpe"
+      }
+    },
+    "fan": {
+      "ventilation": {
+        "name": "Belüftung",
+        "state_attributes": {
+          "preset_mode": {
+            "state": {
+              "continuous": "Konstantbetrieb",
+              "timed": "Zeitprogramm",
+              "timed_sensor": "Zeitprogramm mit Sensorvorrang",
+              "sensor_auto": "Sensorbasierter Automatikmodus"
+            }
+          }
+        }
       }
     }
   }

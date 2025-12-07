@@ -20,6 +20,20 @@
           }
         }
       }
+    },
+    "fan": {
+      "ventilation": {
+        "state_attributes": {
+          "preset_mode": {
+            "state": {
+              "continuous": "mdi:fan",
+              "timed": "mdi:timer-outline",
+              "timed_sensor": "mdi:timer-cog-outline",
+              "sensor_auto": "mdi:fan-auto"
+            }
+          }
+        }
+      }
     }
   }
 }
