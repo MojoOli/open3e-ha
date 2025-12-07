@@ -170,16 +170,16 @@
         "name": "Domestic Hot Water Temperature"
       },
       "flow_circuit1_temperature": {
-        "name": "Flow Circuit 1 Temperature"
+        "name": "Heating circuit 1 flow temperature"
       },
       "flow_circuit2_temperature": {
-        "name": "Flow Circuit 2 Temperature"
+        "name": "Heating circuit 2 flow temperature"
       },
       "flow_circuit3_temperature": {
-        "name": "Flow Circuit 3 Temperature"
+        "name": "Heating circuit 3 flow temperature"
       },
       "flow_circuit4_temperature": {
-        "name": "Flow Circuit 4 Temperature"
+        "name": "Heating circuit 4 flow temperature"
       },
       "compressor_inlet_temperature": {
         "name": "Compressor Inlet Temperature"
@@ -394,7 +394,19 @@
         "name": "Frost Protection Heating Circuit"
       },
       "circuit_pump": {
-        "name": "Heating Circuit Pump"
+        "name": "Heatpump circuit pump"
+      },
+      "circuit_1_pump": {
+        "name": "Heating circuit 1 circulation pump"
+      },
+      "circuit_2_pump": {
+        "name": "Heating circuit 2 circulation pump"
+      },
+      "circuit_3_pump": {
+        "name": "Heating circuit 3 circulation pump"
+      },
+      "circuit_4_pump": {
+        "name": "Heating circuit 4 circulation pump"
       },
       "hot_water_circulation_pump_hygiene": {
         "name": "Hot Water Legionella Protection"

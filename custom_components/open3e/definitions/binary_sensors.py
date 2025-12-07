@@ -4,8 +4,10 @@ from typing import Callable, Any
 from homeassistant.components.binary_sensor import BinarySensorEntityDescription, BinarySensorDeviceClass
 from homeassistant.util.json import json_loads
 
+from .devices import Open3eDevices
 from .entity_description import Open3eEntityDescription
 from .features import Features
+from ..capability.capability import Capability
 
 
 class BinarySensorDataTransform:
@@ -65,6 +67,46 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
         translation_key="circuit_pump",
         icon="mdi:water-sync",
         data_transform=BinarySensorDataTransform.STATE
+    ),
+    Open3eBinarySensorEntityDescription(
+        device_class=BinarySensorDeviceClass.POWER,
+        poll_data_features=[Features.State.Circuit1Pump],
+        key="circuit_1_pump",
+        translation_key="circuit_1_pump",
+        icon="mdi:water-sync",
+        data_transform=BinarySensorDataTransform.POWERSTATE,
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eBinarySensorEntityDescription(
+        device_class=BinarySensorDeviceClass.POWER,
+        poll_data_features=[Features.State.Circuit2Pump],
+        key="circuit_2_pump",
+        translation_key="circuit_2_pump",
+        icon="mdi:water-sync",
+        data_transform=BinarySensorDataTransform.POWERSTATE,
+        required_capabilities=[Capability.Circuit2],
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eBinarySensorEntityDescription(
+        device_class=BinarySensorDeviceClass.POWER,
+        poll_data_features=[Features.State.Circuit3Pump],
+        key="circuit_3_pump",
+        translation_key="circuit_3_pump",
+        icon="mdi:water-sync",
+        data_transform=BinarySensorDataTransform.POWERSTATE,
+        required_capabilities=[Capability.Circuit3],
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eBinarySensorEntityDescription(
+        device_class=BinarySensorDeviceClass.POWER,
+        poll_data_features=[Features.State.Circuit4Pump],
+        key="circuit_4_pump",
+        translation_key="circuit_4_pump",
+        icon="mdi:water-sync",
+        data_transform=BinarySensorDataTransform.POWERSTATE,
+        required_capabilities=[Capability.Circuit4],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eBinarySensorEntityDescription(
         device_class=BinarySensorDeviceClass.POWER,
