@@ -637,6 +637,21 @@
       "hot_water_circulation_pump": {
         "name": "Hot Water Circulation Pump"
       }
+    },
+    "fan": {
+      "ventilation": {
+        "name": "Ventilation",
+        "state_attributes": {
+          "preset_mode": {
+            "state": {
+              "continuous": "Continuous",
+              "timed": "Timed",
+              "timed_sensor": "Timed with sensor priority",
+              "sensor_auto": "Sensor automatic"
+            }
+          }
+        }
+      }
     }
   }
 }

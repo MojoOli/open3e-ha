@@ -27,6 +27,7 @@ from .definitions.subfeatures.buffer_mode import BufferMode
 from .definitions.subfeatures.dhw_hysteresis import DhwHysteresis
 from .definitions.subfeatures.heating_curve import HeatingCurve
 from .definitions.subfeatures.hvac_mode import HvacMode
+from .definitions.subfeatures.ventilation_mode import VentilationMode
 from .definitions.subfeatures.vitoair_quick_mode import VitoairQuickMode
 from .errors import Open3eServerTimeoutError, Open3eError, Open3eServerUnavailableError
 
@@ -547,6 +548,50 @@ class Open3eMqttClient:
                     feature_id=feature_id,
                     sub_feature="State",
                     data=1 if is_on else 0,
+                    device_id=device_id
+                )
+            )
+        except Exception as exception:
+            raise Open3eError(exception)
+
+    async def async_set_ventilation_level(
+            self,
+            hass: HomeAssistant,
+            feature_id: int,
+            level: float,
+            device_id: int
+    ):
+        try:
+            _LOGGER.debug(f"Setting level to {level} of feature ID {feature_id}")
+            await mqtt.async_publish(
+                hass=hass,
+                topic=self.__mqtt_cmd,
+                payload=self.__write_json_payload(
+                    feature_id=feature_id,
+                    data=level,
+                    sub_feature="Acutual",
+                    device_id=device_id
+                )
+            )
+        except Exception as exception:
+            raise Open3eError(exception)
+
+    async def async_set_ventilation_mode(
+            self,
+            hass: HomeAssistant,
+            feature_id: int,
+            mode: VentilationMode,
+            device_id: int
+    ):
+        try:
+            _LOGGER.debug(f"Setting mode to {mode} of feature ID {feature_id}")
+            await mqtt.async_publish(
+                hass=hass,
+                topic=self.__mqtt_cmd,
+                payload=self.__write_json_payload(
+                    feature_id=feature_id,
+                    data=mode.map_to_api(),
+                    sub_feature="Mode",
                     device_id=device_id
                 )
             )

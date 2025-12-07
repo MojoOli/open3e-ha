@@ -637,6 +637,21 @@
       "hot_water_circulation_pump": {
         "name": "Warmwasser Zirkulationspumpe"
       }
+    },
+    "fan": {
+      "ventilation": {
+        "name": "Belüftung",
+        "state_attributes": {
+          "preset_mode": {
+            "state": {
+              "continuous": "Konstantbetrieb",
+              "timed": "Zeitprogramm",
+              "timed_sensor": "Zeitprogramm mit Sensorvorrang",
+              "sensor_auto": "Sensorbasierter Automatikmodus"
+            }
+          }
+        }
+      }
     }
   }
 }

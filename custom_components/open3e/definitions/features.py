@@ -133,6 +133,8 @@ class Features:
         FlowCircuit2HeatingCurve = Feature(id=881, refresh_interval=30)
         FlowCircuit3HeatingCurve = Feature(id=882, refresh_interval=30)
         FlowCircuit4HeatingCurve = Feature(id=883, refresh_interval=30)
+        VentilationMode = Feature(id=2371, refresh_interval=30)
+        VentilationLevel = Feature(id=533, refresh_interval=30)
 
     class Speed:
         CompressorPercent = Feature(id=2346, refresh_interval=10)

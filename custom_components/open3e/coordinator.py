@@ -23,6 +23,7 @@ from .definitions.subfeatures.buffer_mode import BufferMode
 from .definitions.subfeatures.dhw_hysteresis import DhwHysteresis
 from .definitions.subfeatures.heating_curve import HeatingCurve
 from .definitions.subfeatures.hvac_mode import HvacMode
+from .definitions.subfeatures.ventilation_mode import VentilationMode
 from .definitions.subfeatures.vitoair_quick_mode import VitoairQuickMode
 from .errors import Open3eCoordinatorUpdateFailed
 
@@ -439,6 +440,36 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             hass=self.hass,
             feature_id=feature_id,
             is_on=is_on,
+            device_id=device.id
+        )
+
+        await self.async_refresh_feature(device, [feature_id])
+
+    async def async_set_ventilation_level(
+            self,
+            feature_id: int,
+            level: float,
+            device: Open3eDataDevice
+    ):
+        await self.__client.async_set_ventilation_level(
+            hass=self.hass,
+            feature_id=feature_id,
+            level=level,
+            device_id=device.id
+        )
+
+        await self.async_refresh_feature(device, [feature_id])
+
+    async def async_set_ventilation_mode(
+            self,
+            feature_id: int,
+            mode: VentilationMode,
+            device: Open3eDataDevice
+    ):
+        await self.__client.async_set_ventilation_mode(
+            hass=self.hass,
+            feature_id=feature_id,
+            mode=mode,
             device_id=device.id
         )
 
