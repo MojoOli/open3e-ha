@@ -47,7 +47,6 @@ SELECTS: tuple[Open3eSelectEntityDescription, ...] = (
 
     Open3eSelectEntityDescription(
         poll_data_features=[Features.State.CurrentQuickMode],
-        required_device=Open3eDevices.Vitoair,
         options=[VitoairQuickMode.Intensive, VitoairQuickMode.ReducedNoise, VitoairQuickMode.Off,
                  VitoairQuickMode.Nothing],
         get_option=lambda data: VitoairQuickMode.from_operation_mode(data["OpMode"]),
@@ -57,7 +56,9 @@ SELECTS: tuple[Open3eSelectEntityDescription, ...] = (
             mode=VitoairQuickMode.from_str(option),
             device=device
         ),
+        icon="mdi:fan-chevron-up",
         key="quick_operation_mode",
-        translation_key="quick_operation_mode"
+        translation_key="quick_operation_mode",
+        required_device=Open3eDevices.Vitoair
     ),
 )

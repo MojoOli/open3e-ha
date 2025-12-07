@@ -6,6 +6,7 @@ from homeassistant.const import UnitOfTemperature, UnitOfEnergy, PERCENTAGE, Uni
     EntityCategory, UnitOfPressure, UnitOfVolumeFlowRate, UnitOfTime
 from homeassistant.util.json import json_loads
 
+from .devices import Open3eDevices
 from .entity_description import Open3eEntityDescription
 from .features import Features
 from .subfeatures.connection_status import ConnectionStatus, get_connection_status
@@ -1151,7 +1152,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         icon="mdi:fan",
         key="supply_air_fan_speed",
         translation_key="supply_air_fan_speed",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitoair
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Speed.ExhaustAirFan],
@@ -1161,7 +1163,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         icon="mdi:fan",
         key="exhaust_air_fan_speed",
         translation_key="exhaust_air_fan_speed",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitoair
     ),
 )
 
