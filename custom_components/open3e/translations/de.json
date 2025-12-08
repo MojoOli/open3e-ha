@@ -170,16 +170,16 @@
         "name": "Warmwasser-Zieltemperatur"
       },
       "flow_circuit1_temperature": {
-        "name": "Vorlaufkreis 1 Temperatur"
+        "name": "Heizkreis 1 Vorlauftemperatur"
       },
       "flow_circuit2_temperature": {
-        "name": "Vorlaufkreis 2 Temperatur"
+        "name": "Heizkreis 2 Vorlauftemperatur"
       },
       "flow_circuit3_temperature": {
-        "name": "Vorlaufkreis 3 Temperatur"
+        "name": "Heizkreis 3 Vorlauftemperatur"
       },
       "flow_circuit4_temperature": {
-        "name": "Vorlaufkreis 4 Temperatur"
+        "name": "Heizkreis 4 Vorlauftemperatur"
       },
       "compressor_inlet_temperature": {
         "name": "Verdichtereintrittstemperatur"
@@ -394,7 +394,19 @@
         "name": "Frostschutz Heizkreis"
       },
       "circuit_pump": {
-        "name": "Heizkreispumpe"
+        "name": "Wärmepumpe Heizkreis-Pumpe"
+      },
+      "circuit_1_pump": {
+        "name": "Heizkreis 1 Umwälzpumpe"
+      },
+      "circuit_2_pump": {
+        "name": "Heizkreis 2 Umwälzpumpe"
+      },
+      "circuit_3_pump": {
+        "name": "Heizkreis 3 Umwälzpumpe"
+      },
+      "circuit_4_pump": {
+        "name": "Heizkreis 4 Umwälzpumpe"
       },
       "hot_water_circulation_pump_hygiene": {
         "name": "Warmwasser Legionellenschutz"
