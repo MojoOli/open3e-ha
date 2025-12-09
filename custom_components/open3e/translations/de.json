@@ -617,6 +617,18 @@
       },
       "dhw_hysteresis_off": {
         "name": "Warmwasser Hysterese aus"
+      },
+      "circuit_1_pump_speed": {
+        "name": "Heizkreis 1 Umwälzpumpe Drehzahl"
+      },
+      "circuit_2_pump_speed": {
+        "name": "Heizkreis 2 Umwälzpumpe Drehzahl"
+      },
+      "circuit_3_pump_speed": {
+        "name": "Heizkreis 3 Umwälzpumpe Drehzahl"
+      },
+      "circuit_4_pump_speed": {
+        "name": "Heizkreis 4 Umwälzpumpe Drehzahl"
       }
     },
     "select": {

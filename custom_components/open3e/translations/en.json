@@ -617,6 +617,18 @@
       },
       "dhw_hysteresis_off": {
         "name": "Warm Water Hysteresis Off"
+      },
+      "circuit_1_pump_speed": {
+        "name": "Heating circuit 1 circulation pump speed"
+      },
+      "circuit_2_pump_speed": {
+        "name": "Heating circuit 2 circulation pump speed"
+      },
+      "circuit_3_pump_speed": {
+        "name": "Heating circuit 3 circulation pump speed"
+      },
+      "circuit_4_pump_speed": {
+        "name": "Heating circuit 4 circulation pump speed"
       }
     },
     "select": {

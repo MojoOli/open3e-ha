@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import Callable, Any, Awaitable
 
 from homeassistant.components.number import NumberEntityDescription, NumberDeviceClass
-from homeassistant.const import UnitOfTemperature, UnitOfPower
+from homeassistant.const import UnitOfTemperature, UnitOfPower, PERCENTAGE
 
 from custom_components.open3e.definitions.subfeatures.buffer import Buffer
 from custom_components.open3e.definitions.subfeatures.hysteresis import Hysteresis
@@ -1015,5 +1015,81 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="dhw_hysteresis_off",
         translation_key="dhw_hysteresis_off"
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.Speed.Circuit1Pump],
+        native_unit_of_measurement=PERCENTAGE,
+        device_class=NumberDeviceClass.SPEED,
+        icon="mdi:pump",
+        native_min_value=20,
+        native_max_value=100,
+        native_step=1,
+        get_native_value=lambda data: data["Setpoint"],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_circuit_pump_speed(
+            feature_id=Features.Speed.Circuit1Pump.id,
+            speed=value,
+            device=device
+        ),
+        key="circuit_1_pump_speed",
+        translation_key="circuit_1_pump_speed",
+        required_device=Open3eDevices.Vitocal,
+        required_capabilities=[Capability.Circuit1]
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.Speed.Circuit2Pump],
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        device_class=NumberDeviceClass.TEMPERATURE,
+        icon="mdi:pump",
+        native_min_value=20,
+        native_max_value=100,
+        native_step=1,
+        get_native_value=lambda data: data["Setpoint"],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_circuit_pump_speed(
+            feature_id=Features.Speed.Circuit2Pump.id,
+            value=value,
+            device=device
+        ),
+        key="circuit_2_pump_speed",
+        translation_key="circuit_2_pump_speed",
+        required_device=Open3eDevices.Vitocal,
+        required_capabilities=[Capability.Circuit2]
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.Speed.Circuit3Pump],
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        device_class=NumberDeviceClass.TEMPERATURE,
+        icon="mdi:pump",
+        native_min_value=20,
+        native_max_value=100,
+        native_step=1,
+        get_native_value=lambda data: data["Setpoint"],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_circuit_pump_speed(
+            feature_id=Features.Speed.Circuit3Pump.id,
+            value=value,
+            device=device
+        ),
+        key="circuit_3_pump_speed",
+        translation_key="circuit_3_pump_speed",
+        required_device=Open3eDevices.Vitocal,
+        required_capabilities=[Capability.Circuit3]
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.Speed.Circuit4Pump],
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        device_class=NumberDeviceClass.TEMPERATURE,
+        icon="mdi:pump",
+        native_min_value=20,
+        native_max_value=100,
+        native_step=1,
+        get_native_value=lambda data: data["Setpoint"],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_circuit_pump_speed(
+            feature_id=Features.Speed.Circuit4Pump.id,
+            value=value,
+            device=device
+        ),
+        key="circuit_4_pump_speed",
+        translation_key="circuit_4_pump_speed",
+        required_device=Open3eDevices.Vitocal,
+        required_capabilities=[Capability.Circuit4]
     )
 )
