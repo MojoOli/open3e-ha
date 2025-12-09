@@ -145,6 +145,10 @@ class Features:
         CompressorRps = Feature(id=2569, refresh_interval=10)
         SupplyAirFan = Feature(id=1040, refresh_interval=10)
         ExhaustAirFan = Feature(id=1041, refresh_interval=10)
+        Circuit1Pump = Feature(id=1102, refresh_interval=10)
+        Circuit2Pump = Feature(id=1103, refresh_interval=10)
+        Circuit3Pump = Feature(id=1104, refresh_interval=10)
+        Circuit4Pump = Feature(id=1105, refresh_interval=10)
 
     class Position:
         ExpansionValve1 = Feature(id=389, refresh_interval=30)
