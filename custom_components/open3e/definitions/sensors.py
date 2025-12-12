@@ -19,7 +19,6 @@ class SensorDataRetriever:
     """Retriever functions for MQTT sensor data."""
 
     ACTUAL = lambda data: float(json_loads(data)["Actual"])
-    ACUTUAL = lambda data: float(json_loads(data)["Acutual"])  # intended, typo on Open3e for VentilationLevel (533)
     MINIMUM = lambda data: float(json_loads(data)["Minimum"])
     MAXIMUM = lambda data: float(json_loads(data)["Maximum"])
     AVERAGE = lambda data: float(json_loads(data)["Average"])
@@ -1198,7 +1197,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         icon="mdi:fan-speed-1",
         key="ventilation_level",
         translation_key="ventilation_level",
-        data_retriever=SensorDataRetriever.ACUTUAL,
+        data_retriever=lambda data: float(json_loads(data)["Acutual"]),
+        # intended, typo on Open3e for VentilationLevel (533)
         required_device=Open3eDevices.Vitoair
     ),
 )
