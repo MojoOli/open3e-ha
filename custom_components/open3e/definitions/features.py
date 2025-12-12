@@ -140,6 +140,9 @@ class Features:
         VentilationMode = Feature(id=2371, refresh_interval=30)
         VentilationLevel = Feature(id=533, refresh_interval=30)
 
+    class Volume:
+        Ventilation = Feature(id=2328, refresh_interval=10)
+
     class Speed:
         CompressorPercent = Feature(id=2346, refresh_interval=10)
         CompressorRps = Feature(id=2569, refresh_interval=10)

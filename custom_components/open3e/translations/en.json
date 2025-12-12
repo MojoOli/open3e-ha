@@ -387,6 +387,15 @@
       },
       "exhaust_air_fan_speed": {
         "name": "Exhaust Air Fan"
+      },
+      "ventilation_supply_air_volume": {
+        "name": "Supply air volume flow"
+      },
+      "ventilation_exhaust_air_volume": {
+        "name": "Exhaust air volume flow"
+      },
+      "ventilation_level": {
+        "name": "Ventilation level"
       }
     },
     "binary_sensor": {
