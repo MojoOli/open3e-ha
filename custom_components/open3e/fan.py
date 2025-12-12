@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 from typing import cast
 
 from homeassistant.components.fan import FanEntity, FanEntityFeature
@@ -76,6 +77,8 @@ class Open3eFan(Open3eEntity, FanEntity):
         # Percentage can only be set in continuous mode
         if self.current_mode != VentilationMode.Continuous:
             await self.async_set_ventilation_mode(VentilationMode.Continuous)
+            # Wait for program to be set
+            await asyncio.sleep(1)
 
         level = percentage_to_ranged_value(VENTILATION_SPEED_RANGE, percentage)
         await self.coordinator.async_set_ventilation_level(
@@ -114,7 +117,7 @@ class Open3eFan(Open3eEntity, FanEntity):
                 self.current_speed_level = int(json_loads(self.data[feature_id])["Acutual"])  # intended, typo on Open3e
 
             case self.entity_description.mode_feature.id:
-                self.current_speed_level = VentilationMode.from_operation_mode(
+                self.current_mode = VentilationMode.from_operation_mode(
                     json_loads(self.data[feature_id])["Mode"])
 
         self.async_write_ha_state()

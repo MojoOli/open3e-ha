@@ -196,7 +196,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             device_id=device.id
         )
 
-        await self.async_refresh_feature(device, [set_programs_feature_id])
+        self.async_refresh_feature(device, [set_programs_feature_id])
 
     async def async_set_program_temperature_cooling(
             self,
@@ -213,7 +213,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             device_id=device.id
         )
 
-        await self.async_refresh_feature(device, [set_programs_feature_id])
+        self.async_refresh_feature(device, [set_programs_feature_id])
 
     async def async_set_hot_water_temperature(
             self,
@@ -228,14 +228,14 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             device_id=device.id
         )
 
-        await self.async_refresh_feature(device, [feature_id])
+        self.async_refresh_feature(device, [feature_id])
 
     async def async_set_hvac_mode(self, mode: HvacMode, hvac_mode_feature_id: int, device: Open3eDataDevice):
         await self.__client.async_set_hvac_mode(self.hass, mode, hvac_mode_feature_id, device.id)
         # Wait for 4 seconds to request hvac mode
         # this takes a bit longer hence the longer wait time
 
-        await self.async_refresh_feature(device, [hvac_mode_feature_id])
+        self.async_refresh_feature(device, [hvac_mode_feature_id])
 
     async def async_set_hot_water_mode(
             self,
@@ -252,7 +252,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             device_id=device.id
         )
 
-        await self.async_refresh_feature(device, [dmw_state_feature_id, dmw_efficiency_mode_feature_id])
+        self.async_refresh_feature(device, [dmw_state_feature_id, dmw_efficiency_mode_feature_id])
 
     async def async_set_max_power_electrical_heater(
             self,
@@ -267,7 +267,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             device_id=device.id
         )
 
-        await self.async_refresh_feature(device, [feature_id])
+        self.async_refresh_feature(device, [feature_id])
 
     async def async_set_smart_grid_temperature_offset(
             self,
@@ -284,7 +284,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             device_id=device.id
         )
 
-        await self.async_refresh_feature(device, [feature_id])
+        self.async_refresh_feature(device, [feature_id])
 
     async def async_set_temperature_cooling(
             self,
@@ -299,7 +299,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             device_id=device.id
         )
 
-        await self.async_refresh_feature(device, [feature_id])
+        self.async_refresh_feature(device, [feature_id])
 
     async def async_set_hysteresis(
             self,
@@ -316,7 +316,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             device_id=device.id
         )
 
-        await self.async_refresh_feature(device, [feature_id])
+        self.async_refresh_feature(device, [feature_id])
 
     async def async_set_buffer_temperature(
             self,
@@ -333,7 +333,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             device_id=device.id
         )
 
-        await self.async_refresh_feature(device, [feature_id])
+        self.async_refresh_feature(device, [feature_id])
 
     async def async_set_frost_protection_temperature(
             self,
@@ -348,7 +348,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             device_id=device.id
         )
 
-        await self.async_refresh_feature(device, [feature_id])
+        self.async_refresh_feature(device, [feature_id])
 
     async def async_set_heating_curve(
             self,
@@ -365,7 +365,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             device_id=device.id
         )
 
-        await self.async_refresh_feature(device, [feature_id])
+        self.async_refresh_feature(device, [feature_id])
 
     async def async_set_dhw_hysteresis(
             self,
@@ -382,7 +382,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             device_id=device.id
         )
 
-        await self.async_refresh_feature(device, [feature_id])
+        self.async_refresh_feature(device, [feature_id])
 
     async def async_set_buffer_mode(
             self,
@@ -397,7 +397,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             device_id=device.id
         )
 
-        await self.async_refresh_feature(device, [feature_id])
+        self.async_refresh_feature(device, [feature_id])
 
     async def async_set_hot_water_quickmode(
             self,
@@ -412,7 +412,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             device_id=device.id
         )
 
-        await self.async_refresh_feature(device, [feature_id])
+        self.async_refresh_feature(device, [feature_id])
 
     async def async_set_vitoair_quick_mode(
             self,
@@ -428,7 +428,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             device_id=device.id
         )
 
-        await self.async_refresh_feature(device, [refresh_feature_id])
+        self.async_refresh_feature(device, [refresh_feature_id])
 
     async def async_set_hot_water_circulation_pump(
             self,
@@ -443,7 +443,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             device_id=device.id
         )
 
-        await self.async_refresh_feature(device, [feature_id])
+        self.async_refresh_feature(device, [feature_id])
 
     async def async_set_ventilation_level(
             self,
@@ -458,7 +458,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             device_id=device.id
         )
 
-        await self.async_refresh_feature(device, [feature_id])
+        self.async_refresh_feature(device, [feature_id])
 
     async def async_set_ventilation_mode(
             self,
@@ -473,7 +473,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             device_id=device.id
         )
 
-        await self.async_refresh_feature(device, [feature_id])
+        self.async_refresh_feature(device, [feature_id])
 
     async def async_set_circuit_pump_speed(
             self,
@@ -488,10 +488,12 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             device_id=device.id
         )
 
-        await self.async_refresh_feature(device, [feature_id])
+        self.async_refresh_feature(device, [feature_id])
 
-    async def async_refresh_feature(self, device: Open3eDataDevice, feature_ids: list[int]):
-        # Wait for 2 seconds to request new states
-        await asyncio.sleep(2)
+    def async_refresh_feature(self, device: Open3eDataDevice, feature_ids: list[int]):
+        async def delayed_refresh():
+            # Wait for 2 seconds to request new states
+            await asyncio.sleep(2)
+            await self.__client.async_request_data(self.hass, {device.id: feature_ids})
 
-        await self.__client.async_request_data(self.hass, {device.id: feature_ids})
+        asyncio.create_task(delayed_refresh())

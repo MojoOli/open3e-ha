@@ -694,6 +694,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Speed.CompressorRps],
         native_unit_of_measurement="rpm",
+        device_class=SensorDeviceClass.SPEED,
         state_class=SensorStateClass.MEASUREMENT,
         icon="mdi:fan",
         key="compressor_speed_rpm",
