@@ -387,6 +387,15 @@
       },
       "exhaust_air_fan_speed": {
         "name": "Abluftventilator"
+      },
+      "ventilation_supply_air_volume": {
+        "name": "Zuluft Volumenstrom"
+      },
+      "ventilation_exhaust_air_volume": {
+        "name": "Abluft Volumenstrom"
+      },
+      "ventilation_level": {
+        "name": "Lüftungsstufe"
       }
     },
     "binary_sensor": {
@@ -664,7 +673,7 @@
     },
     "fan": {
       "ventilation": {
-        "name": "Belüftung",
+        "name": "Lüftung",
         "state_attributes": {
           "preset_mode": {
             "state": {
