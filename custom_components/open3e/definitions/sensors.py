@@ -49,6 +49,8 @@ class SensorDataRetriever:
     PV_POWER_STRING_3 = lambda data: float(json_loads(data)["ActivePower String C"])
     STARTS = lambda data: int(json_loads(data)["starts"])
     HOURS = lambda data: int(json_loads(data)["hours"])
+    TARGET_FLOW = lambda data: float(json_loads(data)["TargetFlow"])
+    UNKNOWN = lambda data: float(json_loads(data)["UNKNOWN"])
     RAW = lambda data: float(data)
     """The data state represents a raw value without any encapsulation."""
 
@@ -694,6 +696,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Speed.CompressorRps],
         native_unit_of_measurement="rpm",
+        device_class=SensorDeviceClass.SPEED,
         state_class=SensorStateClass.MEASUREMENT,
         icon="mdi:fan",
         key="compressor_speed_rpm",
@@ -1146,8 +1149,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Speed.SupplyAirFan],
-        device_class=SensorDeviceClass.POWER_FACTOR,
-        native_unit_of_measurement=PERCENTAGE,
+        device_class=SensorDeviceClass.SPEED,
+        native_unit_of_measurement="rpm",
         state_class=SensorStateClass.MEASUREMENT,
         icon="mdi:fan",
         key="supply_air_fan_speed",
@@ -1157,13 +1160,45 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Speed.ExhaustAirFan],
-        device_class=SensorDeviceClass.POWER_FACTOR,
-        native_unit_of_measurement=PERCENTAGE,
+        device_class=SensorDeviceClass.SPEED,
+        native_unit_of_measurement="rpm",
         state_class=SensorStateClass.MEASUREMENT,
         icon="mdi:fan",
         key="exhaust_air_fan_speed",
         translation_key="exhaust_air_fan_speed",
         data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitoair
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Volume.Ventilation],
+        device_class=SensorDeviceClass.VOLUME_FLOW_RATE,
+        native_unit_of_measurement=UnitOfVolumeFlowRate.CUBIC_METERS_PER_HOUR,
+        state_class=SensorStateClass.MEASUREMENT,
+        icon="mdi:fan",
+        key="ventilation_supply_air_volume",
+        translation_key="ventilation_supply_air_volume",
+        data_retriever=SensorDataRetriever.TARGET_FLOW,
+        required_device=Open3eDevices.Vitoair
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Volume.Ventilation],
+        state_class=SensorStateClass.MEASUREMENT,
+        icon="mdi:fan",
+        key="ventilation_exhaust_air_volume",
+        translation_key="ventilation_exhaust_air_volume",
+        data_retriever=SensorDataRetriever.UNKNOWN,
+        required_device=Open3eDevices.Vitoair
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.State.VentilationLevel],
+        device_class=SensorDeviceClass.VOLUME_FLOW_RATE,
+        native_unit_of_measurement=UnitOfVolumeFlowRate.CUBIC_METERS_PER_HOUR,
+        state_class=SensorStateClass.MEASUREMENT,
+        icon="mdi:fan-speed-1",
+        key="ventilation_level",
+        translation_key="ventilation_level",
+        data_retriever=lambda data: float(json_loads(data)["Acutual"]),
+        # intended, typo on Open3e for VentilationLevel (533)
         required_device=Open3eDevices.Vitoair
     ),
 )
