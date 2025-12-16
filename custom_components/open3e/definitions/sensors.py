@@ -526,7 +526,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
     Open3eSensorEntityDescription(
         poll_data_features=[Features.State.Allengra],
         device_class=SensorDeviceClass.VOLUME_FLOW_RATE,
-        native_unit_of_measurement=UnitOfVolumeFlowRate.CUBIC_METERS_PER_HOUR,
+        native_unit_of_measurement=UnitOfVolumeFlowRate.LITERS_PER_HOUR,
         state_class=SensorStateClass.MEASUREMENT,
         key="allengra_flow_rate",
         translation_key="allengra_flow_rate",
@@ -695,8 +695,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Speed.CompressorRps],
-        native_unit_of_measurement="rpm",
-        device_class=SensorDeviceClass.SPEED,
+        native_unit_of_measurement="rps",
+        device_class=SensorDeviceClass.FREQUENCY,
         state_class=SensorStateClass.MEASUREMENT,
         icon="mdi:fan",
         key="compressor_speed_rpm",
@@ -1149,7 +1149,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Speed.SupplyAirFan],
-        device_class=SensorDeviceClass.SPEED,
+        device_class=SensorDeviceClass.FREQUENCY,
         native_unit_of_measurement="rpm",
         state_class=SensorStateClass.MEASUREMENT,
         icon="mdi:fan",
@@ -1160,7 +1160,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Speed.ExhaustAirFan],
-        device_class=SensorDeviceClass.SPEED,
+        device_class=SensorDeviceClass.FREQUENCY,
         native_unit_of_measurement="rpm",
         state_class=SensorStateClass.MEASUREMENT,
         icon="mdi:fan",

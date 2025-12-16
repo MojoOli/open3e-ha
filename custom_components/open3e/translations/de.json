@@ -212,7 +212,7 @@
         "name": "Expansionsventil 2 Stellung"
       },
       "allengra_flow_rate": {
-        "name": "Allengra Durchflussrate"
+        "name": "Volumetric Flow"
       },
       "allengra_temperature": {
         "name": "Allengra Temperatur"
