@@ -319,8 +319,8 @@
       "four_three_way_valve_position": {
         "name": "4/3-Wege-Ventil Position",
         "state": {
-          "buffer": "Pufferspeicher",
-          "idle": "Leerlauf",
+          "buffer": "Heizen",
+          "idle": "Ruhezustand/Abtauen",
           "hot_water": "Warmwasser"
         }
       },
