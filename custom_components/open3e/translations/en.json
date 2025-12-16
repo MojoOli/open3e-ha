@@ -319,8 +319,8 @@
       "four_three_way_valve_position": {
         "name": "4/3-Way Valve Position",
         "state": {
-          "buffer": "Buffer",
-          "idle": "Idle",
+          "buffer": "Heating",
+          "idle": "Idle/Defrost",
           "hot_water": "Hot Water"
         }
       },
