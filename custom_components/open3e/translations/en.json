@@ -212,7 +212,7 @@
         "name": "Expansion Valve 2 Position"
       },
       "allengra_flow_rate": {
-        "name": "Allengra Flow Rate"
+        "name": "Volumenstrom"
       },
       "allengra_temperature": {
         "name": "Allengra Temperature"
