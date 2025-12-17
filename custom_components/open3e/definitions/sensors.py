@@ -50,7 +50,7 @@ class SensorDataRetriever:
     STARTS = lambda data: int(json_loads(data)["starts"])
     HOURS = lambda data: int(json_loads(data)["hours"])
     TARGET_FLOW = lambda data: float(json_loads(data)["TargetFlow"])
-    UNKNOWN = lambda data: float(json_loads(data)["UNKNOWN"])
+    UNKNOWN = lambda data: float(json_loads(data)["Unknown"])
     RAW = lambda data: float(data)
     """The data state represents a raw value without any encapsulation."""
 
@@ -1179,6 +1179,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Volume.Ventilation],
+        device_class=SensorDeviceClass.VOLUME_FLOW_RATE,
+        native_unit_of_measurement=UnitOfVolumeFlowRate.CUBIC_METERS_PER_HOUR,
         state_class=SensorStateClass.MEASUREMENT,
         icon="mdi:fan",
         key="ventilation_exhaust_air_volume",
@@ -1188,14 +1190,12 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.State.VentilationLevel],
-        device_class=SensorDeviceClass.VOLUME_FLOW_RATE,
-        native_unit_of_measurement=UnitOfVolumeFlowRate.CUBIC_METERS_PER_HOUR,
         state_class=SensorStateClass.MEASUREMENT,
         icon="mdi:fan-speed-1",
         key="ventilation_level",
         translation_key="ventilation_level",
         data_retriever=lambda data: float(json_loads(data)["Acutual"]),
-        # intended, typo on Open3e for VentilationLevel (533)
+        # Acutual intended, typo on Open3e for VentilationLevel (533)
         required_device=Open3eDevices.Vitoair
     ),
 )
