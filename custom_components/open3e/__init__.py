@@ -153,6 +153,8 @@ def async_migrate_entities(
     device_entities = [
         e for e in ent_reg.entities.values()
         if e.device_id == device.id
+           and e.platform == DOMAIN
+           and e.config_entry_id == entry.entry_id
     ]
 
     for entity in device_entities:
