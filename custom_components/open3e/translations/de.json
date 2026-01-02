@@ -136,6 +136,9 @@
       "battery_power_current": {
         "name": "Aktuelle Batterieleistung"
       },
+      "backup_box_discharge_limit_percentage": {
+        "name": "Batterie Entladegrenze (Backup-Box)"
+      },
       "grid_power_current": {
         "name": "Aktuelle Netzleistung"
       },
