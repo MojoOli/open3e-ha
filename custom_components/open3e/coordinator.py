@@ -489,6 +489,21 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
         )
 
         self.async_refresh_feature(device, [feature_id])
+        
+    async def async_set_backup_box_discharge_limit_percentage(
+            self,
+            feature_id: int,
+            backup_box_discharge_limit_percentage: float,
+            device: Open3eDataDevice
+    ):
+        await self.__client.async_set_backup_box_discharge_limit_percentage(
+            hass=self.hass,
+            feature_id=feature_id,
+            backup_box_discharge_limit_percentage=backup_box_discharge_limit_percentage,
+            device_id=device.id
+        )
+
+        self.async_refresh_feature(device, [feature_id])
 
     def async_refresh_feature(self, device: Open3eDataDevice, feature_ids: list[int]):
         async def delayed_refresh():

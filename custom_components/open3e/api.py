@@ -619,6 +619,31 @@ class Open3eMqttClient:
             )
         except Exception as exception:
             raise Open3eError(exception)
+        
+    async def async_set_backup_box_discharge_limit_percentage(
+            self,
+            hass: HomeAssistant,
+            feature_id: int,
+            backup_box_discharge_limit_percentage: float,
+            device_id: int
+    ):
+        try:
+            _LOGGER.debug(f"Setting backup box discharge limit percentage to {backup_box_discharge_limit_percentage} of feature ID {feature_id}")
+            await mqtt.async_publish(
+                await mqtt.async_publish(
+                hass=hass,
+                topic=self.__mqtt_cmd,
+                payload=self.__write_json_payload(
+                    feature_id=feature_id,
+                    sub_feature="DischargeLimit",
+                    data=backup_box_discharge_limit_percentage,
+                    device_id=device_id
+                )
+            )
+            )
+        except Exception as exception:
+            raise Open3eError(exception)
+        
 
     @staticmethod
     def __write_json_payload(feature_id: int, data: any, device_id: int, sub_feature: str | None = None):
