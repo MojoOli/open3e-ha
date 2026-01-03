@@ -42,6 +42,8 @@ class SensorDataRetriever:
     PV_ENERGY_PRODUCTION_MONTH = lambda data: float(json_loads(data)["PhotovoltaicProductionMonth"])
     PV_ENERGY_PRODUCTION_YEAR = lambda data: float(json_loads(data)["PhotovoltaicProductionYear"])
     PV_ENERGY_PRODUCTION_TOTAL = lambda data: float(json_loads(data)["PhotovoltaicProductionTotal"])
+    GRID_FEED_IN_ENERGY = lambda data: float(json_loads(data)["GridFeedInEnergy"])
+    GRID_SUPPLIED_ENERGY = lambda data: float(json_loads(data)["GridSuppliedEnergy"])
     TEMPERATURE = lambda data: float(json_loads(data)["Temperature"])
     PV_POWER_CUMULATED = lambda data: float(json_loads(data)["ActivePower cumulated"])
     PV_POWER_STRING_1 = lambda data: float(json_loads(data)["ActivePower String A"])
@@ -1048,6 +1050,24 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="pv_energy_production_total",
         translation_key="pv_energy_production_total",
         data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_TOTAL
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.Grid],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="grid_feed_in_energy",
+        translation_key="grid_feed_in_energy",
+        data_retriever=SensorDataRetriever.GRID_FEED_IN_ENERGY
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.Grid],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="grid_supplied_energy",
+        translation_key="grid_supplied_energy",
+        data_retriever=SensorDataRetriever.GRID_SUPPLIED_ENERGY
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.InverterAmbient],

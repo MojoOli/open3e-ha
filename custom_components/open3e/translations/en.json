@@ -166,6 +166,12 @@
       "pv_energy_production_total": {
         "name": "PV Energy Production Total"
       },
+      "grid_supplied_energy": {
+        "name": "Grid Energy Supply Total"
+      },
+      "grid_feed_in_energy": {
+        "name": "Grid Energy Feed-In Total"
+      },
       "domestic_hot_water_target_temperature": {
         "name": "Domestic Hot Water Temperature"
       },
