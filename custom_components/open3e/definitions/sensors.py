@@ -1191,7 +1191,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
     Open3eSensorEntityDescription(
         poll_data_features=[Features.State.VentilationLevel],
         state_class=SensorStateClass.MEASUREMENT,
-        icon="mdi:fan-speed-1",
+        icon="mdi:fan",
         key="ventilation_level",
         translation_key="ventilation_level",
         data_retriever=lambda data: float(json_loads(data)["Acutual"]),
