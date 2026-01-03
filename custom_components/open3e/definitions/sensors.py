@@ -1153,7 +1153,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         icon="mdi:fan",
         key="supply_air_fan_speed",
         translation_key="supply_air_fan_speed",
-        data_retriever=SensorDataRetriever.ACTUAL,
+        data_retriever=lambda data: float(json_loads(data)["Actual"]) * 10,
         required_device=Open3eDevices.Vitoair
     ),
     Open3eSensorEntityDescription(
@@ -1163,7 +1163,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         icon="mdi:fan",
         key="exhaust_air_fan_speed",
         translation_key="exhaust_air_fan_speed",
-        data_retriever=SensorDataRetriever.ACTUAL,
+        data_retriever=lambda data: float(json_loads(data)["Actual"]) * 10,
         required_device=Open3eDevices.Vitoair
     ),
     Open3eSensorEntityDescription(
