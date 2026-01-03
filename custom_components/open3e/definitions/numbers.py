@@ -1113,5 +1113,6 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         key="backup_box_discharge_limit_percentage",
         translation_key="backup_box_discharge_limit_percentage",
         required_device=Open3eDevices.Vitocharge,
+        required_capabilities=[Capability.BackupBox]
     ),
 )

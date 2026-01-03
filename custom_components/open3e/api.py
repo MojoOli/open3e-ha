@@ -635,7 +635,8 @@ class Open3eMqttClient:
                 topic=self.__mqtt_cmd,
                 payload=self.__write_json_payload(
                     feature_id=feature_id,
-                    data={"DischargeLimit": backup_box_discharge_limit_percentage, "Unknown": "1.0"}, #TODO: Unknown Needs to be renamed when open3e is updated to BackUpBoxIn
+                    sub_feature="DischargeLimit",
+                    data=backup_box_discharge_limit_percentage,
                     device_id=device_id
                 )
             )
