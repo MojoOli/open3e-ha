@@ -212,10 +212,10 @@
         "name": "Expansion Valve 2 Position"
       },
       "allengra_flow_rate": {
-        "name": "Volumenstrom"
+        "name": "Volumetric Flow"
       },
       "allengra_temperature": {
-        "name": "Allengra Temperature"
+        "name": "Volumetric Flow Sensor Temperature"
       },
       "primary_inlet_temperature": {
         "name": "Primary Inlet Temperature"

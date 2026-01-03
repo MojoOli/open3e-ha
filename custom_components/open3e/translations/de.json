@@ -212,10 +212,10 @@
         "name": "Expansionsventil 2 Stellung"
       },
       "allengra_flow_rate": {
-        "name": "Volumetric Flow"
+        "name": "Volumenstrom"
       },
       "allengra_temperature": {
-        "name": "Allengra Temperatur"
+        "name": "Volumenstromsensor Temperatur"
       },
       "primary_inlet_temperature": {
         "name": "Primäreintrittstemperatur"
