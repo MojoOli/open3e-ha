@@ -127,7 +127,7 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
         poll_data_features=[Features.State.BackUpBox],
         key="backup_box_installed",
         translation_key="backup_box_installed",
-        icon="mdi:power-plug-outline",
+        icon="mdi:power-plug-battery",
         data_transform=BinarySensorDataTransform.BACKUP_BOX_INSTALLED
     ),
 

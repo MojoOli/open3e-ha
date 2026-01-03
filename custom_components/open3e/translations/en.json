@@ -137,7 +137,7 @@
         "name": "Current Battery Load"
       },
       "backup_bx_installed":{
-        "name": "BackUp-Box installed"
+        "name": "Backup-Box installed"
       },
       "backup_box_discharge_limit_percentage": {
         "name": "Battery Discharge Limit (Backup-Box)"
