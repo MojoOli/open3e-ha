@@ -630,7 +630,6 @@ class Open3eMqttClient:
         try:
             _LOGGER.debug(f"Setting backup box discharge limit percentage to {backup_box_discharge_limit_percentage} of feature ID {feature_id}")
             await mqtt.async_publish(
-                await mqtt.async_publish(
                 hass=hass,
                 topic=self.__mqtt_cmd,
                 payload=self.__write_json_payload(
@@ -639,7 +638,6 @@ class Open3eMqttClient:
                     data=backup_box_discharge_limit_percentage,
                     device_id=device_id
                 )
-            )
             )
         except Exception as exception:
             raise Open3eError(exception)
