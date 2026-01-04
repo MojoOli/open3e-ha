@@ -1104,7 +1104,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         native_min_value=0,
         native_max_value=100,
         native_step=1,
-        get_native_value=lambda data: data["DischargeLimit"],
+        get_native_value=lambda data: data,
         set_native_value=lambda value, device, coordinator: coordinator.async_set_backup_box_discharge_limit_percentage(
             feature_id=Features.State.BackUpBox.id,
             backup_box_discharge_limit_percentage=value,
@@ -1114,5 +1114,23 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         translation_key="backup_box_discharge_limit_percentage",
         required_device=Open3eDevices.Vitocharge,
         required_capabilities=[Capability.BackupBox]
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.State.MaximumRechargePower],
+        native_unit_of_measurement=UnitOfPower.WATT,
+        device_class=NumberDeviceClass.POWER,
+        icon="mdi:lightning-bolt",
+        native_min_value=0,
+        native_max_value=8000,
+        native_step=1,
+        get_native_value=lambda data: data["Setpoint"],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_maximum_recharge_power(
+            feature_id=Features.State.MaximumRechargePower.id,
+            maximum_recharge_power=value,
+            device=device
+        ),
+        key="maximum_recharge_power",
+        translation_key="maximum_recharge_power",
+        required_device=Open3eDevices.Vitocharge,
     ),
 )

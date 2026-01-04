@@ -142,6 +142,9 @@
       "backup_box_discharge_limit_percentage": {
         "name": "Batterie Entladegrenze (Backup-Box)"
       },
+      "maximum_recharge_power": {
+        "name": "Maximale Nachladeleistung aus dem Netz"
+      },
       "grid_power_current": {
         "name": "Aktuelle Netzleistung"
       },
