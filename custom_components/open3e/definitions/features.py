@@ -119,6 +119,8 @@ class Features:
         DomesticHotWater = Feature(id=531, refresh_interval=30)
         DomesticHotWaterEfficiency = Feature(id=3029, refresh_interval=30)
         Battery = Feature(id=1664, refresh_interval=30)
+        BackUpBox = Feature(id=2214, refresh_interval=30)
+        MaximumRechargePower = Feature(id=2643, refresh_interval=30)
         Allengra = Feature(id=1043, refresh_interval=30)
         HeatPumpCompressor = Feature(id=2351, refresh_interval=30)
         Buffer = Feature(id=3070, refresh_interval=30)

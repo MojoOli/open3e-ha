@@ -136,6 +136,15 @@
       "battery_power_current": {
         "name": "Current Battery Load"
       },
+      "backup_box_installed":{
+        "name": "Backup-Box installed"
+      },
+      "backup_box_discharge_limit_percentage": {
+        "name": "Battery Discharge Limit (Backup-Box)"
+      },
+      "maximum_recharge_power": {
+        "name": "Maximum Recharge Power from the Grid"
+      },
       "grid_power_current": {
         "name": "Grid Power"
       },
