@@ -654,7 +654,6 @@ class Open3eMqttClient:
         try:
             _LOGGER.debug(f"Setting maximum recharge power to {maximum_recharge_power} of feature ID {feature_id}")
             await mqtt.async_publish(
-                await mqtt.async_publish(
                 hass=hass,
                 topic=self.__mqtt_cmd,
                 payload=self.__write_json_payload(
@@ -662,7 +661,6 @@ class Open3eMqttClient:
                     data=maximum_recharge_power,
                     device_id=device_id
                 )
-            )
             )
         except Exception as exception:
             raise Open3eError(exception)
