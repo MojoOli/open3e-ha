@@ -136,7 +136,7 @@
       "battery_power_current": {
         "name": "Aktuelle Batterieleistung"
       },
-      "backup_bx_installed":{
+      "backup_box_installed":{
         "name": "Backup-Box vorhanden"
       },
       "backup_box_discharge_limit_percentage": {
