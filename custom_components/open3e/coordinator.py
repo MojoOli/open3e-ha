@@ -508,7 +508,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
     async def async_set_maximum_recharge_power(
             self,
             feature_id: int,
-            maximum_recharge_power: int,
+            maximum_recharge_power: float,
             device: Open3eDataDevice
     ):
         await self.__client.async_set_maximum_recharge_power(

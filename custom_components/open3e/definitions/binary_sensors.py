@@ -43,7 +43,8 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
         key="additional_heater_active",
         translation_key="additional_heater_active",
         icon="mdi:power",
-        data_transform=BinarySensorDataTransform.POWERSTATE
+        data_transform=BinarySensorDataTransform.POWERSTATE,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eBinarySensorEntityDescription(
         device_class=BinarySensorDeviceClass.POWER,
@@ -51,7 +52,8 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
         key="heat_pump_compressor_active",
         translation_key="heat_pump_compressor_active",
         icon="mdi:power",
-        data_transform=BinarySensorDataTransform.POWERSTATE
+        data_transform=BinarySensorDataTransform.POWERSTATE,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eBinarySensorEntityDescription(
         device_class=BinarySensorDeviceClass.POWER,
@@ -59,7 +61,8 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
         key="circuit_frost_protection",
         translation_key="circuit_frost_protection",
         icon="mdi:snowflake-melt",
-        data_transform=BinarySensorDataTransform.STATE
+        data_transform=BinarySensorDataTransform.STATE,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eBinarySensorEntityDescription(
         device_class=BinarySensorDeviceClass.POWER,
@@ -67,7 +70,8 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
         key="circuit_pump",
         translation_key="circuit_pump",
         icon="mdi:water-sync",
-        data_transform=BinarySensorDataTransform.STATE
+        data_transform=BinarySensorDataTransform.STATE,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eBinarySensorEntityDescription(
         device_class=BinarySensorDeviceClass.POWER,
@@ -115,7 +119,8 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
         key="hot_water_circulation_pump_hygiene",
         translation_key="hot_water_circulation_pump_hygiene",
         icon="mdi:bacteria-outline",
-        data_transform=BinarySensorDataTransform.HYGIENE_ACTIVE
+        data_transform=BinarySensorDataTransform.HYGIENE_ACTIVE,
+        required_device=Open3eDevices.Vitocal
     ),
     
     ##################
@@ -128,7 +133,8 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
         key="backup_box_installed",
         translation_key="backup_box_installed",
         icon="mdi:power-plug-battery",
-        data_transform=BinarySensorDataTransform.BACKUP_BOX_INSTALLED
+        data_transform=BinarySensorDataTransform.BACKUP_BOX_INSTALLED,
+        required_device=Open3eDevices.Vitocharge
     ),
 
     ###############
@@ -141,6 +147,7 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
         key="frost_protection",
         translation_key="frost_protection",
         icon="mdi:snowflake-melt",
-        data_transform=BinarySensorDataTransform.HEX_ON
+        data_transform=BinarySensorDataTransform.HEX_ON,
+        required_device=Open3eDevices.Vitoair
     ),
 )

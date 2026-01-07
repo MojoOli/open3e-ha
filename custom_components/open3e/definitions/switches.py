@@ -30,7 +30,6 @@ SWITCHES: tuple[Open3eSwitchEntityDescription, ...] = (
 
     Open3eSwitchEntityDescription(
         poll_data_features=[Features.State.TargetQuickMode],
-        required_device=Open3eDevices.Vitocal,
         device_class=SwitchDeviceClass.SWITCH,
         icon="mdi:shower-head",
         key="i_want_hot_water",
@@ -45,7 +44,8 @@ SWITCHES: tuple[Open3eSwitchEntityDescription, ...] = (
             feature_id=Features.State.TargetQuickMode.id,
             is_on=False,
             device=device
-        )
+        ),
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSwitchEntityDescription(
         poll_data_features=[Features.State.HotWaterCirculationPump],
@@ -63,6 +63,7 @@ SWITCHES: tuple[Open3eSwitchEntityDescription, ...] = (
             feature_id=Features.State.HotWaterCirculationPump.id,
             is_on=False,
             device=device
-        )
+        ),
+        required_device=Open3eDevices.Vitocal
     ),
 )

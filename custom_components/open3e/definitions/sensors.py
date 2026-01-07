@@ -138,7 +138,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="error_dtc_list",
         translation_key="error_dtc_list",
         data_retriever=lambda data: ", ".join(
-            {e["Error"]["Text"] for e in json_loads(data).get("ListEntries", [])}) or "-",
+            {e["Error"]["Text"] for e in json_loads(data).get("ListEntries", [])}) or "-"
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Misc.BackendConnectionStatus],
@@ -162,7 +162,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="flow_temperature",
         translation_key="flow_temperature",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.Return],
@@ -171,7 +172,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="return_temperature",
         translation_key="return_temperature",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.DomesticHotWater],
@@ -180,7 +182,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="domestic_hot_water_temperature",
         translation_key="domestic_hot_water_temperature",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.DomesticHotWaterTarget],
@@ -189,7 +192,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="domestic_hot_water_temperature",
         translation_key="domestic_hot_water_temperature",
-        data_retriever=SensorDataRetriever.RAW
+        data_retriever=SensorDataRetriever.RAW,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Pressure.Water],
@@ -198,7 +202,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="water_pressure",
         translation_key="water_pressure",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Power.System],
@@ -209,7 +214,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         suggested_display_precision=2,
         key="power_consumption_system",
         translation_key="power_consumption_system",
-        data_retriever=SensorDataRetriever.RAW
+        data_retriever=SensorDataRetriever.RAW,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Power.ElectricalHeater],
@@ -220,7 +226,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         suggested_display_precision=2,
         key="power_consumption_electric_heater",
         translation_key="power_consumption_electric_heater",
-        data_retriever=SensorDataRetriever.RAW
+        data_retriever=SensorDataRetriever.RAW,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Power.RefrigerantCircuit],
@@ -231,7 +238,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         suggested_display_precision=2,
         key="power_consumption_refrigerant_circuit",
         translation_key="power_consumption_refrigerant_circuit",
-        data_retriever=SensorDataRetriever.RAW
+        data_retriever=SensorDataRetriever.RAW,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Power.ThermalCapacitySystem],
@@ -242,7 +250,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         suggested_display_precision=2,
         key="thermal_power",
         translation_key="thermal_power",
-        data_retriever=SensorDataRetriever.RAW
+        data_retriever=SensorDataRetriever.RAW,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.CentralHeating],
@@ -251,7 +260,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="energy_consumption_central_heating_today",
         translation_key="energy_consumption_central_heating_today",
-        data_retriever=SensorDataRetriever.TODAY
+        data_retriever=SensorDataRetriever.TODAY,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.CentralHeating],
@@ -260,7 +270,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="energy_consumption_central_heating_current_month",
         translation_key="energy_consumption_central_heating_current_month",
-        data_retriever=SensorDataRetriever.CURRENT_MONTH
+        data_retriever=SensorDataRetriever.CURRENT_MONTH,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.CentralHeating],
@@ -269,7 +280,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="energy_consumption_central_heating_current_year",
         translation_key="energy_consumption_central_heating_current_year",
-        data_retriever=SensorDataRetriever.CURRENT_YEAR
+        data_retriever=SensorDataRetriever.CURRENT_YEAR,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.CentralHeating],
@@ -279,7 +291,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="energy_consumption_central_heating_past_year",
         translation_key="energy_consumption_central_heating_past_year",
         data_retriever=SensorDataRetriever.PAST_YEAR,
-        entity_registry_enabled_default=False
+        entity_registry_enabled_default=False,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.DomesticHotWater],
@@ -288,7 +301,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="energy_consumption_domestic_hot_water_today",
         translation_key="energy_consumption_domestic_hot_water_today",
-        data_retriever=SensorDataRetriever.TODAY
+        data_retriever=SensorDataRetriever.TODAY,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.DomesticHotWater],
@@ -297,7 +311,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="energy_consumption_domestic_hot_water_current_month",
         translation_key="energy_consumption_domestic_hot_water_current_month",
-        data_retriever=SensorDataRetriever.CURRENT_MONTH
+        data_retriever=SensorDataRetriever.CURRENT_MONTH,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.DomesticHotWater],
@@ -306,7 +321,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="energy_consumption_domestic_hot_water_current_year",
         translation_key="energy_consumption_domestic_hot_water_current_year",
-        data_retriever=SensorDataRetriever.CURRENT_YEAR
+        data_retriever=SensorDataRetriever.CURRENT_YEAR,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.DomesticHotWater],
@@ -316,7 +332,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="energy_consumption_domestic_hot_water_past_year",
         translation_key="energy_consumption_domestic_hot_water_past_year",
         data_retriever=SensorDataRetriever.PAST_YEAR,
-        entity_registry_enabled_default=False
+        entity_registry_enabled_default=False,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.Cooling],
@@ -325,7 +342,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="energy_consumption_cooling_today",
         translation_key="energy_consumption_cooling_today",
-        data_retriever=SensorDataRetriever.TODAY
+        data_retriever=SensorDataRetriever.TODAY,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.Cooling],
@@ -334,7 +352,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="energy_consumption_cooling_current_month",
         translation_key="energy_consumption_cooling_current_month",
-        data_retriever=SensorDataRetriever.CURRENT_MONTH
+        data_retriever=SensorDataRetriever.CURRENT_MONTH,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.Cooling],
@@ -343,7 +362,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="energy_consumption_cooling_current_year",
         translation_key="energy_consumption_cooling_current_year",
-        data_retriever=SensorDataRetriever.CURRENT_YEAR
+        data_retriever=SensorDataRetriever.CURRENT_YEAR,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.Cooling],
@@ -353,7 +373,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="energy_consumption_cooling_past_year",
         translation_key="energy_consumption_cooling_past_year",
         data_retriever=SensorDataRetriever.PAST_YEAR,
-        entity_registry_enabled_default=False
+        entity_registry_enabled_default=False,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.Outside],
@@ -362,7 +383,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="outside_temperature",
         translation_key="outside_temperature",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.PrimaryHeatExchanger],
@@ -371,7 +393,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="primary_heat_exchanger_temperature",
         translation_key="primary_heat_exchanger_temperature",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.SecondaryHeatExchanger],
@@ -380,7 +403,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="secondary_heat_exchanger_temperature",
         translation_key="secondary_heat_exchanger_temperature",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.State.CentralHeatingPump],
@@ -389,7 +413,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="central_heating_pump_speed_percentage",
         translation_key="central_heating_pump_speed_percentage",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.FlowCircuit1],
@@ -399,7 +424,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="flow_circuit1_temperature",
         translation_key="flow_circuit1_temperature",
         data_retriever=SensorDataRetriever.ACTUAL,
-        required_capabilities=[Capability.Circuit1]
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.FlowCircuit2],
@@ -409,7 +435,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="flow_circuit2_temperature",
         translation_key="flow_circuit2_temperature",
         data_retriever=SensorDataRetriever.ACTUAL,
-        required_capabilities=[Capability.Circuit2]
+        required_capabilities=[Capability.Circuit2],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.FlowCircuit3],
@@ -419,7 +446,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="flow_circuit3_temperature",
         translation_key="flow_circuit3_temperature",
         data_retriever=SensorDataRetriever.ACTUAL,
-        required_capabilities=[Capability.Circuit3]
+        required_capabilities=[Capability.Circuit3],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.FlowCircuit4],
@@ -429,7 +457,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="flow_circuit4_temperature",
         translation_key="flow_circuit4_temperature",
         data_retriever=SensorDataRetriever.ACTUAL,
-        required_capabilities=[Capability.Circuit4]
+        required_capabilities=[Capability.Circuit4],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.CompressorInlet],
@@ -438,7 +467,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="compressor_inlet_temperature",
         translation_key="compressor_inlet_temperature",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Pressure.CompressorInlet],
@@ -447,7 +477,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="compressor_inlet_pressure",
         translation_key="compressor_inlet_pressure",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.CompressorOutlet],
@@ -456,7 +487,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="compressor_outlet_temperature",
         translation_key="compressor_outlet_temperature",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Pressure.CompressorOutlet],
@@ -465,7 +497,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="compressor_outlet_pressure",
         translation_key="compressor_outlet_pressure",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.Room1],
@@ -475,7 +508,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="room1_temperature",
         translation_key="room1_temperature",
         data_retriever=SensorDataRetriever.ACTUAL,
-        required_capabilities=[Capability.Room1Temperature]
+        required_capabilities=[Capability.Room1Temperature],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.Room2],
@@ -485,7 +519,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="room2_temperature",
         translation_key="room2_temperature",
         data_retriever=SensorDataRetriever.ACTUAL,
-        required_capabilities=[Capability.Room2Temperature]
+        required_capabilities=[Capability.Room2Temperature],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.Room3],
@@ -495,7 +530,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="room3_temperature",
         translation_key="room3_temperature",
         data_retriever=SensorDataRetriever.ACTUAL,
-        required_capabilities=[Capability.Room3Temperature]
+        required_capabilities=[Capability.Room3Temperature],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.Room4],
@@ -505,7 +541,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="room4_temperature",
         translation_key="room4_temperature",
         data_retriever=SensorDataRetriever.ACTUAL,
-        required_capabilities=[Capability.Room4Temperature]
+        required_capabilities=[Capability.Room4Temperature],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Position.ExpansionValve1],
@@ -514,7 +551,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="expansion_valve1_position",
         translation_key="expansion_valve1_position",
-        data_retriever=SensorDataRetriever.RAW
+        data_retriever=SensorDataRetriever.RAW,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Position.ExpansionValve2],
@@ -523,7 +561,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="expansion_valve2_position",
         translation_key="expansion_valve2_position",
-        data_retriever=SensorDataRetriever.RAW
+        data_retriever=SensorDataRetriever.RAW,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.State.Allengra],
@@ -532,7 +571,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="allengra_flow_rate",
         translation_key="allengra_flow_rate",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.State.Allengra],
@@ -541,7 +581,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="allengra_temperature",
         translation_key="allengra_temperature",
-        data_retriever=SensorDataRetriever.TEMPERATURE
+        data_retriever=SensorDataRetriever.TEMPERATURE,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.PrimaryInlet],
@@ -550,7 +591,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="primary_inlet_temperature",
         translation_key="primary_inlet_temperature",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.SecondaryOutlet],
@@ -559,7 +601,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="secondary_outlet_temperature",
         translation_key="secondary_outlet_temperature",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.EngineRoom],
@@ -569,7 +612,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         entity_category=EntityCategory.DIAGNOSTIC,
         key="engine_room_temperature",
         translation_key="engine_room_temperature",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.CompressorOil],
@@ -578,7 +622,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="compressor_oil_temperature",
         translation_key="compressor_oil_temperature",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Power.Fan1],
@@ -588,7 +633,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="fan1_power",
         translation_key="fan1_power",
         icon="mdi:fan",
-        data_retriever=SensorDataRetriever.RAW
+        data_retriever=SensorDataRetriever.RAW,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Power.Fan2],
@@ -599,7 +645,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         translation_key="fan2_power",
         icon="mdi:fan",
         data_retriever=SensorDataRetriever.RAW,
-        required_capabilities=[Capability.Fan2]
+        required_capabilities=[Capability.Fan2],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.EconomizerLiquid],
@@ -608,7 +655,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="economizer_liquid_temperature",
         translation_key="economizer_liquid_temperature",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.EvaporationVapor],
@@ -617,7 +665,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="evaporation_vapor_temperature",
         translation_key="evaporation_vapor_temperature",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Speed.CompressorPercent],
@@ -626,7 +675,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="compressor_speed_percentage",
         translation_key="compressor_speed_percentage",
-        data_retriever=SensorDataRetriever.RAW
+        data_retriever=SensorDataRetriever.RAW,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.HeatingOutput],
@@ -635,7 +685,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="thermal_output_today",
         translation_key="thermal_output_today",
-        data_retriever=SensorDataRetriever.TODAY
+        data_retriever=SensorDataRetriever.TODAY,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.CoolingOutput],
@@ -644,7 +695,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="cooling_output_today",
         translation_key="cooling_output_today",
-        data_retriever=SensorDataRetriever.TODAY
+        data_retriever=SensorDataRetriever.TODAY,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.WarmWaterOutput],
@@ -653,7 +705,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="warm_water_output_today",
         translation_key="warm_water_output_today",
-        data_retriever=SensorDataRetriever.TODAY
+        data_retriever=SensorDataRetriever.TODAY,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.FlowCircuit1Target],
@@ -663,7 +716,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="flow_circuit_1_supply_temp_setpoint",
         translation_key="flow_circuit_1_supply_temp_setpoint",
         data_retriever=SensorDataRetriever.RAW,
-        required_capabilities=[Capability.Circuit1]
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.FlowCircuit2Target],
@@ -673,7 +727,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="flow_circuit_2_supply_temp_setpoint",
         translation_key="flow_circuit_2_supply_temp_setpoint",
         data_retriever=SensorDataRetriever.RAW,
-        required_capabilities=[Capability.Circuit2]
+        required_capabilities=[Capability.Circuit2],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.FlowCircuit3Target],
@@ -683,7 +738,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="flow_circuit_3_supply_temp_setpoint",
         translation_key="flow_circuit_3_supply_temp_setpoint",
         data_retriever=SensorDataRetriever.RAW,
-        required_capabilities=[Capability.Circuit3]
+        required_capabilities=[Capability.Circuit3],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.FlowCircuit4Target],
@@ -693,7 +749,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="flow_circuit_4_supply_temp_setpoint",
         translation_key="flow_circuit_4_supply_temp_setpoint",
         data_retriever=SensorDataRetriever.RAW,
-        required_capabilities=[Capability.Circuit4]
+        required_capabilities=[Capability.Circuit4],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Speed.CompressorRps],
@@ -702,7 +759,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         icon="mdi:fan",
         key="compressor_speed_rpm",
         translation_key="compressor_speed_rpm",
-        data_retriever=SensorDataRetriever.RAW
+        data_retriever=SensorDataRetriever.RAW,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.HeatingBuffer],
@@ -711,7 +769,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="heating_buffer_temperature",
         translation_key="heating_buffer_temperature",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.CoolingBuffer],
@@ -720,7 +779,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="cooling_buffer_temperature",
         translation_key="cooling_buffer_temperature",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.HeatingCoolingBuffer],
@@ -729,7 +789,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="heating_cooling_buffer_temperature",
         translation_key="heating_cooling_buffer_temperature",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.State.EnergyManagement],
@@ -738,7 +799,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="energy_management_mode",
         translation_key="energy_management_mode",
         data_retriever=lambda data: ENERGY_MANAGEMENT_MODES_MAP.get(int(data)),
-        options=[mode for mode in EnergyManagementMode]
+        options=[mode for mode in EnergyManagementMode],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Position.FourThreeWayValve],
@@ -747,7 +809,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         translation_key="four_three_way_valve_position",
         icon="mdi:valve",
         data_retriever=lambda data: FOUR_THREE_WAY_VALVE_POSITION_MAP.get(int(data)),
-        options=[mode for mode in FourThreeWayValvePosition]
+        options=[mode for mode in FourThreeWayValvePosition],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.DesiredThermalCapacity],
@@ -758,7 +821,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="desired_thermal_capacity",
         translation_key="desired_thermal_capacity",
         icon="mdi:heat-wave",
-        data_retriever=SensorDataRetriever.RAW
+        data_retriever=SensorDataRetriever.RAW,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.DesiredThermalEnergyDefrost],
@@ -769,7 +833,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="desired_thermal_energy_defrost",
         translation_key="desired_thermal_energy_defrost",
         icon="mdi:snowflake-melt",
-        data_retriever=SensorDataRetriever.RAW
+        data_retriever=SensorDataRetriever.RAW,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Misc.AdditionalHeaterStatistics],
@@ -779,7 +844,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         entity_category=EntityCategory.DIAGNOSTIC,
         key="additional_heater_operating_hours",
         translation_key="additional_heater_operating_hours",
-        data_retriever=SensorDataRetriever.HOURS
+        data_retriever=SensorDataRetriever.HOURS,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Misc.AdditionalHeaterStatistics],
@@ -788,7 +854,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         icon="mdi:counter",
         key="additional_heater_starts",
         translation_key="additional_heater_starts",
-        data_retriever=SensorDataRetriever.STARTS
+        data_retriever=SensorDataRetriever.STARTS,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Misc.CompressorStatistics],
@@ -798,7 +865,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         entity_category=EntityCategory.DIAGNOSTIC,
         key="compressor_operating_hours",
         translation_key="compressor_operating_hours",
-        data_retriever=SensorDataRetriever.HOURS
+        data_retriever=SensorDataRetriever.HOURS,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Misc.CompressorStatistics],
@@ -807,7 +875,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         icon="mdi:counter",
         key="compressor_starts",
         translation_key="compressor_starts",
-        data_retriever=SensorDataRetriever.STARTS
+        data_retriever=SensorDataRetriever.STARTS,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.Cop],
@@ -815,7 +884,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         icon="mdi:leaf",
         key="cop_total_current_year",
         translation_key="cop_total_current_year",
-        data_retriever=SensorDataRetriever.CURRENT_YEAR
+        data_retriever=SensorDataRetriever.CURRENT_YEAR,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.CopHeating],
@@ -823,7 +893,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         icon="mdi:leaf",
         key="cop_heating_current_year",
         translation_key="cop_heating_current_year",
-        data_retriever=SensorDataRetriever.CURRENT_YEAR
+        data_retriever=SensorDataRetriever.CURRENT_YEAR,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.CopDhw],
@@ -831,7 +902,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         icon="mdi:leaf",
         key="cop_dhw_current_year",
         translation_key="cop_dhw_current_year",
-        data_retriever=SensorDataRetriever.CURRENT_YEAR
+        data_retriever=SensorDataRetriever.CURRENT_YEAR,
+        required_device=Open3eDevices.Vitocal
     ),
 
     ##################
@@ -845,7 +917,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="battery_state_percentage",
         translation_key="battery_state_percentage",
-        data_retriever=SensorDataRetriever.RAW
+        data_retriever=SensorDataRetriever.RAW,
+        required_device=Open3eDevices.Vitocharge
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.Battery],
@@ -855,7 +928,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="battery_charge_today",
         translation_key="battery_charge_today",
-        data_retriever=SensorDataRetriever.BATTERY_CHARGE_TODAY
+        data_retriever=SensorDataRetriever.BATTERY_CHARGE_TODAY,
+        required_device=Open3eDevices.Vitocharge
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.Battery],
@@ -865,7 +939,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="battery_charge_week",
         translation_key="battery_charge_week",
-        data_retriever=SensorDataRetriever.BATTERY_CHARGE_WEEK
+        data_retriever=SensorDataRetriever.BATTERY_CHARGE_WEEK,
+        required_device=Open3eDevices.Vitocharge
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.Battery],
@@ -875,7 +950,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="battery_charge_month",
         translation_key="battery_charge_month",
-        data_retriever=SensorDataRetriever.BATTERY_CHARGE_MONTH
+        data_retriever=SensorDataRetriever.BATTERY_CHARGE_MONTH,
+        required_device=Open3eDevices.Vitocharge
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.Battery],
@@ -885,7 +961,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="battery_charge_year",
         translation_key="battery_charge_year",
-        data_retriever=SensorDataRetriever.BATTERY_CHARGE_YEAR
+        data_retriever=SensorDataRetriever.BATTERY_CHARGE_YEAR,
+        required_device=Open3eDevices.Vitocharge
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.Battery],
@@ -895,7 +972,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="battery_charge_total",
         translation_key="battery_charge_total",
-        data_retriever=SensorDataRetriever.BATTERY_CHARGE_TOTAL
+        data_retriever=SensorDataRetriever.BATTERY_CHARGE_TOTAL,
+        required_device=Open3eDevices.Vitocharge
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.Battery],
@@ -905,7 +983,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="battery_discharge_today",
         translation_key="battery_discharge_today",
-        data_retriever=SensorDataRetriever.BATTERY_DISCHARGE_TODAY
+        data_retriever=SensorDataRetriever.BATTERY_DISCHARGE_TODAY,
+        required_device=Open3eDevices.Vitocharge
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.Battery],
@@ -915,7 +994,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="battery_discharge_week",
         translation_key="battery_discharge_week",
-        data_retriever=SensorDataRetriever.BATTERY_DISCHARGE_WEEK
+        data_retriever=SensorDataRetriever.BATTERY_DISCHARGE_WEEK,
+        required_device=Open3eDevices.Vitocharge
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.Battery],
@@ -925,7 +1005,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="battery_discharge_month",
         translation_key="battery_discharge_month",
-        data_retriever=SensorDataRetriever.BATTERY_DISCHARGE_MONTH
+        data_retriever=SensorDataRetriever.BATTERY_DISCHARGE_MONTH,
+        required_device=Open3eDevices.Vitocharge
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.Battery],
@@ -935,7 +1016,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="battery_discharge_year",
         translation_key="battery_discharge_year",
-        data_retriever=SensorDataRetriever.BATTERY_DISCHARGE_YEAR
+        data_retriever=SensorDataRetriever.BATTERY_DISCHARGE_YEAR,
+        required_device=Open3eDevices.Vitocharge
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.Battery],
@@ -945,7 +1027,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="battery_discharge_total",
         translation_key="battery_discharge_total",
-        data_retriever=SensorDataRetriever.BATTERY_DISCHARGE_TOTAL
+        data_retriever=SensorDataRetriever.BATTERY_DISCHARGE_TOTAL,
+        required_device=Open3eDevices.Vitocharge
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Power.Grid],
@@ -954,7 +1037,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="grid_power_current",
         translation_key="grid_power_current",
-        data_retriever=SensorDataRetriever.ACTIVE_POWER
+        data_retriever=SensorDataRetriever.ACTIVE_POWER,
+        required_device=Open3eDevices.Vitocharge
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Power.Battery],
@@ -963,7 +1047,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="battery_power_current",
         translation_key="battery_power_current",
-        data_retriever=SensorDataRetriever.RAW
+        data_retriever=SensorDataRetriever.RAW,
+        required_device=Open3eDevices.Vitocharge
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Power.PV],
@@ -972,7 +1057,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="pv_power_current",
         translation_key="pv_power_current",
-        data_retriever=SensorDataRetriever.PV_POWER_CUMULATED
+        data_retriever=SensorDataRetriever.PV_POWER_CUMULATED,
+        required_device=Open3eDevices.Vitocharge
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Power.PV],
@@ -981,7 +1067,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="pv_power_string_1_current",
         translation_key="pv_power_string_1_current",
-        data_retriever=SensorDataRetriever.PV_POWER_STRING_1
+        data_retriever=SensorDataRetriever.PV_POWER_STRING_1,
+        required_device=Open3eDevices.Vitocharge
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Power.PV],
@@ -990,7 +1077,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="pv_power_string_2_current",
         translation_key="pv_power_string_2_current",
-        data_retriever=SensorDataRetriever.PV_POWER_STRING_2
+        data_retriever=SensorDataRetriever.PV_POWER_STRING_2,
+        required_device=Open3eDevices.Vitocharge
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Power.PV],
@@ -999,7 +1087,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="pv_power_string_3_current",
         translation_key="pv_power_string_3_current",
-        data_retriever=SensorDataRetriever.PV_POWER_STRING_3
+        data_retriever=SensorDataRetriever.PV_POWER_STRING_3,
+        required_device=Open3eDevices.Vitocharge
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.PV],
@@ -1009,7 +1098,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="pv_energy_production_today",
         translation_key="pv_energy_production_today",
-        data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_TODAY
+        data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_TODAY,
+        required_device=Open3eDevices.Vitocharge
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.PV],
@@ -1019,7 +1109,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="pv_energy_production_week",
         translation_key="pv_energy_production_week",
-        data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_WEEK
+        data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_WEEK,
+        required_device=Open3eDevices.Vitocharge
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.PV],
@@ -1029,7 +1120,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="pv_energy_production_month",
         translation_key="pv_energy_production_month",
-        data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_MONTH
+        data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_MONTH,
+        required_device=Open3eDevices.Vitocharge
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.PV],
@@ -1039,7 +1131,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="pv_energy_production_year",
         translation_key="pv_energy_production_year",
-        data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_YEAR
+        data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_YEAR,
+        required_device=Open3eDevices.Vitocharge
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.PV],
@@ -1049,7 +1142,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="pv_energy_production_total",
         translation_key="pv_energy_production_total",
-        data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_TOTAL
+        data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_TOTAL,
+        required_device=Open3eDevices.Vitocharge
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.Grid],
@@ -1058,7 +1152,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="grid_feed_in_energy",
         translation_key="grid_feed_in_energy",
-        data_retriever=SensorDataRetriever.GRID_FEED_IN_ENERGY
+        data_retriever=SensorDataRetriever.GRID_FEED_IN_ENERGY,
+        required_device=Open3eDevices.Vitocharge
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.Grid],
@@ -1067,7 +1162,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="grid_supplied_energy",
         translation_key="grid_supplied_energy",
-        data_retriever=SensorDataRetriever.GRID_SUPPLIED_ENERGY
+        data_retriever=SensorDataRetriever.GRID_SUPPLIED_ENERGY,
+        required_device=Open3eDevices.Vitocharge
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.InverterAmbient],
@@ -1077,7 +1173,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         entity_category=EntityCategory.DIAGNOSTIC,
         key="inverter_ambient_temperature",
         translation_key="inverter_ambient_temperature",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitocharge
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.Battery],
@@ -1087,7 +1184,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         entity_category=EntityCategory.DIAGNOSTIC,
         key="battery_temperature",
         translation_key="battery_temperature",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitocharge
     ),
 
     ###############
@@ -1101,7 +1199,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="outdoor_air_temperature",
         translation_key="outdoor_air_temperature",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitoair
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.SupplyAir],
@@ -1110,7 +1209,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="supply_air_temperature",
         translation_key="supply_air_temperature",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitoair
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.ExtractAir],
@@ -1119,7 +1219,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="extract_air_temperature",
         translation_key="extract_air_temperature",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitoair
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.ExhaustAir],
@@ -1128,7 +1229,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="exhaust_air_temperature",
         translation_key="exhaust_air_temperature",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitoair
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Humidity.Outdoor],
@@ -1137,7 +1239,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="outdoor_air_humidity",
         translation_key="outdoor_air_humidity",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitoair
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Humidity.SupplyAir],
@@ -1146,7 +1249,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="supply_air_humidity",
         translation_key="supply_air_humidity",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitoair
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Humidity.ExtractAir],
@@ -1155,7 +1259,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="extract_air_humidity",
         translation_key="extract_air_humidity",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitoair
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Humidity.ExhaustAir],
@@ -1164,7 +1269,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="exhaust_air_humidity",
         translation_key="exhaust_air_humidity",
-        data_retriever=SensorDataRetriever.ACTUAL
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitoair
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Speed.SupplyAirFan],
@@ -1235,7 +1341,8 @@ DERIVED_SENSORS: tuple[Open3eDerivedSensorEntityDescription, ...] = (
         key="energy_consumption_total_today",
         translation_key="energy_consumption_total_today",
         data_retrievers=[SensorDataRetriever.TODAY] * 3,
-        compute_value=lambda heating, cooling, dhw: heating + cooling + dhw
+        compute_value=lambda heating, cooling, dhw: heating + cooling + dhw,
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eDerivedSensorEntityDescription(
         poll_data_features=[Features.Power.ThermalCapacitySystem, Features.Power.System],
@@ -1248,7 +1355,8 @@ DERIVED_SENSORS: tuple[Open3eDerivedSensorEntityDescription, ...] = (
         compute_value=lambda thermal, electric: SensorDataDeriver.calculate_cop(
             thermals=(thermal,),
             electrics=(electric,)
-        )
+        ),
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eDerivedSensorEntityDescription(
         poll_data_features=[Features.Energy.HeatingOutput, Features.Energy.CentralHeating],
@@ -1262,6 +1370,7 @@ DERIVED_SENSORS: tuple[Open3eDerivedSensorEntityDescription, ...] = (
             thermals=(thermal,),
             electrics=(electric,)
         ),
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eDerivedSensorEntityDescription(
         poll_data_features=[Features.Energy.CoolingOutput, Features.Energy.Cooling],
@@ -1274,7 +1383,8 @@ DERIVED_SENSORS: tuple[Open3eDerivedSensorEntityDescription, ...] = (
         compute_value=lambda thermal, electric: SensorDataDeriver.calculate_cop(
             thermals=(thermal,),
             electrics=(electric,)
-        )
+        ),
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eDerivedSensorEntityDescription(
         poll_data_features=[Features.Energy.WarmWaterOutput, Features.Energy.DomesticHotWater],
@@ -1287,7 +1397,8 @@ DERIVED_SENSORS: tuple[Open3eDerivedSensorEntityDescription, ...] = (
         compute_value=lambda thermal, electric: SensorDataDeriver.calculate_cop(
             thermals=(thermal,),
             electrics=(electric,)
-        )
+        ),
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eDerivedSensorEntityDescription(
         poll_data_features=[
@@ -1307,6 +1418,7 @@ DERIVED_SENSORS: tuple[Open3eDerivedSensorEntityDescription, ...] = (
         compute_value=lambda heating_t, cooling_t, dhw_t, heating_e, cooling_e, dhw_e: SensorDataDeriver.calculate_cop(
             thermals=(heating_t, cooling_t, dhw_t),
             electrics=(heating_e, cooling_e, dhw_e)
-        )
+        ),
+        required_device=Open3eDevices.Vitocal
     )
 )

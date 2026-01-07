@@ -8,7 +8,6 @@ from .entity_description import Open3eEntityDescription
 from .features import Features
 from .open3e_data import Open3eDataDevice
 from .subfeatures.buffer_mode import BufferMode
-from .subfeatures.vitoair_quick_mode import VitoairQuickMode
 from .. import Open3eDataUpdateCoordinator
 
 
@@ -38,27 +37,28 @@ SELECTS: tuple[Open3eSelectEntityDescription, ...] = (
             device=device
         ),
         key="buffer_operation_mode",
-        translation_key="buffer_operation_mode"
+        translation_key="buffer_operation_mode",
+        required_device=Open3eDevices.Vitocal
     ),
 
     ###############
     ### VITOAIR ###
     ###############
 
-    Open3eSelectEntityDescription(
-        poll_data_features=[Features.State.CurrentQuickMode],
-        options=[VitoairQuickMode.Intensive, VitoairQuickMode.ReducedNoise, VitoairQuickMode.Off,
-                 VitoairQuickMode.Nothing],
-        get_option=lambda data: VitoairQuickMode.from_operation_mode(data["OpMode"]),
-        set_option=lambda option, device, coordinator: coordinator.async_set_vitoair_quick_mode(
-            refresh_feature_id=Features.State.CurrentQuickMode.id,
-            set_feature_id=Features.State.TargetQuickMode.id,
-            mode=VitoairQuickMode.from_str(option),
-            device=device
-        ),
-        icon="mdi:fan-chevron-up",
-        key="quick_operation_mode",
-        translation_key="quick_operation_mode",
-        required_device=Open3eDevices.Vitoair
-    ),
+    # Open3eSelectEntityDescription(
+    #     poll_data_features=[Features.State.CurrentQuickMode],
+    #     options=[VitoairQuickMode.Intensive, VitoairQuickMode.ReducedNoise, VitoairQuickMode.Off,
+    #              VitoairQuickMode.Nothing],
+    #     get_option=lambda data: VitoairQuickMode.from_operation_mode(data["OpMode"]),
+    #     set_option=lambda option, device, coordinator: coordinator.async_set_vitoair_quick_mode(
+    #         refresh_feature_id=Features.State.CurrentQuickMode.id,
+    #         set_feature_id=Features.State.TargetQuickMode.id,
+    #         mode=VitoairQuickMode.from_str(option),
+    #         device=device
+    #     ),
+    #     icon="mdi:fan-chevron-up",
+    #     key="quick_operation_mode",
+    #     translation_key="quick_operation_mode",
+    #     required_device=Open3eDevices.Vitoair
+    # ),
 )
