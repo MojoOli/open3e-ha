@@ -121,8 +121,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         icon="mdi:account-wrench",
         key="service_manager_required",
         translation_key="service_manager_required",
-        data_retriever=lambda data: bool(int(data)),
-        required_device=Open3eDevices.Vitocal
+        data_retriever=lambda data: bool(int(data))
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Misc.MalfunctionIdentification],
@@ -130,8 +129,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         icon="mdi:file-document-alert",
         key="malfunction_id",
         translation_key="malfunction_id",
-        data_retriever=lambda data: int(data),
-        required_device=Open3eDevices.Vitocal
+        data_retriever=lambda data: int(data)
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Misc.ErrorDtcList],
@@ -140,8 +138,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="error_dtc_list",
         translation_key="error_dtc_list",
         data_retriever=lambda data: ", ".join(
-            {e["Error"]["Text"] for e in json_loads(data).get("ListEntries", [])}) or "-",
-        required_device=Open3eDevices.Vitocal
+            {e["Error"]["Text"] for e in json_loads(data).get("ListEntries", [])}) or "-"
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Misc.BackendConnectionStatus],
@@ -151,8 +148,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="connection_status",
         translation_key="connection_status",
         data_retriever=lambda data: get_connection_status(int(data)),
-        options=[mode for mode in ConnectionStatus],
-        required_device=Open3eDevices.Vitocal
+        options=[mode for mode in ConnectionStatus]
     ),
 
     ###############
