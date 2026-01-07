@@ -111,7 +111,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_2_reduced_temperature",
         translation_key="circuit_2_reduced_temperature",
-        required_capabilities=[Capability.Circuit2]
+        required_capabilities=[Capability.Circuit2],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.ProgramsCircuit2],
@@ -129,7 +130,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_2_standard_temperature",
         translation_key="circuit_2_standard_temperature",
-        required_capabilities=[Capability.Circuit2]
+        required_capabilities=[Capability.Circuit2],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.ProgramsCircuit2],
@@ -147,7 +149,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_2_comfort_temperature",
         translation_key="circuit_2_comfort_temperature",
-        required_capabilities=[Capability.Circuit2]
+        required_capabilities=[Capability.Circuit2],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.ProgramsCircuit3],
@@ -165,7 +168,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_3_reduced_temperature",
         translation_key="circuit_3_reduced_temperature",
-        required_capabilities=[Capability.Circuit3]
+        required_capabilities=[Capability.Circuit3],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.ProgramsCircuit3],
@@ -183,7 +187,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_3_standard_temperature",
         translation_key="circuit_3_standard_temperature",
-        required_capabilities=[Capability.Circuit3]
+        required_capabilities=[Capability.Circuit3],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.ProgramsCircuit3],
@@ -201,7 +206,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_3_comfort_temperature",
         translation_key="circuit_3_comfort_temperature",
-        required_capabilities=[Capability.Circuit3]
+        required_capabilities=[Capability.Circuit3],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.ProgramsCircuit4],
@@ -219,7 +225,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_4_reduced_temperature",
         translation_key="circuit_4_reduced_temperature",
-        required_capabilities=[Capability.Circuit4]
+        required_capabilities=[Capability.Circuit4],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.ProgramsCircuit4],
@@ -237,7 +244,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_4_standard_temperature",
         translation_key="circuit_4_standard_temperature",
-        required_capabilities=[Capability.Circuit4]
+        required_capabilities=[Capability.Circuit4],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.ProgramsCircuit4],
@@ -255,7 +263,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_4_comfort_temperature",
         translation_key="circuit_4_comfort_temperature",
-        required_capabilities=[Capability.Circuit4]
+        required_capabilities=[Capability.Circuit4],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.CoolingProgramsCircuit1],
@@ -273,7 +282,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_1_reduced_cooling",
         translation_key="circuit_1_reduced_cooling",
-        required_capabilities=[Capability.Circuit1]
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.CoolingProgramsCircuit1],
@@ -291,7 +301,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_1_standard_cooling",
         translation_key="circuit_1_standard_cooling",
-        required_capabilities=[Capability.Circuit1]
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.CoolingProgramsCircuit1],
@@ -309,7 +320,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_1_comfort_cooling",
         translation_key="circuit_1_comfort_cooling",
-        required_capabilities=[Capability.Circuit1]
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.CoolingProgramsCircuit2],
@@ -327,7 +339,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_2_reduced_cooling",
         translation_key="circuit_2_reduced_cooling",
-        required_capabilities=[Capability.Circuit2]
+        required_capabilities=[Capability.Circuit2],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.CoolingProgramsCircuit2],
@@ -345,7 +358,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_2_standard_cooling",
         translation_key="circuit_2_standard_cooling",
-        required_capabilities=[Capability.Circuit2]
+        required_capabilities=[Capability.Circuit2],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.CoolingProgramsCircuit2],
@@ -363,7 +377,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_2_comfort_cooling",
         translation_key="circuit_2_comfort_cooling",
-        required_capabilities=[Capability.Circuit2]
+        required_capabilities=[Capability.Circuit2],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.CoolingProgramsCircuit3],
@@ -381,7 +396,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_3_reduced_cooling",
         translation_key="circuit_3_reduced_cooling",
-        required_capabilities=[Capability.Circuit3]
+        required_capabilities=[Capability.Circuit3],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.CoolingProgramsCircuit3],
@@ -399,7 +415,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_3_standard_cooling",
         translation_key="circuit_3_standard_cooling",
-        required_capabilities=[Capability.Circuit3]
+        required_capabilities=[Capability.Circuit3],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.CoolingProgramsCircuit3],
@@ -417,7 +434,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_3_comfort_cooling",
         translation_key="circuit_3_comfort_cooling",
-        required_capabilities=[Capability.Circuit3]
+        required_capabilities=[Capability.Circuit3],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.CoolingProgramsCircuit4],
@@ -435,7 +453,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_4_reduced_cooling",
         translation_key="circuit_4_reduced_cooling",
-        required_capabilities=[Capability.Circuit4]
+        required_capabilities=[Capability.Circuit4],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.CoolingProgramsCircuit4],
@@ -453,7 +472,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_4_standard_cooling",
         translation_key="circuit_4_standard_cooling",
-        required_capabilities=[Capability.Circuit4]
+        required_capabilities=[Capability.Circuit4],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.CoolingProgramsCircuit4],
@@ -471,7 +491,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_4_comfort_cooling",
         translation_key="circuit_4_comfort_cooling",
-        required_capabilities=[Capability.Circuit4]
+        required_capabilities=[Capability.Circuit4],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Power.MaxElectricalHeater],
@@ -487,7 +508,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
             device=device
         ),
         key="heater_max_power",
-        translation_key="heater_max_power"
+        translation_key="heater_max_power",
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.SmartGridTemperatureOffsets],
@@ -504,7 +526,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
             device=device
         ),
         key="smartgrid_increase_heating_room_temperature",
-        translation_key="smartgrid_increase_heating_room_temperature"
+        translation_key="smartgrid_increase_heating_room_temperature",
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.SmartGridTemperatureOffsets],
@@ -521,7 +544,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
             device=device
         ),
         key="smartgrid_decrease_cooling_room_temperature",
-        translation_key="smartgrid_decrease_cooling_room_temperature"
+        translation_key="smartgrid_decrease_cooling_room_temperature",
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.SmartGridTemperatureOffsets],
@@ -538,7 +562,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
             device=device
         ),
         key="smartgrid_increase_heating_buffer_temperature",
-        translation_key="smartgrid_increase_heating_buffer_temperature"
+        translation_key="smartgrid_increase_heating_buffer_temperature",
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.SmartGridTemperatureOffsets],
@@ -555,7 +580,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
             device=device
         ),
         key="smartgrid_decrease_cooling_buffer_temperature",
-        translation_key="smartgrid_decrease_cooling_buffer_temperature"
+        translation_key="smartgrid_decrease_cooling_buffer_temperature",
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.SmartGridTemperatureOffsets],
@@ -572,7 +598,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
             device=device
         ),
         key="smartgrid_increase_dhw_temperature",
-        translation_key="smartgrid_increase_dhw_temperature"
+        translation_key="smartgrid_increase_dhw_temperature",
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.FlowCircuit1Cooling],
@@ -589,7 +616,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="heating_circuit_1_flow_setpoint_cooling",
         translation_key="heating_circuit_1_flow_setpoint_cooling",
-        required_capabilities=[Capability.Circuit1]
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.FlowCircuit2Cooling],
@@ -606,7 +634,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="heating_circuit_2_flow_setpoint_cooling",
         translation_key="heating_circuit_2_flow_setpoint_cooling",
-        required_capabilities=[Capability.Circuit2]
+        required_capabilities=[Capability.Circuit2],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.FlowCircuit3Cooling],
@@ -623,7 +652,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="heating_circuit_3_flow_setpoint_cooling",
         translation_key="heating_circuit_3_flow_setpoint_cooling",
-        required_capabilities=[Capability.Circuit3]
+        required_capabilities=[Capability.Circuit3],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.FlowCircuit4Cooling],
@@ -640,7 +670,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="heating_circuit_4_flow_setpoint_cooling",
         translation_key="heating_circuit_4_flow_setpoint_cooling",
-        required_capabilities=[Capability.Circuit4]
+        required_capabilities=[Capability.Circuit4],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.FlowCircuit1CoolingHysteresis],
@@ -658,7 +689,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="heating_circuit_1_cooling_hysteresis_on",
         translation_key="heating_circuit_1_cooling_hysteresis_on",
-        required_capabilities=[Capability.Circuit1]
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.FlowCircuit2CoolingHysteresis],
@@ -676,7 +708,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="heating_circuit_2_cooling_hysteresis_on",
         translation_key="heating_circuit_2_cooling_hysteresis_on",
-        required_capabilities=[Capability.Circuit2]
+        required_capabilities=[Capability.Circuit2],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.FlowCircuit3CoolingHysteresis],
@@ -694,7 +727,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="heating_circuit_3_cooling_hysteresis_on",
         translation_key="heating_circuit_3_cooling_hysteresis_on",
-        required_capabilities=[Capability.Circuit3]
+        required_capabilities=[Capability.Circuit3],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.FlowCircuit4CoolingHysteresis],
@@ -712,7 +746,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="heating_circuit_4_cooling_hysteresis_on",
         translation_key="heating_circuit_4_cooling_hysteresis_on",
-        required_capabilities=[Capability.Circuit4]
+        required_capabilities=[Capability.Circuit4],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.FlowCircuit1CoolingHysteresis],
@@ -730,7 +765,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="heating_circuit_1_cooling_hysteresis_off",
         translation_key="heating_circuit_1_cooling_hysteresis_off",
-        required_capabilities=[Capability.Circuit1]
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.FlowCircuit2CoolingHysteresis],
@@ -748,7 +784,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="heating_circuit_2_cooling_hysteresis_off",
         translation_key="heating_circuit_2_cooling_hysteresis_off",
-        required_capabilities=[Capability.Circuit2]
+        required_capabilities=[Capability.Circuit2],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.FlowCircuit3CoolingHysteresis],
@@ -766,7 +803,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="heating_circuit_3_cooling_hysteresis_off",
         translation_key="heating_circuit_3_cooling_hysteresis_off",
-        required_capabilities=[Capability.Circuit3]
+        required_capabilities=[Capability.Circuit3],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.FlowCircuit4CoolingHysteresis],
@@ -784,7 +822,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="heating_circuit_4_cooling_hysteresis_off",
         translation_key="heating_circuit_4_cooling_hysteresis_off",
-        required_capabilities=[Capability.Circuit4]
+        required_capabilities=[Capability.Circuit4],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.BufferMinMax],
@@ -801,7 +840,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
             device=device
         ),
         key="buffer_min_temperature",
-        translation_key="buffer_min_temperature"
+        translation_key="buffer_min_temperature",
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.BufferMinMax],
@@ -818,7 +858,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
             device=device
         ),
         key="buffer_max_temperature",
-        translation_key="buffer_max_temperature"
+        translation_key="buffer_max_temperature",
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.State.CircuitFrostProtection],
@@ -834,7 +875,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
             device=device
         ),
         key="frost_protection_temperature",
-        translation_key="frost_protection_temperature"
+        translation_key="frost_protection_temperature",
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.State.FlowCircuit1HeatingCurve],
@@ -851,7 +893,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_1_heating_curve_slope",
         translation_key="circuit_1_heating_curve_slope",
-        required_capabilities=[Capability.Circuit1]
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.State.FlowCircuit2HeatingCurve],
@@ -868,7 +911,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_2_heating_curve_slope",
         translation_key="circuit_2_heating_curve_slope",
-        required_capabilities=[Capability.Circuit2]
+        required_capabilities=[Capability.Circuit2],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.State.FlowCircuit3HeatingCurve],
@@ -885,7 +929,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_3_heating_curve_slope",
         translation_key="circuit_3_heating_curve_slope",
-        required_capabilities=[Capability.Circuit3]
+        required_capabilities=[Capability.Circuit3],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.State.FlowCircuit4HeatingCurve],
@@ -902,7 +947,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_4_heating_curve_slope",
         translation_key="circuit_4_heating_curve_slope",
-        required_capabilities=[Capability.Circuit4]
+        required_capabilities=[Capability.Circuit4],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.State.FlowCircuit1HeatingCurve],
@@ -921,7 +967,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_1_heating_curve_level",
         translation_key="circuit_1_heating_curve_level",
-        required_capabilities=[Capability.Circuit1]
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.State.FlowCircuit2HeatingCurve],
@@ -940,7 +987,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_2_heating_curve_level",
         translation_key="circuit_2_heating_curve_level",
-        required_capabilities=[Capability.Circuit2]
+        required_capabilities=[Capability.Circuit2],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.State.FlowCircuit3HeatingCurve],
@@ -959,7 +1007,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_3_heating_curve_level",
         translation_key="circuit_3_heating_curve_level",
-        required_capabilities=[Capability.Circuit3]
+        required_capabilities=[Capability.Circuit3],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.State.FlowCircuit4HeatingCurve],
@@ -978,7 +1027,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_4_heating_curve_level",
         translation_key="circuit_4_heating_curve_level",
-        required_capabilities=[Capability.Circuit4]
+        required_capabilities=[Capability.Circuit4],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.DomesticHotWaterHysteresis],
@@ -996,7 +1046,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
             device=device
         ),
         key="dhw_hysteresis_on",
-        translation_key="dhw_hysteresis_on"
+        translation_key="dhw_hysteresis_on",
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Temperature.DomesticHotWaterHysteresis],
@@ -1014,7 +1065,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
             device=device
         ),
         key="dhw_hysteresis_off",
-        translation_key="dhw_hysteresis_off"
+        translation_key="dhw_hysteresis_off",
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Speed.Circuit1Pump],
@@ -1032,8 +1084,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_1_pump_speed",
         translation_key="circuit_1_pump_speed",
-        required_device=Open3eDevices.Vitocal,
-        required_capabilities=[Capability.Circuit1]
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Speed.Circuit2Pump],
@@ -1046,13 +1098,13 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         get_native_value=lambda data: data["Setpoint"],
         set_native_value=lambda value, device, coordinator: coordinator.async_set_circuit_pump_speed(
             feature_id=Features.Speed.Circuit2Pump.id,
-            value=value,
+            speed=value,
             device=device
         ),
         key="circuit_2_pump_speed",
         translation_key="circuit_2_pump_speed",
-        required_device=Open3eDevices.Vitocal,
-        required_capabilities=[Capability.Circuit2]
+        required_capabilities=[Capability.Circuit2],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Speed.Circuit3Pump],
@@ -1065,13 +1117,13 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         get_native_value=lambda data: data["Setpoint"],
         set_native_value=lambda value, device, coordinator: coordinator.async_set_circuit_pump_speed(
             feature_id=Features.Speed.Circuit3Pump.id,
-            value=value,
+            speed=value,
             device=device
         ),
         key="circuit_3_pump_speed",
         translation_key="circuit_3_pump_speed",
-        required_device=Open3eDevices.Vitocal,
-        required_capabilities=[Capability.Circuit3]
+        required_capabilities=[Capability.Circuit3],
+        required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Speed.Circuit4Pump],
@@ -1084,13 +1136,13 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         get_native_value=lambda data: data["Setpoint"],
         set_native_value=lambda value, device, coordinator: coordinator.async_set_circuit_pump_speed(
             feature_id=Features.Speed.Circuit4Pump.id,
-            value=value,
+            speed=value,
             device=device
         ),
         key="circuit_4_pump_speed",
         translation_key="circuit_4_pump_speed",
-        required_device=Open3eDevices.Vitocal,
-        required_capabilities=[Capability.Circuit4]
+        required_capabilities=[Capability.Circuit4],
+        required_device=Open3eDevices.Vitocal
     ),
     
     ##################
@@ -1112,8 +1164,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="backup_box_discharge_limit_percentage",
         translation_key="backup_box_discharge_limit_percentage",
-        required_device=Open3eDevices.Vitocharge,
-        required_capabilities=[Capability.BackupBox]
+        required_capabilities=[Capability.BackupBox],
+        required_device=Open3eDevices.Vitocharge
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.State.MaximumRechargePower],
@@ -1131,6 +1183,6 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="maximum_recharge_power",
         translation_key="maximum_recharge_power",
-        required_device=Open3eDevices.Vitocharge,
+        required_device=Open3eDevices.Vitocharge
     ),
 )

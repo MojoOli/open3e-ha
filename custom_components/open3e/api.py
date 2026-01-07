@@ -646,7 +646,7 @@ class Open3eMqttClient:
             self,
             hass: HomeAssistant,
             feature_id: int,
-            maximum_recharge_power: int,
+            maximum_recharge_power: float,
             device_id: int
     ):
         try:
