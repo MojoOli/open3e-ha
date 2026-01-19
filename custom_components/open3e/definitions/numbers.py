@@ -1089,8 +1089,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Speed.Circuit2Pump],
-        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
-        device_class=NumberDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=PERCENTAGE,
+        device_class=NumberDeviceClass.SPEED,
         icon="mdi:pump",
         native_min_value=20,
         native_max_value=100,
@@ -1108,8 +1108,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Speed.Circuit3Pump],
-        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
-        device_class=NumberDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=PERCENTAGE,
+        device_class=NumberDeviceClass.SPEED,
         icon="mdi:pump",
         native_min_value=20,
         native_max_value=100,
@@ -1127,8 +1127,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
     ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Speed.Circuit4Pump],
-        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
-        device_class=NumberDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=PERCENTAGE,
+        device_class=NumberDeviceClass.SPEED,
         icon="mdi:pump",
         native_min_value=20,
         native_max_value=100,
