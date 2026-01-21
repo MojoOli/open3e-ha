@@ -156,7 +156,7 @@ class Features:
         LegionellaProtectionLastSuccessfulWeekday = Feature(id=878, refresh_interval=30)
         CentralHeatingRegulationMode = Feature(id=1004, refresh_interval=30)
         CentralHeatingAllengraSensor = Feature(id=1043, refresh_interval=30)
-
+        HeaterFlameState = Feature(id=364, refresh_interval=30)
 
     class Volume:
         Ventilation = Feature(id=2328, refresh_interval=10)
