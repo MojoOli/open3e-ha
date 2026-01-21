@@ -441,6 +441,9 @@
       "circuit_4_pump": {
         "name": "Heating circuit 4 circulation pump"
       },
+      "hot_water_circulation_pump": {
+        "name": "Hot water circuit pump"
+      },
       "hot_water_circulation_pump_hygiene": {
         "name": "Hot Water Legionella Protection"
       },
