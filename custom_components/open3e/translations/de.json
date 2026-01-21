@@ -42,10 +42,10 @@
       },
       "gas_consumption_domestic_hotwater_today": {
         "name": "Gasverbrauch Warmwasser heute"
-      }
+      },
       "gas_consumption_total_today": {
         "name": "Gasverbrauch Gesamt heute"
-      }
+      ,}
       "energy_consumption_central_heating_today": {
         "name": "Energieverbrauch Heizung heute"
       },
