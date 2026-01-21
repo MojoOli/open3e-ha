@@ -1422,6 +1422,22 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
 ## Sensors which are derived by calculation
 DERIVED_SENSORS: tuple[Open3eDerivedSensorEntityDescription, ...] = (
 
+    ################
+    ### Vitodens ###
+    ################
+    Open3eDerivedSensorEntityDescription(
+        poll_data_features=[Features.Volume.GasConsumptionCentralHeating, Features.Volume.GasConsumptionDomesticHotWater],
+        device_class=SensorDeviceClass.VOLUME,
+        native_unit_of_measurement="m³",
+        icon="mdi:meter-gas",
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="gas_consumption_total_today",
+        translation_key="gas_consumption_total_today",
+        data_retrievers=[SensorDataRetriever.TODAY] * 2,
+        compute_value=lambda heating, dhw: heating + dhw,
+        required_device=Open3eDevices.Vitodens
+    ),
+    
     ###############
     ### VITOCAL ###
     ###############
