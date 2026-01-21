@@ -426,6 +426,9 @@
       "circuit_frost_protection": {
         "name": "Frost Protection Heating Circuit"
       },
+      "flamestate": {
+        "name": "Burner flame"
+      },
       "circuit_pump": {
         "name": "Heatpump circuit pump"
       },
