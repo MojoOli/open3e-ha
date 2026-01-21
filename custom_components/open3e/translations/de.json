@@ -426,6 +426,9 @@
       "circuit_frost_protection": {
         "name": "Frostschutz Heizkreis"
       },
+      "flamestate": {
+        "name": "Brennerflamme"
+      },
       "circuit_pump": {
         "name": "Wärmepumpe Heizkreis-Pumpe"
       },
