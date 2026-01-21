@@ -156,17 +156,8 @@ class Features:
         LegionellaProtectionLastSuccessfulWeekday = Feature(id=878, refresh_interval=30)
         CentralHeatingRegulationMode = Feature(id=1004, refresh_interval=30)
         CentralHeatingAllengraSensor = Feature(id=1043, refresh_interval=30)
-        
-#        EnergyConsumptionCentralHeatingMonthMatrix = Feature(id=1294, refresh_interval=30)
-#        EnergyConsumptionCentralHeatingYearMatrix = Feature(id=1316, refresh_interval=30)
-#        EnergyConsumptionDomesticHotWaterMonthMatrix = Feature(id=1311, refresh_interval=30)
-#        EnergyConsumptionDomesticHotWaterYearMatrix = Feature(id=1333, refresh_interval=30)       
-#        GeneratedCentralHeatingOutputMonthMatrix = Feature(id=1315, refresh_interval=30)
-#        GeneratedCentralHeatingOutputYearMatrix = Feature(id=1337, refresh_interval=30)
-        
 
-        
-    
+
     class Volume:
         Ventilation = Feature(id=2328, refresh_interval=10)
         GasConsumptionCentralHeatingm3 = Feature(id=544, refresh_interval=300)
