@@ -151,6 +151,99 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         options=[mode for mode in ConnectionStatus]
     ),
 
+
+    ##################
+    ### Vitodens   ###
+    ##################
+    
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.Flow],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="flow_temperature",
+        translation_key="flow_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitodens
+    ),
+        Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.Outside],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="outside_temperature",
+        translation_key="outside_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.Return],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="return_temperature",
+        translation_key="return_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.DomesticHotWater],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="domestic_hot_water_temperature",
+        translation_key="domestic_hot_water_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitodens
+    ),
+        Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.DomesticHotWaterTarget],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="domestic_hot_water_temperature",
+        translation_key="domestic_hot_water_temperature",
+        data_retriever=SensorDataRetriever.RAW,
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Pressure.Water],
+        device_class=SensorDeviceClass.PRESSURE,
+        native_unit_of_measurement=UnitOfPressure.BAR,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="water_pressure",
+        translation_key="water_pressure",
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Volume.GasConsumptionCentralHeating],
+        device_class=SensorDeviceClass.VOLUME,
+#        native_unit_of_measurement=UnitOfVolume.CUBIC_METERS,
+        native_unit_of_measurement="m³",
+        icon="mdi:meter-gas",
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        suggested_display_precision=1,
+        key="gas_consumption_central_heating_today",
+        translation_key="gas_consumption_central_heating_today",
+        data_retriever=SensorDataRetriever.TODAY,
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Volume.GasConsumptionDomesticHotWater],
+        device_class=SensorDeviceClass.VOLUME,
+#        native_unit_of_measurement=UnitOfVolume.CUBIC_METERS,
+        native_unit_of_measurement="m³",
+        icon="mdi:meter-gas",
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        suggested_display_precision=1,
+        key="gas_consumption_domestic_hotwater_today",
+        translation_key="gas_consumption_domestic_hotwater_today",
+        data_retriever=SensorDataRetriever.TODAY,
+        required_device=Open3eDevices.Vitodens
+    ),
+    
+    
     ###############
     ### VITOCAL ###
     ###############
