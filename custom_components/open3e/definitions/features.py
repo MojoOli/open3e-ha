@@ -98,6 +98,7 @@ class Features:
         Cop = Feature(id=2625, refresh_interval=300)
         CopHeating = Feature(id=2622, refresh_interval=300)
         CopDhw = Feature(id=2624, refresh_interval=300)
+        EnergyConsumptionCentralHeatingMonthMatrix
 
     class Power:
         Fan1 = Feature(id=1775, refresh_interval=5)
@@ -153,7 +154,18 @@ class Features:
         LegionellaProtectionWeekday = Feature(id=876, refresh_interval=30)
         LegionellaProtectionLastSuccessfulStartTime = Feature(id=877, refresh_interval=30)
         LegionellaProtectionLastSuccessfulWeekday = Feature(id=878, refresh_interval=30)
+        CentralHeatingRegulationMode = Feature(id=1004, refresh_interval=30)
+        CentralHeatingAllengraSensor = Feature(id=1043, refresh_interval=30)
+        
+#        EnergyConsumptionCentralHeatingMonthMatrix = Feature(id=1294, refresh_interval=30)
+#        EnergyConsumptionCentralHeatingYearMatrix = Feature(id=1316, refresh_interval=30)
+#        EnergyConsumptionDomesticHotWaterMonthMatrix = Feature(id=1311, refresh_interval=30)
+#        EnergyConsumptionDomesticHotWaterYearMatrix = Feature(id=1333, refresh_interval=30)       
+#        GeneratedCentralHeatingOutputMonthMatrix = Feature(id=1315, refresh_interval=30)
+#        GeneratedCentralHeatingOutputYearMatrix = Feature(id=1337, refresh_interval=30)
+        
 
+        
     
     class Volume:
         Ventilation = Feature(id=2328, refresh_interval=10)
@@ -182,6 +194,8 @@ class Features:
         DeviceGatewayRemoteSignalStrength = Feature(id=900, refresh_interval=30)
         DeviceExternalAccessInProgress = Feature(id=921, refresh_interval=30)
         HeatingBurnerGasType = Feature(id=929, refresh_interval=604800)
+        DeviceBusTopologyMatrix = Feature(id=954, refresh_interval=86400)
+        DeviceExhaustPipeLength = Feature(id=1093, refresh_interval=604800)
         
         
         CompressorStatistics = Feature(id=2369, refresh_interval=120)
