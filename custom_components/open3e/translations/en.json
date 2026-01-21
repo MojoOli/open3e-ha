@@ -37,6 +37,15 @@
       "water_pressure": {
         "name": "Water pressure"
       },
+      "gas_consumption_central_heating_today": {
+        "name": "Gas Consumption heating today"
+      },
+      "gas_consumption_domestic_hotwater_today": {
+        "name": "Gas Consumption hot water today"
+      }
+      "gas_consumption_total_today": {
+        "name": "Gas Consumption total today"
+      }
       "energy_consumption_central_heating_today": {
         "name": "Energy consumption central heating today"
       },
