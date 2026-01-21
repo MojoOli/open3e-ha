@@ -191,7 +191,7 @@
         "name": "Grid Energy Feed-In Total"
       },
       "domestic_hot_water_target_temperature": {
-        "name": "Domestic Hot Water Temperature"
+        "name": "Domestic Hot Water Target Temperature"
       },
       "flow_circuit1_temperature": {
         "name": "Heating circuit 1 flow temperature"
