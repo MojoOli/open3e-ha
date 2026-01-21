@@ -186,8 +186,7 @@ class Features:
         DeviceExternalAccessInProgress = Feature(id=921, refresh_interval=30)
         HeatingBurnerGasType = Feature(id=929, refresh_interval=604800)
         DeviceBusTopologyMatrix = Feature(id=954, refresh_interval=86400)
-        DeviceExhaustPipeLength = Feature(id=1093, refresh_interval=604800)
-        
+        DeviceExhaustPipeLength = Feature(id=1093, refresh_interval=604800)        
         
         CompressorStatistics = Feature(id=2369, refresh_interval=120)
         AdditionalHeaterStatistics = Feature(id=2370, refresh_interval=120)
