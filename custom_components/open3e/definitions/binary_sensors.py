@@ -34,6 +34,22 @@ class Open3eBinarySensorEntityDescription(
 BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
 
     ###############
+    ### Vitodens ##
+    ###############
+    
+    Open3eBinarySensorEntityDescription(
+        device_class=BinarySensorDeviceClass.POWER,
+        poll_data_features=[Features.State.CentralHeatingPump],
+        key="hot_water_circulation_pump",
+        translation_key="hot_water_circulation_pump",
+        icon="mdi:water-sync",
+        entity_registry_enabled_default=False,
+        entity_registry_visible_default=False,
+        data_transform=BinarySensorDataTransform.STATE,
+        required_device=Open3eDevices.Vitodens
+    ),
+    
+    ###############
     ### VITOCAL ###
     ###############
 
