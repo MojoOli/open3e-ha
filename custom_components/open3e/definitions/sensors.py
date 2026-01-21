@@ -177,16 +177,6 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         required_device=Open3eDevices.Vitodens
     ),
     Open3eSensorEntityDescription(
-        poll_data_features=[Features.Temperature.Return],
-        device_class=SensorDeviceClass.TEMPERATURE,
-        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
-        state_class=SensorStateClass.MEASUREMENT,
-        key="return_temperature",
-        translation_key="return_temperature",
-        data_retriever=SensorDataRetriever.ACTUAL,
-        required_device=Open3eDevices.Vitodens
-    ),
-    Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.DomesticHotWater],
         device_class=SensorDeviceClass.TEMPERATURE,
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
