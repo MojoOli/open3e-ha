@@ -31,15 +31,16 @@ class Features:
         PrimaryHeatExchanger = Feature(id=320, refresh_interval=5)
         CompressorInlet = Feature(id=321, refresh_interval=5)
         CompressorOutlet = Feature(id=324, refresh_interval=5)
+        FlueGasTemperatureSensor = Feature(id=331, refresh_interval=300)
         Room1 = Feature(id=334, refresh_interval=5)
         Room2 = Feature(id=335, refresh_interval=5)
         Room3 = Feature(id=336, refresh_interval=5)
         Room4 = Feature(id=337, refresh_interval=5)
         SecondaryHeatExchanger = Feature(id=355, refresh_interval=5)
-        ProgramsCircuit1 = Feature(id=424, refresh_interval=30)
-        ProgramsCircuit2 = Feature(id=426, refresh_interval=30)
-        ProgramsCircuit3 = Feature(id=428, refresh_interval=30)
-        ProgramsCircuit4 = Feature(id=430, refresh_interval=30)
+        ProgramsCircuit1 = Feature(id=424, refresh_interval=300)
+        ProgramsCircuit2 = Feature(id=426, refresh_interval=300)
+        ProgramsCircuit3 = Feature(id=428, refresh_interval=300)
+        ProgramsCircuit4 = Feature(id=430, refresh_interval=300)
         CoolingProgramsCircuit1 = Feature(id=2546, refresh_interval=30)
         CoolingProgramsCircuit2 = Feature(id=2547, refresh_interval=30)
         CoolingProgramsCircuit3 = Feature(id=2548, refresh_interval=30)
@@ -83,12 +84,12 @@ class Features:
         CompressorOutlet = Feature(id=325, refresh_interval=15)
 
     class Energy:
+        Grid = Feature(id=535, refresh_interval=300)
         CentralHeating = Feature(id=548, refresh_interval=300)
         DomesticHotWater = Feature(id=565, refresh_interval=300)
         Cooling = Feature(id=566, refresh_interval=300)
         Battery = Feature(id=1801, refresh_interval=300)
         PV = Feature(id=1802, refresh_interval=300)
-        Grid = Feature(id=535, refresh_interval=300)
         HeatingOutput = Feature(id=1211, refresh_interval=30)
         WarmWaterOutput = Feature(id=1391, refresh_interval=30)
         CoolingOutput = Feature(id=2529, refresh_interval=30)
@@ -129,9 +130,10 @@ class Features:
         Circuit1Pump = Feature(id=401, refresh_interval=10)
         Circuit2Pump = Feature(id=402, refresh_interval=10)
         Circuit3Pump = Feature(id=403, refresh_interval=10)
-        Circuit4Pump = Feature(id=404, refresh_interval=10)
+        Circuit4Pump = Feature(id=404, refresh_interval=10)        
         HotWaterCirculationPump = Feature(id=491, refresh_interval=30)
         DomesticHotWaterCirculationPumpMode = Feature(id=497, refresh_interval=30)
+        DomesticHotWaterOperationState = Feature(id=531, refresh_interval=30)
         TargetQuickMode = Feature(id=1006, refresh_interval=30)
         CurrentQuickMode = Feature(id=1007, refresh_interval=30)
         FrostProtection = Feature(id=2489, refresh_interval=30)
@@ -142,9 +144,21 @@ class Features:
         FlowCircuit4HeatingCurve = Feature(id=883, refresh_interval=30)
         VentilationMode = Feature(id=2371, refresh_interval=30)
         VentilationLevel = Feature(id=533, refresh_interval=30)
+        CentralHeatingCircuitName1 = Feature(id=627, refresh_interval=86400)
+        CentralHeatingCircuitName2 = Feature(id=628, refresh_interval=86400)
+        CentralHeatingCircuitName3 = Feature(id=629, refresh_interval=86400)
+        CentralHeatingCircuitName4 = Feature(id=630, refresh_interval=86400)
+        LegionellaProtectionActivation = Feature(id=873, refresh_interval=30)
+        LegionellaProtectionStartTime = Feature(id=875, refresh_interval=30)
+        LegionellaProtectionWeekday = Feature(id=876, refresh_interval=30)
+        LegionellaProtectionLastSuccessfulStartTime = Feature(id=877, refresh_interval=30)
+        LegionellaProtectionLastSuccessfulWeekday = Feature(id=878, refresh_interval=30)
 
+    
     class Volume:
         Ventilation = Feature(id=2328, refresh_interval=10)
+        GasConsumptionCentralHeatingm3 = Feature(id=544, refresh_interval=300)
+        GasConsumptionDomesticHotWaterm3 = Feature(id=545, refresh_interval=300)        
 
     class Speed:
         CompressorPercent = Feature(id=2346, refresh_interval=10)
@@ -162,6 +176,14 @@ class Features:
         FourThreeWayValve = Feature(id=2735, refresh_interval=30)
 
     class Misc:
+        DeviceSoftwareVersion = Feature(id=580, refresh_interval=86400)
+        DeviceHardwareVersion = Feature(id=581, refresh_interval=604800)
+        DeviceGatewayRemoteIp = Feature(id=607, refresh_interval=300)
+        DeviceGatewayRemoteSignalStrength = Feature(id=900, refresh_interval=30)
+        DeviceExternalAccessInProgress = Feature(id=921, refresh_interval=30)
+        HeatingBurnerGasType = Feature(id=929, refresh_interval=604800)
+        
+        
         CompressorStatistics = Feature(id=2369, refresh_interval=120)
         AdditionalHeaterStatistics = Feature(id=2370, refresh_interval=120)
         ServiceManagerIsRequired = Feature(id=901, refresh_interval=30)
