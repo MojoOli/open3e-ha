@@ -25,6 +25,16 @@ class Open3eSwitchEntityDescription(
 SWITCHES: tuple[Open3eSwitchEntityDescription, ...] = (
 
     ###############
+    ### GENERAL ###
+    ###############
+
+
+    ################
+    ### Vitodens ###
+    ################
+    
+    
+    ###############
     ### VITOCAL ###
     ###############
 
