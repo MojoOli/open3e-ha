@@ -191,8 +191,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         device_class=SensorDeviceClass.TEMPERATURE,
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         state_class=SensorStateClass.MEASUREMENT,
-        key="domestic_hot_water_temperature",
-        translation_key="domestic_hot_water_temperature",
+        key="domestic_hot_water_temperature_target",
+        translation_key="domestic_hot_water_temperature_target",
         data_retriever=SensorDataRetriever.RAW,
         required_device=Open3eDevices.Vitodens
     ),
