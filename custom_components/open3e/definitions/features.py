@@ -158,8 +158,8 @@ class Features:
 
     class Volume:
         Ventilation = Feature(id=2328, refresh_interval=10)
-        GasConsumptionCentralHeatingm3 = Feature(id=544, refresh_interval=300)
-        GasConsumptionDomesticHotWaterm3 = Feature(id=545, refresh_interval=300)        
+        GasConsumptionCentralHeating = Feature(id=544, refresh_interval=300)
+        GasConsumptionDomesticHotWater = Feature(id=545, refresh_interval=300)        
 
     class Speed:
         CompressorPercent = Feature(id=2346, refresh_interval=10)
