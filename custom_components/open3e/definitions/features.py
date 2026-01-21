@@ -131,7 +131,7 @@ class Features:
         Circuit2Pump = Feature(id=402, refresh_interval=10)
         Circuit3Pump = Feature(id=403, refresh_interval=10)
         Circuit4Pump = Feature(id=404, refresh_interval=10)        
-        DomesticHotWaterCirculationPump = Feature(id=491, refresh_interval=10)
+        HotWaterCirculationPump = Feature(id=491, refresh_interval=10)
         DomesticHotWaterCirculationPumpMode = Feature(id=497, refresh_interval=10)
         DomesticHotWaterOperationState = Feature(id=531, refresh_interval=10)
         TargetQuickMode = Feature(id=1006, refresh_interval=30)
