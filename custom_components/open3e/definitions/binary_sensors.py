@@ -39,15 +39,25 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
     
     Open3eBinarySensorEntityDescription(
         device_class=BinarySensorDeviceClass.POWER,
-        poll_data_features=[Features.State.CentralHeatingPump],
+        poll_data_features=[Features.State.DomesticHotWaterCirculationPump],
         key="hot_water_circulation_pump",
         translation_key="hot_water_circulation_pump",
         icon="mdi:water-sync",
+        data_transform=BinarySensorDataTransform.STATE,
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eBinarySensorEntityDescription(
+        device_class=BinarySensorDeviceClass.POWER,
+        poll_data_features=[Features.State.HeaterFlameState],
+        key="flamestate",
+        translation_key="flamestate",
+        icon="mdi:fire",
         entity_registry_enabled_default=False,
         entity_registry_visible_default=False,
         data_transform=BinarySensorDataTransform.STATE,
         required_device=Open3eDevices.Vitodens
     ),
+
     
     ###############
     ### VITOCAL ###
