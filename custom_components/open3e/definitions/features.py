@@ -97,8 +97,7 @@ class Features:
         DesiredThermalEnergyDefrost = Feature(id=2256, refresh_interval=30)
         Cop = Feature(id=2625, refresh_interval=300)
         CopHeating = Feature(id=2622, refresh_interval=300)
-        CopDhw = Feature(id=2624, refresh_interval=300)
-        EnergyConsumptionCentralHeatingMonthMatrix
+        CopDhw = Feature(id=2624, refresh_interval=300)        
 
     class Power:
         Fan1 = Feature(id=1775, refresh_interval=5)
@@ -155,7 +154,6 @@ class Features:
         LegionellaProtectionLastSuccessfulStartTime = Feature(id=877, refresh_interval=30)
         LegionellaProtectionLastSuccessfulWeekday = Feature(id=878, refresh_interval=30)
         CentralHeatingRegulationMode = Feature(id=1004, refresh_interval=30)
-        CentralHeatingAllengraSensor = Feature(id=1043, refresh_interval=30)
         HeaterFlameState = Feature(id=364, refresh_interval=30)
 
     class Volume:
