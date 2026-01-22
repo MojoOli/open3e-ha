@@ -385,8 +385,8 @@
       "wlan_connection_status": {
         "name": "Wifi Connection status",
         "state": {
-          "connected": "Verbunden",
-          "not_connected": "Nicht verbunden"
+          "connected": "Connected",
+          "not_connected": "Disconnected"
         }
       },
       "wlan_ip_addr": {
