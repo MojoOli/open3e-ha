@@ -382,6 +382,12 @@
           "not_connected": "Disconnected"
         }
       },
+      "wlan_ip_addr": {
+        "name": "Wifi IP-adress"
+      },
+      "wlan_signalstrength": {
+        "name": "Wifi signalstrength"
+      },            
       "cop_total_current_year": {
         "name": "COP total year"
       },
