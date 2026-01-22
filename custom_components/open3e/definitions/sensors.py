@@ -150,6 +150,27 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=lambda data: get_connection_status(int(data)),
         options=[mode for mode in ConnectionStatus]
     ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.DeviceGatewayRemoteIp],
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:ip-network",
+        entity_registry_enabled_default=False,
+        entity_registry_visible_default=False,
+        key="wlan_ip_addr",
+        translation_key="wlan_ip_addr",
+        data_retriever=SensorDataRetriever.WLAN_IP,
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.DeviceGatewayRemoteSignalStrength],
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:wifi",
+        entity_registry_enabled_default=False,
+        entity_registry_visible_default=False,
+        key="wlan_signalstrength",
+        translation_key="wlan_signalstrength",
+        data_retriever=SensorDataRetriever.RAW,
+    ),
+
 
 
     ##################
