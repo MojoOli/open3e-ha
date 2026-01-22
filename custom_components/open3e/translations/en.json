@@ -376,14 +376,14 @@
         "name": "Errors"
       },
       "connection_status": {
-        "name": "CAN-Bus Connection status",
+        "name": "CAN-Bus status",
         "state": {
           "connected": "Connected",
           "not_connected": "Disconnected"
         }
       },
       "wlan_connection_status": {
-        "name": "Wifi Connection status",
+        "name": "Wifi status",
         "state": {
           "connected": "Connected",
           "not_connected": "Disconnected"
