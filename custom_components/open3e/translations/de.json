@@ -376,14 +376,14 @@
         "name": "Fehler"
       },
       "connection_status": {
-        "name": "CAN-Bus Verbindungsstatus",
+        "name": "CAN-Bus Status",
         "state": {
           "connected": "Verbunden",
           "not_connected": "Nicht verbunden"
         }
       },
       "wlan_connection_status": {
-        "name": "WLAN Verbindungsstatus",
+        "name": "WLAN Status",
         "state": {
           "connected": "Verbunden",
           "not_connected": "Nicht verbunden"
