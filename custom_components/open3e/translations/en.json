@@ -376,10 +376,17 @@
         "name": "Errors"
       },
       "connection_status": {
-        "name": "Connection status",
+        "name": "CAN-Bus Connection status",
         "state": {
           "connected": "Connected",
           "not_connected": "Disconnected"
+        }
+      },
+      "wlan_connection_status": {
+        "name": "Wifi Connection status",
+        "state": {
+          "connected": "Verbunden",
+          "not_connected": "Nicht verbunden"
         }
       },
       "wlan_ip_addr": {
