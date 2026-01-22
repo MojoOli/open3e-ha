@@ -382,6 +382,12 @@
           "not_connected": "Nicht verbunden"
         }
       },
+      "wlan_ip_addr": {
+        "name": "WLAN IP-Adresse"
+      },
+      "wlan_signalstrength": {
+        "name": "WLAN Signalstärke"
+      },            
       "cop_total_current_year": {
         "name": "COP Gesamt Jahr"
       },
