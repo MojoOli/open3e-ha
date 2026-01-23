@@ -40,6 +40,9 @@
       "water_pressure": {
         "name": "Wasserdruck"
       },
+      "Operating_Hours": {
+        "name": "Anlagen Betriebsstunden"
+      },
       "Burner_Hours": {
         "name": "Brennerbetriebsstunden"
       },
