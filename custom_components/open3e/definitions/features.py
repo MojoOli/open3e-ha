@@ -31,7 +31,7 @@ class Features:
         PrimaryHeatExchanger = Feature(id=320, refresh_interval=5)
         CompressorInlet = Feature(id=321, refresh_interval=5)
         CompressorOutlet = Feature(id=324, refresh_interval=5)
-        FlueGasTemperatureSensor = Feature(id=331, refresh_interval=300)
+        FlueGasTemperatureSensor = Feature(id=331, refresh_interval=5)
         Room1 = Feature(id=334, refresh_interval=5)
         Room2 = Feature(id=335, refresh_interval=5)
         Room3 = Feature(id=336, refresh_interval=5)
