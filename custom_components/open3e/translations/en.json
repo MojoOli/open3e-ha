@@ -445,6 +445,9 @@
       "flamestate": {
         "name": "Burner flame"
       },
+      "central_heating_pump": {
+        "name": "Heating circulation pump"
+      },
       "circuit_pump": {
         "name": "Heatpump circuit pump"
       },
