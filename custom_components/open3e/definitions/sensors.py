@@ -243,7 +243,6 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         poll_data_features=[Features.Volume.GasConsumptionCentralHeating],
         device_class=SensorDeviceClass.VOLUME,
         native_unit_of_measurement=UnitOfVolume.CUBIC_METERS,
-#        native_unit_of_measurement="m³",
         icon="mdi:meter-gas",
         state_class=SensorStateClass.TOTAL_INCREASING,
         suggested_display_precision=1,
