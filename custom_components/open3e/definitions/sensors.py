@@ -186,9 +186,9 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
 
 
 
-    ##################
-    ### Vitodens   ###
-    ##################
+    ################
+    ### Vitodens ###
+    ################
     
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.Flow],
@@ -270,6 +270,17 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.TODAY,
         required_device=Open3eDevices.Vitodens
     ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.FlueGasTemperatureSensor],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="fluegas_temperature",
+        translation_key="fluegas_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitodens
+    ),
+
     
     
     ###############
