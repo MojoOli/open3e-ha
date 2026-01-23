@@ -278,6 +278,30 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.ACTUAL,
         required_device=Open3eDevices.Vitodens
     ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.HeatEngineStatistical],
+        device_class=SensorDeviceClass.DURATION,
+        native_unit_of_measurement=UnitOfTime.HOURS,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        key="Operating_Hours",
+        translation_key="Operating_Hours",
+        data_retriever=lambda data: str(json_loads(data)["OperatingHours"]),
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.HeatEngineStatistical],
+        device_class=SensorDeviceClass.DURATION,
+        native_unit_of_measurement=UnitOfTime.HOURS,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        entity_registry_enabled_default=False,
+        entity_registry_visible_default=False,
+        key="Burner_Hours",
+        translation_key="Burner_Hours",
+        data_retriever=lambda data: str(json_loads(data)["BurnerHours"]),
+        required_device=Open3eDevices.Vitodens
+    ),
     
 
     
