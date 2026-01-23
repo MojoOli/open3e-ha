@@ -51,8 +51,7 @@ class SensorDataRetriever:
     PV_POWER_STRING_3 = lambda data: float(json_loads(data)["ActivePower String C"])
     STARTS = lambda data: int(json_loads(data)["starts"])
     HOURS = lambda data: int(json_loads(data)["hours"])
-    TARGET_FLOW = lambda data: float(json_loads(data)["TargetFlow"])
-    WLAN_IP = lambda data: str(json_loads(data)["WLAN_IP-Address"])    
+    TARGET_FLOW = lambda data: float(json_loads(data)["TargetFlow"])    
     UNKNOWN = lambda data: float(json_loads(data)["Unknown"])
     RAW = lambda data: float(data)
     """The data state represents a raw value without any encapsulation."""
@@ -171,7 +170,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         entity_registry_visible_default=False,
         key="wlan_ip_addr",
         translation_key="wlan_ip_addr",
-        data_retriever=SensorDataRetriever.WLAN_IP,
+        data_retriever=lambda data: str(json_loads(data)["WLAN_IP-Address"])
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Misc.DeviceGatewayRemoteSignalStrength],
