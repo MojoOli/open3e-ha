@@ -179,8 +179,9 @@ class Features:
     class Misc:
         DeviceSoftwareVersion = Feature(id=580, refresh_interval=86400)
         DeviceHardwareVersion = Feature(id=581, refresh_interval=604800)
-        DeviceGatewayRemoteIp = Feature(id=607, refresh_interval=300)
-        DeviceGatewayRemoteSignalStrength = Feature(id=900, refresh_interval=30)
+        DeviceGatewayRemoteLocalNetworkStatus = Feature(id=602, refresh_interval=60)        
+        DeviceGatewayRemoteIp = Feature(id=607, refresh_interval=60)
+        DeviceGatewayRemoteSignalStrength = Feature(id=900, refresh_interval=60)
         DeviceExternalAccessInProgress = Feature(id=921, refresh_interval=30)
         HeatingBurnerGasType = Feature(id=929, refresh_interval=604800)
         DeviceBusTopologyMatrix = Feature(id=954, refresh_interval=86400)
