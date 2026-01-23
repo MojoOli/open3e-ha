@@ -57,6 +57,16 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
         data_transform=BinarySensorDataTransform.STATE,
         required_device=Open3eDevices.Vitodens
     ),
+    Open3eBinarySensorEntityDescription(
+        device_class=BinarySensorDeviceClass.POWER,
+        poll_data_features=[Features.State.CentralHeatingPump],
+        key="central_heating_pump",
+        translation_key="central_heating_pump",
+        icon="mdi:water-sync",
+        data_transform=BinarySensorDataTransform.STATE,
+        required_device=Open3eDevices.Vitodens
+    ),
+
 
     
     ###############
