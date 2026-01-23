@@ -3,7 +3,7 @@ from typing import Callable, Any, List
 
 from homeassistant.components.sensor import SensorEntityDescription, SensorDeviceClass, SensorStateClass
 from homeassistant.const import UnitOfTemperature, UnitOfEnergy, PERCENTAGE, UnitOfPower, \
-    EntityCategory, UnitOfPressure, UnitOfVolumeFlowRate, UnitOfTime
+    EntityCategory, UnitOfPressure, UnitOfVolumeFlowRate, UnitOfTime, UnitOfVolume
 from homeassistant.util.json import json_loads
 
 from .devices import Open3eDevices
@@ -242,8 +242,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Volume.GasConsumptionCentralHeating],
         device_class=SensorDeviceClass.VOLUME,
-#        native_unit_of_measurement=UnitOfVolume.CUBIC_METERS,
-        native_unit_of_measurement="m³",
+        native_unit_of_measurement=UnitOfVolume.CUBIC_METERS,
+#        native_unit_of_measurement="m³",
         icon="mdi:meter-gas",
         state_class=SensorStateClass.TOTAL_INCREASING,
         suggested_display_precision=1,
@@ -257,8 +257,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Volume.GasConsumptionDomesticHotWater],
         device_class=SensorDeviceClass.VOLUME,
-#        native_unit_of_measurement=UnitOfVolume.CUBIC_METERS,
-        native_unit_of_measurement="m³",
+        native_unit_of_measurement=UnitOfVolume.CUBIC_METERS,
         icon="mdi:meter-gas",
         state_class=SensorStateClass.TOTAL_INCREASING,
         suggested_display_precision=1,
@@ -279,6 +278,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.ACTUAL,
         required_device=Open3eDevices.Vitodens
     ),
+    
 
     
     
@@ -1466,7 +1466,7 @@ DERIVED_SENSORS: tuple[Open3eDerivedSensorEntityDescription, ...] = (
     Open3eDerivedSensorEntityDescription(
         poll_data_features=[Features.Volume.GasConsumptionCentralHeating, Features.Volume.GasConsumptionDomesticHotWater],
         device_class=SensorDeviceClass.VOLUME,
-        native_unit_of_measurement="m³",
+        native_unit_of_measurement=UnitOfVolume.CUBIC_METERS,
         icon="mdi:meter-gas",
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="gas_consumption_total_today",
