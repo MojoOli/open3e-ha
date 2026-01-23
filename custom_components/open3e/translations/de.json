@@ -31,6 +31,9 @@
       "return_temperature": {
         "name": "Rücklauftemperatur"
       },
+      "fluegas_temperature": {
+        "name": "Abgastemperatur"
+      },
       "domestic_hot_water_temperature": {
         "name": "Warmwassertemperatur"
       },
