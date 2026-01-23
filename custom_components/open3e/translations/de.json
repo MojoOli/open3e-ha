@@ -445,6 +445,9 @@
       "flamestate": {
         "name": "Brennerflamme"
       },
+      "central_heating_pump": {
+        "name": "Heizkreis-Pumpe"
+      },
       "circuit_pump": {
         "name": "Wärmepumpe Heizkreis-Pumpe"
       },
