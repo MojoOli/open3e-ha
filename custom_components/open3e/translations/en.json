@@ -31,6 +31,9 @@
       "return_temperature": {
         "name": "Return temperature"
       },
+      "fluegas_temperature": {
+        "name": "Fluegas temperature"
+      },      
       "domestic_hot_water_temperature": {
         "name": "Domestic Hot Water temperature"
       },
