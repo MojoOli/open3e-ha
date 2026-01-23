@@ -52,6 +52,7 @@ class SensorDataRetriever:
     STARTS = lambda data: int(json_loads(data)["starts"])
     HOURS = lambda data: int(json_loads(data)["hours"])
     TARGET_FLOW = lambda data: float(json_loads(data)["TargetFlow"])
+    WLAN_IP = lambda data: str(json_loads(data)["WLAN_IP-Address"])    
     UNKNOWN = lambda data: float(json_loads(data)["Unknown"])
     RAW = lambda data: float(data)
     """The data state represents a raw value without any encapsulation."""
@@ -147,6 +148,18 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         icon="mdi:lan-connect",
         key="connection_status",
         translation_key="connection_status",
+        data_retriever=lambda data: get_connection_status(int(data)),
+        options=[mode for mode in ConnectionStatus]
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.DeviceGatewayRemoteLocalNetworkStatus],
+        device_class=SensorDeviceClass.ENUM,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:lan-connect",
+        entity_registry_enabled_default=False,
+        entity_registry_visible_default=False,
+        key="wlan_connection_status",
+        translation_key="wlan_connection_status",
         data_retriever=lambda data: get_connection_status(int(data)),
         options=[mode for mode in ConnectionStatus]
     ),
