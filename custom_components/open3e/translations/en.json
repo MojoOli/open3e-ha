@@ -37,6 +37,12 @@
       "domestic_hot_water_temperature": {
         "name": "Domestic Hot Water temperature"
       },
+      "Burner_Hours": {
+        "name": "Burner hours"
+      },
+      "Burner_Starts": {
+        "name": "Burner starts"
+      },
       "water_pressure": {
         "name": "Water pressure"
       },
