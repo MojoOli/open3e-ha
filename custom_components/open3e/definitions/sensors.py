@@ -180,7 +180,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         entity_registry_visible_default=False,
         key="wlan_signalstrength",
         translation_key="wlan_signalstrength",
-        data_retriever=SensorDataRetriever.RAW,
+        data_retriever=SensorDataRetriever.RAW
     ),
 
 
