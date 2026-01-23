@@ -37,6 +37,9 @@
       "domestic_hot_water_temperature": {
         "name": "Domestic Hot Water temperature"
       },
+      "Operating_Hours": {
+        "name": "Anlagen Betriebsstunden"
+      },
       "Burner_Hours": {
         "name": "Burner hours"
       },
