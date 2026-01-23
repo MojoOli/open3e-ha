@@ -40,6 +40,12 @@
       "water_pressure": {
         "name": "Wasserdruck"
       },
+      "Burner_Hours": {
+        "name": "Brennerbetriebsstunden"
+      },
+      "Burner_Starts": {
+        "name": "Brennerstarts"
+      },
       "gas_consumption_central_heating_today": {
         "name": "Gasverbrauch Heizung heute"
       },
