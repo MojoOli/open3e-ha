@@ -92,7 +92,32 @@ DEVICE_CAPABILITIES: dict[Device, list[CapabilityFeature]] = {
         )
     ],
     Open3eDevices.Vitoair: [],
-    Open3eDevices.Vitodens: [],
+    Open3eDevices.Vitodens: [
+        CapabilityFeature(
+            capability=Capability.Circuit1,
+            feature=Features.Temperature.FlowCircuit1,
+            path="Actual",
+            invalid_value=VIESSMANN_UNAVAILABLE_VALUE
+        ),
+        CapabilityFeature(
+            capability=Capability.Circuit2,
+            feature=Features.Temperature.FlowCircuit2,
+            path="Actual",
+            invalid_value=VIESSMANN_UNAVAILABLE_VALUE
+        ),
+        CapabilityFeature(
+            capability=Capability.Circuit3,
+            feature=Features.Temperature.FlowCircuit3,
+            path="Actual",
+            invalid_value=VIESSMANN_UNAVAILABLE_VALUE
+        ),
+        CapabilityFeature(
+            capability=Capability.Circuit4,
+            feature=Features.Temperature.FlowCircuit4,
+            path="Actual",
+            invalid_value=VIESSMANN_UNAVAILABLE_VALUE
+        )
+    ],
     Open3eDevices.Vitocharge: [
         CapabilityFeature(
             capability=Capability.BackupBox,
