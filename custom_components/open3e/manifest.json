@@ -1,8 +1,8 @@
 {
   "domain": "open3e",
-  "name": "open3e",
+  "name": "open3e Vitodens",
   "codeowners": [
-    "@MojoOli"
+    "@MojoOli,@hobbysegler"
   ],
   "config_flow": true,
   "dependencies": [
