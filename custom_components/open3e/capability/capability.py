@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from enum import Enum, auto
 from typing import Any
 
-from custom_components.open3e.const import VIESSMANN_UNAVAILABLE_VALUE
+from custom_components.open3e.const import VIESSMANN_UNAVAILABLE_VALUE, VITODENS_UNAVAILABLE_VALUE
 from custom_components.open3e.definitions.devices import Open3eDevices, Device
 from custom_components.open3e.definitions.features import Features, Feature
 
