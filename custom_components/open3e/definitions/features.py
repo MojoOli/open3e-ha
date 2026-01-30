@@ -72,6 +72,15 @@ class Features:
         HeatingCoolingBuffer = Feature(id=3018, refresh_interval=30)
         DomesticHotWaterHysteresis = Feature(id=1085, refresh_interval=30)
 
+# Vitodens
+        MixerOneCircuitFlowTemperatureSensor = Feature(id=284, refresh_interval=30)
+        FlueGasTemperatureSensor = Feature(id=331, refresh_interval=30)
+        MixerOneCircuitRoomTemperatureSensor = Feature(id=334, refresh_interval=30)
+        DomesticHotWaterOutletSensor = Feature(id=360, refresh_interval=30)
+        MixerOneCircuitFlowTemperatureTargetSetpoint = Feature(id=987, refresh_interval=30)
+        AllengraSensor = Feature(id=1043, refresh_interval=10)
+    
+
     class Humidity:
         Outdoor = Feature(id=419, refresh_interval=5)
         SupplyAir = Feature(id=420, refresh_interval=5)
