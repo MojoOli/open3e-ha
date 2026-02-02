@@ -423,6 +423,81 @@
       },
       "GeneratedHeatingWaterOutputTotalToday": {
         "name": "Output total today"
+      },
+      "WaterPressureSensor": {
+        "name": "Water pressure"
+      },
+      "FlowTemperatureSensor": {
+        "name": "Flow Temperature"
+      },
+      "DomesticHotWaterSensor": {
+        "name": "Hot Water Temperature"
+      },
+      "OutsideTemperatureSensor": {
+        "name": "Outside Temperature"
+      },
+      "MixerOneCircuitFlowTemperatureSensor": {
+        "name": "Flow Temperature Circuit 1"
+      },
+      "MixerTwoCircuitFlowTemperatureSensor": {
+        "name": "Flow Temperature Circuit 2"
+      },
+      "MixerThreeCircuitFlowTemperatureSensor": {
+        "name": "Flow Temperature Circuit 3"
+      },
+      "MixerFourCircuitFlowTemperatureSensor": {
+        "name": "Flow Temperature Circuit 4"
+      },
+      "FlueGasTemperatureSensor": {
+        "name": "Fluegas Temperature"
+      },
+      "MixerOneCircuitRoomTemperatureSensor": {
+        "name": "Room Temperature Circuit 1"
+      },
+      "MixerTwoCircuitRoomTemperatureSensor": {
+        "name": "Room Temperature Circuit 2"
+      },
+      "MixerThreeCircuitRoomTemperatureSensor": {
+        "name": "Room Temperature Circuit 3"
+      },
+      "MixerFourCircuitRoomTemperatureSensor": {
+        "name": "Room Temperature Circuit 4"
+      },
+      "DomesticHotWaterOutletSensor": {
+        "name": "Hot Water Outlet Temperature"
+      },
+      "DomesticHotWaterTemperatureSetpoint": {
+        "name": "Hot Water Outlet Target Temperature "
+      },
+      "MixerOneCircuitRoomTemperatureSetpoint": {
+        "name": "Target Temperature Circuit 1"
+      },
+      "MixerTwoCircuitRoomTemperatureSetpoint": {
+        "name": "Target Temperature Circuit 2"
+      },
+      "MixerThreeCircuitRoomTemperatureSetpoint": {
+        "name": "Target Temperature Circuit 3"
+      },
+      "MixerFourCircuitRoomTemperatureSetpoint": {
+        "name": "Target Temperature Circuit 4"
+      },
+      "FlowTemperatureTargetSetpoint": {
+        "name": "Flow Temperature Target"
+      },
+      "MixerOneCircuitFlowTemperatureTargetSetpoint": {
+        "name": "Flow Temperature Target Circuit 1"
+      },
+      "MixerTwoCircuitFlowTemperatureTargetSetpoint": {
+        "name": "Flow Temperature Target Circuit 2"
+      },
+      "MixerThreeCircuitFlowTemperatureTargetSetpoint": {
+        "name": "Flow Temperature Target Circuit 3"
+      },
+      "MixerFourCircuitFlowTemperatureTargetSetpoint": {
+        "name": "Flow Temperature Target Circuit 4"
+      },
+      "AllengraSensor": {
+        "name": "AllengraSensor"
       }
     },
     "binary_sensor": {

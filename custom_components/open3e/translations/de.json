@@ -423,8 +423,83 @@
       },
       "GeneratedHeatingWaterOutputTotalToday": {
         "name": "Wärmeleistung Gesamt heute"
+      },
+      "WaterPressureSensor": {
+        "name": "Warmwasserdruck"
+      },
+      "FlowTemperatureSensor": {
+        "name": "Vorlauftemperatur"
+      },
+      "DomesticHotWaterSensor": {
+        "name": "Warmwassertemperatur"
+      },
+      "OutsideTemperatureSensor": {
+        "name": "Außentemperatur"
+      },
+      "MixerOneCircuitFlowTemperatureSensor": {
+        "name": "Vorlauftemperatur Heizkreis 1"
+      },
+      "MixerTwoCircuitFlowTemperatureSensor": {
+        "name": "Vorlauftemperatur Heizkreis 2"
+      },
+      "MixerThreeCircuitFlowTemperatureSensor": {
+        "name": "Vorlauftemperatur Heizkreis 3"
+      },
+      "MixerFourCircuitFlowTemperatureSensor": {
+        "name": "Vorlauftemperatur Heizkreis 4"
+      },
+      "FlueGasTemperatureSensor": {
+        "name": "Abgastemperatur"
+      },
+      "MixerOneCircuitRoomTemperatureSensor": {
+        "name": "Raumtemperatur Heizkreis 1"
+      },
+      "MixerTwoCircuitRoomTemperatureSensor": {
+        "name": "Raumtemperatur Heizkreis 2"
+      },
+      "MixerThreeCircuitRoomTemperatureSensor": {
+        "name": "Raumtemperatur Heizkreis 3"
+      },
+      "MixerFourCircuitRoomTemperatureSensor": {
+        "name": "Raumtemperatur Heizkreis 4"
+      },
+      "DomesticHotWaterOutletSensor": {
+        "name": "Warmwasserausgangstemperatur"
+      },
+      "DomesticHotWaterTemperatureSetpoint": {
+        "name": "Warmwassertemperatur Soll"
+      },
+      "MixerOneCircuitRoomTemperatureSetpoint": {
+        "name": "Solltemperatur Heizkreis 1"
+      },
+      "MixerTwoCircuitRoomTemperatureSetpoint": {
+        "name": "Solltemperatur Heizkreis 2"
+      },
+      "MixerThreeCircuitRoomTemperatureSetpoint": {
+        "name": "Solltemperatur Heizkreis 3"
+      },
+      "MixerFourCircuitRoomTemperatureSetpoint": {
+        "name": "Solltemperatur Heizkreis 4"
+      },
+      "FlowTemperatureTargetSetpoint": {
+        "name": "Vorlauftemperatur Soll"
+      },
+      "MixerOneCircuitFlowTemperatureTargetSetpoint": {
+        "name": "Vorlauftemperatur Ziel Heizkreis 1"
+      },
+      "MixerTwoCircuitFlowTemperatureTargetSetpoint": {
+        "name": "Vorlauftemperatur Ziel Heizkreis 2"
+      },
+      "MixerThreeCircuitFlowTemperatureTargetSetpoint": {
+        "name": "Vorlauftemperatur Ziel Heizkreis 3"
+      },
+      "MixerFourCircuitFlowTemperatureTargetSetpoint": {
+        "name": "Vorlauftemperatur Ziel Heizkreis 4"
+      },
+      "AllengraSensor": {
+        "name": "AllengraSensor"
       }
-    },
+    },    
     "binary_sensor": {
       "circuit_frost_protection": {
         "name": "Frostschutz Heizkreis"
