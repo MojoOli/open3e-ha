@@ -151,6 +151,58 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         options=[mode for mode in ConnectionStatus]
     ),
 
+    ################
+    ### VITODENS ###
+    ################
+
+    ######### ENERGY-SENSORS #########
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.EnergyConsumptionCentralHeating],
+        device_class=SensorDeviceClass.ENERGY,
+#        icon="mdi:eye",
+        key="EnergyConsumptionCentralHeating",
+        translation_key="EnergyConsumptionCentralHeating",
+        entity_registry_enabled_default=False,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        data_retriever=SensorDataRetriever.TODAY,
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.EnergyConsumptionDomesticHotWater],
+        device_class=SensorDeviceClass.ENERGY,
+#        icon="mdi:eye",
+        key="EnergyConsumptionDomesticHotWater",
+        translation_key="EnergyConsumptionDomesticHotWater",
+        entity_registry_enabled_default=False,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        data_retriever=SensorDataRetriever.TODAY,
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.GeneratedCentralHeatingOutput],
+        device_class=SensorDeviceClass.ENERGY,
+#        icon="mdi:eye",
+        key="GeneratedCentralHeatingOutput",
+        translation_key="GeneratedCentralHeatingOutput",
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        data_retriever=SensorDataRetriever.TODAY,
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.GeneratedDomesticHotWaterOutput],
+        device_class=SensorDeviceClass.ENERGY,
+#        icon="mdi:eye",
+        key="GeneratedDomesticHotWaterOutput",
+        translation_key="GeneratedDomesticHotWaterOutput",
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        data_retriever=SensorDataRetriever.TODAY,
+        required_device=Open3eDevices.Vitodens
+    ),
+
     ###############
     ### VITOCAL ###
     ###############
@@ -1328,6 +1380,34 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
 
 ## Sensors which are derived by calculation
 DERIVED_SENSORS: tuple[Open3eDerivedSensorEntityDescription, ...] = (
+
+    ################
+    ### VITODENS ###
+    ################
+
+    ######### ENERGY-SENSORS #########
+    Open3eDerivedSensorEntityDescription(
+        poll_data_features=[Features.Energy.EnergyConsumptionCentralHeating, Features.Energy.EnergyConsumptionDomesticHotWater],
+        device_class=SensorDeviceClass.ENERGY,
+        key="EnergyConsumptionCentralTotalToday",
+        translation_key="EnergyConsumptionCentralTotalToday",
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        data_retrievers=[SensorDataRetriever.TODAY] * 2,
+        compute_value=lambda heating, hotwater: heating + hotwater,
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eDerivedSensorEntityDescription(
+        poll_data_features=[Features.Energy.GeneratedCentralHeatingOutput, Features.Energy.GeneratedDomesticHotWaterOutput],
+        device_class=SensorDeviceClass.ENERGY,
+        key="GeneratedHeatingWaterOutputTotalToday",
+        translation_key="GeneratedHeatingWaterOutputTotalToday",
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        data_retrievers=[SensorDataRetriever.TODAY] * 2,
+        compute_value=lambda heating, hotwater: heating + hotwater,
+        required_device=Open3eDevices.Vitodens
+    ),
 
     ###############
     ### VITOCAL ###

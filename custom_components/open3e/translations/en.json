@@ -405,6 +405,18 @@
       },
       "ventilation_level": {
         "name": "Ventilation level"
+      },
+      "EnergyConsumptionCentralHeating": {
+        "name": "Energyconsumption heating today"
+      },
+      "EnergyConsumptionDomesticHotWater": {
+        "name": "Energyconsumption hot water today"
+      },
+      "GeneratedCentralHeatingOutput": {
+        "name": "Output heating today"
+      },
+      "GeneratedDomesticHotWaterOutput": {
+        "name": "Output hot water today"
       }
     },
     "binary_sensor": {

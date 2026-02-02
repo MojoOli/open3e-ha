@@ -405,6 +405,18 @@
       },
       "ventilation_level": {
         "name": "Lüftungsstufe"
+      },
+      "EnergyConsumptionCentralHeating": {
+        "name": "Energieverbrauch Heizung heute"
+      },
+      "EnergyConsumptionDomesticHotWater": {
+        "name": "Energieverbrauch Warmwasser heute"
+      },
+      "GeneratedCentralHeatingOutput": {
+        "name": "Wärmeleistung Heizung heute"
+      },
+      "GeneratedDomesticHotWaterOutput": {
+        "name": "Wärmeleistung Warmwasser heute"
       }
     },
     "binary_sensor": {
