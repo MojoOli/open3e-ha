@@ -497,7 +497,28 @@
         "name": "Flow Temperature Target Circuit 4"
       },
       "AllengraSensor": {
-        "name": "AllengraSensor"
+        "name": "Flow Rate"
+      },
+      "HeatEngineStatisticalOperatingHours": {
+        "name": "Heating Operatinghours"
+      },
+      "HeatEngineStatisticalBurnerHours": {
+        "name": "Burner Operatinghours"
+      },
+      "LegionellaProtectionStartTime": {
+        "name": "Legionella Protection Start Time"
+      },
+      "LegionellaProtectionWeekday": {
+        "name": "Legionella Protection Weekday",
+        "state": {
+          "1": "Monday",
+          "2": "Tuesday",
+          "3": "Wednesday",
+          "4": "Thursday",
+          "5": "Friday",
+          "6": "Sattuerday",
+          "7": "Sunday"
+        }
       }
     },
     "binary_sensor": {

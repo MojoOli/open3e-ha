@@ -229,10 +229,10 @@ class Features:
     class Time:
         OperatingHoursTillService = Feature(id=521, refresh_interval=60)
         ServiceDateNext = Feature(id=522, refresh_interval=60)
-        LegionellaProtectionStartTime = Feature(id=875, refresh_interval=3600)
-        LegionellaProtectionWeekday = Feature(id=876, refresh_interval=3600)
-        LegionellaProtectionLastSuccessfulStartTime = Feature(id=877, refresh_interval=3600)
-        LegionellaProtectionLastSuccessfulWeekday = Feature(id=878, refresh_interval=3600)
+        LegionellaProtectionStartTime = Feature(id=875, refresh_interval=60)
+        LegionellaProtectionWeekday = Feature(id=876, refresh_interval=60)
+        LegionellaProtectionLastSuccessfulStartTime = Feature(id=877, refresh_interval=60)
+        LegionellaProtectionLastSuccessfulWeekday = Feature(id=878, refresh_interval=60)
         HeatEngineStatistical = Feature(id=1346, refresh_interval=60)
 
     class Misc:

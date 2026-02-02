@@ -477,15 +477,54 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         required_capabilities=[Capability.Circuit4],
         required_device=Open3eDevices.Vitodens
     ),
+# keine Ahnung, welche Daten der Allengra-Sensor liefert, daher auskommentiert
+#    Open3eSensorEntityDescription(
+#        poll_data_features=[Features.Temperature.AllengraSensor],
+#        device_class=SensorDeviceClass.TEMPERATURE,
+#        key="AllengraSensor",
+#        translation_key="AllengraSensor",
+#        entity_registry_enabled_default=False,
+#        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+#        state_class=SensorStateClass.MEASUREMENT,
+#        data_retriever=SensorDataRetriever.ACTUAL,
+#        required_device=Open3eDevices.Vitodens
+#    ),
+
+    ######### TIME-SENSORS #########
     Open3eSensorEntityDescription(
-        poll_data_features=[Features.Temperature.AllengraSensor],
-        device_class=SensorDeviceClass.TEMPERATURE,
-        key="AllengraSensor",
-        translation_key="AllengraSensor",
-        entity_registry_enabled_default=False,
-        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
-        state_class=SensorStateClass.MEASUREMENT,
-        data_retriever=SensorDataRetriever.ACTUAL,
+        poll_data_features=[Features.Time.HeatEngineStatistical],
+        device_class=SensorDeviceClass.DURATION,
+        key="HeatEngineStatisticalOperatingHours",
+        translation_key="HeatEngineStatisticalOperatingHours",
+        native_unit_of_measurement=UnitOfTime.HOURS,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        data_retriever=lambda data: int(json_loads(data)["OperatingHours"]),
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Time.HeatEngineStatistical],
+        device_class=SensorDeviceClass.DURATION,
+        key="HeatEngineStatisticalBurnerHours",
+        translation_key="HeatEngineStatisticalBurnerHours",
+        native_unit_of_measurement=UnitOfTime.HOURS,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        data_retriever=lambda data: int(json_loads(data)["BurnerHours"]),
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Time.LegionellaProtectionStartTime],
+#        device_class=SensorDeviceClass.DATE,
+        key="LegionellaProtectionStartTime",
+        translation_key="LegionellaProtectionStartTime",        
+        data_retriever=lambda data: data,
+#        data_retriever=lambda data: strptime(data,"%H:%M"),
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Time.LegionellaProtectionWeekday],
+        key="LegionellaProtectionWeekday",
+        translation_key="LegionellaProtectionWeekday",
+        data_retriever=lambda data: int(data),
         required_device=Open3eDevices.Vitodens
     ),
 

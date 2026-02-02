@@ -497,7 +497,28 @@
         "name": "Vorlauftemperatur Ziel Heizkreis 4"
       },
       "AllengraSensor": {
-        "name": "AllengraSensor"
+        "name": "Volumenstrom"
+      },
+      "HeatEngineStatisticalOperatingHours": {
+        "name": "Anlagen Betriebsstunden"
+      },
+      "HeatEngineStatisticalBurnerHours": {
+        "name": "Brenner Betriebsstunden"
+      },
+      "LegionellaProtectionStartTime": {
+        "name": "Legionellenschutz Startzeit"
+      },
+      "LegionellaProtectionWeekday": {
+        "name": "Legionellenschutz Wochentag",
+        "state": {
+          "1": "Montag",
+          "2": "Dienstag",
+          "3": "Mittwoch",
+          "4": "Donnerstag",
+          "5": "Freitag",
+          "6": "Samstag",
+          "7": "Sonntag"
+        }
       }
     },    
     "binary_sensor": {
