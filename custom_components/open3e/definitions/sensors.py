@@ -3,7 +3,7 @@ from typing import Callable, Any, List
 
 from homeassistant.components.sensor import SensorEntityDescription, SensorDeviceClass, SensorStateClass
 from homeassistant.const import UnitOfTemperature, UnitOfEnergy, PERCENTAGE, UnitOfPower, \
-    EntityCategory, UnitOfPressure, UnitOfVolumeFlowRate, UnitOfTime
+    EntityCategory, UnitOfPressure, UnitOfVolume, UnitOfVolumeFlowRate, UnitOfTime
 from homeassistant.util.json import json_loads
 
 from .devices import Open3eDevices
@@ -45,6 +45,7 @@ class SensorDataRetriever:
     GRID_FEED_IN_ENERGY = lambda data: float(json_loads(data)["GridFeedInEnergy"])
     GRID_SUPPLIED_ENERGY = lambda data: float(json_loads(data)["GridSuppliedEnergy"])
     TEMPERATURE = lambda data: float(json_loads(data)["Temperature"])
+    STANDARD =  lambda data: float(json_loads(data)["Standard"])
     PV_POWER_CUMULATED = lambda data: float(json_loads(data)["ActivePower cumulated"])
     PV_POWER_STRING_1 = lambda data: float(json_loads(data)["ActivePower String A"])
     PV_POWER_STRING_2 = lambda data: float(json_loads(data)["ActivePower String B"])
