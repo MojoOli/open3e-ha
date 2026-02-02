@@ -98,6 +98,7 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
         key="MixerOneCircuitOperationState",
         translation_key="MixerOneCircuitOperationState",
         data_transform=lambda data: int(json_loads(data)["State"]["ID"]) < 255,
+        required_capabilities=[Capability.Circuit1],
         required_device=Open3eDevices.Vitodens
     ),
     Open3eBinarySensorEntityDescription(
@@ -107,6 +108,7 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
         key="MixerTwoCircuitOperationState",
         translation_key="MixerTwoCircuitOperationState",
         data_transform=lambda data: int(json_loads(data)["State"]["ID"]) < 255,
+        required_capabilities=[Capability.Circuit2],
         required_device=Open3eDevices.Vitodens
     ),
     Open3eBinarySensorEntityDescription(
@@ -116,6 +118,7 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
         key="MixerThreeCircuitOperationState",
         translation_key="MixerThreeCircuitOperationState",
         data_transform=lambda data: int(json_loads(data)["State"]["ID"]) < 255,
+        required_capabilities=[Capability.Circuit3],
         required_device=Open3eDevices.Vitodens
     ),
     Open3eBinarySensorEntityDescription(
@@ -125,6 +128,7 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
         key="MixerFourCircuitOperationState",
         translation_key="MixerFourCircuitOperationState",
         data_transform=lambda data: int(json_loads(data)["State"]["ID"]) < 255,
+        required_capabilities=[Capability.Circuit4],
         required_device=Open3eDevices.Vitodens
     ),
 

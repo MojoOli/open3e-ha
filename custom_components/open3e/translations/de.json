@@ -31,32 +31,11 @@
       "return_temperature": {
         "name": "Rücklauftemperatur"
       },
-      "fluegas_temperature": {
-        "name": "Abgastemperatur"
-      },
       "domestic_hot_water_temperature": {
         "name": "Warmwassertemperatur"
       },
       "water_pressure": {
         "name": "Wasserdruck"
-      },
-      "Operating_Hours": {
-        "name": "Anlagen Betriebsstunden"
-      },
-      "Burner_Hours": {
-        "name": "Brennerbetriebsstunden"
-      },
-      "Burner_Starts": {
-        "name": "Brennerstarts"
-      },
-      "gas_consumption_central_heating_today": {
-        "name": "Gasverbrauch Heizung heute"
-      },
-      "gas_consumption_domestic_hotwater_today": {
-        "name": "Gasverbrauch Warmwasser heute"
-      },
-      "gas_consumption_total_today": {
-        "name": "Gasverbrauch Gesamt heute"
       },
       "energy_consumption_central_heating_today": {
         "name": "Energieverbrauch Heizung heute"
@@ -196,12 +175,6 @@
       "pv_energy_production_total": {
         "name": "PV-Energieproduktion Gesamt"
       },
-      "grid_supplied_energy": {
-        "name": "Netz-Energiebezug Gesamt"
-      },
-      "grid_feed_in_energy": {
-        "name": "Netz-Energielieferung Gesamt"
-      },
       "domestic_hot_water_target_temperature": {
         "name": "Warmwasser-Zieltemperatur"
       },
@@ -248,10 +221,10 @@
         "name": "Expansionsventil 2 Stellung"
       },
       "allengra_flow_rate": {
-        "name": "Volumenstrom"
+        "name": "Volumetric Flow"
       },
       "allengra_temperature": {
-        "name": "Volumenstromsensor Temperatur"
+        "name": "Allengra Temperatur"
       },
       "primary_inlet_temperature": {
         "name": "Primäreintrittstemperatur"
@@ -388,25 +361,12 @@
         "name": "Fehler"
       },
       "connection_status": {
-        "name": "CAN-Bus Status",
+        "name": "Verbindungsstatus",
         "state": {
           "connected": "Verbunden",
           "not_connected": "Nicht verbunden"
         }
       },
-      "wlan_connection_status": {
-        "name": "WLAN Status",
-        "state": {
-          "connected": "Verbunden",
-          "not_connected": "Nicht verbunden"
-        }
-      },
-      "wlan_ip_addr": {
-        "name": "WLAN IP-Adresse"
-      },
-      "wlan_signalstrength": {
-        "name": "WLAN Signalstärke"
-      },            
       "cop_total_current_year": {
         "name": "COP Gesamt Jahr"
       },
@@ -451,12 +411,6 @@
       "circuit_frost_protection": {
         "name": "Frostschutz Heizkreis"
       },
-      "flamestate": {
-        "name": "Brennerflamme"
-      },
-      "central_heating_pump": {
-        "name": "Heizkreis-Pumpe"
-      },
       "circuit_pump": {
         "name": "Wärmepumpe Heizkreis-Pumpe"
       },
@@ -472,9 +426,6 @@
       "circuit_4_pump": {
         "name": "Heizkreis 4 Umwälzpumpe"
       },
-      "hot_water_circulation_pump": {
-        "name": "Warmwasser Umwälzpumpe"
-      },
       "hot_water_circulation_pump_hygiene": {
         "name": "Warmwasser Legionellenschutz"
       },
@@ -486,6 +437,36 @@
       },
       "frost_protection": {
         "name": "Frostschutz"
+      },
+      "Flame": {
+        "name": "Brennerflamme"
+      },
+      "CentralHeatingPump": {
+        "name": "Heizkreis-Pumpe"
+      },
+      "DomesticHotWaterCirculationPump": {
+        "name": "Warmwasser Umwälzpumpe"
+      },
+      "DomesticHotWaterOperationState": {
+        "name": "Warmwasser Status"
+      },
+      "LegionellaProtectionActivation": {
+        "name": "Warmwasser Legionellenschutz"
+      },
+      "MalfunctionHeatingUnitBlocked": {
+        "name": "Heizung Fehlfunktion"
+      },
+      "MixerOneCircuitOperationState": {
+        "name": "Umwälzpumpe Heizkreis 1"
+      },
+      "MixerTwoCircuitOperationState": {
+        "name": "Umwälzpumpe Heizkreis 2"
+      },
+      "MixerThreeCircuitOperationState": {
+        "name": "Umwälzpumpe Heizkreis 3"
+      },
+      "MixerFourCircuitOperationState": {
+        "name": "Umwälzpumpe Heizkreis 4"
       }
     },
     "climate": {
