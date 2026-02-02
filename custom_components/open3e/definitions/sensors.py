@@ -159,7 +159,6 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.EnergyConsumptionCentralHeating],
         device_class=SensorDeviceClass.ENERGY,
-#        icon="mdi:eye",
         key="EnergyConsumptionCentralHeating",
         translation_key="EnergyConsumptionCentralHeating",
         entity_registry_enabled_default=False,
@@ -171,7 +170,6 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.EnergyConsumptionDomesticHotWater],
         device_class=SensorDeviceClass.ENERGY,
-#        icon="mdi:eye",
         key="EnergyConsumptionDomesticHotWater",
         translation_key="EnergyConsumptionDomesticHotWater",
         entity_registry_enabled_default=False,
@@ -183,9 +181,9 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.GeneratedCentralHeatingOutput],
         device_class=SensorDeviceClass.ENERGY,
-#        icon="mdi:eye",
         key="GeneratedCentralHeatingOutput",
         translation_key="GeneratedCentralHeatingOutput",
+        entity_registry_enabled_default=False,
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         state_class=SensorStateClass.TOTAL_INCREASING,
         data_retriever=SensorDataRetriever.TODAY,
@@ -194,9 +192,9 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.GeneratedDomesticHotWaterOutput],
         device_class=SensorDeviceClass.ENERGY,
-#        icon="mdi:eye",
         key="GeneratedDomesticHotWaterOutput",
         translation_key="GeneratedDomesticHotWaterOutput",
+        entity_registry_enabled_default=False,
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         state_class=SensorStateClass.TOTAL_INCREASING,
         data_retriever=SensorDataRetriever.TODAY,

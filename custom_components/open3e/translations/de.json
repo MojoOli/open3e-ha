@@ -417,6 +417,12 @@
       },
       "GeneratedDomesticHotWaterOutput": {
         "name": "Wärmeleistung Warmwasser heute"
+      },
+      "EnergyConsumptionCentralTotalToday": {
+        "name": "Energieverbrauch Gesamt heute"
+      },
+      "GeneratedHeatingWaterOutputTotalToday": {
+        "name": "Wärmeleistung Gesamt heute"
       }
     },
     "binary_sensor": {

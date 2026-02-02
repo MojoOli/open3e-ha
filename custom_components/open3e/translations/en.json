@@ -417,6 +417,12 @@
       },
       "GeneratedDomesticHotWaterOutput": {
         "name": "Output hot water today"
+      },
+      "EnergyConsumptionCentralTotalToday": {
+        "name": "Energyconsumption total today"
+      },
+      "GeneratedHeatingWaterOutputTotalToday": {
+        "name": "Output total today"
       }
     },
     "binary_sensor": {
