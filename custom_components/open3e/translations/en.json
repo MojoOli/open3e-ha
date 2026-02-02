@@ -31,32 +31,11 @@
       "return_temperature": {
         "name": "Return temperature"
       },
-      "fluegas_temperature": {
-        "name": "Fluegas temperature"
-      },      
       "domestic_hot_water_temperature": {
         "name": "Domestic Hot Water temperature"
       },
-      "Operating_Hours": {
-        "name": "Anlagen Betriebsstunden"
-      },
-      "Burner_Hours": {
-        "name": "Burner hours"
-      },
-      "Burner_Starts": {
-        "name": "Burner starts"
-      },
       "water_pressure": {
         "name": "Water pressure"
-      },
-      "gas_consumption_central_heating_today": {
-        "name": "Gas Consumption heating today"
-      },
-      "gas_consumption_domestic_hotwater_today": {
-        "name": "Gas Consumption hot water today"
-      },
-      "gas_consumption_total_today": {
-        "name": "Gas Consumption total today"
       },
       "energy_consumption_central_heating_today": {
         "name": "Energy consumption central heating today"
@@ -196,14 +175,8 @@
       "pv_energy_production_total": {
         "name": "PV Energy Production Total"
       },
-      "grid_supplied_energy": {
-        "name": "Grid Energy Supply Total"
-      },
-      "grid_feed_in_energy": {
-        "name": "Grid Energy Feed-In Total"
-      },
       "domestic_hot_water_target_temperature": {
-        "name": "Domestic Hot Water Target Temperature"
+        "name": "Domestic Hot Water Temperature"
       },
       "flow_circuit1_temperature": {
         "name": "Heating circuit 1 flow temperature"
@@ -248,10 +221,10 @@
         "name": "Expansion Valve 2 Position"
       },
       "allengra_flow_rate": {
-        "name": "Volumetric Flow"
+        "name": "Volumenstrom"
       },
       "allengra_temperature": {
-        "name": "Volumetric Flow Sensor Temperature"
+        "name": "Allengra Temperature"
       },
       "primary_inlet_temperature": {
         "name": "Primary Inlet Temperature"
@@ -388,25 +361,12 @@
         "name": "Errors"
       },
       "connection_status": {
-        "name": "CAN-Bus status",
+        "name": "Connection status",
         "state": {
           "connected": "Connected",
           "not_connected": "Disconnected"
         }
       },
-      "wlan_connection_status": {
-        "name": "Wifi status",
-        "state": {
-          "connected": "Connected",
-          "not_connected": "Disconnected"
-        }
-      },
-      "wlan_ip_addr": {
-        "name": "Wifi IP-adress"
-      },
-      "wlan_signalstrength": {
-        "name": "Wifi signalstrength"
-      },            
       "cop_total_current_year": {
         "name": "COP total year"
       },
@@ -451,12 +411,6 @@
       "circuit_frost_protection": {
         "name": "Frost Protection Heating Circuit"
       },
-      "flamestate": {
-        "name": "Burner flame"
-      },
-      "central_heating_pump": {
-        "name": "Heating circulation pump"
-      },
       "circuit_pump": {
         "name": "Heatpump circuit pump"
       },
@@ -472,9 +426,6 @@
       "circuit_4_pump": {
         "name": "Heating circuit 4 circulation pump"
       },
-      "hot_water_circulation_pump": {
-        "name": "Hot water circuit pump"
-      },
       "hot_water_circulation_pump_hygiene": {
         "name": "Hot Water Legionella Protection"
       },
@@ -486,6 +437,36 @@
       },
       "frost_protection": {
         "name": "Frost protection"
+      },
+      "Flame": {
+        "name": "Flame Status"
+      },
+      "CentralHeatingPump": {
+        "name": "Heating Circulation Pump"
+      },
+      "DomesticHotWaterCirculationPump": {
+        "name": "Hot Water Circuit Pump"
+      },
+      "DomesticHotWaterOperationState": {
+        "name": "Hot Water Status"
+      },
+      "LegionellaProtectionActivation": {
+        "name": "Hot Water Legionella Protection"
+      },
+      "MalfunctionHeatingUnitBlocked": {
+        "name": "Heating Malfunction"
+      },
+      "MixerOneCircuitOperationState": {
+        "name": "Pump Circuit 1"
+      },
+      "MixerTwoCircuitOperationState": {
+        "name": "Pump Circuit 2"
+      },
+      "MixerThreeCircuitOperationState": {
+        "name": "Pump Circuit 3"
+      },
+      "MixerFourCircuitOperationState": {
+        "name": "Pump Circuit 4"
       }
     },
     "climate": {
