@@ -5,6 +5,7 @@ from homeassistant.components.sensor import SensorEntityDescription, SensorDevic
 from homeassistant.const import UnitOfTemperature, UnitOfEnergy, PERCENTAGE, UnitOfPower, \
     EntityCategory, UnitOfPressure, UnitOfVolume, UnitOfVolumeFlowRate, UnitOfTime
 from homeassistant.util.json import json_loads
+from datetime import datetime
 
 from .devices import Open3eDevices
 from .entity_description import Open3eEntityDescription
@@ -477,18 +478,19 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         required_capabilities=[Capability.Circuit4],
         required_device=Open3eDevices.Vitodens
     ),
-# keine Ahnung, welche Daten der Allengra-Sensor liefert, daher auskommentiert
-#    Open3eSensorEntityDescription(
-#        poll_data_features=[Features.Temperature.AllengraSensor],
-#        device_class=SensorDeviceClass.TEMPERATURE,
-#        key="AllengraSensor",
-#        translation_key="AllengraSensor",
-#        entity_registry_enabled_default=False,
-#        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
-#        state_class=SensorStateClass.MEASUREMENT,
-#        data_retriever=SensorDataRetriever.ACTUAL,
-#        required_device=Open3eDevices.Vitodens
-#    ),
+
+    ######### FLOW-RATE-SENSORS #########
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Volume.AllengraSensor],
+        device_class=SensorDeviceClass.VOLUME_FLOW_RATE,
+        key="AllengraSensor",
+        translation_key="AllengraSensor",
+        entity_registry_enabled_default=False,
+        native_unit_of_measurement=UnitOfVolumeFlowRate.LITERS_PER_HOUR,
+        state_class=SensorStateClass.MEASUREMENT,
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitodens
+    ),
 
     ######### TIME-SENSORS #########
     Open3eSensorEntityDescription(
@@ -511,6 +513,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=lambda data: int(json_loads(data)["BurnerHours"]),
         required_device=Open3eDevices.Vitodens
     ),
+# Zeitpunkt will noch nicht so recht funktionieren, daher erstml nur als String 
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Time.LegionellaProtectionStartTime],
 #        device_class=SensorDeviceClass.DATE,

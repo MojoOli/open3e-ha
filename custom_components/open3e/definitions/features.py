@@ -95,7 +95,6 @@ class Features:
         MixerTwoCircuitFlowTemperatureTargetSetpoint = Feature(id=988, refresh_interval=30)
         MixerThreeCircuitFlowTemperatureTargetSetpoint = Feature(id=989, refresh_interval=30)
         MixerFourCircuitFlowTemperatureTargetSetpoint = Feature(id=990, refresh_interval=30)
-        AllengraSensor = Feature(id=1043, refresh_interval=10)
 
     class Humidity:
         Outdoor = Feature(id=419, refresh_interval=5)
@@ -205,6 +204,7 @@ class Features:
 # Vitodens
         GasConsumptionCentralHeating = Feature(id=544, refresh_interval=60)
         GasConsumptionDomesticHotWater = Feature(id=545, refresh_interval=60)
+        AllengraSensor = Feature(id=1043, refresh_interval=10)
         GasConsumptionCentralHeatingMonthMatrix = Feature(id=1342, refresh_interval=86400)
         GasConsumptionCentralHeatingYearMatrix = Feature(id=1343, refresh_interval=86400)
         GasConsumptionDomesticHotWaterMonthMatrix = Feature(id=1344, refresh_interval=86400)
