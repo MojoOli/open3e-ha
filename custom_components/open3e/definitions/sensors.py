@@ -5,6 +5,7 @@ from homeassistant.components.sensor import SensorEntityDescription, SensorDevic
 from homeassistant.const import UnitOfTemperature, UnitOfEnergy, PERCENTAGE, UnitOfPower, \
     EntityCategory, UnitOfPressure, UnitOfVolume, UnitOfVolumeFlowRate, UnitOfTime
 from homeassistant.util.json import json_loads
+from homeassistant.util.dt import parse_time
 from datetime import datetime
 
 from .devices import Open3eDevices
@@ -70,6 +71,20 @@ class SensorDataDeriver:
             return 0.0
 
         return round(min(total_thermal / total_electric, 10.0), 1)
+
+# Unglücklich, da nicht ins Englische übersetzt
+# Weiß aber nicht, wie es richtig geht
+    @staticmethod
+    def concstr(WeekdayInt: int, starttime: datetime) -> str:
+        if WeekdayInt == 1: Weekday = "Montag"
+        if WeekdayInt == 2: Weekday = "Dienstag"
+        if WeekdayInt == 3: Weekday = "Mittwoch"
+        if WeekdayInt == 4: Weekday = "Donnerstag"
+        if WeekdayInt == 5: Weekday = "Freitag"
+        if WeekdayInt == 6: Weekday = "Samstag"
+        if WeekdayInt == 7: Weekday = "Sonntag"
+
+        return Weekday + " um " + starttime.strftime("%H:%M")
 
 
 @dataclass(frozen=True)
@@ -513,20 +528,22 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=lambda data: int(json_loads(data)["BurnerHours"]),
         required_device=Open3eDevices.Vitodens
     ),
-# Zeitpunkt will noch nicht so recht funktionieren, daher erstml nur als String 
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Time.LegionellaProtectionStartTime],
-#        device_class=SensorDeviceClass.DATE,
+        device_class=SensorDeviceClass.DATE,
         key="LegionellaProtectionStartTime",
-        translation_key="LegionellaProtectionStartTime",        
-        data_retriever=lambda data: data,
-#        data_retriever=lambda data: strptime(data,"%H:%M"),
+        translation_key="LegionellaProtectionStartTime",
+        entity_registry_enabled_default=False,
+        icon="mdi:water-plus",
+        data_retriever=lambda data: parse_time(str(data[1:][:-1])),
         required_device=Open3eDevices.Vitodens
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Time.LegionellaProtectionWeekday],
         key="LegionellaProtectionWeekday",
         translation_key="LegionellaProtectionWeekday",
+        entity_registry_enabled_default=False,
+        icon="mdi:water-plus",
         data_retriever=lambda data: int(data),
         required_device=Open3eDevices.Vitodens
     ),
@@ -1717,7 +1734,10 @@ DERIVED_SENSORS: tuple[Open3eDerivedSensorEntityDescription, ...] = (
 
     ######### ENERGY-SENSORS #########
     Open3eDerivedSensorEntityDescription(
-        poll_data_features=[Features.Energy.EnergyConsumptionCentralHeating, Features.Energy.EnergyConsumptionDomesticHotWater],
+        poll_data_features=[
+            Features.Energy.EnergyConsumptionCentralHeating, 
+            Features.Energy.EnergyConsumptionDomesticHotWater
+        ],
         device_class=SensorDeviceClass.ENERGY,
         key="EnergyConsumptionCentralTotalToday",
         translation_key="EnergyConsumptionCentralTotalToday",
@@ -1728,7 +1748,10 @@ DERIVED_SENSORS: tuple[Open3eDerivedSensorEntityDescription, ...] = (
         required_device=Open3eDevices.Vitodens
     ),
     Open3eDerivedSensorEntityDescription(
-        poll_data_features=[Features.Energy.GeneratedCentralHeatingOutput, Features.Energy.GeneratedDomesticHotWaterOutput],
+        poll_data_features=[
+            Features.Energy.GeneratedCentralHeatingOutput, 
+            Features.Energy.GeneratedDomesticHotWaterOutput
+        ],
         device_class=SensorDeviceClass.ENERGY,
         key="GeneratedHeatingWaterOutputTotalToday",
         translation_key="GeneratedHeatingWaterOutputTotalToday",
@@ -1738,6 +1761,24 @@ DERIVED_SENSORS: tuple[Open3eDerivedSensorEntityDescription, ...] = (
         compute_value=lambda heating, hotwater: heating + hotwater,
         required_device=Open3eDevices.Vitodens
     ),
+
+    ######### TIME/DATE-SENSORS #########
+    Open3eDerivedSensorEntityDescription(
+        poll_data_features=[
+            Features.Time.LegionellaProtectionWeekday, 
+            Features.Time.LegionellaProtectionStartTime
+        ],
+        key="LegionellaProtectionWeekly",
+        translation_key="LegionellaProtectionWeekly",
+        icon="mdi:water-plus",
+        data_retrievers=[
+            lambda data: int(data),
+            lambda data: parse_time(str(data[1:][:-1]))
+        ],
+        compute_value=lambda weekday, starttime: SensorDataDeriver.concstr(weekday, starttime),
+        required_device=Open3eDevices.Vitodens
+    ),
+
 
     ###############
     ### VITOCAL ###

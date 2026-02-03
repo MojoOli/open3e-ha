@@ -519,6 +519,9 @@
           "6": "Samstag",
           "7": "Sonntag"
         }
+      },
+      "LegionellaProtectionWeekly": {
+        "name": "Legionellenschutz wöchentlich"
       }
     },    
     "binary_sensor": {
@@ -565,7 +568,7 @@
         "name": "Warmwasser Status"
       },
       "LegionellaProtectionActivation": {
-        "name": "Warmwasser Legionellenschutz"
+        "name": "Legionellenschutz aktiv"
       },
       "MalfunctionHeatingUnitBlocked": {
         "name": "Heizung Fehlfunktion"

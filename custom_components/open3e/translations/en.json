@@ -516,9 +516,12 @@
           "3": "Wednesday",
           "4": "Thursday",
           "5": "Friday",
-          "6": "Sattuerday",
+          "6": "Saturday",
           "7": "Sunday"
         }
+      },
+      "LegionellaProtectionWeekly": {
+        "name": "Legionella Protection Weekly"
       }
     },
     "binary_sensor": {
