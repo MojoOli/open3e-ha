@@ -86,6 +86,14 @@ class SensorDataDeriver:
 
         return Weekday + " um " + starttime.strftime("%H:%M")
 
+    @staticmethod
+    def parse_date_vitodens(dt_str: str) -> datetime.date:
+        """Convert a date string to a date object."""
+        try:
+            return datetime.strptime(dt_str, "%d.%m.%Y").date()
+        except ValueError:  # If dt_str did not match our format
+            return None
+
 
 @dataclass(frozen=True)
 class Open3eSensorEntityDescription(
@@ -372,6 +380,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         device_class=SensorDeviceClass.TEMPERATURE,
         key="DomesticHotWaterOutletSensor",
         translation_key="DomesticHotWaterOutletSensor",
+        entity_registry_enabled_default=False,
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         state_class=SensorStateClass.MEASUREMENT,
         data_retriever=SensorDataRetriever.ACTUAL,
@@ -545,6 +554,17 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         entity_registry_enabled_default=False,
         icon="mdi:water-plus",
         data_retriever=lambda data: int(data),
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Time.ServiceDateNext],
+        entity_category=EntityCategory.DIAGNOSTIC,
+        key="ServiceDateNext",
+        translation_key="ServiceDateNext",
+        entity_registry_enabled_default=False,
+        icon="mdi:calendar",
+#        data_retriever=lambda data: SensorDataDeriver.parse_date_vitodens("01.01.2026"),
+        data_retriever=lambda data: SensorDataDeriver.parse_date_vitodens(json_loads(data)["Date"]),
         required_device=Open3eDevices.Vitodens
     ),
 

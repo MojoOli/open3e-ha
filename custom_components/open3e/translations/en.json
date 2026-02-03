@@ -522,6 +522,9 @@
       },
       "LegionellaProtectionWeekly": {
         "name": "Legionella Protection Weekly"
+      },
+      "ServiceDateNext": {
+        "name": "Next service appointment"
       }
     },
     "binary_sensor": {
