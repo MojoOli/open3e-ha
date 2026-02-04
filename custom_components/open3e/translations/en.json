@@ -361,7 +361,7 @@
         "name": "Errors"
       },
       "connection_status": {
-        "name": "Connection status",
+        "name": "CAN bus status",
         "state": {
           "connected": "Connected",
           "not_connected": "Disconnected"
@@ -525,6 +525,55 @@
       },
       "ServiceDateNext": {
         "name": "Next service appointment"
+      },
+      "ScaldProtection": {
+        "name": "Status scald Protection"
+      },
+      "VitodensDate": {
+        "name": "Vitodens device date"
+      },
+      "VitodensTime": {
+        "name": "Vitodens device time"
+      },
+      "GatewayMac": {
+        "name": "Gateway MAC-adress"
+      },
+      "GatewayRemoteLocalNetworkStatus": {
+        "name": "WiFi status",
+        "state": {
+          "connected": "Verbunden",
+          "not_connected": "Nicht verbunden"
+        }
+      },
+      "GatewayRemoteIp": {
+        "name": "WiFi IP-adress"
+      },
+      "GatewayRemoteSignalStrength": {
+        "name": "WiFi signalstrength"
+      },
+      "CentralHeatingOneCircuitName": {
+        "name": "Name circuit 1"
+      },
+      "CentralHeatingTwoCircuitName": {
+        "name": "Name circuit 2"
+      },
+      "CentralHeatingThreeCircuitName": {
+        "name": "Name circuit 3"
+      },
+      "CentralHeatingFourCircuitName": {
+        "name": "Name circuit 4"
+      },
+      "MixerOneCircuitCentralHeatingCurve": {
+        "name": "Heatingcurve circuit 1"
+      },
+      "MixerTwoCircuitCentralHeatingCurve": {
+        "name": "Heatingcurve circuit 2"
+      },
+      "MixerThreeCircuitCentralHeatingCurve": {
+        "name": "Heatingcurve circuit 3"
+      },
+      "MixerFourCircuitCentralHeatingCurve": {
+        "name": "Heatingcurve circuit 4"
       }
     },
     "binary_sensor": {

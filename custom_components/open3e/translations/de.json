@@ -361,7 +361,7 @@
         "name": "Fehler"
       },
       "connection_status": {
-        "name": "Verbindungsstatus",
+        "name": "CAN Bus Status",
         "state": {
           "connected": "Verbunden",
           "not_connected": "Nicht verbunden"
@@ -525,6 +525,55 @@
       },
       "ServiceDateNext": {
         "name": "Nächster Servicetermin"
+      },
+      "ScaldProtection": {
+        "name": "Status Kalkschutz"
+      },
+      "VitodensDate": {
+        "name": "VitodensDate"
+      },
+      "VitodensTime": {
+        "name": "VitodensTime"
+      },
+      "GatewayMac": {
+        "name": "Gateway Mac"
+      },
+      "GatewayRemoteLocalNetworkStatus": {
+        "name": "WLAN Status",
+        "state": {
+          "connected": "Verbunden",
+          "not_connected": "Nicht verbunden"
+        }
+      },
+      "GatewayRemoteIp": {
+        "name": "WLAN IP-Adresse"
+      },
+      "GatewayRemoteSignalStrength": {
+        "name": "WLAN Signalstärke"
+      },
+      "CentralHeatingOneCircuitName": {
+        "name": "Name Heizkreis 1"
+      },
+      "CentralHeatingTwoCircuitName": {
+        "name": "Name Heizkreis 2"
+      },
+      "CentralHeatingThreeCircuitName": {
+        "name": "Name Heizkreis 3"
+      },
+      "CentralHeatingFourCircuitName": {
+        "name": "Name Heizkreis 4"
+      },
+      "MixerOneCircuitCentralHeatingCurve": {
+        "name": "Heizkurzve Heizkreis 1"
+      },
+      "MixerTwoCircuitCentralHeatingCurve": {
+        "name": "Heizkurzve Heizkreis 2"
+      },
+      "MixerThreeCircuitCentralHeatingCurve": {
+        "name": "Heizkurzve Heizkreis 3"
+      },
+      "MixerFourCircuitCentralHeatingCurve": {
+        "name": "Heizkurzve Heizkreis 4"
       }
     },    
     "binary_sensor": {
