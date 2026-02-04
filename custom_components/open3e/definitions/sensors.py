@@ -646,6 +646,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Misc.GatewayRemoteSignalStrength],
         entity_category=EntityCategory.DIAGNOSTIC,
+        device_class=SensorDeviceClass.SIGNAL_STRENGTH,
+        native_unit_of_measurement="dB",
         key="GatewayRemoteSignalStrength",
         translation_key="GatewayRemoteSignalStrength",
         icon="mdi:wifi",
