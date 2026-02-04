@@ -536,7 +536,7 @@
         "name": "Vitodens device time"
       },
       "GatewayMac": {
-        "name": "Gateway MAC-adress"
+        "name": "MAC-adress"
       },
       "GatewayRemoteLocalNetworkStatus": {
         "name": "WiFi status",
@@ -574,6 +574,27 @@
       },
       "MixerFourCircuitCentralHeatingCurve": {
         "name": "Heatingcurve circuit 4"
+      },
+      "BuildingType": {
+        "name": "Buildingtype"
+      },
+      "ElectronicTraceabilityNumber": {
+        "name": "ElectronicTraceabilityNumber"
+      },
+      "GasType": {
+        "name": "Gastype"
+      },
+      "CentralHeatingRegulationMode": {
+        "name": "Heating regulation mode"
+      },
+      "CurrentQuickMode": {
+        "name": "Current QuickMode"
+      },
+      "TimeSettingSource": {
+        "name": "Timesetting source"
+      },
+      "ChimneySweeperTestMode": {
+        "name": "Chimneysweeper testmode"
       }
     },
     "binary_sensor": {

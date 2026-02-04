@@ -530,13 +530,13 @@
         "name": "Status Kalkschutz"
       },
       "VitodensDate": {
-        "name": "VitodensDate"
+        "name": "Vitodens Date"
       },
       "VitodensTime": {
-        "name": "VitodensTime"
+        "name": "Vitodens Time"
       },
       "GatewayMac": {
-        "name": "Gateway Mac"
+        "name": "MAC-Adresse"
       },
       "GatewayRemoteLocalNetworkStatus": {
         "name": "WLAN Status",
@@ -574,6 +574,27 @@
       },
       "MixerFourCircuitCentralHeatingCurve": {
         "name": "Heizkurzve Heizkreis 4"
+      },
+      "BuildingType": {
+        "name": "Gebäudetyp"
+      },
+      "ElectronicTraceabilityNumber": {
+        "name": "ElectronicTraceabilityNumber"
+      },
+      "GasType": {
+        "name": "Gastyp"
+      },
+      "CentralHeatingRegulationMode": {
+        "name": "Heizungs Regulierungmodus"
+      },
+      "CurrentQuickMode": {
+        "name": "Aktueller Kurz Modus"
+      },
+      "TimeSettingSource": {
+        "name": "Zeitquelle"
+      },
+      "ChimneySweeperTestMode": {
+        "name": "Schornsteinfeger Testmodus"
       }
     },    
     "binary_sensor": {

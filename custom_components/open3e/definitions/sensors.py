@@ -47,6 +47,7 @@ class SensorDataRetriever:
     GRID_FEED_IN_ENERGY = lambda data: float(json_loads(data)["GridFeedInEnergy"])
     GRID_SUPPLIED_ENERGY = lambda data: float(json_loads(data)["GridSuppliedEnergy"])
     TEMPERATURE = lambda data: float(json_loads(data)["Temperature"])
+    TIME = lambda data: parse_time(str(data[1:][:-1]))
     STANDARD =  lambda data: float(json_loads(data)["Standard"])
     PV_POWER_CUMULATED = lambda data: float(json_loads(data)["ActivePower cumulated"])
     PV_POWER_STRING_1 = lambda data: float(json_loads(data)["ActivePower String A"])
@@ -74,8 +75,16 @@ class SensorDataDeriver:
 
         return round(min(total_thermal / total_electric, 10.0), 1)
 
-# Unglücklich, da nicht ins Englische übersetzt
-# Weiß aber nicht, wie es richtig geht
+# Zur Bereinigung der IP-Adressen von führenden Nullen
+    @staticmethod
+    def cleaned_ip(ip_str: str) -> str:
+        try:
+            return ".".join(str(int(octet)) for octet in ip_str.split('.'))
+        except ValueError:  # If ip_str did not match format
+            return '-'
+
+# Um einen Wochentag und eine Uhrzeit in einen lesbaren String zu verwandeln
+# Unglücklich, da nicht ins Englische übersetzt, weiß aber nicht, wie es richtig geht
     @staticmethod
     def concstr(WeekdayInt: int, starttime: datetime) -> str:
         if WeekdayInt == 1: Weekday = "Montag"
@@ -88,6 +97,7 @@ class SensorDataDeriver:
 
         return Weekday + " um " + starttime.strftime("%H:%M")
 
+# Um ein Datumsstring in ein Datumsobjekt zu verwandeln und als formatierten String auszugeben
     @staticmethod
     def parse_date_vitodensstr(dt_str: str) -> str:
         """Convert a date string to a date object and output as string."""
@@ -546,7 +556,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         translation_key="LegionellaProtectionStartTime",
         entity_registry_enabled_default=False,
         icon="mdi:water-plus",
-        data_retriever=lambda data: parse_time(str(data[1:][:-1])),
+        data_retriever=SensorDataRetriever.TIME,
         required_device=Open3eDevices.Vitodens
     ),
     Open3eSensorEntityDescription(
@@ -577,7 +587,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         translation_key="ScaldProtection",
         icon="mdi:shield-star",
         entity_registry_enabled_default=False,
-        data_retriever=lambda data: str(data[1:][:-1]),
+        data_retriever=SensorDataRetriever.RAWSTR,
         required_device=Open3eDevices.Vitodens
     ),
     Open3eSensorEntityDescription(
@@ -599,7 +609,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         translation_key="VitodensTime",
         icon="mdi:clock",
         entity_registry_enabled_default=False,
-        data_retriever=lambda data: parse_time(str(data[1:][:-1])),
+        data_retriever=SensorDataRetriever.TIME,
         required_device=Open3eDevices.Vitodens
     ),
     Open3eSensorEntityDescription(
@@ -608,7 +618,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="GatewayMac",
         translation_key="GatewayMac",
         icon="mdi:ethernet",
-        data_retriever=lambda data: str(data[1:][:-1]),
+        data_retriever=SensorDataRetriever.RAWSTR,
         required_device=Open3eDevices.Vitodens
     ),
     Open3eSensorEntityDescription(
@@ -781,13 +791,13 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
 #        data_retriever=SensorDataRetriever.xxx,
 #        required_device=Open3eDevices.Vitodens
 #    ),
-    Open3eSensorEntityDescription(
-        poll_data_features=[Features.Misc.CurrentQuickMode],
-        key="CurrentQuickMode",
-        translation_key="CurrentQuickMode",
-        data_retriever=SensorDataRetriever.RAWSTR,
-        required_device=Open3eDevices.Vitodens
-    ),
+#    Open3eSensorEntityDescription(
+#        poll_data_features=[Features.Misc.CurrentQuickMode],
+#        key="CurrentQuickMode",
+#        translation_key="CurrentQuickMode",
+#        data_retriever=SensorDataRetriever.RAWSTR,
+#        required_device=Open3eDevices.Vitodens
+#    ),
 #    Open3eSensorEntityDescription(
 #        poll_data_features=[Features.Misc.DomesticHotWaterHysteresis],
 #        device_class=SensorDeviceClass.MISC,
@@ -2041,7 +2051,7 @@ DERIVED_SENSORS: tuple[Open3eDerivedSensorEntityDescription, ...] = (
         icon="mdi:water-plus",
         data_retrievers=[
             lambda data: int(data),
-            lambda data: parse_time(str(data[1:][:-1]))
+            SensorDataRetriever.TIME
         ],
         compute_value=lambda weekday, starttime: SensorDataDeriver.concstr(weekday, starttime),
         required_device=Open3eDevices.Vitodens
