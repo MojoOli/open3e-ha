@@ -58,7 +58,7 @@ class SensorDataRetriever:
     TARGET_FLOW = lambda data: float(json_loads(data)["TargetFlow"])
     TEXT = lambda data: str(json_loads(data)["Text"])
     UNKNOWN = lambda data: float(json_loads(data)["Unknown"])
-    RAWSTR = lambda data: str(data)
+    RAWSTR = lambda data: str(data[1:][:-1])
     RAW = lambda data: float(data)
     """The data state represents a raw value without any encapsulation."""
 
@@ -640,7 +640,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         translation_key="GatewayRemoteIp",
         icon="mdi:ip-network",
         entity_registry_enabled_default=False,
-        data_retriever=lambda data: str(json_loads(data)["WLAN_IP-Address"]),
+        data_retriever=lambda data: SensorDataDeriver.cleaned_ip(json_loads(data)["WLAN_IP-Address"]),
         required_device=Open3eDevices.Vitodens
     ),
     Open3eSensorEntityDescription(
@@ -653,22 +653,6 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.RAW,
         required_device=Open3eDevices.Vitodens
     ),
-#    Open3eSensorEntityDescription(
-#        poll_data_features=[Features.Misc.ExternalAccessInProgress],
-##        device_class=SensorDeviceClass.ENUM,
-#        key="ExternalAccessInProgressState",
-#        translation_key="ExternalAccessInProgressState",
-#        data_retriever=lambda data: int(json_loads(data)["State"]),
-##        options=[mode for mode in ConnectionStatus],
-#        required_device=Open3eDevices.Vitodens
-#    ),
-#    Open3eSensorEntityDescription(
-#        poll_data_features=[Features.Misc.ExternalAccessInProgress],
-#        key="ExternalAccessInProgressMode",
-#        translation_key="ExternalAccessInProgressMode",
-#        data_retriever=lambda data: str(json_loads(data)["Mode"]),
-#        required_device=Open3eDevices.Vitodens
-#    ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Misc.CentralHeatingOneCircuitName],
         entity_category=EntityCategory.DIAGNOSTIC,
@@ -783,11 +767,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
     ),
 #    Open3eSensorEntityDescription(
 #        poll_data_features=[Features.Misc.TargetQuickMode],
-#        device_class=SensorDeviceClass.MISC,
 #        key="TargetQuickMode",
 #        translation_key="TargetQuickMode",
-#        native_unit_of_measurement=UnitOfMisc.yyyy,
-#        state_class=SensorStateClass.MEASUREMENT,
 #        data_retriever=SensorDataRetriever.xxx,
 #        required_device=Open3eDevices.Vitodens
 #    ),
@@ -800,11 +781,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
 #    ),
 #    Open3eSensorEntityDescription(
 #        poll_data_features=[Features.Misc.DomesticHotWaterHysteresis],
-#        device_class=SensorDeviceClass.MISC,
 #        key="DomesticHotWaterHysteresis",
 #        translation_key="DomesticHotWaterHysteresis",
-#        native_unit_of_measurement=UnitOfMisc.yyyy,
-#        state_class=SensorStateClass.MEASUREMENT,
 #        data_retriever=SensorDataRetriever.xxx,
 #        required_device=Open3eDevices.Vitodens
 #    ),
