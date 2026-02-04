@@ -640,7 +640,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         translation_key="GatewayRemoteSignalStrength",
         icon="mdi:wifi",
         entity_registry_enabled_default=False,
-        data_retriever=SensorDataRetriever.RAW
+        data_retriever=SensorDataRetriever.RAW,
         required_device=Open3eDevices.Vitodens
     ),
 #    Open3eSensorEntityDescription(
