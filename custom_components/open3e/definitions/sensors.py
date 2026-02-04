@@ -796,10 +796,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.TEXT,
         required_device=Open3eDevices.Vitodens
     ),
-
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Misc.ChimneySweeperTestMode],
-        entity_category=EntityCategory.DIAGNOSTIC,
         key="ChimneySweeperTestMode",
         translation_key="ChimneySweeperTestMode",
         data_retriever=SensorDataRetriever.RAWSTR,
