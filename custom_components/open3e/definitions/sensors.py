@@ -62,6 +62,23 @@ class SensorDataRetriever:
     RAW = lambda data: float(data)
     """The data state represents a raw value without any encapsulation."""
 
+# Zur Bereinigung der IP-Adressen von führenden Nullen
+    @staticmethod
+    def cleaned_ip(ip_str: str) -> str:
+        try:
+            return ".".join(str(int(octet)) for octet in ip_str.split('.'))
+        except ValueError:  # If ip_str did not match format
+            return '-'
+
+# Um ein Datumsstring in ein Datumsobjekt zu verwandeln und als formatierten String auszugeben
+    @staticmethod
+    def parse_date_vitodensstr(dt_str: str) -> str:
+        """Convert a date string to a date object and output as string."""
+        try:
+            return datetime.strptime(dt_str, "%d.%m.%Y").date().strftime("%d.%m.%Y")
+        except ValueError:  # If dt_str did not match our format
+            return '-'
+
 
 class SensorDataDeriver:
 
@@ -74,14 +91,6 @@ class SensorDataDeriver:
             return 0.0
 
         return round(min(total_thermal / total_electric, 10.0), 1)
-
-# Zur Bereinigung der IP-Adressen von führenden Nullen
-    @staticmethod
-    def cleaned_ip(ip_str: str) -> str:
-        try:
-            return ".".join(str(int(octet)) for octet in ip_str.split('.'))
-        except ValueError:  # If ip_str did not match format
-            return '-'
 
 # Um einen Wochentag und eine Uhrzeit in einen lesbaren String zu verwandeln
 # Unglücklich, da nicht ins Englische übersetzt, weiß aber nicht, wie es richtig geht
@@ -96,15 +105,6 @@ class SensorDataDeriver:
         if WeekdayInt == 7: Weekday = "Sonntag"
 
         return Weekday + " um " + starttime.strftime("%H:%M")
-
-# Um ein Datumsstring in ein Datumsobjekt zu verwandeln und als formatierten String auszugeben
-    @staticmethod
-    def parse_date_vitodensstr(dt_str: str) -> str:
-        """Convert a date string to a date object and output as string."""
-        try:
-            return datetime.strptime(dt_str, "%d.%m.%Y").date().strftime("%d.%m.%Y")
-        except ValueError:  # If dt_str did not match our format
-            return '-'
 
 
 @dataclass(frozen=True)
@@ -575,8 +575,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         translation_key="ServiceDateNext",
         entity_registry_enabled_default=False,
         icon="mdi:calendar",
-#        data_retriever=lambda data: SensorDataDeriver.parse_date_vitodensstr("01.01.2026"),
-        data_retriever=lambda data: SensorDataDeriver.parse_date_vitodensstr(json_loads(data)["Date"]),
+#        data_retriever=lambda data: SensorDataRetriever.parse_date_vitodensstr("01.01.2026"),
+        data_retriever=lambda data: SensorDataRetriever.parse_date_vitodensstr(json_loads(data)["Date"]),
         required_device=Open3eDevices.Vitodens
     ),
 
@@ -597,8 +597,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         translation_key="VitodensDate",
         icon="mdi:calendar",
         entity_registry_enabled_default=False,
-#        data_retriever=lambda data: SensorDataDeriver.parse_date_vitodensstr("01.01.2026"),
-        data_retriever=lambda data: SensorDataDeriver.parse_date_vitodensstr(data[1:][:-1]),
+#        data_retriever=lambda data: SensorDataRetriever.parse_date_vitodensstr("01.01.2026"),
+        data_retriever=lambda data: SensorDataRetriever.parse_date_vitodensstr(data[1:][:-1]),
         required_device=Open3eDevices.Vitodens
     ),
     Open3eSensorEntityDescription(
@@ -640,7 +640,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         translation_key="GatewayRemoteIp",
         icon="mdi:ip-network",
         entity_registry_enabled_default=False,
-        data_retriever=lambda data: SensorDataDeriver.cleaned_ip(json_loads(data)["WLAN_IP-Address"]),
+        data_retriever=lambda data: SensorDataRetriever.cleaned_ip(json_loads(data)["WLAN_IP-Address"]),
         required_device=Open3eDevices.Vitodens
     ),
     Open3eSensorEntityDescription(
@@ -650,7 +650,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         translation_key="GatewayRemoteSignalStrength",
         icon="mdi:wifi",
         entity_registry_enabled_default=False,
-        data_retriever=SensorDataRetriever.RAW,
+        data_retriever=lambda data: int(data),
         required_device=Open3eDevices.Vitodens
     ),
     Open3eSensorEntityDescription(
