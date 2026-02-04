@@ -139,6 +139,7 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
     ),
 
 
+
     ###############
     ### VITOCAL ###
     ###############
