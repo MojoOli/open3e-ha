@@ -630,7 +630,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         translation_key="GatewayRemoteIp",
         icon="mdi:ip-network",
         entity_registry_enabled_default=False,
-        data_retriever=lambda data: str(json_loads(data)["WLAN_IP-Address"])
+        data_retriever=lambda data: str(json_loads(data)["WLAN_IP-Address"]),
         required_device=Open3eDevices.Vitodens
     ),
     Open3eSensorEntityDescription(
