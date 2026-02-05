@@ -175,6 +175,12 @@
       "pv_energy_production_total": {
         "name": "PV Energy Production Total"
       },
+      "grid_supplied_energy": {
+        "name": "Grid Energy Supply Total"
+      },
+      "grid_feed_in_energy": {
+        "name": "Grid Energy Feed-In Total"
+      },
       "domestic_hot_water_target_temperature": {
         "name": "Domestic Hot Water Temperature"
       },
@@ -221,10 +227,10 @@
         "name": "Expansion Valve 2 Position"
       },
       "allengra_flow_rate": {
-        "name": "Volumenstrom"
+        "name": "Volumetric Flow"
       },
       "allengra_temperature": {
-        "name": "Allengra Temperature"
+        "name": "Volumetric Flow Sensor Temperature"
       },
       "primary_inlet_temperature": {
         "name": "Primary Inlet Temperature"
@@ -509,15 +515,15 @@
         "name": "Legionella Protection Start Time"
       },
       "LegionellaProtectionWeekday": {
-        "name": "Legionella Protection Weekday",
+        "name": "Legionellenschutz Wochentag",
         "state": {
-          "1": "Monday",
-          "2": "Tuesday",
-          "3": "Wednesday",
-          "4": "Thursday",
-          "5": "Friday",
-          "6": "Saturday",
-          "7": "Sunday"
+          "monday": "Monday",
+          "tuesday": "Tuesday",
+          "wednesday": "Wednesday",
+          "thursday": "Thursday",
+          "friday": "Friday",
+          "saturday": "Saturday",
+          "sunday": "Sunday"
         }
       },
       "LegionellaProtectionWeekly": {

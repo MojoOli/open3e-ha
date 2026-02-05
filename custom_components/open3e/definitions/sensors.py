@@ -14,6 +14,7 @@ from .features import Features
 from .subfeatures.connection_status import ConnectionStatus, get_connection_status
 from .subfeatures.energy_management_mode import ENERGY_MANAGEMENT_MODES_MAP, EnergyManagementMode
 from .subfeatures.four_three_way_valve_position import FOUR_THREE_WAY_VALVE_POSITION_MAP, FourThreeWayValvePosition
+from .subfeatures.legionella_protection import LegionellaProtectionWeekday, get_lp_weekday #, ConcStrLPWeekDay
 from ..capability.capability import Capability
 
 
@@ -62,15 +63,15 @@ class SensorDataRetriever:
     RAW = lambda data: float(data)
     """The data state represents a raw value without any encapsulation."""
 
-# Zur Bereinigung der IP-Adressen von führenden Nullen
     @staticmethod
     def cleaned_ip(ip_str: str) -> str:
+        """Clean-up the IP-adress string by removing leading zeros from each octet. 
+           This is necessary because the Viessmann CAN Bus returns IPs with leading zeros."""
         try:
             return ".".join(str(int(octet)) for octet in ip_str.split('.'))
         except ValueError:  # If ip_str did not match format
             return '-'
 
-# Um ein Datumsstring in ein Datumsobjekt zu verwandeln und als formatierten String auszugeben
     @staticmethod
     def parse_date_vitodensstr(dt_str: str) -> str:
         """Convert a date string to a date object and output as string."""
@@ -91,20 +92,6 @@ class SensorDataDeriver:
             return 0.0
 
         return round(min(total_thermal / total_electric, 10.0), 1)
-
-# Um einen Wochentag und eine Uhrzeit in einen lesbaren String zu verwandeln
-# Unglücklich, da nicht ins Englische übersetzt, weiß aber nicht, wie es richtig geht
-    @staticmethod
-    def concstr(WeekdayInt: int, starttime: datetime) -> str:
-        if WeekdayInt == 1: Weekday = "Montag"
-        if WeekdayInt == 2: Weekday = "Dienstag"
-        if WeekdayInt == 3: Weekday = "Mittwoch"
-        if WeekdayInt == 4: Weekday = "Donnerstag"
-        if WeekdayInt == 5: Weekday = "Freitag"
-        if WeekdayInt == 6: Weekday = "Samstag"
-        if WeekdayInt == 7: Weekday = "Sonntag"
-
-        return Weekday + " um " + starttime.strftime("%H:%M")
 
 
 @dataclass(frozen=True)
@@ -2019,21 +2006,23 @@ DERIVED_SENSORS: tuple[Open3eDerivedSensorEntityDescription, ...] = (
     ),
 
     ######### TIME/DATE-SENSORS #########
-    Open3eDerivedSensorEntityDescription(
-        poll_data_features=[
-            Features.Time.LegionellaProtectionWeekday, 
-            Features.Time.LegionellaProtectionStartTime
-        ],
-        key="LegionellaProtectionWeekly",
-        translation_key="LegionellaProtectionWeekly",
-        icon="mdi:water-plus",
-        data_retrievers=[
-            lambda data: int(data),
-            SensorDataRetriever.TIME
-        ],
-        compute_value=lambda weekday, starttime: SensorDataDeriver.concstr(weekday, starttime),
-        required_device=Open3eDevices.Vitodens
-    ),
+# for future purposes, currently not used in code
+#    Open3eDerivedSensorEntityDescription(
+#        poll_data_features=[
+#            Features.Time.LegionellaProtectionWeekday, 
+#            Features.Time.LegionellaProtectionStartTime
+#        ],
+##        device_class=SensorDeviceClass.ENUM,
+#        key="LegionellaProtectionWeekly",
+#        translation_key="LegionellaProtectionWeekly",
+#        icon="mdi:water-plus",
+#        data_retrievers=[
+#            lambda data: int(data),
+#            SensorDataRetriever.TIME
+#        ],
+#        compute_value=lambda weekday, starttime: ConcStrLPWeekDay(weekday, starttime),
+#        required_device=Open3eDevices.Vitodens
+#    ),
 
 
     ###############
