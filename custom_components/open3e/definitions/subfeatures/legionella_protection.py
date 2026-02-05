@@ -32,6 +32,7 @@ def get_lp_weekday(wday: int):
     return None
 
 
+
 # for future purposes, currently not used in code
 #@staticmethod
 #def ConcStrLPWeekDay(WeekdayInt: int, Starttime: datetime) -> str:
