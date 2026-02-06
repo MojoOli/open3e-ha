@@ -548,11 +548,13 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Time.LegionellaProtectionWeekday],
+        device_class=SensorDeviceClass.ENUM,
         key="LegionellaProtectionWeekday",
         translation_key="LegionellaProtectionWeekday",
         entity_registry_enabled_default=False,
         icon="mdi:water-plus",
-        data_retriever=lambda data: int(data),
+        data_retriever=lambda data: get_lp_weekday(int(data)),
+        options=[wday for wday in LegionellaProtectionWeekday],
         required_device=Open3eDevices.Vitodens
     ),
     Open3eSensorEntityDescription(
