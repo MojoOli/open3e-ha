@@ -19,7 +19,8 @@ from .. import Open3eDataUpdateCoordinator
 from ..capability.capability import Capability
 from ..const import VIESSMANN_TEMP_HEATING_MIN, VIESSMANN_TEMP_HEATING_MAX, VIESSMANN_POWER_MAX_WATT_ELECTRICAL_HEATER, \
     VIESSMANN_POWER_MIN_WATT_ELECTRICAL_HEATER, VIESSMANN_POWER_WATT_ELECTRICAL_HEATER_STEP, \
-    VIESSMANN_SMART_GRID_TEMP_MIN, VIESSMANN_SMART_GRID_TEMP_MAX, VIESSMANN_HYSTERESIS_MIN, VIESSMANN_HYSTERESIS_MAX
+    VIESSMANN_SMART_GRID_TEMP_MIN, VIESSMANN_SMART_GRID_TEMP_MAX, VIESSMANN_HYSTERESIS_MIN, VIESSMANN_HYSTERESIS_MAX, \
+    VIESSMANN_TEMP_DHW_MIN, VIESSMANN_TEMP_DHW_MAX
 
 
 @dataclass(frozen=True)
@@ -33,6 +34,29 @@ class Open3eNumberEntityDescription(
 
 
 NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
+
+
+    ################
+    ### VITODENS ###
+    ################
+
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.Temperature.DomesticHotWaterTemperatureSetpoint],
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        device_class=NumberDeviceClass.TEMPERATURE,
+        native_min_value=VIESSMANN_TEMP_DHW_MIN,
+        native_max_value=VIESSMANN_TEMP_DHW_MAX,
+        native_step=1,
+        get_native_value=lambda data: int(data),
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_hot_water_temperature(
+            feature_id=Features.Temperature.DomesticHotWaterTemperatureSetpoint.id,
+            temperature=value,
+            device=device
+        ),
+        key="Hot_WaterDomesticHotWaterTemperatureSetpoint",
+        translation_key="DomesticHotWaterTemperatureSetpoint",
+        required_device=Open3eDevices.Vitodens
+    ),
 
     ###############
     ### VITOCAL ###
