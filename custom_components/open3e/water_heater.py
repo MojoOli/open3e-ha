@@ -57,17 +57,22 @@ class Open3eWaterHeater(Open3eEntity, WaterHeaterEntity):
             device: Open3eDataDevice
     ):
         super().__init__(coordinator, description, device)
-        self._attr_current_operation = DmwMode.Eco.to_ha_preset_mode()
-        self._attr_operation_list = [
-            DmwMode.Eco.to_ha_preset_mode(),
-            DmwMode.Comfort.to_ha_preset_mode(),
-            DmwMode.Off.to_ha_preset_mode()
-        ]
-        self._attr_precision = PRECISION_TENTHS
-        self._attr_supported_features = (
-                WaterHeaterEntityFeature.TARGET_TEMPERATURE
-                | WaterHeaterEntityFeature.OPERATION_MODE
-        )
+        if device.name == "Vitodens": 
+            self._attr_supported_features = (
+                    WaterHeaterEntityFeature.TARGET_TEMPERATURE
+                )
+        else:
+            self._attr_current_operation = DmwMode.Eco.to_ha_preset_mode()
+            self._attr_operation_list = [
+                DmwMode.Eco.to_ha_preset_mode(),
+                DmwMode.Comfort.to_ha_preset_mode(),
+                DmwMode.Off.to_ha_preset_mode()
+            ]
+            self._attr_precision = PRECISION_TENTHS
+            self._attr_supported_features = (
+                    WaterHeaterEntityFeature.TARGET_TEMPERATURE
+                    | WaterHeaterEntityFeature.OPERATION_MODE
+            )
         self._attr_temperature_unit = UnitOfTemperature.CELSIUS
         self._attr_min_temp = VIESSMANN_TEMP_DHW_MIN
         self._attr_max_temp = VIESSMANN_TEMP_DHW_MAX

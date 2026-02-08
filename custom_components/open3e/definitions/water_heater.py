@@ -40,4 +40,18 @@ WATER_HEATER: tuple[Open3eWaterHeaterEntityDescription, ...] = (
         translation_key="water_heater",
         required_device=Open3eDevices.Vitocal
     ),
+    Open3eWaterHeaterEntityDescription(
+        poll_data_features=[
+            Features.Temperature.DomesticHotWaterSensor,
+            Features.Temperature.DomesticHotWaterTemperatureSetpoint
+#            Features.State.DomesticHotWaterOperationState
+        ],
+        temperature_feature=Features.Temperature.DomesticHotWaterSensor,
+        temperature_target_feature=Features.Temperature.DomesticHotWaterTemperatureSetpoint,
+#        state_feature=Features.State.DomesticHotWaterOperationState,
+#        efficiency_mode_feature=None,
+        key="vitodens_water_heater",
+        translation_key="vitodens_water_heater",
+        required_device=Open3eDevices.Vitodens
+    ),
 )
