@@ -116,7 +116,7 @@ class Features:
         Cooling = Feature(id=566, refresh_interval=300)
         Battery = Feature(id=1801, refresh_interval=300)
         PV = Feature(id=1802, refresh_interval=300)
-        Grid = Feature(id=1603, refresh_interval=5)
+        Grid = Feature(id=531, refresh_interval=5)
         HeatingOutput = Feature(id=1211, refresh_interval=30)
         WarmWaterOutput = Feature(id=1391, refresh_interval=30)
         CoolingOutput = Feature(id=2529, refresh_interval=30)
