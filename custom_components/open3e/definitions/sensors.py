@@ -14,7 +14,7 @@ from .features import Features
 from .subfeatures.connection_status import ConnectionStatus, get_connection_status
 from .subfeatures.energy_management_mode import ENERGY_MANAGEMENT_MODES_MAP, EnergyManagementMode
 from .subfeatures.four_three_way_valve_position import FOUR_THREE_WAY_VALVE_POSITION_MAP, FourThreeWayValvePosition
-from .subfeatures.legionella_protection import LegionellaProtectionWeekday, get_lp_weekday #, ConcStrLPWeekDay
+from .subfeatures.legionella_protection import LegionellaProtectionWeekday, get_lp_weekday
 from ..capability.capability import Capability
 
 
@@ -539,7 +539,6 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         translation_key="vitodens_device_date",
         icon="mdi:calendar",
         entity_registry_enabled_default=False,
-#        data_retriever=lambda data: SensorDataRetriever.parse_date_vitodensstr("01.01.2026"),
         data_retriever=lambda data: SensorDataRetriever.parse_date_vitodensstr(data[1:][:-1]),
         required_device=Open3eDevices.Vitodens
     ),
@@ -1939,26 +1938,7 @@ DERIVED_SENSORS: tuple[Open3eDerivedSensorEntityDescription, ...] = (
         required_device=Open3eDevices.Vitodens
     ),
 
-    ######### TIME/DATE-SENSORS #########
-# for future purposes, currently not used in code
-#    Open3eDerivedSensorEntityDescription(
-#        poll_data_features=[
-#            Features.Time.LegionellaProtectionWeekday, 
-#            Features.Time.LegionellaProtectionStartTime
-#        ],
-##        device_class=SensorDeviceClass.ENUM,
-#        key="legionella_protection_weekly",
-#        translation_key="legionella_protection_weekly",
-#        icon="mdi:water-plus",
-#        data_retrievers=[
-#            lambda data: int(data),
-#            SensorDataRetriever.TIME
-#        ],
-#        compute_value=lambda weekday, starttime: ConcStrLPWeekDay(weekday, starttime),
-#        required_device=Open3eDevices.Vitodens
-#    ),
-
-
+    
     ###############
     ### VITOCAL ###
     ###############
