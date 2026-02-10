@@ -622,35 +622,35 @@
       "frost_protection": {
         "name": "Frost protection"
       },
-      "Flame": {
-        "name": "Flame Status"
+      "flame": {
+        "name": "Flame status"
       },
-      "CentralHeatingPump": {
-        "name": "Heating Circulation Pump"
+      "central_heating_pump": {
+        "name": "Heating circulation pump"
       },
-      "DomesticHotWaterCirculationPump": {
-        "name": "Hot Water Circuit Pump"
+      "domestic_hot_water_circulation_pump": {
+        "name": "Hot water circuit pump"
       },
-      "DomesticHotWaterOperationState": {
-        "name": "Hot Water Status"
+      "domestic_hot_water_operation_state": {
+        "name": "Hot water operation status"
       },
-      "LegionellaProtectionActivation": {
-        "name": "Hot Water Legionella Protection"
+      "legionella_protection_activation": {
+        "name": "Hot water legionella protection"
       },
-      "MalfunctionHeatingUnitBlocked": {
-        "name": "Heating Malfunction"
+      "malfunction_heating_unit_blocked": {
+        "name": "Heating malfunction"
       },
-      "MixerOneCircuitOperationState": {
-        "name": "Pump Circuit 1"
+      "mixer_one_circuit_operation_state": {
+        "name": "Pump circuit 1"
       },
-      "MixerTwoCircuitOperationState": {
-        "name": "Pump Circuit 2"
+      "mixer_two_circuit_operation_state": {
+        "name": "Pump circuit 2"
       },
-      "MixerThreeCircuitOperationState": {
-        "name": "Pump Circuit 3"
+      "mixer_three_circuit_operation_state": {
+        "name": "Pump circuit 3"
       },
-      "MixerFourCircuitOperationState": {
-        "name": "Pump Circuit 4"
+      "mixer_four_circuit_operation_state": {
+        "name": "Pump circuit 4"
       }
     },
     "climate": {
