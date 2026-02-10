@@ -428,7 +428,7 @@
         "name": "Energieverbrauch Gesamt heute"
       },
       "generated_heating_water_output_total_today": {
-        "name": "Wärmeleistung Gesamt heute"
+        "name": "Wärmeleistung Warmwasser Gesamt heute"
       },
       "water_pressure_sensor": {
         "name": "Warmwasserdruck"
