@@ -413,10 +413,10 @@
         "name": "Ventilation level"
       },
       "energy_consumption_central_heating": {
-        "name": "Energyconsumption heating today"
+        "name": "Energy consumption heating today"
       },
       "energy_consumption_domestic_hot_water": {
-        "name": "Energyconsumption hot water today"
+        "name": "Energy consumption hot water today"
       },
       "generated_central_heating_output": {
         "name": "Output heating today"
@@ -425,10 +425,10 @@
         "name": "Output hot water today"
       },
       "energy_consumption_central_total_today": {
-        "name": "Energyconsumption total today"
+        "name": "Energy consumption total today"
       },
       "generated_heating_water_output_total_today": {
-        "name": "Output total today"
+        "name": "Hot water output total today"
       },
       "water_pressure_sensor": {
         "name": "Water pressure"
@@ -561,19 +561,19 @@
         "name": "Name circuit 4"
       },
       "mixer_one_circuit_central_heating_curve": {
-        "name": "Heatingcurve circuit 1"
+        "name": "Heating curve circuit 1"
       },
       "mixer_two_circuit_central_heating_curve": {
-        "name": "Heatingcurve circuit 2"
+        "name": "Heating curve circuit 2"
       },
       "mixer_three_circuit_central_heating_curve": {
-        "name": "Heatingcurve circuit 3"
+        "name": "Heating curve circuit 3"
       },
       "mixer_four_circuit_central_heating_curve": {
-        "name": "Heatingcurve circuit 4"
+        "name": "Heating curve circuit 4"
       },
       "building_type": {
-        "name": "Buildingtype"
+        "name": "Building type"
       },
       "electronic_traceability_number": {
         "name": "Electronic traceability number"
@@ -585,10 +585,10 @@
         "name": "Heating regulation mode"
       },
       "time_setting_source": {
-        "name": "Timesetting source"
+        "name": "Time setting source"
       },
       "chimney_sweeper_test_mode": {
-        "name": "Chimneysweeper testmode"
+        "name": "Chimney sweeper testmode"
       }
     },
     "binary_sensor": {
