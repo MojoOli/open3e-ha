@@ -689,6 +689,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         entity_category=EntityCategory.DIAGNOSTIC,
         key="electronic_traceability_number",
         translation_key="electronic_traceability_number",
+        entity_registry_enabled_default=False,
         data_retriever=SensorDataRetriever.RAWSTR,
         required_device=Open3eDevices.Vitodens
     ),
@@ -705,6 +706,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         entity_category=EntityCategory.DIAGNOSTIC,
         key="central_heating_regulation_mode",
         translation_key="central_heating_regulation_mode",
+        entity_registry_enabled_default=False,
         data_retriever=SensorDataRetriever.TEXT,
         required_device=Open3eDevices.Vitodens
     ),
