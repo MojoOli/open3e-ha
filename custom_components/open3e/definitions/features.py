@@ -227,6 +227,8 @@ class Features:
 
 # Vitodens
     class Time:
+        Date = Feature(id=505, refresh_interval=10)
+        Time = Feature(id=506, refresh_interval=10)
         OperatingHoursTillService = Feature(id=521, refresh_interval=60)
         ServiceDateNext = Feature(id=522, refresh_interval=60)
         LegionellaProtectionStartTime = Feature(id=875, refresh_interval=60)
@@ -256,8 +258,6 @@ class Features:
         FlameStatistical = Feature(id=365, refresh_interval=60)
         ViessmannIdentificationNumber = Feature(id=377, refresh_interval=2592000)
         ScaldProtection = Feature(id=503, refresh_interval=60)
-        Date = Feature(id=505, refresh_interval=10)
-        Time = Feature(id=506, refresh_interval=10)
         GatewayMac = Feature(id=593, refresh_interval=2592000)
         GatewayRemoteLocalNetworkStatus = Feature(id=602, refresh_interval=60)
         GatewayRemoteIp = Feature(id=607, refresh_interval=60)

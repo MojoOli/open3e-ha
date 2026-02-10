@@ -470,6 +470,27 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
 
     ######### TIME/DATE-SENSORS #########
     Open3eSensorEntityDescription(
+        poll_data_features=[Features.Time.Date],
+        entity_category=EntityCategory.DIAGNOSTIC,
+        key="vitodens_device_date",
+        translation_key="vitodens_device_date",
+        icon="mdi:calendar",
+        entity_registry_enabled_default=False,
+        data_retriever=lambda data: SensorDataRetriever.parse_date_vitodensstr(data[1:][:-1]),
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Time.Time],
+        entity_category=EntityCategory.DIAGNOSTIC,
+        device_class=SensorDeviceClass.DATE,
+        key="vitodens_device_time",
+        translation_key="vitodens_device_time",
+        icon="mdi:clock",
+        entity_registry_enabled_default=False,
+        data_retriever=SensorDataRetriever.TIME,
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eSensorEntityDescription(
         poll_data_features=[Features.Time.HeatEngineStatistical],
         device_class=SensorDeviceClass.DURATION,
         key="heat_engine_statistical_operating_hours",
@@ -558,27 +579,6 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         icon="mdi:shield-star",
         entity_registry_enabled_default=False,
         data_retriever=SensorDataRetriever.RAWSTR,
-        required_device=Open3eDevices.Vitodens
-    ),
-    Open3eSensorEntityDescription(
-        poll_data_features=[Features.Misc.Date],
-        entity_category=EntityCategory.DIAGNOSTIC,
-        key="vitodens_device_date",
-        translation_key="vitodens_device_date",
-        icon="mdi:calendar",
-        entity_registry_enabled_default=False,
-        data_retriever=lambda data: SensorDataRetriever.parse_date_vitodensstr(data[1:][:-1]),
-        required_device=Open3eDevices.Vitodens
-    ),
-    Open3eSensorEntityDescription(
-        poll_data_features=[Features.Misc.Time],
-        entity_category=EntityCategory.DIAGNOSTIC,
-        device_class=SensorDeviceClass.DATE,
-        key="vitodens_device_time",
-        translation_key="vitodens_device_time",
-        icon="mdi:clock",
-        entity_registry_enabled_default=False,
-        data_retriever=SensorDataRetriever.TIME,
         required_device=Open3eDevices.Vitodens
     ),
     Open3eSensorEntityDescription(
