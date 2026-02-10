@@ -522,7 +522,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         required_device=Open3eDevices.Vitodens
     ),
 
-    ######### VOLUMEN-SENSORS #########
+    ######### VOLUME-SENSORS #########
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Volume.GasConsumptionCentralHeating],
         device_class=SensorDeviceClass.VOLUME,
