@@ -412,46 +412,46 @@
       "ventilation_level": {
         "name": "Lüftungsstufe"
       },
-      "EnergyConsumptionCentralHeating": {
+      "energy_consumption_central_heating": {
         "name": "Energieverbrauch Heizung heute"
       },
-      "EnergyConsumptionDomesticHotWater": {
+      "energy_consumption_domestic_hot_water": {
         "name": "Energieverbrauch Warmwasser heute"
       },
-      "GeneratedCentralHeatingOutput": {
+      "generated_central_heating_output": {
         "name": "Wärmeleistung Heizung heute"
       },
-      "GeneratedDomesticHotWaterOutput": {
+      "generated_domestic_hot_water_output": {
         "name": "Wärmeleistung Warmwasser heute"
       },
-      "EnergyConsumptionCentralTotalToday": {
+      "energy_consumption_central_total_today": {
         "name": "Energieverbrauch Gesamt heute"
       },
-      "GeneratedHeatingWaterOutputTotalToday": {
+      "generated_heating_water_output_total_today": {
         "name": "Wärmeleistung Gesamt heute"
       },
-      "WaterPressureSensor": {
+      "water_pressure_sensor": {
         "name": "Warmwasserdruck"
       },
-      "FlowTemperatureSensor": {
+      "flow_temperature_sensor": {
         "name": "Vorlauftemperatur"
       },
-      "DomesticHotWaterSensor": {
+      "domestic_hot_water_sensor": {
         "name": "Warmwassertemperatur"
       },
-      "OutsideTemperatureSensor": {
+      "outside_temperature_sensor": {
         "name": "Außentemperatur"
       },
-      "MixerOneCircuitFlowTemperatureSensor": {
+      "mixer_one_circuit_flow_temperature_sensor": {
         "name": "Vorlauftemperatur Heizkreis 1"
       },
-      "MixerTwoCircuitFlowTemperatureSensor": {
+      "mixer_two_circuit_flow_temperature_sensor": {
         "name": "Vorlauftemperatur Heizkreis 2"
       },
-      "MixerThreeCircuitFlowTemperatureSensor": {
+      "mixer_three_circuit_flow_temperature_sensor": {
         "name": "Vorlauftemperatur Heizkreis 3"
       },
-      "MixerFourCircuitFlowTemperatureSensor": {
+      "mixer_four_circuit_flow_temperature_sensor": {
         "name": "Vorlauftemperatur Heizkreis 4"
       },
       "FlueGasTemperatureSensor": {
