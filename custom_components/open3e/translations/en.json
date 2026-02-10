@@ -533,7 +533,7 @@
         "name": "Vitodens device time"
       },
       "gateway_mac": {
-        "name": "MAC adress"
+        "name": "MAC address"
       },
       "gateway_remote_local_network_status": {
         "name": "WiFi status",
@@ -543,7 +543,7 @@
         }
       },
       "gateway_remote_ip": {
-        "name": "WiFi IP adress"
+        "name": "WiFi IP address"
       },
       "gateway_remote_signal_strength": {
         "name": "WiFi signalstrength"
