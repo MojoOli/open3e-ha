@@ -434,88 +434,79 @@
         "name": "Water pressure"
       },
       "flow_temperature_sensor": {
-        "name": "Flow Temperature"
+        "name": "Flow temperature"
       },
       "domestic_hot_water_sensor": {
-        "name": "Hot Water Temperature"
+        "name": "Hot water temperature"
       },
       "outside_temperature_sensor": {
-        "name": "Outside Temperature"
+        "name": "Outside temperature"
       },
       "mixer_one_circuit_flow_temperature_sensor": {
-        "name": "Flow Temperature Circuit 1"
+        "name": "Flow temperature circuit 1"
       },
       "mixer_two_circuit_flow_temperature_sensor": {
-        "name": "Flow Temperature Circuit 2"
+        "name": "Flow temperature circuit 2"
       },
       "mixer_three_circuit_flow_temperature_sensor": {
-        "name": "Flow Temperature Circuit 3"
+        "name": "Flow temperature circuit 3"
       },
       "mixer_four_circuit_flow_temperature_sensor": {
-        "name": "Flow Temperature Circuit 4"
+        "name": "Flow temperature circuit 4"
       },
-      "FlueGasTemperatureSensor": {
-        "name": "Fluegas Temperature"
+      "flue_gas_temperature_sensor": {
+        "name": "Fluegas temperature"
       },
-      "MixerOneCircuitRoomTemperatureSensor": {
-        "name": "Room Temperature Circuit 1"
+      "mixer_one_circuit_room_temperature_sensor": {
+        "name": "Room temperature circuit 1"
       },
-      "MixerTwoCircuitRoomTemperatureSensor": {
-        "name": "Room Temperature Circuit 2"
+      "mixer_two_circuit_room_temperature_sensor": {
+        "name": "Room temperature circuit 2"
       },
-      "MixerThreeCircuitRoomTemperatureSensor": {
-        "name": "Room Temperature Circuit 3"
+      "mixer_three_circuit_room_temperature_sensor": {
+        "name": "Room temperature circuit 3"
       },
-      "MixerFourCircuitRoomTemperatureSensor": {
-        "name": "Room Temperature Circuit 4"
+      "mixer_four_circuit_room_temperature_sensor": {
+        "name": "Room temperature circuit 4"
       },
-      "DomesticHotWaterOutletSensor": {
-        "name": "Hot Water Outlet Temperature"
+      "domestic_hot_water_outlet_sensor": {
+        "name": "Hot water outlet temperature"
       },
-      "DomesticHotWaterTemperatureSetpoint": {
-        "name": "Hot Water Outlet Target Temperature "
+      "domestic_hot_water_temperature_setpoint": {
+        "name": "Hot water outlet target temperature "
       },
-      "MixerOneCircuitRoomTemperatureSetpoint": {
-        "name": "Target Temperature Circuit 1"
+      "mixer_one_circuit_room_temperature_setpoint": {
+        "name": "Target temperature circuit 1"
       },
-      "MixerTwoCircuitRoomTemperatureSetpoint": {
-        "name": "Target Temperature Circuit 2"
+      "mixer_two_circuit_room_temperature_setpoint": {
+        "name": "Target temperature circuit 2"
       },
-      "MixerThreeCircuitRoomTemperatureSetpoint": {
-        "name": "Target Temperature Circuit 3"
+      "mixer_three_circuit_room_temperature_setpoint": {
+        "name": "Target temperature circuit 3"
       },
-      "MixerFourCircuitRoomTemperatureSetpoint": {
-        "name": "Target Temperature Circuit 4"
+      "mixer_four_circuit_room_temperature_setpoint": {
+        "name": "Target temperature circuit 4"
       },
-      "FlowTemperatureTargetSetpoint": {
-        "name": "Flow Temperature Target"
+      "flow_temperature_target_setpoint": {
+        "name": "Flow temperature target"
       },
-      "MixerOneCircuitFlowTemperatureTargetSetpoint": {
-        "name": "Flow Temperature Target Circuit 1"
+      "allengra_sensor_temperatur": {
+        "name": "Flow rate temperature"
       },
-      "MixerTwoCircuitFlowTemperatureTargetSetpoint": {
-        "name": "Flow Temperature Target Circuit 2"
+      "allengra_sensor_volume": {
+        "name": "Flow rate"
       },
-      "MixerThreeCircuitFlowTemperatureTargetSetpoint": {
-        "name": "Flow Temperature Target Circuit 3"
+      "heat_engine_statistical_operating_hours": {
+        "name": "Heating operatinghours"
       },
-      "MixerFourCircuitFlowTemperatureTargetSetpoint": {
-        "name": "Flow Temperature Target Circuit 4"
+      "heat_engine_statistical_burner_hours": {
+        "name": "Burner operatinghours"
       },
-      "AllengraSensor": {
-        "name": "Flow Rate"
+      "legionella_protection_start_time": {
+        "name": "Legionella protection start time"
       },
-      "HeatEngineStatisticalOperatingHours": {
-        "name": "Heating Operatinghours"
-      },
-      "HeatEngineStatisticalBurnerHours": {
-        "name": "Burner Operatinghours"
-      },
-      "LegionellaProtectionStartTime": {
-        "name": "Legionella Protection Start Time"
-      },
-      "LegionellaProtectionWeekday": {
-        "name": "Legionellenschutz Wochentag",
+      "legionella_protection_weekday": {
+        "name": "Legionella protection weekday",
         "state": {
           "monday": "Monday",
           "tuesday": "Tuesday",
@@ -526,35 +517,35 @@
           "sunday": "Sunday"
         }
       },
-      "LegionellaProtectionWeekly": {
-        "name": "Legionella Protection Weekly"
+      "legionella_protection_weekly": {
+        "name": "Legionella protection weekly"
       },
-      "ServiceDateNext": {
+      "service_date_next": {
         "name": "Next service appointment"
       },
-      "ScaldProtection": {
-        "name": "Status scald Protection"
+      "scald_protection": {
+        "name": "Status scald protection"
       },
-      "VitodensDate": {
+      "vitodens_device_date": {
         "name": "Vitodens device date"
       },
-      "VitodensTime": {
+      "vitodens_device_time": {
         "name": "Vitodens device time"
       },
-      "GatewayMac": {
-        "name": "MAC-adress"
+      "gateway_mac": {
+        "name": "MAC adress"
       },
-      "GatewayRemoteLocalNetworkStatus": {
+      "gateway_remote_local_network_status": {
         "name": "WiFi status",
         "state": {
-          "connected": "Verbunden",
-          "not_connected": "Nicht verbunden"
+          "connected": "Connected",
+          "not_connected": "Not Connected"
         }
       },
-      "GatewayRemoteIp": {
-        "name": "WiFi IP-adress"
+      "gateway_remote_ip": {
+        "name": "WiFi IP adress"
       },
-      "GatewayRemoteSignalStrength": {
+      "gateway_remote_signal_strength": {
         "name": "WiFi signalstrength"
       },
       "CentralHeatingOneCircuitName": {
