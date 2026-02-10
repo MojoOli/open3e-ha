@@ -227,8 +227,8 @@ class Features:
 
 # Vitodens
     class Time:
-        Date = Feature(id=505, refresh_interval=10)
-        Time = Feature(id=506, refresh_interval=10)
+        Date = Feature(id=505, refresh_interval=60)
+        Time = Feature(id=506, refresh_interval=60)
         OperatingHoursTillService = Feature(id=521, refresh_interval=60)
         ServiceDateNext = Feature(id=522, refresh_interval=60)
         LegionellaProtectionStartTime = Feature(id=875, refresh_interval=60)
@@ -276,8 +276,6 @@ class Features:
         GasType = Feature(id=929, refresh_interval=86400)
         ActiveDiagnosticSession = Feature(id=964, refresh_interval=60)
         CentralHeatingRegulationMode = Feature(id=1004, refresh_interval=3600)
-        TargetQuickMode = Feature(id=1006, refresh_interval=30)
-        CurrentQuickMode = Feature(id=1007, refresh_interval=30)
         DomesticHotWaterHysteresis = Feature(id=1085, refresh_interval=2592000)
         TimeSettingSource = Feature(id=1504, refresh_interval=86400)
         FlueGasSensorTestMode = Feature(id=1535, refresh_interval=30)
