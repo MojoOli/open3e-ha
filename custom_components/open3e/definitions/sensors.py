@@ -1969,7 +1969,7 @@ DERIVED_SENSORS: tuple[Open3eDerivedSensorEntityDescription, ...] = (
         required_device=Open3eDevices.Vitodens
     ),
 
-    ######### VOLUMEN-SENSORS #########
+    ######### VOLUME-SENSORS #########
     Open3eDerivedSensorEntityDescription(
         poll_data_features=[Features.Volume.GasConsumptionCentralHeating, Features.Volume.GasConsumptionDomesticHotWater],
         device_class=SensorDeviceClass.VOLUME,
