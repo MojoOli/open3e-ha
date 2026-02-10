@@ -31,25 +31,3 @@ def get_lp_weekday(wday: int):
             return LegionellaProtectionWeekday.Sunday
     return None
 
-# for future purposes, currently not used in code
-#@staticmethod
-#def ConcStrLPWeekDay(WeekdayInt: int, Starttime: datetime) -> str:
-#    match WeekdayInt:
-#        case 0:
-#            Weekday = "Montag"
-#        case 1:
-#            Weekday = "Dienstag"
-#        case 2:
-#            Weekday = "Mittwoch"
-#        case 3:
-#            Weekday = "Donnerstag"
-#        case 4:
-#            Weekday = "Freitag"
-#        case 5:
-#            Weekday = "Samstag"
-#        case 6:
-#            Weekday = "Sonntag"
-#    try:
-#        return Weekday + " um " + Starttime.strftime("%H:%M")
-#    except ValueError:  # If dt_strinput did not match the format
-#        return '-'
