@@ -548,49 +548,46 @@
       "gateway_remote_signal_strength": {
         "name": "WiFi signalstrength"
       },
-      "CentralHeatingOneCircuitName": {
+      "central_heating_one_circuit_name": {
         "name": "Name circuit 1"
       },
-      "CentralHeatingTwoCircuitName": {
+      "central_heating_two_circuit_name": {
         "name": "Name circuit 2"
       },
-      "CentralHeatingThreeCircuitName": {
+      "central_heating_three_circuit_name": {
         "name": "Name circuit 3"
       },
-      "CentralHeatingFourCircuitName": {
+      "central_heating_four_circuit_name": {
         "name": "Name circuit 4"
       },
-      "MixerOneCircuitCentralHeatingCurve": {
+      "mixer_one_circuit_central_heating_curve": {
         "name": "Heatingcurve circuit 1"
       },
-      "MixerTwoCircuitCentralHeatingCurve": {
+      "mixer_two_circuit_central_heating_curve": {
         "name": "Heatingcurve circuit 2"
       },
-      "MixerThreeCircuitCentralHeatingCurve": {
+      "mixer_three_circuit_central_heating_curve": {
         "name": "Heatingcurve circuit 3"
       },
-      "MixerFourCircuitCentralHeatingCurve": {
+      "mixer_four_circuit_central_heating_curve": {
         "name": "Heatingcurve circuit 4"
       },
-      "BuildingType": {
+      "building_type": {
         "name": "Buildingtype"
       },
-      "ElectronicTraceabilityNumber": {
-        "name": "ElectronicTraceabilityNumber"
+      "electronic_traceability_number": {
+        "name": "Electronic traceability number"
       },
-      "GasType": {
+      "gas_type": {
         "name": "Gastype"
       },
-      "CentralHeatingRegulationMode": {
+      "central_heating_regulation_mode": {
         "name": "Heating regulation mode"
       },
-      "CurrentQuickMode": {
-        "name": "Current QuickMode"
-      },
-      "TimeSettingSource": {
+      "time_setting_source": {
         "name": "Timesetting source"
       },
-      "ChimneySweeperTestMode": {
+      "chimney_sweeper_test_mode": {
         "name": "Chimneysweeper testmode"
       }
     },
