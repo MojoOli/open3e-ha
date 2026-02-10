@@ -523,6 +523,15 @@
       "service_date_next": {
         "name": "Next service appointment"
       },
+      "gas_consumption_central_heating_today": {
+        "name": "Gas consumption heating today"
+      },
+      "gas_consumption_domestic_hot_water_today": {
+        "name": "Gas consumption hot water today"
+      },
+      "gas_consumption_total_today": {
+        "name": "Gas consumption total today"
+      },
       "scald_protection": {
         "name": "Status scald protection"
       },

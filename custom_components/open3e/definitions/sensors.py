@@ -522,6 +522,34 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         required_device=Open3eDevices.Vitodens
     ),
 
+    ######### VOLUMEN-SENSORS #########
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Volume.GasConsumptionCentralHeating],
+        device_class=SensorDeviceClass.VOLUME,
+        native_unit_of_measurement=UnitOfVolume.CUBIC_METERS,
+        icon="mdi:meter-gas",
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        suggested_display_precision=1,
+        entity_registry_enabled_default=False,
+        key="gas_consumption_central_heating_today",
+        translation_key="gas_consumption_central_heating_today",
+        data_retriever=SensorDataRetriever.TODAY,
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Volume.GasConsumptionDomesticHotWater],
+        device_class=SensorDeviceClass.VOLUME,
+        native_unit_of_measurement=UnitOfVolume.CUBIC_METERS,
+        icon="mdi:meter-gas",
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        suggested_display_precision=1,
+        entity_registry_enabled_default=False,
+        key="gas_consumption_domestic_hot_water_today",
+        translation_key="gas_consumption_domestic_hot_water_today",
+        data_retriever=SensorDataRetriever.TODAY,
+        required_device=Open3eDevices.Vitodens
+    ),
+
     ######### MISC-SENSORS #########
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Misc.ScaldProtection],
@@ -1941,6 +1969,20 @@ DERIVED_SENSORS: tuple[Open3eDerivedSensorEntityDescription, ...] = (
         required_device=Open3eDevices.Vitodens
     ),
 
+    ######### VOLUMEN-SENSORS #########
+    Open3eDerivedSensorEntityDescription(
+        poll_data_features=[Features.Volume.GasConsumptionCentralHeating, Features.Volume.GasConsumptionDomesticHotWater],
+        device_class=SensorDeviceClass.VOLUME,
+        native_unit_of_measurement=UnitOfVolume.CUBIC_METERS,
+        icon="mdi:meter-gas",
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="gas_consumption_total_today",
+        translation_key="gas_consumption_total_today",
+        data_retrievers=[SensorDataRetriever.TODAY] * 2,
+        compute_value=lambda heating, dhw: heating + dhw,
+        required_device=Open3eDevices.Vitodens
+    ),
+    
     
     ###############
     ### VITOCAL ###

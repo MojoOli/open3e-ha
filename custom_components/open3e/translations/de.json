@@ -526,6 +526,15 @@
       "scald_protection": {
         "name": "Status Kalkschutz"
       },
+      "gas_consumption_central_heating_today": {
+        "name": "Gasverbrauch Heizung heute"
+      },
+      "gas_consumption_domestic_hot_water_today": {
+        "name": "Gasverbrauch Warmwasser heute"
+      },
+      "gas_consumption_total_today": {
+        "name": "Gasverbrauch Gesamt heute"
+      },
       "vitodens_device_date": {
         "name": "Vitodens Date"
       },
