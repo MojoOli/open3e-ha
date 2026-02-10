@@ -548,49 +548,46 @@
       "gateway_remote_signal_strength": {
         "name": "WLAN Signalstärke"
       },
-      "CentralHeatingOneCircuitName": {
+      "central_heating_one_circuit_name": {
         "name": "Name Heizkreis 1"
       },
-      "CentralHeatingTwoCircuitName": {
+      "central_heating_two_circuit_name": {
         "name": "Name Heizkreis 2"
       },
-      "CentralHeatingThreeCircuitName": {
+      "central_heating_three_circuit_name": {
         "name": "Name Heizkreis 3"
       },
-      "CentralHeatingFourCircuitName": {
+      "central_heating_four_circuit_name": {
         "name": "Name Heizkreis 4"
       },
-      "MixerOneCircuitCentralHeatingCurve": {
+      "mixer_one_circuit_central_heating_curve": {
         "name": "Heizkurzve Heizkreis 1"
       },
-      "MixerTwoCircuitCentralHeatingCurve": {
+      "mixer_two_circuit_central_heating_curve": {
         "name": "Heizkurzve Heizkreis 2"
       },
-      "MixerThreeCircuitCentralHeatingCurve": {
+      "mixer_three_circuit_central_heating_curve": {
         "name": "Heizkurzve Heizkreis 3"
       },
-      "MixerFourCircuitCentralHeatingCurve": {
+      "mixer_four_circuit_central_heating_curve": {
         "name": "Heizkurzve Heizkreis 4"
       },
-      "BuildingType": {
+      "building_type": {
         "name": "Gebäudetyp"
       },
-      "ElectronicTraceabilityNumber": {
+      "electronic_traceability_number": {
         "name": "ElectronicTraceabilityNumber"
       },
-      "GasType": {
+      "gas_type": {
         "name": "Gastyp"
       },
-      "CentralHeatingRegulationMode": {
+      "central_heating_regulation_mode": {
         "name": "Heizungs Regulierungmodus"
       },
-      "CurrentQuickMode": {
-        "name": "Aktueller Kurz Modus"
-      },
-      "TimeSettingSource": {
+      "time_setting_source": {
         "name": "Zeitquelle"
       },
-      "ChimneySweeperTestMode": {
+      "chimney_sweeper_test_mode": {
         "name": "Schornsteinfeger Testmodus"
       }
     },
