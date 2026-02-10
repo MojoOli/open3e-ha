@@ -622,34 +622,34 @@
       "frost_protection": {
         "name": "Frostschutz"
       },
-      "Flame": {
+      "flame": {
         "name": "Brennerflamme"
       },
-      "CentralHeatingPump": {
-        "name": "Heizkreis-Pumpe"
+      "central_heating_pump": {
+        "name": "Heizkreis Pumpe"
       },
-      "DomesticHotWaterCirculationPump": {
+      "domestic_hot_water_circulation_pump": {
         "name": "Warmwasser Umwälzpumpe"
       },
-      "DomesticHotWaterOperationState": {
+      "domestic_hot_water_operation_state": {
         "name": "Warmwasser Status"
       },
-      "LegionellaProtectionActivation": {
+      "legionella_protection_activation": {
         "name": "Legionellenschutz aktiv"
       },
-      "MalfunctionHeatingUnitBlocked": {
+      "malfunction_heating_unit_blocked": {
         "name": "Heizung Fehlfunktion"
       },
-      "MixerOneCircuitOperationState": {
+      "mixer_one_circuit_operation_state": {
         "name": "Umwälzpumpe Heizkreis 1"
       },
-      "MixerTwoCircuitOperationState": {
+      "mixer_two_circuit_operation_state": {
         "name": "Umwälzpumpe Heizkreis 2"
       },
-      "MixerThreeCircuitOperationState": {
+      "mixer_three_circuit_operation_state": {
         "name": "Umwälzpumpe Heizkreis 3"
       },
-      "MixerFourCircuitOperationState": {
+      "mixer_four_circuit_operation_state": {
         "name": "Umwälzpumpe Heizkreis 4"
       }
     },
