@@ -713,6 +713,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         entity_category=EntityCategory.DIAGNOSTIC,
         key="time_setting_source",
         translation_key="time_setting_source",
+        entity_registry_enabled_default=False,
         data_retriever=SensorDataRetriever.TEXT,
         required_device=Open3eDevices.Vitodens
     ),
