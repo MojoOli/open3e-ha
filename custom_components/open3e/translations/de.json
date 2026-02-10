@@ -454,67 +454,58 @@
       "mixer_four_circuit_flow_temperature_sensor": {
         "name": "Vorlauftemperatur Heizkreis 4"
       },
-      "FlueGasTemperatureSensor": {
+      "flue_gas_temperature_sensor": {
         "name": "Abgastemperatur"
       },
-      "MixerOneCircuitRoomTemperatureSensor": {
+      "mixer_one_circuit_room_temperature_sensor": {
         "name": "Raumtemperatur Heizkreis 1"
       },
-      "MixerTwoCircuitRoomTemperatureSensor": {
+      "mixer_two_circuit_room_temperature_sensor": {
         "name": "Raumtemperatur Heizkreis 2"
       },
-      "MixerThreeCircuitRoomTemperatureSensor": {
+      "mixer_three_circuit_room_temperature_sensor": {
         "name": "Raumtemperatur Heizkreis 3"
       },
-      "MixerFourCircuitRoomTemperatureSensor": {
+      "mixer_four_circuit_room_temperature_sensor": {
         "name": "Raumtemperatur Heizkreis 4"
       },
-      "DomesticHotWaterOutletSensor": {
+      "domestic_hot_water_outlet_sensor": {
         "name": "Warmwasserausgangstemperatur"
       },
-      "DomesticHotWaterTemperatureSetpoint": {
+      "domestic_hot_water_temperature_setpoint": {
         "name": "Warmwassertemperatur Soll"
       },
-      "MixerOneCircuitRoomTemperatureSetpoint": {
+      "mixer_one_circuit_room_temperature_setpoint": {
         "name": "Solltemperatur Heizkreis 1"
       },
-      "MixerTwoCircuitRoomTemperatureSetpoint": {
+      "mixer_two_circuit_room_temperature_setpoint": {
         "name": "Solltemperatur Heizkreis 2"
       },
-      "MixerThreeCircuitRoomTemperatureSetpoint": {
+      "mixer_three_circuit_room_temperature_setpoint": {
         "name": "Solltemperatur Heizkreis 3"
       },
-      "MixerFourCircuitRoomTemperatureSetpoint": {
+      "mixer_four_circuit_room_temperature_setpoint": {
         "name": "Solltemperatur Heizkreis 4"
       },
-      "FlowTemperatureTargetSetpoint": {
+      "flow_temperature_target_setpoint": {
         "name": "Vorlauftemperatur Soll"
       },
-      "MixerOneCircuitFlowTemperatureTargetSetpoint": {
-        "name": "Vorlauftemperatur Ziel Heizkreis 1"
+      "allengra_sensor_temperatur": {
+        "name": "Volumenstrom Temperatur"
       },
-      "MixerTwoCircuitFlowTemperatureTargetSetpoint": {
-        "name": "Vorlauftemperatur Ziel Heizkreis 2"
-      },
-      "MixerThreeCircuitFlowTemperatureTargetSetpoint": {
-        "name": "Vorlauftemperatur Ziel Heizkreis 3"
-      },
-      "MixerFourCircuitFlowTemperatureTargetSetpoint": {
-        "name": "Vorlauftemperatur Ziel Heizkreis 4"
-      },
-      "AllengraSensor": {
+      "allengra_sensor_volume": {
         "name": "Volumenstrom"
       },
-      "HeatEngineStatisticalOperatingHours": {
-        "name": "Anlagen Betriebsstunden"
+      "heat_engine_statistical_operating_hours": {
+        "name": "Anlage Betriebsstunden"
       },
-      "HeatEngineStatisticalBurnerHours": {
+      "heat_engine_statistical_burner_hours": {
         "name": "Brenner Betriebsstunden"
       },
-      "LegionellaProtectionStartTime": {
+      "legionella_protection_start_time": {
         "name": "Legionellenschutz Startzeit"
       },
-      "LegionellaProtectionWeekday": {
+      "legionella_protection_weekday": {
         "name": "Legionellenschutz Wochentag",
         "state": {
           "monday": "Montag",
@@ -526,35 +517,35 @@
           "sunday": "Sonntag"
         }
       },
-      "LegionellaProtectionWeekly": {
+      "legionella_protection_weekly": {
         "name": "Legionellenschutz wöchentlich"
       },
-      "ServiceDateNext": {
+      "service_date_next": {
         "name": "Nächster Servicetermin"
       },
-      "ScaldProtection": {
+      "scald_protection": {
         "name": "Status Kalkschutz"
       },
-      "VitodensDate": {
+      "vitodens_device_date": {
         "name": "Vitodens Date"
       },
-      "VitodensTime": {
+      "vitodens_device_time": {
         "name": "Vitodens Time"
       },
-      "GatewayMac": {
-        "name": "MAC-Adresse"
+      "gateway_mac": {
+        "name": "MAC Adresse"
       },
-      "GatewayRemoteLocalNetworkStatus": {
+      "gateway_remote_local_network_status": {
         "name": "WLAN Status",
         "state": {
           "connected": "Verbunden",
           "not_connected": "Nicht verbunden"
         }
       },
-      "GatewayRemoteIp": {
-        "name": "WLAN IP-Adresse"
+      "gateway_remote_ip": {
+        "name": "WLAN IP Adresse"
       },
-      "GatewayRemoteSignalStrength": {
+      "gateway_remote_signal_strength": {
         "name": "WLAN Signalstärke"
       },
       "CentralHeatingOneCircuitName": {
