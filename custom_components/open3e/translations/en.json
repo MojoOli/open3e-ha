@@ -579,7 +579,7 @@
         "name": "Electronic traceability number"
       },
       "gas_type": {
-        "name": "Gastype"
+        "name": "Gas type"
       },
       "central_heating_regulation_mode": {
         "name": "Heating regulation mode"
