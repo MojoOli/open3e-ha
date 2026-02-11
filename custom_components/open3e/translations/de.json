@@ -472,21 +472,6 @@
       "domestic_hot_water_outlet_sensor": {
         "name": "Warmwasserausgangstemperatur"
       },
-      "domestic_hot_water_temperature_setpoint": {
-        "name": "Warmwassertemperatur Soll"
-      },
-      "mixer_one_circuit_room_temperature_setpoint": {
-        "name": "Solltemperatur Heizkreis 1"
-      },
-      "mixer_two_circuit_room_temperature_setpoint": {
-        "name": "Solltemperatur Heizkreis 2"
-      },
-      "mixer_three_circuit_room_temperature_setpoint": {
-        "name": "Solltemperatur Heizkreis 3"
-      },
-      "mixer_four_circuit_room_temperature_setpoint": {
-        "name": "Solltemperatur Heizkreis 4"
-      },
       "flow_temperature_target_setpoint": {
         "name": "Vorlauftemperatur Soll"
       },
