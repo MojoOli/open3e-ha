@@ -472,6 +472,9 @@
       "domestic_hot_water_outlet_sensor": {
         "name": "Warmwasserausgangstemperatur"
       },
+      "domestic_hot_water_temperature_setpoint": {
+        "name": "Warmwassertemperatur Soll"
+      },
       "flow_temperature_target_setpoint": {
         "name": "Vorlauftemperatur Soll"
       },
