@@ -475,18 +475,6 @@
       "domestic_hot_water_temperature_setpoint": {
         "name": "Hot water outlet target temperature "
       },
-      "mixer_one_circuit_room_temperature_setpoint": {
-        "name": "Target temperature circuit 1"
-      },
-      "mixer_two_circuit_room_temperature_setpoint": {
-        "name": "Target temperature circuit 2"
-      },
-      "mixer_three_circuit_room_temperature_setpoint": {
-        "name": "Target temperature circuit 3"
-      },
-      "mixer_four_circuit_room_temperature_setpoint": {
-        "name": "Target temperature circuit 4"
-      },
       "flow_temperature_target_setpoint": {
         "name": "Flow temperature target"
       },
