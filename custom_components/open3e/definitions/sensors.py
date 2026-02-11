@@ -386,54 +386,6 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         required_device=Open3eDevices.Vitodens
     ),
     Open3eSensorEntityDescription(
-        poll_data_features=[Features.Temperature.MixerOneCircuitRoomTemperatureSetpoint],
-        device_class=SensorDeviceClass.TEMPERATURE,
-        key="mixer_one_circuit_room_temperature_setpoint",
-        translation_key="mixer_one_circuit_room_temperature_setpoint",
-        entity_registry_enabled_default=False,
-        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
-        state_class=SensorStateClass.MEASUREMENT,
-        data_retriever=SensorDataRetriever.STANDARD,
-        required_capabilities=[Capability.Circuit1],
-        required_device=Open3eDevices.Vitodens
-    ),
-    Open3eSensorEntityDescription(
-        poll_data_features=[Features.Temperature.MixerTwoCircuitRoomTemperatureSetpoint],
-        device_class=SensorDeviceClass.TEMPERATURE,
-        key="mixer_two_circuit_room_temperature_setpoint",
-        translation_key="mixer_two_circuit_room_temperature_setpoint",
-        entity_registry_enabled_default=False,
-        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
-        state_class=SensorStateClass.MEASUREMENT,
-        data_retriever=SensorDataRetriever.STANDARD,
-        required_capabilities=[Capability.Circuit2],
-        required_device=Open3eDevices.Vitodens
-    ),
-    Open3eSensorEntityDescription(
-        poll_data_features=[Features.Temperature.MixerThreeCircuitRoomTemperatureSetpoint],
-        device_class=SensorDeviceClass.TEMPERATURE,
-        key="mixer_three_circuit_room_temperature_setpoint",
-        translation_key="mixer_three_circuit_room_temperature_setpoint",
-        entity_registry_enabled_default=False,
-        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
-        state_class=SensorStateClass.MEASUREMENT,
-        data_retriever=SensorDataRetriever.STANDARD,
-        required_capabilities=[Capability.Circuit3],
-        required_device=Open3eDevices.Vitodens
-    ),
-    Open3eSensorEntityDescription(
-        poll_data_features=[Features.Temperature.MixerFourCircuitRoomTemperatureSetpoint],
-        device_class=SensorDeviceClass.TEMPERATURE,
-        key="mixer_four_circuit_room_temperature_setpoint",
-        translation_key="mixer_four_circuit_room_temperature_setpoint",
-        entity_registry_enabled_default=False,
-        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
-        state_class=SensorStateClass.MEASUREMENT,
-        data_retriever=SensorDataRetriever.STANDARD,
-        required_capabilities=[Capability.Circuit4],
-        required_device=Open3eDevices.Vitodens
-    ),
-    Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.FlowTemperatureTargetSetpoint],
         device_class=SensorDeviceClass.TEMPERATURE,
         key="flow_temperature_target_setpoint",
