@@ -558,16 +558,16 @@
         "name": "Name Heizkreis 4"
       },
       "mixer_one_circuit_central_heating_curve": {
-        "name": "Heizkurzve Heizkreis 1"
+        "name": "Heizkurve Heizkreis 1"
       },
       "mixer_two_circuit_central_heating_curve": {
-        "name": "Heizkurzve Heizkreis 2"
+        "name": "Heizkurve Heizkreis 2"
       },
       "mixer_three_circuit_central_heating_curve": {
-        "name": "Heizkurzve Heizkreis 3"
+        "name": "Heizkurve Heizkreis 3"
       },
       "mixer_four_circuit_central_heating_curve": {
-        "name": "Heizkurzve Heizkreis 4"
+        "name": "Heizkurve Heizkreis 4"
       },
       "building_type": {
         "name": "Gebäudetyp"
