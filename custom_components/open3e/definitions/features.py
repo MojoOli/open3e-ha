@@ -71,7 +71,7 @@ class Features:
         HeatingCoolingBuffer = Feature(id=3018, refresh_interval=30)
         DomesticHotWaterHysteresis = Feature(id=1085, refresh_interval=30)
 
-# Vitodens
+        # Vitodens
         FlowTemperatureSensor = Feature(id=268, refresh_interval=30)
         DomesticHotWaterSensor = Feature(id=271, refresh_interval=30)
         OutsideTemperatureSensor = Feature(id=274, refresh_interval=30)
@@ -107,7 +107,7 @@ class Features:
         CompressorInlet = Feature(id=322, refresh_interval=15)
         CompressorOutlet = Feature(id=325, refresh_interval=15)
 
-# Vitodens
+        # Vitodens
         WaterPressureSensor = Feature(id=318, refresh_interval=10)
 
     class Energy:
@@ -126,7 +126,7 @@ class Features:
         CopHeating = Feature(id=2622, refresh_interval=300)
         CopDhw = Feature(id=2624, refresh_interval=300)
 
-# Vitodens
+        # Vitodens
         EnergyConsumptionCentralHeating = Feature(id=548, refresh_interval=60)
         EnergyConsumptionDomesticHotWater = Feature(id=565, refresh_interval=60)
         GeneratedCentralHeatingOutput = Feature(id=1211, refresh_interval=60)
@@ -185,7 +185,7 @@ class Features:
         VentilationMode = Feature(id=2371, refresh_interval=30)
         VentilationLevel = Feature(id=533, refresh_interval=30)
 
-# Vitodens
+        # Vitodens
         Flame = Feature(id=364, refresh_interval=10)
         CentralHeatingPump = Feature(id=381, refresh_interval=10)
         DomesticHotWaterCirculationPump = Feature(id=491, refresh_interval=10)
@@ -201,7 +201,7 @@ class Features:
     class Volume:
         Ventilation = Feature(id=2328, refresh_interval=10)
 
-# Vitodens
+        # Vitodens
         GasConsumptionCentralHeating = Feature(id=544, refresh_interval=60)
         GasConsumptionDomesticHotWater = Feature(id=545, refresh_interval=60)
         AllengraSensor = Feature(id=1043, refresh_interval=10)
@@ -225,7 +225,7 @@ class Features:
         ExpansionValve2 = Feature(id=391, refresh_interval=30)
         FourThreeWayValve = Feature(id=2735, refresh_interval=30)
 
-# Vitodens
+    # Vitodens
     class Time:
         Date = Feature(id=505, refresh_interval=60)
         Time = Feature(id=506, refresh_interval=60)
@@ -245,7 +245,7 @@ class Features:
         ErrorDtcList = Feature(id=265, refresh_interval=30)
         BackendConnectionStatus = Feature(id=1165, refresh_interval=30)
 
-# Vitodens
+        # Vitodens
         StatusDtcList = Feature(id=257, refresh_interval=60)
         StatusDtcHistory = Feature(id=258, refresh_interval=60)
         InfoDtcList = Feature(id=259, refresh_interval=60)
