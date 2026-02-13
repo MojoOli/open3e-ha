@@ -473,7 +473,7 @@
         "name": "Hot water outlet temperature"
       },
       "domestic_hot_water_temperature_setpoint": {
-        "name": "Hot water outlet target temperature "
+        "name": "Hot water outlet target temperature"
       },
       "flow_temperature_target_setpoint": {
         "name": "Flow temperature target"
