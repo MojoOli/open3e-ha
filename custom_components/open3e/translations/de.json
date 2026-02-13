@@ -524,10 +524,10 @@
         "name": "Gasverbrauch Gesamt heute"
       },
       "vitodens_device_date": {
-        "name": "Vitodens Date"
+        "name": "Vitodens Datum"
       },
       "vitodens_device_time": {
-        "name": "Vitodens Time"
+        "name": "Vitodens Uhrzeit"
       },
       "gateway_mac": {
         "name": "MAC Adresse"
