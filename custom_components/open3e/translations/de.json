@@ -367,7 +367,7 @@
         "name": "Fehler"
       },
       "connection_status": {
-        "name": "Verbindungsstatus",
+        "name": "CAN Bus Status",
         "state": {
           "connected": "Verbunden",
           "not_connected": "Nicht verbunden"
@@ -411,6 +411,181 @@
       },
       "ventilation_level": {
         "name": "Lüftungsstufe"
+      },
+      "energy_consumption_central_heating": {
+        "name": "Energieverbrauch Heizung heute"
+      },
+      "energy_consumption_domestic_hot_water": {
+        "name": "Energieverbrauch Warmwasser heute"
+      },
+      "generated_central_heating_output": {
+        "name": "Wärmeleistung Heizung heute"
+      },
+      "generated_domestic_hot_water_output": {
+        "name": "Wärmeleistung Warmwasser heute"
+      },
+      "energy_consumption_central_total_today": {
+        "name": "Energieverbrauch Gesamt heute"
+      },
+      "generated_heating_water_output_total_today": {
+        "name": "Wärmeleistung Warmwasser Gesamt heute"
+      },
+      "water_pressure_sensor": {
+        "name": "Warmwasserdruck"
+      },
+      "flow_temperature_sensor": {
+        "name": "Vorlauftemperatur"
+      },
+      "domestic_hot_water_sensor": {
+        "name": "Warmwassertemperatur"
+      },
+      "outside_temperature_sensor": {
+        "name": "Außentemperatur"
+      },
+      "mixer_one_circuit_flow_temperature_sensor": {
+        "name": "Vorlauftemperatur Heizkreis 1"
+      },
+      "mixer_two_circuit_flow_temperature_sensor": {
+        "name": "Vorlauftemperatur Heizkreis 2"
+      },
+      "mixer_three_circuit_flow_temperature_sensor": {
+        "name": "Vorlauftemperatur Heizkreis 3"
+      },
+      "mixer_four_circuit_flow_temperature_sensor": {
+        "name": "Vorlauftemperatur Heizkreis 4"
+      },
+      "flue_gas_temperature_sensor": {
+        "name": "Abgastemperatur"
+      },
+      "mixer_one_circuit_room_temperature_sensor": {
+        "name": "Raumtemperatur Heizkreis 1"
+      },
+      "mixer_two_circuit_room_temperature_sensor": {
+        "name": "Raumtemperatur Heizkreis 2"
+      },
+      "mixer_three_circuit_room_temperature_sensor": {
+        "name": "Raumtemperatur Heizkreis 3"
+      },
+      "mixer_four_circuit_room_temperature_sensor": {
+        "name": "Raumtemperatur Heizkreis 4"
+      },
+      "domestic_hot_water_outlet_sensor": {
+        "name": "Warmwasserausgangstemperatur"
+      },
+      "domestic_hot_water_temperature_setpoint": {
+        "name": "Warmwassertemperatur Soll"
+      },
+      "flow_temperature_target_setpoint": {
+        "name": "Vorlauftemperatur Soll"
+      },
+      "allengra_sensor_temperatur": {
+        "name": "Volumenstrom Temperatur"
+      },
+      "allengra_sensor_volume": {
+        "name": "Volumenstrom"
+      },
+      "heat_engine_statistical_operating_hours": {
+        "name": "Anlage Betriebsstunden"
+      },
+      "heat_engine_statistical_burner_hours": {
+        "name": "Brenner Betriebsstunden"
+      },
+      "legionella_protection_start_time": {
+        "name": "Legionellenschutz Startzeit"
+      },
+      "legionella_protection_weekday": {
+        "name": "Legionellenschutz Wochentag",
+        "state": {
+          "monday": "Montag",
+          "tuesday": "Dienstag",
+          "wednesday": "Mittwoch",
+          "thursday": "Donnerstag",
+          "friday": "Freitag",
+          "saturday": "Samstag",
+          "sunday": "Sonntag"
+        }
+      },
+      "legionella_protection_weekly": {
+        "name": "Legionellenschutz wöchentlich"
+      },
+      "service_date_next": {
+        "name": "Nächster Servicetermin"
+      },
+      "scald_protection": {
+        "name": "Status Kalkschutz"
+      },
+      "gas_consumption_central_heating_today": {
+        "name": "Gasverbrauch Heizung heute"
+      },
+      "gas_consumption_domestic_hot_water_today": {
+        "name": "Gasverbrauch Warmwasser heute"
+      },
+      "gas_consumption_total_today": {
+        "name": "Gasverbrauch Gesamt heute"
+      },
+      "vitodens_device_date": {
+        "name": "Vitodens Datum"
+      },
+      "vitodens_device_time": {
+        "name": "Vitodens Uhrzeit"
+      },
+      "gateway_mac": {
+        "name": "MAC Adresse"
+      },
+      "gateway_remote_local_network_status": {
+        "name": "WLAN Status",
+        "state": {
+          "connected": "Verbunden",
+          "not_connected": "Nicht verbunden"
+        }
+      },
+      "gateway_remote_ip": {
+        "name": "WLAN IP Adresse"
+      },
+      "gateway_remote_signal_strength": {
+        "name": "WLAN Signalstärke"
+      },
+      "central_heating_one_circuit_name": {
+        "name": "Name Heizkreis 1"
+      },
+      "central_heating_two_circuit_name": {
+        "name": "Name Heizkreis 2"
+      },
+      "central_heating_three_circuit_name": {
+        "name": "Name Heizkreis 3"
+      },
+      "central_heating_four_circuit_name": {
+        "name": "Name Heizkreis 4"
+      },
+      "mixer_one_circuit_central_heating_curve": {
+        "name": "Heizkurve Heizkreis 1"
+      },
+      "mixer_two_circuit_central_heating_curve": {
+        "name": "Heizkurve Heizkreis 2"
+      },
+      "mixer_three_circuit_central_heating_curve": {
+        "name": "Heizkurve Heizkreis 3"
+      },
+      "mixer_four_circuit_central_heating_curve": {
+        "name": "Heizkurve Heizkreis 4"
+      },
+      "building_type": {
+        "name": "Gebäudetyp"
+      },
+      "electronic_traceability_number": {
+        "name": "ElectronicTraceabilityNumber"
+      },
+      "gas_type": {
+        "name": "Gastyp"
+      },
+      "central_heating_regulation_mode": {
+        "name": "Heizungs Regulierungmodus"
+      },
+      "time_setting_source": {
+        "name": "Zeitquelle"
+      },
+      "chimney_sweeper_test_mode": {
+        "name": "Schornsteinfeger Testmodus"
       }
     },
     "binary_sensor": {
@@ -443,6 +618,36 @@
       },
       "frost_protection": {
         "name": "Frostschutz"
+      },
+      "flame": {
+        "name": "Brennerflamme"
+      },
+      "central_heating_pump": {
+        "name": "Heizkreis Pumpe"
+      },
+      "domestic_hot_water_circulation_pump": {
+        "name": "Warmwasser Umwälzpumpe"
+      },
+      "domestic_hot_water_operation_state": {
+        "name": "Warmwasser Status"
+      },
+      "legionella_protection_activation": {
+        "name": "Legionellenschutz aktiv"
+      },
+      "malfunction_heating_unit_blocked": {
+        "name": "Heizung Fehlfunktion"
+      },
+      "mixer_one_circuit_operation_state": {
+        "name": "Umwälzpumpe Heizkreis 1"
+      },
+      "mixer_two_circuit_operation_state": {
+        "name": "Umwälzpumpe Heizkreis 2"
+      },
+      "mixer_three_circuit_operation_state": {
+        "name": "Umwälzpumpe Heizkreis 3"
+      },
+      "mixer_four_circuit_operation_state": {
+        "name": "Umwälzpumpe Heizkreis 4"
       }
     },
     "climate": {

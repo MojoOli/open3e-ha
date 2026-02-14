@@ -367,7 +367,7 @@
         "name": "Errors"
       },
       "connection_status": {
-        "name": "Connection status",
+        "name": "CAN bus status",
         "state": {
           "connected": "Connected",
           "not_connected": "Disconnected"
@@ -411,6 +411,181 @@
       },
       "ventilation_level": {
         "name": "Ventilation level"
+      },
+      "energy_consumption_central_heating": {
+        "name": "Energy consumption heating today"
+      },
+      "energy_consumption_domestic_hot_water": {
+        "name": "Energy consumption hot water today"
+      },
+      "generated_central_heating_output": {
+        "name": "Output heating today"
+      },
+      "generated_domestic_hot_water_output": {
+        "name": "Output hot water today"
+      },
+      "energy_consumption_central_total_today": {
+        "name": "Energy consumption total today"
+      },
+      "generated_heating_water_output_total_today": {
+        "name": "Hot water output total today"
+      },
+      "water_pressure_sensor": {
+        "name": "Water pressure"
+      },
+      "flow_temperature_sensor": {
+        "name": "Flow temperature"
+      },
+      "domestic_hot_water_sensor": {
+        "name": "Hot water temperature"
+      },
+      "outside_temperature_sensor": {
+        "name": "Outside temperature"
+      },
+      "mixer_one_circuit_flow_temperature_sensor": {
+        "name": "Flow temperature circuit 1"
+      },
+      "mixer_two_circuit_flow_temperature_sensor": {
+        "name": "Flow temperature circuit 2"
+      },
+      "mixer_three_circuit_flow_temperature_sensor": {
+        "name": "Flow temperature circuit 3"
+      },
+      "mixer_four_circuit_flow_temperature_sensor": {
+        "name": "Flow temperature circuit 4"
+      },
+      "flue_gas_temperature_sensor": {
+        "name": "Fluegas temperature"
+      },
+      "mixer_one_circuit_room_temperature_sensor": {
+        "name": "Room temperature circuit 1"
+      },
+      "mixer_two_circuit_room_temperature_sensor": {
+        "name": "Room temperature circuit 2"
+      },
+      "mixer_three_circuit_room_temperature_sensor": {
+        "name": "Room temperature circuit 3"
+      },
+      "mixer_four_circuit_room_temperature_sensor": {
+        "name": "Room temperature circuit 4"
+      },
+      "domestic_hot_water_outlet_sensor": {
+        "name": "Hot water outlet temperature"
+      },
+      "domestic_hot_water_temperature_setpoint": {
+        "name": "Hot water outlet target temperature"
+      },
+      "flow_temperature_target_setpoint": {
+        "name": "Flow temperature target"
+      },
+      "allengra_sensor_temperatur": {
+        "name": "Flow rate temperature"
+      },
+      "allengra_sensor_volume": {
+        "name": "Flow rate"
+      },
+      "heat_engine_statistical_operating_hours": {
+        "name": "Heating operatinghours"
+      },
+      "heat_engine_statistical_burner_hours": {
+        "name": "Burner operatinghours"
+      },
+      "legionella_protection_start_time": {
+        "name": "Legionella protection start time"
+      },
+      "legionella_protection_weekday": {
+        "name": "Legionella protection weekday",
+        "state": {
+          "monday": "Monday",
+          "tuesday": "Tuesday",
+          "wednesday": "Wednesday",
+          "thursday": "Thursday",
+          "friday": "Friday",
+          "saturday": "Saturday",
+          "sunday": "Sunday"
+        }
+      },
+      "legionella_protection_weekly": {
+        "name": "Legionella protection weekly"
+      },
+      "service_date_next": {
+        "name": "Next service appointment"
+      },
+      "gas_consumption_central_heating_today": {
+        "name": "Gas consumption heating today"
+      },
+      "gas_consumption_domestic_hot_water_today": {
+        "name": "Gas consumption hot water today"
+      },
+      "gas_consumption_total_today": {
+        "name": "Gas consumption total today"
+      },
+      "scald_protection": {
+        "name": "Status scald protection"
+      },
+      "vitodens_device_date": {
+        "name": "Vitodens device date"
+      },
+      "vitodens_device_time": {
+        "name": "Vitodens device time"
+      },
+      "gateway_mac": {
+        "name": "MAC address"
+      },
+      "gateway_remote_local_network_status": {
+        "name": "WiFi status",
+        "state": {
+          "connected": "Connected",
+          "not_connected": "Not Connected"
+        }
+      },
+      "gateway_remote_ip": {
+        "name": "WiFi IP address"
+      },
+      "gateway_remote_signal_strength": {
+        "name": "WiFi signalstrength"
+      },
+      "central_heating_one_circuit_name": {
+        "name": "Name circuit 1"
+      },
+      "central_heating_two_circuit_name": {
+        "name": "Name circuit 2"
+      },
+      "central_heating_three_circuit_name": {
+        "name": "Name circuit 3"
+      },
+      "central_heating_four_circuit_name": {
+        "name": "Name circuit 4"
+      },
+      "mixer_one_circuit_central_heating_curve": {
+        "name": "Heating curve circuit 1"
+      },
+      "mixer_two_circuit_central_heating_curve": {
+        "name": "Heating curve circuit 2"
+      },
+      "mixer_three_circuit_central_heating_curve": {
+        "name": "Heating curve circuit 3"
+      },
+      "mixer_four_circuit_central_heating_curve": {
+        "name": "Heating curve circuit 4"
+      },
+      "building_type": {
+        "name": "Building type"
+      },
+      "electronic_traceability_number": {
+        "name": "Electronic traceability number"
+      },
+      "gas_type": {
+        "name": "Gas type"
+      },
+      "central_heating_regulation_mode": {
+        "name": "Heating regulation mode"
+      },
+      "time_setting_source": {
+        "name": "Time setting source"
+      },
+      "chimney_sweeper_test_mode": {
+        "name": "Chimney sweeper testmode"
       }
     },
     "binary_sensor": {
@@ -443,6 +618,36 @@
       },
       "frost_protection": {
         "name": "Frost protection"
+      },
+      "flame": {
+        "name": "Flame status"
+      },
+      "central_heating_pump": {
+        "name": "Heating circulation pump"
+      },
+      "domestic_hot_water_circulation_pump": {
+        "name": "Hot water circuit pump"
+      },
+      "domestic_hot_water_operation_state": {
+        "name": "Hot water operation status"
+      },
+      "legionella_protection_activation": {
+        "name": "Hot water legionella protection"
+      },
+      "malfunction_heating_unit_blocked": {
+        "name": "Heating malfunction"
+      },
+      "mixer_one_circuit_operation_state": {
+        "name": "Pump circuit 1"
+      },
+      "mixer_two_circuit_operation_state": {
+        "name": "Pump circuit 2"
+      },
+      "mixer_three_circuit_operation_state": {
+        "name": "Pump circuit 3"
+      },
+      "mixer_four_circuit_operation_state": {
+        "name": "Pump circuit 4"
       }
     },
     "climate": {

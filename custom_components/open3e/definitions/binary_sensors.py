@@ -33,6 +33,113 @@ class Open3eBinarySensorEntityDescription(
 
 BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
 
+    ################
+    ### VITODENS ###
+    ################
+
+    Open3eBinarySensorEntityDescription(
+        poll_data_features=[Features.State.Flame],
+        device_class=BinarySensorDeviceClass.POWER,
+        icon="mdi:fire",
+        key="flame",
+        translation_key="flame",
+        data_transform=BinarySensorDataTransform.STATE,
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eBinarySensorEntityDescription(
+        poll_data_features=[Features.State.CentralHeatingPump],
+        device_class=BinarySensorDeviceClass.POWER,
+        icon="mdi:water-sync",
+        key="central_heating_pump",
+        translation_key="central_heating_pump",
+        data_transform=BinarySensorDataTransform.STATE,
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eBinarySensorEntityDescription(
+        poll_data_features=[Features.State.DomesticHotWaterCirculationPump],
+        device_class=BinarySensorDeviceClass.POWER,
+        icon="mdi:water-sync",
+        key="domestic_hot_water_circulation_pump",
+        translation_key="domestic_hot_water_circulation_pump",
+        data_transform=BinarySensorDataTransform.STATE,
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eBinarySensorEntityDescription(
+        poll_data_features=[Features.State.DomesticHotWaterOperationState],
+        device_class=BinarySensorDeviceClass.POWER,
+        icon="mdi:water-sync",
+        key="domestic_hot_water_operation_state",
+        translation_key="domestic_hot_water_operation_state",
+        entity_registry_enabled_default=False,
+        data_transform=BinarySensorDataTransform.STATE,
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eBinarySensorEntityDescription(
+        poll_data_features=[Features.State.LegionellaProtectionActivation],
+        device_class=BinarySensorDeviceClass.POWER,
+        icon="mdi:water-plus",
+        key="legionella_protection_activation",
+        translation_key="legionella_protection_activation",
+        data_transform=BinarySensorDataTransform.STATE,
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eBinarySensorEntityDescription(
+        poll_data_features=[Features.State.MalfunctionHeatingUnitBlocked],
+        device_class=BinarySensorDeviceClass.POWER,
+        icon="mdi:water-sync",
+        key="malfunction_heating_unit_blocked",
+        translation_key="malfunction_heating_unit_blocked",
+        entity_registry_enabled_default=False,
+        data_transform=lambda data: int(data) > 0,
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eBinarySensorEntityDescription(
+        poll_data_features=[Features.State.MixerOneCircuitOperationState],
+        device_class=BinarySensorDeviceClass.POWER,
+        icon="mdi:water-sync",
+        key="mixer_one_circuit_operation_state",
+        translation_key="mixer_one_circuit_operation_state",
+        entity_registry_enabled_default=False,
+        data_transform=lambda data: int(json_loads(data)["State"]["ID"]) < 255,
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eBinarySensorEntityDescription(
+        poll_data_features=[Features.State.MixerTwoCircuitOperationState],
+        device_class=BinarySensorDeviceClass.POWER,
+        icon="mdi:water-sync",
+        key="mixer_two_circuit_operation_state",
+        translation_key="mixer_two_circuit_operation_state",
+        entity_registry_enabled_default=False,
+        data_transform=lambda data: int(json_loads(data)["State"]["ID"]) < 255,
+        required_capabilities=[Capability.Circuit2],
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eBinarySensorEntityDescription(
+        poll_data_features=[Features.State.MixerThreeCircuitOperationState],
+        device_class=BinarySensorDeviceClass.POWER,
+        icon="mdi:water-sync",
+        key="mixer_three_circuit_operation_state",
+        translation_key="mixer_three_circuit_operation_state",
+        entity_registry_enabled_default=False,
+        data_transform=lambda data: int(json_loads(data)["State"]["ID"]) < 255,
+        required_capabilities=[Capability.Circuit3],
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eBinarySensorEntityDescription(
+        poll_data_features=[Features.State.MixerFourCircuitOperationState],
+        device_class=BinarySensorDeviceClass.POWER,
+        icon="mdi:water-sync",
+        key="mixer_four_circuit_operation_state",
+        translation_key="mixer_four_circuit_operation_state",
+        entity_registry_enabled_default=False,
+        data_transform=lambda data: int(json_loads(data)["State"]["ID"]) < 255,
+        required_capabilities=[Capability.Circuit4],
+        required_device=Open3eDevices.Vitodens
+    ),
+
+
+
     ###############
     ### VITOCAL ###
     ###############
