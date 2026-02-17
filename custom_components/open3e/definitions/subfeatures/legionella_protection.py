@@ -1,5 +1,6 @@
 from enum import StrEnum
 
+
 class LegionellaProtectionWeekday(StrEnum):
     Monday = "monday"
     Tuesday = "tuesday"
