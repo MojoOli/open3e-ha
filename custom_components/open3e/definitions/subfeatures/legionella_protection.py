@@ -1,5 +1,4 @@
 from enum import StrEnum
-from datetime import datetime
 
 class LegionellaProtectionWeekday(StrEnum):
     Monday = "monday"
