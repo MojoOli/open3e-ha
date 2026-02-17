@@ -14,7 +14,7 @@ from .features import Features
 from .subfeatures.connection_status import ConnectionStatus, get_connection_status
 from .subfeatures.energy_management_mode import ENERGY_MANAGEMENT_MODES_MAP, EnergyManagementMode
 from .subfeatures.four_three_way_valve_position import FOUR_THREE_WAY_VALVE_POSITION_MAP, FourThreeWayValvePosition
-from .subfeatures.legionella_protection import LegionellaProtectionWeekday, get_lp_weekday
+from .subfeatures.legionella_protection import LegionellaProtectionWeekday
 from ..capability.capability import Capability
 
 
@@ -479,7 +479,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         translation_key="legionella_protection_weekday",
         entity_registry_enabled_default=False,
         icon="mdi:water-plus",
-        data_retriever=lambda data: get_lp_weekday(int(data)),
+        data_retriever=lambda data: LegionellaProtectionWeekday.get_lp_weekday(int(data)),
         options=[wday for wday in LegionellaProtectionWeekday],
         required_device=Open3eDevices.Vitodens
     ),
