@@ -9,10 +9,10 @@ Automatic recognition of Viessmann devices via the Open3e Server and setup of av
 
 #### Supported Devices
 
-- [x] Vitocal (100+ entities)
-- [x] Vitoair (30+ entities)
-- [ ] Vitodens
-- [x] Vitocharge (20+ entities)
+- [x] Vitocal
+- [x] Vitoair
+- [x] Vitodens
+- [x] Vitocharge
 
 ## Installation
 
