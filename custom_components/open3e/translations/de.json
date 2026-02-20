@@ -136,7 +136,7 @@
       "battery_power_current": {
         "name": "Aktuelle Batterieleistung"
       },
-      "backup_box_installed":{
+      "backup_box_installed": {
         "name": "Backup-Box vorhanden"
       },
       "backup_box_discharge_limit_percentage": {
@@ -672,13 +672,64 @@
         }
       },
       "climate_circuit_2": {
-        "name": "Heiz-Kühlkreis 2"
+        "name": "Heiz-Kühlkreis 2",
+        "state_attributes": {
+          "preset_mode": {
+            "state": {
+              "off_mode": "Abschaltbetrieb",
+              "reduced": "Reduziert",
+              "normal": "Normal",
+              "comfort": "Komfort",
+              "fixed_value": "Festwert",
+              "frost_protection": "Frostschutz",
+              "eco_reduced": "Energiesparen Reduziert",
+              "eco_normal": "Energiesparen Normal",
+              "eco_comfort": "Energiesparen Komfort",
+              "cooling_normal": "Kühlen Normal",
+              "cooling_comfort": "Kühlen Komfort"
+            }
+          }
+        }
       },
       "climate_circuit_3": {
-        "name": "Heiz-Kühlkreis 3"
+        "name": "Heiz-Kühlkreis 3",
+        "state_attributes": {
+          "preset_mode": {
+            "state": {
+              "off_mode": "Abschaltbetrieb",
+              "reduced": "Reduziert",
+              "normal": "Normal",
+              "comfort": "Komfort",
+              "fixed_value": "Festwert",
+              "frost_protection": "Frostschutz",
+              "eco_reduced": "Energiesparen Reduziert",
+              "eco_normal": "Energiesparen Normal",
+              "eco_comfort": "Energiesparen Komfort",
+              "cooling_normal": "Kühlen Normal",
+              "cooling_comfort": "Kühlen Komfort"
+            }
+          }
+        }
       },
       "climate_circuit_4": {
-        "name": "Heiz-Kühlkreis 4"
+        "name": "Heiz-Kühlkreis 4",
+        "state_attributes": {
+          "preset_mode": {
+            "state": {
+              "off_mode": "Abschaltbetrieb",
+              "reduced": "Reduziert",
+              "normal": "Normal",
+              "comfort": "Komfort",
+              "fixed_value": "Festwert",
+              "frost_protection": "Frostschutz",
+              "eco_reduced": "Energiesparen Reduziert",
+              "eco_normal": "Energiesparen Normal",
+              "eco_comfort": "Energiesparen Komfort",
+              "cooling_normal": "Kühlen Normal",
+              "cooling_comfort": "Kühlen Komfort"
+            }
+          }
+        }
       }
     },
     "number": {
