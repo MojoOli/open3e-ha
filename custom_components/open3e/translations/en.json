@@ -4,15 +4,15 @@
       "user": {
         "description": "Please enter the topic and command topic for your Open3e server. Use the default if you haven't changed it.",
         "data": {
-          "mqtt_topic": "Open3e MQTT Topic",
-          "mqtt_cmnd": "Open3e MQTT Command Topic"
+          "mqtt_topic": "Open3e MQTT topic",
+          "mqtt_cmnd": "Open3e MQTT command topic"
         }
       }
     },
     "error": {
       "timeout": "Unable to get a response from the Open3e server.",
       "unavailable": "The Open3e server is not running.",
-      "general": "Unable to communicate with the Open3e server. Make sure the the MQTT topic and cmnd is correct, the MQTT server is running, the Open3e server is running and connected to the MQTT client of HomeAssistant."
+      "general": "Unable to communicate with the Open3e server. Make sure the the MQTT topic and cmnd is correct, the MQTT server is running, the Open3e server is running and connected to the MQTT client of Home Assistant."
     }
   },
   "exceptions": {
@@ -32,7 +32,7 @@
         "name": "Return temperature"
       },
       "domestic_hot_water_temperature": {
-        "name": "Domestic Hot Water temperature"
+        "name": "Domestic hot water temperature"
       },
       "water_pressure": {
         "name": "Water pressure"
@@ -101,88 +101,88 @@
         "name": "Thermal power"
       },
       "battery_state_percentage": {
-        "name": "Battery State of Charge"
+        "name": "Battery state of charge"
       },
       "battery_charge_today": {
-        "name": "Battery Charge Today"
+        "name": "Battery charge today"
       },
       "battery_charge_week": {
-        "name": "Battery Charge Week"
+        "name": "Battery charge week"
       },
       "battery_charge_month": {
-        "name": "Battery Charge Month"
+        "name": "Battery charge month"
       },
       "battery_charge_year": {
-        "name": "Battery Charge Year"
+        "name": "Battery charge year"
       },
       "battery_charge_total": {
-        "name": "Battery Charge Total"
+        "name": "Battery charge total"
       },
       "battery_discharge_today": {
-        "name": "Battery Discharge Today"
+        "name": "Battery discharge today"
       },
       "battery_discharge_week": {
-        "name": "Battery Discharge Week"
+        "name": "Battery discharge week"
       },
       "battery_discharge_month": {
-        "name": "Battery Discharge Month"
+        "name": "Battery discharge month"
       },
       "battery_discharge_year": {
-        "name": "Battery Discharge Year"
+        "name": "Battery discharge year"
       },
       "battery_discharge_total": {
-        "name": "Battery Discharge Total"
+        "name": "Battery discharge total"
       },
       "battery_power_current": {
-        "name": "Current Battery Load"
+        "name": "Current battery load"
       },
       "backup_box_installed": {
         "name": "Backup-Box installed"
       },
       "backup_box_discharge_limit_percentage": {
-        "name": "Battery Discharge Limit (Backup-Box)"
+        "name": "Battery discharge limit (Backup-Box)"
       },
       "maximum_recharge_power": {
-        "name": "Maximum Recharge Power from the Grid"
+        "name": "Maximum recharge power from the grid"
       },
       "grid_power_current": {
-        "name": "Grid Power"
+        "name": "Grid power"
       },
       "pv_power_current": {
-        "name": "PV Power"
+        "name": "PV power"
       },
       "pv_power_string_1_current": {
-        "name": "PV Power String1"
+        "name": "PV power string1"
       },
       "pv_power_string_2_current": {
-        "name": "PV Power String2"
+        "name": "PV power string2"
       },
       "pv_power_string_3_current": {
-        "name": "PV Power String3"
+        "name": "PV power string3"
       },
       "pv_energy_production_today": {
-        "name": "PV Energy Production Today"
+        "name": "PV energy production today"
       },
       "pv_energy_production_week": {
-        "name": "PV Energy Production Week"
+        "name": "PV energy production week"
       },
       "pv_energy_production_month": {
-        "name": "PV Energy Production Month"
+        "name": "PV energy production month"
       },
       "pv_energy_production_year": {
-        "name": "PV Energy Production Year"
+        "name": "PV energy production year"
       },
       "pv_energy_production_total": {
-        "name": "PV Energy Production Total"
+        "name": "PV energy production total"
       },
       "grid_supplied_energy": {
-        "name": "Grid Energy Supply Total"
+        "name": "Grid energy supply total"
       },
       "grid_feed_in_energy": {
-        "name": "Grid Energy Feed-In Total"
+        "name": "Grid energy feed-in total"
       },
       "domestic_hot_water_target_temperature": {
-        "name": "Domestic Hot Water Temperature"
+        "name": "Domestic hot water temperature"
       },
       "flow_circuit1_temperature": {
         "name": "Heating circuit 1 flow temperature"
@@ -197,171 +197,171 @@
         "name": "Heating circuit 4 flow temperature"
       },
       "compressor_inlet_temperature": {
-        "name": "Compressor Inlet Temperature"
+        "name": "Compressor inlet temperature"
       },
       "compressor_inlet_pressure": {
-        "name": "Compressor Inlet Pressure"
+        "name": "Compressor inlet pressure"
       },
       "compressor_outlet_temperature": {
-        "name": "Compressor Outlet Temperature"
+        "name": "Compressor outlet temperature"
       },
       "compressor_outlet_pressure": {
-        "name": "Compressor Outlet Pressure"
+        "name": "Compressor outlet pressure"
       },
       "room1_temperature": {
-        "name": "Room 1 Temperature"
+        "name": "Room 1 temperature"
       },
       "room2_temperature": {
-        "name": "Room 2 Temperature"
+        "name": "Room 2 temperature"
       },
       "room3_temperature": {
-        "name": "Room 3 Temperature"
+        "name": "Room 3 temperature"
       },
       "room4_temperature": {
-        "name": "Room 4 Temperature"
+        "name": "Room 4 temperature"
       },
       "expansion_valve1_position": {
-        "name": "Expansion Valve 1 Position"
+        "name": "Expansion valve 1 position"
       },
       "expansion_valve2_position": {
-        "name": "Expansion Valve 2 Position"
+        "name": "Expansion valve 2 position"
       },
       "allengra_flow_rate": {
-        "name": "Volumetric Flow"
+        "name": "Volumetric flow"
       },
       "allengra_temperature": {
-        "name": "Volumetric Flow Sensor Temperature"
+        "name": "Volumetric flow sensor temperature"
       },
       "primary_inlet_temperature": {
-        "name": "Primary Inlet Temperature"
+        "name": "Primary inlet temperature"
       },
       "secondary_outlet_temperature": {
-        "name": "Secondary Outlet Temperature"
+        "name": "Secondary outlet temperature"
       },
       "engine_room_temperature": {
-        "name": "Engine Room Temperature"
+        "name": "Engine room temperature"
       },
       "compressor_oil_temperature": {
-        "name": "Compressor Oil Temperature"
+        "name": "Compressor oil temperature"
       },
       "fan1_power": {
-        "name": "Fan 1 Power"
+        "name": "Fan 1 power"
       },
       "fan2_power": {
-        "name": "Fan 2 Power"
+        "name": "Fan 2 power"
       },
       "economizer_liquid_temperature": {
-        "name": "Economizer Liquid Temperature"
+        "name": "Economizer liquid temperature"
       },
       "evaporation_vapor_temperature": {
-        "name": "Evaporation Vapor Temperature"
+        "name": "Evaporation vapor temperature"
       },
       "compressor_speed_percentage": {
-        "name": "Compressor Speed Percentage"
+        "name": "Compressor speed percentage"
       },
       "compressor_speed_rpm": {
-        "name": "Compressor Speed"
+        "name": "Compressor speed"
       },
       "outdoor_air_temperature": {
-        "name": "Outdoor Air Temperature"
+        "name": "Outdoor air temperature"
       },
       "supply_air_temperature": {
-        "name": "Supply Air Temperature"
+        "name": "Supply air temperature"
       },
       "extract_air_temperature": {
-        "name": "Extract Air Temperature"
+        "name": "Extract air temperature"
       },
       "exhaust_air_temperature": {
-        "name": "Exhaust Air Temperature"
+        "name": "Exhaust air temperature"
       },
       "outdoor_air_humidity": {
-        "name": "Outdoor Air Humidity"
+        "name": "Outdoor air humidity"
       },
       "supply_air_humidity": {
-        "name": "Supply Air Humidity"
+        "name": "Supply air humidity"
       },
       "extract_air_humidity": {
-        "name": "Extract Air Humidity"
+        "name": "Extract air humidity"
       },
       "exhaust_air_humidity": {
-        "name": "Exhaust Air Humidity"
+        "name": "Exhaust air humidity"
       },
       "inverter_ambient_temperature": {
-        "name": "Ambient Temperature"
+        "name": "Ambient temperature"
       },
       "battery_temperature": {
-        "name": "Battery Temperature"
+        "name": "Battery temperature"
       },
       "thermal_output_today": {
-        "name": "Thermal Output Today"
+        "name": "Thermal output today"
       },
       "cooling_output_today": {
-        "name": "Cooling Output Today"
+        "name": "Cooling output today"
       },
       "warm_water_output_today": {
-        "name": "Warm Water Output Today"
+        "name": "Warm water output today"
       },
       "flow_circuit_1_supply_temp_setpoint": {
-        "name": "Flow Circuit 1 Supply Temperature Setpoint"
+        "name": "Flow circuit 1 supply temperature setpoint"
       },
       "flow_circuit_2_supply_temp_setpoint": {
-        "name": "Flow Circuit 2 Supply Temperature Setpoint"
+        "name": "Flow circuit 2 supply temperature setpoint"
       },
       "flow_circuit_3_supply_temp_setpoint": {
-        "name": "Flow Circuit 3 Supply Temperature Setpoint"
+        "name": "Flow circuit 3 supply temperature setpoint"
       },
       "flow_circuit_4_supply_temp_setpoint": {
-        "name": "Flow Circuit 4 Supply Temperature Setpoint"
+        "name": "Flow circuit 4 supply temperature setpoint"
       },
       "heating_buffer_temperature": {
-        "name": "Heating Buffer Temperature"
+        "name": "Heating buffer temperature"
       },
       "cooling_buffer_temperature": {
-        "name": "Cooling Buffer Temperature"
+        "name": "Cooling buffer temperature"
       },
       "heating_cooling_buffer_temperature": {
-        "name": "Heating/Cooling Buffer Temperature"
+        "name": "Heating/cooling buffer temperature"
       },
       "energy_management_mode": {
-        "name": "SmartGrid Operating State",
+        "name": "SmartGrid operating state",
         "state": {
-          "shutdown_mode": "Shutdown Mode",
-          "normal_mode": "Normal Mode",
-          "preferred_mode": "Preferred Mode",
-          "forced_mode": "Forced Mode"
+          "shutdown_mode": "Shutdown mode",
+          "normal_mode": "Normal mode",
+          "preferred_mode": "Preferred mode",
+          "forced_mode": "Forced mode"
         }
       },
       "four_three_way_valve_position": {
-        "name": "4/3-Way Valve Position",
+        "name": "4/3-way valve position",
         "state": {
           "buffer": "Heating",
-          "idle": "Idle/Defrost",
-          "hot_water": "Hot Water"
+          "idle": "Idle/defrost",
+          "hot_water": "Hot water"
         }
       },
       "desired_thermal_capacity": {
-        "name": "Desired Thermal Power"
+        "name": "Desired thermal power"
       },
       "desired_thermal_energy_defrost": {
-        "name": "Desired Thermal Power Defrost"
+        "name": "Desired thermal power defrost"
       },
       "additional_heater_operating_hours": {
-        "name": "Additional Heater Operating Hours"
+        "name": "Additional heater operating hours"
       },
       "additional_heater_starts": {
-        "name": "Additional Heater Starts"
+        "name": "Additional heater starts"
       },
       "compressor_operating_hours": {
-        "name": "Compressor Operating Hours"
+        "name": "Compressor operating hours"
       },
       "compressor_starts": {
-        "name": "Compressor Starts"
+        "name": "Compressor starts"
       },
       "service_manager_required": {
         "name": "Service required"
       },
       "malfunction_id": {
-        "name": "Malfunction Identification"
+        "name": "Malfunction identification"
       },
       "error_dtc_list": {
         "name": "Errors"
@@ -398,10 +398,10 @@
         "name": "COP total today"
       },
       "supply_air_fan_speed": {
-        "name": "Supply Air Fan"
+        "name": "Supply air fan"
       },
       "exhaust_air_fan_speed": {
-        "name": "Exhaust Air Fan"
+        "name": "Exhaust air fan"
       },
       "ventilation_supply_air_volume": {
         "name": "Supply air volume flow"
@@ -455,7 +455,7 @@
         "name": "Flow temperature circuit 4"
       },
       "flue_gas_temperature_sensor": {
-        "name": "Fluegas temperature"
+        "name": "Flue gas temperature"
       },
       "mixer_one_circuit_room_temperature_sensor": {
         "name": "Room temperature circuit 1"
@@ -485,10 +485,10 @@
         "name": "Flow rate"
       },
       "heat_engine_statistical_operating_hours": {
-        "name": "Heating operatinghours"
+        "name": "Heating operating hours"
       },
       "heat_engine_statistical_burner_hours": {
-        "name": "Burner operatinghours"
+        "name": "Burner operating hours"
       },
       "legionella_protection_start_time": {
         "name": "Legionella protection start time"
@@ -536,14 +536,14 @@
         "name": "WiFi status",
         "state": {
           "connected": "Connected",
-          "not_connected": "Not Connected"
+          "not_connected": "Not connected"
         }
       },
       "gateway_remote_ip": {
         "name": "WiFi IP address"
       },
       "gateway_remote_signal_strength": {
-        "name": "WiFi signalstrength"
+        "name": "WiFi signal strength"
       },
       "central_heating_one_circuit_name": {
         "name": "Name circuit 1"
@@ -585,12 +585,12 @@
         "name": "Time setting source"
       },
       "chimney_sweeper_test_mode": {
-        "name": "Chimney sweeper testmode"
+        "name": "Chimney sweeper test mode"
       }
     },
     "binary_sensor": {
       "circuit_frost_protection": {
-        "name": "Frost Protection Heating Circuit"
+        "name": "Frost protection heating circuit"
       },
       "circuit_pump": {
         "name": "Heatpump circuit pump"
@@ -608,13 +608,13 @@
         "name": "Heating circuit 4 circulation pump"
       },
       "hot_water_circulation_pump_hygiene": {
-        "name": "Hot Water Legionella Protection"
+        "name": "Hot water legionella protection"
       },
       "additional_heater_active": {
-        "name": "Additional Heater"
+        "name": "Additional heater"
       },
       "heat_pump_compressor_active": {
-        "name": "Heat Pump Compressor"
+        "name": "Heat pump compressor"
       },
       "frost_protection": {
         "name": "Frost protection"
@@ -734,169 +734,169 @@
     },
     "number": {
       "circuit_1_comfort_temperature": {
-        "name": "Climate circuit 1 heating Comfort"
+        "name": "Climate circuit 1 heating comfort"
       },
       "circuit_1_standard_temperature": {
-        "name": "Climate circuit 1 heating Standard"
+        "name": "Climate circuit 1 heating standard"
       },
       "circuit_1_reduced_temperature": {
-        "name": "Climate circuit 1 heating Reduced"
+        "name": "Climate circuit 1 heating reduced"
       },
       "circuit_2_comfort_temperature": {
-        "name": "Climate circuit 2 heating Comfort"
+        "name": "Climate circuit 2 heating comfort"
       },
       "circuit_2_standard_temperature": {
-        "name": "Climate circuit 2 heating Standard"
+        "name": "Climate circuit 2 heating standard"
       },
       "circuit_2_reduced_temperature": {
-        "name": "Climate circuit 2 heating Reduced"
+        "name": "Climate circuit 2 heating reduced"
       },
       "circuit_3_comfort_temperature": {
-        "name": "Climate circuit 3 heating Comfort"
+        "name": "Climate circuit 3 heating comfort"
       },
       "circuit_3_standard_temperature": {
-        "name": "Climate circuit 3 heating Standard"
+        "name": "Climate circuit 3 heating standard"
       },
       "circuit_3_reduced_temperature": {
-        "name": "Climate circuit 3 heating Reduced"
+        "name": "Climate circuit 3 heating reduced"
       },
       "circuit_4_comfort_temperature": {
-        "name": "Climate circuit 4 heating Comfort"
+        "name": "Climate circuit 4 heating comfort"
       },
       "circuit_4_standard_temperature": {
-        "name": "Climate circuit 4 heating Standard"
+        "name": "Climate circuit 4 heating standard"
       },
       "circuit_4_reduced_temperature": {
-        "name": "Climate circuit 4 heating Reduced"
+        "name": "Climate circuit 4 heating reduced"
       },
       "circuit_1_comfort_cooling": {
-        "name": "Climate circuit 1 cooling Comfort"
+        "name": "Climate circuit 1 cooling comfort"
       },
       "circuit_1_standard_cooling": {
-        "name": "Climate circuit 1 cooling Standard"
+        "name": "Climate circuit 1 cooling standard"
       },
       "circuit_1_reduced_cooling": {
-        "name": "Climate circuit 1 cooling Reduced"
+        "name": "Climate circuit 1 cooling reduced"
       },
       "circuit_2_comfort_cooling": {
-        "name": "Climate circuit 2 cooling Comfort"
+        "name": "Climate circuit 2 cooling comfort"
       },
       "circuit_2_standard_cooling": {
-        "name": "Climate circuit 2 cooling Standard"
+        "name": "Climate circuit 2 cooling standard"
       },
       "circuit_2_reduced_cooling": {
-        "name": "Climate circuit 2 cooling Reduced"
+        "name": "Climate circuit 2 cooling reduced"
       },
       "circuit_3_comfort_cooling": {
-        "name": "Climate circuit 3 cooling Comfort"
+        "name": "Climate circuit 3 cooling comfort"
       },
       "circuit_3_standard_cooling": {
-        "name": "Climate circuit 3 cooling Standard"
+        "name": "Climate circuit 3 cooling standard"
       },
       "circuit_3_reduced_cooling": {
-        "name": "Climate circuit 3 cooling Reduced"
+        "name": "Climate circuit 3 cooling reduced"
       },
       "circuit_4_comfort_cooling": {
-        "name": "Climate circuit 4 cooling Comfort"
+        "name": "Climate circuit 4 cooling comfort"
       },
       "circuit_4_standard_cooling": {
-        "name": "Climate circuit 4 cooling Standard"
+        "name": "Climate circuit 4 cooling standard"
       },
       "circuit_4_reduced_cooling": {
-        "name": "Climate circuit 4 cooling Reduced"
+        "name": "Climate circuit 4 cooling reduced"
       },
       "heater_max_power": {
-        "name": "Electrical Heater Maximum Power"
+        "name": "Electrical heater maximum power"
       },
       "smartgrid_increase_heating_room_temperature": {
-        "name": "SmartGrid Heating Increase Room Temperature"
+        "name": "SmartGrid heating increase room temperature"
       },
       "smartgrid_decrease_cooling_room_temperature": {
-        "name": "SmartGrid Cooling Decrease Room Temperature"
+        "name": "SmartGrid cooling decrease room temperature"
       },
       "smartgrid_increase_heating_buffer_temperature": {
-        "name": "SmartGrid Heating Increase Buffer Temperature"
+        "name": "SmartGrid heating increase buffer temperature"
       },
       "smartgrid_decrease_cooling_buffer_temperature": {
-        "name": "SmartGrid Cooling Decrease Buffer Temperature"
+        "name": "SmartGrid cooling decrease buffer temperature"
       },
       "smartgrid_increase_dhw_temperature": {
-        "name": "SmartGrid Increase DHW Temperature"
+        "name": "SmartGrid increase DHW temperature"
       },
       "heating_circuit_1_flow_setpoint_cooling": {
-        "name": "Setpoint Cooling Circuit 1"
+        "name": "Setpoint cooling circuit 1"
       },
       "heating_circuit_2_flow_setpoint_cooling": {
-        "name": "Setpoint Cooling Circuit 2"
+        "name": "Setpoint cooling circuit 2"
       },
       "heating_circuit_3_flow_setpoint_cooling": {
-        "name": "Setpoint Cooling Circuit 3"
+        "name": "Setpoint cooling circuit 3"
       },
       "heating_circuit_4_flow_setpoint_cooling": {
-        "name": "Setpoint Cooling Circuit 4"
+        "name": "Setpoint cooling circuit 4"
       },
       "heating_circuit_1_cooling_hysteresis_on": {
-        "name": "Hysteresis On Cooling Circuit 1"
+        "name": "Hysteresis on cooling circuit 1"
       },
       "heating_circuit_2_cooling_hysteresis_on": {
-        "name": "Hysteresis On Cooling Circuit 2"
+        "name": "Hysteresis on cooling circuit 2"
       },
       "heating_circuit_3_cooling_hysteresis_on": {
-        "name": "Hysteresis On Cooling Circuit 3"
+        "name": "Hysteresis on cooling circuit 3"
       },
       "heating_circuit_4_cooling_hysteresis_on": {
-        "name": "Hysteresis On Cooling Circuit 4"
+        "name": "Hysteresis on cooling circuit 4"
       },
       "heating_circuit_1_cooling_hysteresis_off": {
-        "name": "Hysteresis Off Cooling Circuit 1"
+        "name": "Hysteresis off cooling circuit 1"
       },
       "heating_circuit_2_cooling_hysteresis_off": {
-        "name": "Hysteresis Off Cooling Circuit 2"
+        "name": "Hysteresis off cooling circuit 2"
       },
       "heating_circuit_3_cooling_hysteresis_off": {
-        "name": "Hysteresis Off Cooling Circuit 3"
+        "name": "Hysteresis off cooling circuit 3"
       },
       "heating_circuit_4_cooling_hysteresis_off": {
-        "name": "Hysteresis Off Cooling Circuit 4"
+        "name": "Hysteresis off cooling circuit 4"
       },
       "buffer_min_temperature": {
-        "name": "Buffer Tank Min Temperature"
+        "name": "Buffer tank min temperature"
       },
       "buffer_max_temperature": {
-        "name": "Buffer Tank Max Temperature"
+        "name": "Buffer tank max temperature"
       },
       "frost_protection_temperature": {
-        "name": "Frost Protection Temperature Heating Circuit"
+        "name": "Frost protection temperature heating circuit"
       },
       "circuit_1_heating_curve_slope": {
-        "name": "Heating Curve 1 Slope"
+        "name": "Heating curve 1 slope"
       },
       "circuit_2_heating_curve_slope": {
-        "name": "Heating Curve 2 Slope"
+        "name": "Heating curve 2 slope"
       },
       "circuit_3_heating_curve_slope": {
-        "name": "Heating Curve 3 Slope"
+        "name": "Heating curve 3 slope"
       },
       "circuit_4_heating_curve_slope": {
-        "name": "Heating Curve 4 Slope"
+        "name": "Heating curve 4 slope"
       },
       "circuit_1_heating_curve_level": {
-        "name": "Heating Curve 1 Level"
+        "name": "Heating curve 1 level"
       },
       "circuit_2_heating_curve_level": {
-        "name": "Heating Curve 2 Level"
+        "name": "Heating curve 2 level"
       },
       "circuit_3_heating_curve_level": {
-        "name": "Heating Curve 3 Level"
+        "name": "Heating curve 3 level"
       },
       "circuit_4_heating_curve_level": {
-        "name": "Heating Curve 4 Level"
+        "name": "Heating curve 4 level"
       },
       "dhw_hysteresis_on": {
-        "name": "Warm Water Hysteresis On"
+        "name": "Warm water hysteresis on"
       },
       "dhw_hysteresis_off": {
-        "name": "Warm Water Hysteresis Off"
+        "name": "Warm water hysteresis off"
       },
       "circuit_1_pump_speed": {
         "name": "Heating circuit 1 circulation pump speed"
@@ -913,7 +913,7 @@
     },
     "select": {
       "buffer_operation_mode": {
-        "name": "Buffer Tank mode",
+        "name": "Buffer tank mode",
         "state": {
           "heating": "Heating",
           "cooling": "Cooling"
@@ -923,8 +923,8 @@
         "name": "Quick mode",
         "state": {
           "none": "-",
-          "intensive": "Intensive Ventilation",
-          "reduced_noise": "Reduced Noise",
+          "intensive": "Intensive ventilation",
+          "reduced_noise": "Reduced noise",
           "off": "Off"
         }
       }
@@ -939,7 +939,7 @@
         "name": "Shortly generate hot water"
       },
       "hot_water_circulation_pump": {
-        "name": "Hot Water Circulation Pump"
+        "name": "Hot water circulation pump"
       }
     },
     "fan": {

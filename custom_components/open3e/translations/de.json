@@ -12,7 +12,7 @@
     "error": {
       "timeout": "Es wurde keine Antwort vom Open3e server empfangen.",
       "unavailable": "Der Open3e Server ist abgeschalten.",
-      "general": "Die Kommunikation mit dem Open3e Server wurde nicht hergestellt. Vergewissere dich, dass das MQTT topic und cmnd korrekt sind, der MQTT Server läuft, der Open3e Server läuft und mit dem MQTT Client von HomeAssistant verbunden ist."
+      "general": "Die Kommunikation mit dem Open3e Server wurde nicht hergestellt. Vergewissere dich, dass das MQTT Topic und Command Topic korrekt sind, der MQTT Server läuft, der Open3e Server läuft und mit dem MQTT Client von Home Assistant verbunden ist."
     }
   },
   "exceptions": {
@@ -425,13 +425,13 @@
         "name": "Wärmeleistung Warmwasser heute"
       },
       "energy_consumption_central_total_today": {
-        "name": "Energieverbrauch Gesamt heute"
+        "name": "Energieverbrauch Heizung Gesamt heute"
       },
       "generated_heating_water_output_total_today": {
         "name": "Wärmeleistung Warmwasser Gesamt heute"
       },
       "water_pressure_sensor": {
-        "name": "Warmwasserdruck"
+        "name": "Wasserdruck"
       },
       "flow_temperature_sensor": {
         "name": "Vorlauftemperatur"
@@ -573,13 +573,13 @@
         "name": "Gebäudetyp"
       },
       "electronic_traceability_number": {
-        "name": "ElectronicTraceabilityNumber"
+        "name": "Elektronische Rückverfolgbarkeitsnummer"
       },
       "gas_type": {
         "name": "Gastyp"
       },
       "central_heating_regulation_mode": {
-        "name": "Heizungs Regulierungmodus"
+        "name": "Heizungs-Regelungsmodus"
       },
       "time_setting_source": {
         "name": "Zeitquelle"
