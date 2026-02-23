@@ -1,12 +1,12 @@
 from dataclasses import dataclass
+from datetime import datetime
 from typing import Callable, Any, List
 
 from homeassistant.components.sensor import SensorEntityDescription, SensorDeviceClass, SensorStateClass
 from homeassistant.const import UnitOfTemperature, UnitOfEnergy, PERCENTAGE, UnitOfPower, \
     EntityCategory, UnitOfPressure, UnitOfVolume, UnitOfVolumeFlowRate, UnitOfTime
-from homeassistant.util.json import json_loads
 from homeassistant.util.dt import parse_time
-from datetime import datetime
+from homeassistant.util.json import json_loads
 
 from .devices import Open3eDevices
 from .entity_description import Open3eEntityDescription
@@ -65,7 +65,7 @@ class SensorDataRetriever:
 
     @staticmethod
     def cleaned_ip(ip_str: str) -> str:
-        """Clean-up the IP-adress string by removing leading zeros from each octet. 
+        """Clean-up the IP address string by removing leading zeros from each octet. 
            This is necessary because the Viessmann CAN Bus returns IPs with leading zeros."""
         try:
             return ".".join(str(int(octet)) for octet in ip_str.split('.'))

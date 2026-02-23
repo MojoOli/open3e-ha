@@ -16,7 +16,8 @@ Automatic recognition of Viessmann devices via the Open3e Server and setup of av
 
 ## Installation
 
-**This integration needs the Open3e sever in order to communicate with the devices. So make sure its installed and running in listen mode.**
+**This integration needs the Open3e server in order to communicate with the devices. So make sure its installed and
+running in listen mode.**
 
 <details>
 <summary>Open3e Server Installation Instructions</summary>
