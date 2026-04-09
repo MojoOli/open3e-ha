@@ -131,7 +131,9 @@ the official [open3e repository](https://github.com/open3e/open3e).
            if isinstance(data, str) and data.strip().startswith("{"):
                payload = json_loads(data)
                # Target the 'ID' field for enums or 'Actual' for complex types
-               raw_id = payload.get("ID") or payload.get("State", {}).get("ID")
+               raw_id = payload.get("ID") if payload.get("ID") is not None else payload.get("State", {}).get("ID")
+               if raw_id is None:
+                   return None
                value = int(raw_id)
            else:
                # Legacy format (simple integer or byte)

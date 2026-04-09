@@ -412,7 +412,7 @@
       "ventilation_level": {
         "name": "Ventilation level"
       },
-      "domestic_hot_water_operation_state": {
+      "domestic_hot_water_operation_state_text": {
         "name": "Hot water operation status",
         "state": {
           "off": "Off",

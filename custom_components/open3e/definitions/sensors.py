@@ -532,9 +532,10 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
     ######### STATE-SENSORS #########
     Open3eSensorEntityDescription(
         poll_data_features=[Features.State.DomesticHotWaterOperationState],
+        device_class=SensorDeviceClass.ENUM,
         icon="mdi:water-sync",
-        key="domestic_hot_water_operation_state",
-        translation_key="domestic_hot_water_operation_state",
+        key="domestic_hot_water_operation_state_text",
+        translation_key="domestic_hot_water_operation_state_text",
         data_retriever=get_domestic_hot_water_operation_state,
         options=[mode for mode in DomesticHotWaterOperationState],
         required_device=Open3eDevices.Vitodens
@@ -1893,7 +1894,9 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         icon="mdi:fan",
         key="ventilation_level",
         translation_key="ventilation_level",
-        data_retriever=lambda data: float(json_loads(data).get("Actual") or json_loads(data).get("Acutual")),
+        data_retriever=lambda data: float(
+            (payload := json_loads(data)).get("Actual", payload.get("Acutual", 0))
+        ),
         # Acutual intended, typo on Open3e for VentilationLevel (533)
         required_device=Open3eDevices.Vitoair
     )
