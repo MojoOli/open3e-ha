@@ -7,6 +7,7 @@ from homeassistant.util.json import json_loads
 from .devices import Open3eDevices
 from .entity_description import Open3eEntityDescription
 from .features import Features
+from .subfeatures.domestic_hot_water_operation_state import is_domestic_hot_water_operation_state_active
 from ..capability.capability import Capability
 
 
@@ -14,6 +15,11 @@ class BinarySensorDataTransform:
     """Data transform functions for MQTT binary on/off state."""
 
     POWERSTATE = lambda data: json_loads(data)["PowerState"] > 0
+    POWERSTATE_COMPLEX = lambda data: (
+        json_loads(data)["PowerState"]["ID"] > 0
+        if isinstance(json_loads(data)["PowerState"], dict)
+        else json_loads(data)["PowerState"] > 0
+    )
     STATE = lambda data: json_loads(data)["State"] > 0
     HYGIENE_ACTIVE = lambda data: json_loads(data)["HygenieActive"] > 0
     BACKUP_BOX_INSTALLED = lambda data: json_loads(data)["Unknown"] > 0 #TODO: Needs to be renamed when open3e is updated to BackUpBoxInstalled
@@ -71,7 +77,7 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
         key="domestic_hot_water_operation_state",
         translation_key="domestic_hot_water_operation_state",
         entity_registry_enabled_default=False,
-        data_transform=BinarySensorDataTransform.STATE,
+        data_transform=is_domestic_hot_water_operation_state_active,
         required_device=Open3eDevices.Vitodens
     ),
     Open3eBinarySensorEntityDescription(
@@ -150,7 +156,7 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
         key="additional_heater_active",
         translation_key="additional_heater_active",
         icon="mdi:power",
-        data_transform=BinarySensorDataTransform.POWERSTATE,
+        data_transform=BinarySensorDataTransform.POWERSTATE_COMPLEX,
         required_device=Open3eDevices.Vitocal
     ),
     Open3eBinarySensorEntityDescription(
@@ -159,7 +165,7 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
         key="heat_pump_compressor_active",
         translation_key="heat_pump_compressor_active",
         icon="mdi:power",
-        data_transform=BinarySensorDataTransform.POWERSTATE,
+        data_transform=BinarySensorDataTransform.POWERSTATE_COMPLEX,
         required_device=Open3eDevices.Vitocal
     ),
     Open3eBinarySensorEntityDescription(
