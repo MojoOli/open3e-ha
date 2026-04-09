@@ -12,8 +12,15 @@ from .devices import Open3eDevices
 from .entity_description import Open3eEntityDescription
 from .features import Features
 from .subfeatures.connection_status import ConnectionStatus, get_connection_status
+from .subfeatures.domestic_hot_water_operation_state import (
+    DomesticHotWaterOperationState,
+    get_domestic_hot_water_operation_state,
+)
 from .subfeatures.energy_management_mode import ENERGY_MANAGEMENT_MODES_MAP, EnergyManagementMode
-from .subfeatures.four_three_way_valve_position import FOUR_THREE_WAY_VALVE_POSITION_MAP, FourThreeWayValvePosition
+from .subfeatures.four_three_way_valve_position import (
+    FourThreeWayValvePosition,
+    get_four_three_way_valve_position,
+)
 from .subfeatures.legionella_protection import LegionellaProtectionWeekday
 from ..capability.capability import Capability
 
@@ -49,7 +56,7 @@ class SensorDataRetriever:
     GRID_SUPPLIED_ENERGY = lambda data: float(json_loads(data)["GridSuppliedEnergy"])
     TEMPERATURE = lambda data: float(json_loads(data)["Temperature"])
     TIME = lambda data: parse_time(str(data[1:][:-1]))
-    STANDARD =  lambda data: float(json_loads(data)["Standard"])
+    STANDARD = lambda data: float(json_loads(data)["Standard"])
     PV_POWER_CUMULATED = lambda data: float(json_loads(data)["ActivePower cumulated"])
     PV_POWER_STRING_1 = lambda data: float(json_loads(data)["ActivePower String A"])
     PV_POWER_STRING_2 = lambda data: float(json_loads(data)["ActivePower String B"])
@@ -490,7 +497,6 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         translation_key="service_date_next",
         entity_registry_enabled_default=False,
         icon="mdi:calendar",
-#        data_retriever=lambda data: SensorDataRetriever.parse_date_vitodensstr("01.01.2026"),
         data_retriever=lambda data: SensorDataRetriever.parse_date_vitodensstr(json_loads(data)["Date"]),
         required_device=Open3eDevices.Vitodens
     ),
@@ -520,6 +526,17 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="gas_consumption_domestic_hot_water_today",
         translation_key="gas_consumption_domestic_hot_water_today",
         data_retriever=SensorDataRetriever.TODAY,
+        required_device=Open3eDevices.Vitodens
+    ),
+
+    ######### STATE-SENSORS #########
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.State.DomesticHotWaterOperationState],
+        icon="mdi:water-sync",
+        key="domestic_hot_water_operation_state",
+        translation_key="domestic_hot_water_operation_state",
+        data_retriever=get_domestic_hot_water_operation_state,
+        options=[mode for mode in DomesticHotWaterOperationState],
         required_device=Open3eDevices.Vitodens
     ),
 
@@ -706,8 +723,6 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.RAWSTR,
         required_device=Open3eDevices.Vitodens
     ),
-
-
 
     ###############
     ### VITOCAL ###
@@ -1366,7 +1381,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="four_three_way_valve_position",
         translation_key="four_three_way_valve_position",
         icon="mdi:valve",
-        data_retriever=lambda data: FOUR_THREE_WAY_VALVE_POSITION_MAP.get(int(data)),
+        data_retriever=get_four_three_way_valve_position,
         options=[mode for mode in FourThreeWayValvePosition],
         required_device=Open3eDevices.Vitocal
     ),
@@ -1878,10 +1893,10 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         icon="mdi:fan",
         key="ventilation_level",
         translation_key="ventilation_level",
-        data_retriever=lambda data: float(json_loads(data)["Acutual"]),
+        data_retriever=lambda data: float(json_loads(data).get("Actual") or json_loads(data).get("Acutual")),
         # Acutual intended, typo on Open3e for VentilationLevel (533)
         required_device=Open3eDevices.Vitoair
-    ),
+    )
 )
 
 ## Sensors which are derived by calculation
@@ -1894,7 +1909,7 @@ DERIVED_SENSORS: tuple[Open3eDerivedSensorEntityDescription, ...] = (
     ######### ENERGY-SENSORS #########
     Open3eDerivedSensorEntityDescription(
         poll_data_features=[
-            Features.Energy.EnergyConsumptionCentralHeating, 
+            Features.Energy.EnergyConsumptionCentralHeating,
             Features.Energy.EnergyConsumptionDomesticHotWater
         ],
         device_class=SensorDeviceClass.ENERGY,
@@ -1908,7 +1923,7 @@ DERIVED_SENSORS: tuple[Open3eDerivedSensorEntityDescription, ...] = (
     ),
     Open3eDerivedSensorEntityDescription(
         poll_data_features=[
-            Features.Energy.GeneratedCentralHeatingOutput, 
+            Features.Energy.GeneratedCentralHeatingOutput,
             Features.Energy.GeneratedDomesticHotWaterOutput
         ],
         device_class=SensorDeviceClass.ENERGY,
@@ -1923,7 +1938,8 @@ DERIVED_SENSORS: tuple[Open3eDerivedSensorEntityDescription, ...] = (
 
     ######### VOLUME-SENSORS #########
     Open3eDerivedSensorEntityDescription(
-        poll_data_features=[Features.Volume.GasConsumptionCentralHeating, Features.Volume.GasConsumptionDomesticHotWater],
+        poll_data_features=[Features.Volume.GasConsumptionCentralHeating,
+                            Features.Volume.GasConsumptionDomesticHotWater],
         device_class=SensorDeviceClass.VOLUME,
         native_unit_of_measurement=UnitOfVolume.CUBIC_METERS,
         icon="mdi:meter-gas",
@@ -1934,8 +1950,7 @@ DERIVED_SENSORS: tuple[Open3eDerivedSensorEntityDescription, ...] = (
         compute_value=lambda heating, dhw: heating + dhw,
         required_device=Open3eDevices.Vitodens
     ),
-    
-    
+
     ###############
     ### VITOCAL ###
     ###############

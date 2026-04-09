@@ -103,9 +103,48 @@ When adding a new entity, follow these steps using the data structure from
    }
    ```
 
-**Skill Tip:** Always check the JSON structure in `Open3Edatapoints.py`. This file can be found in the
-[open3e repository](https://github.com/open3e/open3e) specifically at
-[Open3Edatapoints.py](https://github.com/open3e/open3e/blob/develop/src/open3e/Open3Edatapoints.py).
-For example, if a datapoint returns a complex
-JSON like `{"Day": 1, "Month": 3, "Year": 2024}`, you may need a custom `data_retriever` lambda or a subfeature class
-to parse it.
+**Skill Tip (Cross-Checking Open3e Changes):**
+Always cross-check the current integration with the
+latest [Open3Edatapoints.py](https://raw.githubusercontent.com/open3e/open3e/refs/heads/master/src/open3e/Open3Edatapoints.py)
+and [Open3Eenums.py](https://raw.githubusercontent.com/open3e/open3e/refs/heads/master/src/open3e/Open3Eenums.py) from
+the official [open3e repository](https://github.com/open3e/open3e).
+
+### How to Check and Adjust for Datapoint Changes:
+
+1. **Fetch the Remote Definitions:** Fetch the
+   latest [Open3Edatapoints.py](https://raw.githubusercontent.com/open3e/open3e/refs/heads/master/src/open3e/Open3Edatapoints.py)
+   and [Open3Eenums.py](https://raw.githubusercontent.com/open3e/open3e/refs/heads/master/src/open3e/Open3Eenums.py) to
+   identify structural changes.
+   Look for IDs changing from simple types (e.g., `O3EInt16`, `O3EByteVal`) to `O3EComplexType` or `O3EEnum`.
+
+2. **Identify Complex JSON Structures:**
+    - If a datapoint is now an `O3EEnum`, it will return a JSON like `{"ID": 1, "Text": "On"}`.
+    - If it's a `O3EComplexType`, it will return a JSON with multiple keys (e.g.,
+      `{"Actual": 21.5, "SensorStatus": 0}`).
+    - Check for typos in the remote file (e.g., `"Acutual"` instead of `"Actual"` for ID 533) and handle them robustly.
+
+3. **Implement Robust Parsers (Legacy + New Format):**
+   When a data structure changes, ALWAYS maintain compatibility with older Open3e versions. Use the following pattern:
+   ```python
+   def get_my_feature_value(data: Any) -> MyEnumType | None:
+       try:
+           if isinstance(data, str) and data.strip().startswith("{"):
+               payload = json_loads(data)
+               # Target the 'ID' field for enums or 'Actual' for complex types
+               raw_id = payload.get("ID") or payload.get("State", {}).get("ID")
+               value = int(raw_id)
+           else:
+               # Legacy format (simple integer or byte)
+               value = int(data)
+           return MY_MAP.get(value)
+       except (TypeError, ValueError, KeyError):
+           return None
+   ```
+
+4. **Update Entity Descriptions:**
+    - For binary sensors transitioning to complex types, use `POWERSTATE_COMPLEX` or a custom `data_transform`.
+    - For sensors, move the parsing logic to a dedicated helper in `definitions/subfeatures/` and use it as
+      `data_retriever`.
+
+5. **Verify via Linting:** Always run `lint` on modified files to catch `TypeError` or `KeyError` early, especially
+   when dealing with nested JSON parsing.

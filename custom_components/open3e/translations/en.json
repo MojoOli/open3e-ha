@@ -412,6 +412,20 @@
       "ventilation_level": {
         "name": "Ventilation level"
       },
+      "domestic_hot_water_operation_state": {
+        "name": "Hot water operation status",
+        "state": {
+          "off": "Off",
+          "hot_water": "Hot water",
+          "parallel_operation": "Parallel operation",
+          "chimney_sweep": "Chimney sweep",
+          "test_mode": "Test mode",
+          "external_temperature_setpoint": "External temperature setpoint",
+          "external_modulation_setpoint": "External modulation setpoint",
+          "hygiene_function": "Hygiene function",
+          "automatic": "Automatic"
+        }
+      },
       "energy_consumption_central_heating": {
         "name": "Energy consumption heating today"
       },

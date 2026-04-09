@@ -412,6 +412,20 @@
       "ventilation_level": {
         "name": "Lüftungsstufe"
       },
+      "domestic_hot_water_operation_state": {
+        "name": "Warmwasser-Betriebsstatus",
+        "state": {
+          "off": "Aus",
+          "hot_water": "Warmwasser",
+          "parallel_operation": "Parallelbetrieb",
+          "chimney_sweep": "Schornsteinfeger-Prüfbetrieb",
+          "test_mode": "Testbetrieb",
+          "external_temperature_setpoint": "Externer Temperatursollwert",
+          "external_modulation_setpoint": "Externer Modulationssollwert",
+          "hygiene_function": "Hygienefunktion",
+          "automatic": "Automatik"
+        }
+      },
       "energy_consumption_central_heating": {
         "name": "Energieverbrauch Heizung heute"
       },
