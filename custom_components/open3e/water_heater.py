@@ -99,7 +99,7 @@ class Open3eWaterHeater(Open3eEntity, WaterHeaterEntity):
                 self._attr_target_temperature = float(self.data[feature_id])
 
             case self.entity_description.state_feature.id:
-                self.__currently_on = json_loads(self.data[feature_id])["State"] == 1
+                self.__currently_on = json_loads(self.data[feature_id])["State"]["ID"] == 1
 
             case self.entity_description.efficiency_mode_feature.id:
                 self.__current_efficiency_mode = int(self.data[feature_id])
