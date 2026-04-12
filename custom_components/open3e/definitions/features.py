@@ -96,6 +96,13 @@ class Features:
         MixerThreeCircuitFlowTemperatureTargetSetpoint = Feature(id=989, refresh_interval=30)
         MixerFourCircuitFlowTemperatureTargetSetpoint = Feature(id=990, refresh_interval=30)
 
+
+        # Ergänzungen für Soll-/Min-/Max-Temperaturen
+        MixerOneCircuitFlowTemperatureMinimumMaximumLimit = Feature(id=1192, refresh_interval=300)
+        MixerTwoCircuitFlowTemperatureMinimumMaximumLimit = Feature(id=1193, refresh_interval=300)
+        MixerOneCircuitCurrentTemperatureSetpoint = Feature(id=1643, refresh_interval=30)
+        MixerTwoCircuitCurrentTemperatureSetpoint = Feature(id=1644, refresh_interval=30)
+
     class Humidity:
         Outdoor = Feature(id=419, refresh_interval=5)
         SupplyAir = Feature(id=420, refresh_interval=5)
@@ -198,6 +205,13 @@ class Features:
         MixerFourCircuitOperationState = Feature(id=1418, refresh_interval=10)
 
 
+
+        # Ergänzungen für Pump-Status und Kältekreis
+        CentralHeatingPumpStatus = Feature(id=2791, refresh_interval=10)
+        MixerOneCircuitPumpStatus = Feature(id=2792, refresh_interval=10)
+        MixerTwoCircuitPumpStatus = Feature(id=2793, refresh_interval=10)
+        RefrigerationCircuitOperationMode = Feature(id=2806, refresh_interval=10)
+
     class Volume:
         Ventilation = Feature(id=2328, refresh_interval=10)
 
@@ -220,12 +234,24 @@ class Features:
         Circuit3Pump = Feature(id=1104, refresh_interval=10)
         Circuit4Pump = Feature(id=1105, refresh_interval=10)
 
+
+        # Ergänzungen für Pumpgeschwindigkeit WW
+        DomesticHotWaterPumpMinimumLimit = Feature(id=1100, refresh_interval=300)
+        DomesticHotWaterPumpMaximumLimit = Feature(id=1101, refresh_interval=300)
+
     class Position:
         ExpansionValve1 = Feature(id=389, refresh_interval=30)
         ExpansionValve2 = Feature(id=391, refresh_interval=30)
         FourThreeWayValve = Feature(id=2735, refresh_interval=30)
 
     # Vitodens
+
+        # Ergänzungen für Mischer-Ventile
+        MixerOneCircuitThreeWayValvePositionPercent = Feature(id=475, refresh_interval=30)
+        MixerTwoCircuitThreeWayValvePositionPercent = Feature(id=476, refresh_interval=30)
+        MixerThreeCircuitThreeWayValvePositionPercent = Feature(id=477, refresh_interval=30)
+        MixerFourCircuitThreeWayValvePositionPercent = Feature(id=478, refresh_interval=30)
+
     class Time:
         Date = Feature(id=505, refresh_interval=60)
         Time = Feature(id=506, refresh_interval=60)
@@ -280,3 +306,16 @@ class Features:
         TimeSettingSource = Feature(id=1504, refresh_interval=86400)
         FlueGasSensorTestMode = Feature(id=1535, refresh_interval=30)
         ChimneySweeperTestMode = Feature(id=1537, refresh_interval=30)
+
+        # Ergänzungen Vitocal
+        SoftwareVersion = Feature(id=580, refresh_interval=86400)
+        SmartGridReadyConsolidator = Feature(id=543, refresh_interval=30)
+        ExternalLockActive = Feature(id=1731, refresh_interval=30)
+        DomesticHotWaterStatus = Feature(id=2320, refresh_interval=30)
+        HeatPumpFrostProtection = Feature(id=2442, refresh_interval=300)
+        EnableElectricalHeaterSmartGridMin = Feature(id=2544, refresh_interval=300)
+        EnableElectricalHeaterSmartGridMax = Feature(id=2545, refresh_interval=300)
+        SmartGridFeatureSelection = Feature(id=2560, refresh_interval=300)
+        CompressorMinMaxSpeedHeating = Feature(id=2630, refresh_interval=300)
+        NoiseReductionMode = Feature(id=2634, refresh_interval=300)
+        MixerTwoCircuitFrostProtectionConfiguration = Feature(id=2856, refresh_interval=300)
