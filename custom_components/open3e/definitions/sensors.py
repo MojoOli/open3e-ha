@@ -1900,8 +1900,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         ),
         # Acutual intended, typo on Open3e for VentilationLevel (533)
         required_device=Open3eDevices.Vitoair
-    )
-,
+    ),
 
     ###############################################
     ### VITOCAL - Ergänzungen aus Issue #116    ###
