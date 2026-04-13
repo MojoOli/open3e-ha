@@ -1899,6 +1899,47 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         ),
         # Acutual intended, typo on Open3e for VentilationLevel (533)
         required_device=Open3eDevices.Vitoair
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.EnergyOwnConsumption],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="energy_own_consumption_today",
+        translation_key="energy_own_consumption_today",
+        data_retriever=SensorDataRetriever.TODAY,
+        required_device=Open3eDevices.Vitoair
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.EnergyOwnConsumption],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="energy_own_consumption_current_month",
+        translation_key="energy_own_consumption_current_month",
+        data_retriever=SensorDataRetriever.CURRENT_MONTH,
+        required_device=Open3eDevices.Vitoair
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.EnergyOwnConsumption],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="energy_own_consumption_current_year",
+        translation_key="energy_own_consumption_current_year",
+        data_retriever=SensorDataRetriever.CURRENT_YEAR,
+        required_device=Open3eDevices.Vitoair
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.EnergyOwnConsumption],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        key="energy_own_consumption_past_year",
+        translation_key="energy_own_consumption_past_year",
+        data_retriever=SensorDataRetriever.PAST_YEAR,
+        entity_registry_enabled_default=False,
+        required_device=Open3eDevices.Vitoair
     )
 )
 
