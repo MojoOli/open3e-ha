@@ -600,6 +600,18 @@
       },
       "chimney_sweeper_test_mode": {
         "name": "Schornsteinfeger Testmodus"
+      },
+      "energy_own_consumption_today": {
+        "name": "Eigener Energieverbrauch heute"
+      },
+      "energy_own_consumption_current_month": {
+        "name": "Eigener Energieverbrauch Monat"
+      },
+      "energy_own_consumption_current_year": {
+        "name": "Eigener Energieverbrauch Jahr"
+      },
+      "energy_own_consumption_past_year": {
+        "name": "Eigener Energieverbrauch letztes Jahr"
       }
     },
     "binary_sensor": {

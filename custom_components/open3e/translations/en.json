@@ -600,6 +600,18 @@
       },
       "chimney_sweeper_test_mode": {
         "name": "Chimney sweeper test mode"
+      },
+      "energy_own_consumption_today": {
+        "name": "Own energy consumption today"
+      },
+      "energy_own_consumption_current_month": {
+        "name": "Own energy consumption current month"
+      },
+      "energy_own_consumption_current_year": {
+        "name": "Own energy consumption current year"
+      },
+      "energy_own_consumption_past_year": {
+        "name": "Own energy consumption past year"
       }
     },
     "binary_sensor": {
