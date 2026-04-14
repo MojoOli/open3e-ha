@@ -412,6 +412,31 @@
       "ventilation_level": {
         "name": "Ventilation level"
       },
+      "ventilation_bypass_available_modes": {
+        "name": "Bypass available modes"
+      },
+      "ventilation_outside_air_bypass": {
+        "name": "Outside air bypass"
+      },
+      "ventilation_inside_air_bypass": {
+        "name": "Inside air bypass"
+      },
+      "ventilation_bypass_operation_level": {
+        "name": "Bypass operation level",
+        "state": {
+          "off": "Off",
+          "dynamic": "Dynamic",
+          "soft": "Soft",
+          "manual": "Manual",
+          "unknown": "Unknown"
+        }
+      },
+      "ventilation_bypass_position": {
+        "name": "Bypass position"
+      },
+      "ventilation_bypass_flap_available_count": {
+        "name": "Bypass flap available count"
+      },
       "domestic_hot_water_operation_state_text": {
         "name": "Hot water operation status",
         "state": {
@@ -1067,6 +1092,16 @@
           "intensive": "Intensive ventilation",
           "reduced_noise": "Reduced noise",
           "off": "Off"
+        }
+      },
+      "ventilation_bypass_operation_state": {
+        "name": "Bypass operation state",
+        "state": {
+          "closed": "Closed",
+          "automatic": "Automatic",
+          "open": "Open",
+          "transition_error": "Transition/Error",
+          "unknown": "Unknown"
         }
       }
     },

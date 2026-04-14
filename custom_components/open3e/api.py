@@ -14,6 +14,7 @@ from homeassistant.helpers.json import json_dumps
 from homeassistant.util.json import json_loads
 
 from custom_components.open3e.definitions.subfeatures.buffer import Buffer
+from custom_components.open3e.definitions.subfeatures.bypass_operation_state import BypassOperationState
 from custom_components.open3e.definitions.subfeatures.dmw_mode import DmwMode
 from custom_components.open3e.definitions.subfeatures.hysteresis import Hysteresis
 from custom_components.open3e.definitions.subfeatures.program import Program
@@ -597,6 +598,29 @@ class Open3eMqttClient:
             )
         except Exception as exception:
             raise Open3eError(exception)
+
+    async def async_set_bypass_operation_state(
+            self,
+            hass: HomeAssistant,
+            feature_id: int,
+            state: BypassOperationState,
+            device_id: int
+    ):
+        try:
+            _LOGGER.debug(f"Setting bypass operation state to {state} of feature ID {feature_id}")
+            await mqtt.async_publish(
+                hass=hass,
+                topic=self.__mqtt_cmd,
+                payload=self.__write_json_payload(
+                    feature_id=feature_id,
+                    data=state.map_to_api(),
+                    sub_feature="BypassStatus",
+                    device_id=device_id
+                )
+            )
+        except Exception as exception:
+            raise Open3eError(exception)
+
 
     async def async_set_circuit_pump_speed(
             self,

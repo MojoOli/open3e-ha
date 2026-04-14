@@ -191,6 +191,13 @@ class Features:
         FlowCircuit4HeatingCurve = Feature(id=883, refresh_interval=30)
         VentilationMode = Feature(id=2371, refresh_interval=30)
         VentilationLevel = Feature(id=533, refresh_interval=30)
+        BypassOperationState = Feature(id=437, refresh_interval=30)
+        BypassAvailableModes = Feature(id=439, refresh_interval=30)
+        OutsideAirBypass = Feature(id=1088, refresh_interval=30)
+        InsideAirBypass = Feature(id=1089, refresh_interval=30)
+        BypassOperationLevel = Feature(id=2403, refresh_interval=30)
+        VentilationBypassPosition = Feature(id=2493, refresh_interval=30)
+        VentilationBypassFlapAvailableCount = Feature(id=2797, refresh_interval=30)
 
         # Pump-Status und Kältekreis
         CentralHeatingPumpStatus = Feature(id=2791, refresh_interval=10)
