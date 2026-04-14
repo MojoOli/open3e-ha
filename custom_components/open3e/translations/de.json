@@ -607,6 +607,9 @@
       "circuit1_pump_status": {
         "name": "Heizkreis 1 Pumpe Status"
       },
+      "circuit1_frost_protection_config": {
+        "name": "HK1 Frostschutz Konfiguration"
+      },
       "circuit2_frost_protection_config": {
         "name": "HK2 Frostschutz Konfiguration"
       },
@@ -626,7 +629,12 @@
         "name": "WW-Pumpe Drehzahl Minimum"
       },
       "domestic_hot_water_status": {
-        "name": "Warmwasser Status"
+        "name": "Warmwasser Status",
+        "state": {
+          "idle": "Inaktiv",
+          "active": "Aktiv",
+          "postrun": "Nachlauf"
+        }
       },
       "flow_temperature_hk1_maximum": {
         "name": "HK1 Vorlauftemperatur Maximum"
@@ -665,7 +673,12 @@
         "name": "HK2 Mischventil Position"
       },
       "noise_reduction_mode": {
-        "name": "Geräuschreduzierung"
+        "name": "Geräuschreduzierung",
+        "state": {
+          "none": "Keine Reduzierung",
+          "level_1": "Leichte Reduzierung",
+          "level_2": "Maximale Reduzierung"
+        }
       },
       "refrigeration_circuit_mode": {
         "name": "Kältekreis Betriebszustand",
@@ -676,23 +689,26 @@
           "cooling": "Kühlbetrieb",
           "manual": "Manuell",
           "defrost": "Abtauen",
-          "evu_lock": "EVU-Sperre"
+          "grid_lock": "EVU-Sperre"
         }
       },
       "smart_grid_ready_consolidator": {
         "name": "SmartGrid Ready Status",
         "state": {
-          "locked": "Betriebszustand 1 – Sperrung",
-          "normal": "Betriebszustand 2 – Normalbetrieb",
-          "pv_recommended": "Betriebszustand 3 – Einschaltempfehlung PV",
-          "high_temperature": "Betriebszustand 4 – Aktive Ansteuerung"
+          "locked": "Sperrung",
+          "normal": "Normalbetrieb",
+          "pv_recommended": "Einschaltempfehlung PV",
+          "high_temperature": "Aktive Ansteuerung"
         }
       },
       "smartgrid_feature_selection": {
-        "name": "SmartGrid Feature Auswahl"
-      },
-      "software_version": {
-        "name": "Softwareversion"
+        "name": "SmartGrid Feature Auswahl",
+        "state": {
+          "domestic_hot_water": "Warmwasser",
+          "heating_buffer": "Heizwasser-Pufferspeicher",
+          "room_heating": "Raumbeheizung",
+          "room_cooling": "Raumkühlung"
+        }
       },
       "energy_own_consumption_today": {
         "name": "Eigener Energieverbrauch heute"

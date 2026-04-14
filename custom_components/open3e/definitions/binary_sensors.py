@@ -22,7 +22,8 @@ class BinarySensorDataTransform:
     )
     STATE = lambda data: json_loads(data)["State"] > 0
     HYGIENE_ACTIVE = lambda data: json_loads(data)["HygenieActive"] > 0
-    BACKUP_BOX_INSTALLED = lambda data: json_loads(data)["Unknown"] > 0 #TODO: Needs to be renamed when open3e is updated to BackUpBoxInstalled
+    BACKUP_BOX_INSTALLED = lambda data: json_loads(data)[
+                                            "Unknown"] > 0  # TODO: Needs to be renamed when open3e is updated to BackUpBoxInstalled
     HEX_ON = lambda data: data != "000000"  # on
     RAW = lambda data: data
     """The data state represents a raw value without any encapsulation."""
@@ -144,8 +145,6 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
         required_device=Open3eDevices.Vitodens
     ),
 
-
-
     ###############
     ### VITOCAL ###
     ###############
@@ -263,7 +262,7 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
     ##################
 
     Open3eBinarySensorEntityDescription(
-        #device_class=None,
+        # device_class=None,
         poll_data_features=[Features.State.BackUpBox],
         key="backup_box_installed",
         translation_key="backup_box_installed",

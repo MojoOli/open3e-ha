@@ -607,6 +607,9 @@
       "circuit1_pump_status": {
         "name": "Heating circuit 1 pump status"
       },
+      "circuit1_frost_protection_config": {
+        "name": "Circuit 1 frost protection configuration"
+      },
       "circuit2_frost_protection_config": {
         "name": "Circuit 2 frost protection configuration"
       },
@@ -626,7 +629,12 @@
         "name": "DHW pump minimum speed"
       },
       "domestic_hot_water_status": {
-        "name": "Domestic hot water status"
+        "name": "Domestic hot water status",
+        "state": {
+          "idle": "Idle",
+          "active": "Active",
+          "postrun": "Postrun"
+        }
       },
       "flow_temperature_hk1_maximum": {
         "name": "Circuit 1 flow temperature maximum"
@@ -665,7 +673,12 @@
         "name": "Circuit 2 three-way valve position"
       },
       "noise_reduction_mode": {
-        "name": "Noise reduction mode"
+        "name": "Noise reduction mode",
+        "state": {
+          "none": "Normal operation",
+          "level_1": "Level 1: Moderate reduction",
+          "level_2": "Level 2: Significant reduction"
+        }
       },
       "refrigeration_circuit_mode": {
         "name": "Refrigeration circuit operation mode",
@@ -676,23 +689,26 @@
           "cooling": "Cooling",
           "manual": "Manual",
           "defrost": "Defrost",
-          "evu_lock": "EVU lock"
+          "grid_lock": "Grid-lock"
         }
       },
       "smart_grid_ready_consolidator": {
         "name": "SmartGrid ready status",
         "state": {
-          "locked": "Operating state 1 – Locked",
-          "normal": "Operating state 2 – Normal",
-          "pv_recommended": "Operating state 3 – PV recommended",
-          "high_temperature": "Operating state 4 – High temperature"
+          "locked": "Locked",
+          "normal": "Normal",
+          "pv_recommended": "PV recommended",
+          "high_temperature": "High temperature"
         }
       },
       "smartgrid_feature_selection": {
-        "name": "SmartGrid feature selection"
-      },
-      "software_version": {
-        "name": "Software version"
+        "name": "SmartGrid feature selection",
+        "state": {
+          "domestic_hot_water": "Hot water",
+          "heating_buffer": "Heating buffer",
+          "room_heating": "Room heating",
+          "room_cooling": "Room cooling"
+        }
       },
       "energy_own_consumption_today": {
         "name": "Own energy consumption today"

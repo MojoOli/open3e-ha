@@ -16,13 +16,28 @@ from .subfeatures.domestic_hot_water_operation_state import (
     DomesticHotWaterOperationState,
     get_domestic_hot_water_operation_state,
 )
+from .subfeatures.domestic_hot_water_status import (
+    DomesticHotWaterStatus,
+    get_domestic_hot_water_status,
+)
 from .subfeatures.energy_management_mode import ENERGY_MANAGEMENT_MODES_MAP, EnergyManagementMode
 from .subfeatures.four_three_way_valve_position import (
     FourThreeWayValvePosition,
     get_four_three_way_valve_position,
 )
 from .subfeatures.legionella_protection import LegionellaProtectionWeekday
-from .subfeatures.refrigeration_circuit_mode import REFRIGERATION_CIRCUIT_OPERATION_MODES_MAP, RefrigerationCircuitOperationMode
+from .subfeatures.noise_reduction_mode import (
+    NoiseReductionMode,
+    get_noise_reduction_mode,
+)
+from .subfeatures.refrigeration_circuit_mode import (
+    RefrigerationCircuitOperationMode,
+    get_refrigeration_circuit_mode,
+)
+from .subfeatures.smart_grid_feature_selection import (
+    SmartGridFeatureSelection,
+    get_smart_grid_feature_selection,
+)
 from .subfeatures.smart_grid_ready_status import SMART_GRID_READY_STATUS_MAP, SmartGridReadyStatus
 from ..capability.capability import Capability
 
@@ -183,6 +198,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=lambda data: get_connection_status(int(data)),
         options=[mode for mode in ConnectionStatus]
     ),
+
 
     ################
     ### VITODENS ###
@@ -2006,20 +2022,10 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="smart_grid_ready_consolidator",
         translation_key="smart_grid_ready_consolidator",
         data_retriever=lambda data: SMART_GRID_READY_STATUS_MAP.get(
-            int((json_loads(data) if isinstance(data, str) else data)["OperatingStatus"])
+            int(json_loads(data)["OperatingStatus"])
         ),
         options=[mode for mode in SmartGridReadyStatus],
         required_device=Open3eDevices.Vitocal
-    ),
-
-    # DID 580: SoftwareVersion
-    Open3eSensorEntityDescription(
-        poll_data_features=[Features.Misc.SoftwareVersion],
-        entity_category=EntityCategory.DIAGNOSTIC,
-        icon="mdi:file-document-alert",
-        key="software_version",
-        translation_key="software_version",
-        data_retriever=SensorDataRetriever.RAWSTR,
     ),
 
     # DID 1100: DomesticHotWaterPumpMinimumLimit
@@ -2031,7 +2037,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="domestic_hot_water_pump_min_speed",
         translation_key="domestic_hot_water_pump_min_speed",
         icon="mdi:pump",
-        data_retriever=lambda data: float((json_loads(data) if isinstance(data, str) else data)["MinSpeed"]),
+        data_retriever=lambda data: float(json_loads(data)["MinSpeed"]),
         required_device=Open3eDevices.Vitocal
     ),
     # DID 1101: DomesticHotWaterPumpMaximumLimit
@@ -2043,7 +2049,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="domestic_hot_water_pump_max_speed",
         translation_key="domestic_hot_water_pump_max_speed",
         icon="mdi:pump",
-        data_retriever=lambda data: float((json_loads(data) if isinstance(data, str) else data)["MaxSpeed"]),
+        data_retriever=lambda data: float(json_loads(data)["MaxSpeed"]),
         required_device=Open3eDevices.Vitocal
     ),
 
@@ -2121,20 +2127,17 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         required_device=Open3eDevices.Vitocal
     ),
 
-    # DID 1731: ExternalLockActive -> siehe binary_sensors.py
-
     # DID 2320: DomesticHotWaterStatus
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Misc.DomesticHotWaterStatus],
-        state_class=SensorStateClass.MEASUREMENT,
+        device_class=SensorDeviceClass.ENUM,
+        options=[status.value for status in DomesticHotWaterStatus],
         icon="mdi:water-boiler",
         key="domestic_hot_water_status",
         translation_key="domestic_hot_water_status",
-        data_retriever=SensorDataRetriever.RAW,
+        data_retriever=get_domestic_hot_water_status,
         required_device=Open3eDevices.Vitocal
     ),
-
-    # DID 2442: HeatPumpFrostProtection -> siehe binary_sensors.py
 
     # DID 2544/2545: EnableElectricalHeaterSmartGrid
     Open3eSensorEntityDescription(
@@ -2157,10 +2160,12 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
     # DID 2560: SmartGridFeatureSelection
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Misc.SmartGridFeatureSelection],
+        device_class=SensorDeviceClass.ENUM,
+        options=[status.value for status in SmartGridFeatureSelection],
         icon="mdi:home-battery-outline",
         key="smartgrid_feature_selection",
         translation_key="smartgrid_feature_selection",
-        data_retriever=SensorDataRetriever.RAW,
+        data_retriever=get_smart_grid_feature_selection,
         required_device=Open3eDevices.Vitocal
     ),
 
@@ -2173,7 +2178,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="compressor_min_speed_heating",
         translation_key="compressor_min_speed_heating",
         icon="mdi:fan-minus",
-        data_retriever=lambda data: float((json_loads(data) if isinstance(data, str) else data)["Min"]),
+        data_retriever=lambda data: float(json_loads(data)["Min"]),
         required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
@@ -2184,17 +2189,19 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="compressor_max_speed_heating",
         translation_key="compressor_max_speed_heating",
         icon="mdi:fan-plus",
-        data_retriever=lambda data: float((json_loads(data) if isinstance(data, str) else data)["Max"]),
+        data_retriever=lambda data: float(json_loads(data)["Max"]),
         required_device=Open3eDevices.Vitocal
     ),
 
     # DID 2634: NoiseReductionMode
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Misc.NoiseReductionMode],
+        device_class=SensorDeviceClass.ENUM,
+        options=[status.value for status in NoiseReductionMode],
         icon="mdi:volume-off",
         key="noise_reduction_mode",
         translation_key="noise_reduction_mode",
-        data_retriever=SensorDataRetriever.RAW,
+        data_retriever=get_noise_reduction_mode,
         required_device=Open3eDevices.Vitocal
     ),
 
@@ -2236,27 +2243,40 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
     ),
 
     # DID 2806: RefrigerationCircuitOperationMode
-    # WICHTIG: Wird für die Visualisierungskarte benötigt!
     Open3eSensorEntityDescription(
         poll_data_features=[Features.State.RefrigerationCircuitOperationMode],
         device_class=SensorDeviceClass.ENUM,
         icon="mdi:heat-pump",
         key="refrigeration_circuit_mode",
         translation_key="refrigeration_circuit_mode",
-        data_retriever=lambda data: REFRIGERATION_CIRCUIT_OPERATION_MODES_MAP.get(
-            int((json_loads(data) if isinstance(data, str) else data)["Mode"])
-        ),
+        data_retriever=get_refrigeration_circuit_mode,
         options=[mode for mode in RefrigerationCircuitOperationMode],
         required_device=Open3eDevices.Vitocal
     ),
 
-    # DID 2856: MixerTwoCircuitFrostProtectionConfiguration
+    # DID 2855/2856: MixerOne/TwoCircuitFrostProtectionConfiguration
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.MixerOneCircuitFrostProtectionConfiguration],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        icon="mdi:snowflake-melt",
+        key="circuit1_frost_protection_config",
+        translation_key="circuit1_frost_protection_config",
+        data_retriever=lambda data: float(json_loads(data)["Temperature"]),
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitocal
+    ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Misc.MixerTwoCircuitFrostProtectionConfiguration],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
         icon="mdi:snowflake-melt",
         key="circuit2_frost_protection_config",
         translation_key="circuit2_frost_protection_config",
-        data_retriever=lambda data: float((json_loads(data) if isinstance(data, str) else data)["Temperature"]),
+        data_retriever=lambda data: float(json_loads(data)["Temperature"]),
+        required_capabilities=[Capability.Circuit2],
         required_device=Open3eDevices.Vitocal
     ),
 )
