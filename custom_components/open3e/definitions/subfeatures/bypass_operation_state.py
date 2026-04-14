@@ -9,7 +9,6 @@ class BypassOperationState(StrEnum):
     Automatic = "automatic"
     Open = "open"
     TransitionError = "transition_error"
-    Unknown = "unknown"
 
     @staticmethod
     def from_str(mode: str):
@@ -37,16 +36,16 @@ class BypassOperationState(StrEnum):
         return None
 
 
-def get_bypass_operation_state(data: Any) -> BypassOperationState:
+def get_bypass_operation_state(data: Any) -> BypassOperationState | None:
     try:
         if isinstance(data, str) and data.strip().startswith("{"):
             payload = json_loads(data)
             raw_id = payload.get("BypassStatus")
             if raw_id is None:
-                return BypassOperationState.Unknown
+                return None
             value = int(raw_id)
         else:
-            return BypassOperationState.Unknown
+            return None
 
         match value:
             case 0:
@@ -58,6 +57,6 @@ def get_bypass_operation_state(data: Any) -> BypassOperationState:
             case 3:
                 return BypassOperationState.TransitionError
             case _:
-                return BypassOperationState.Unknown
+                return None
     except (TypeError, ValueError, KeyError):
-        return BypassOperationState.Unknown
+        return None

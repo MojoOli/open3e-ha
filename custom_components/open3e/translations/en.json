@@ -412,16 +412,6 @@
       "ventilation_level": {
         "name": "Ventilation level"
       },
-      "ventilation_bypass_operation_state": {
-        "name": "Bypass operation state",
-        "state": {
-          "closed": "Closed",
-          "automatic": "Automatic",
-          "open": "Open",
-          "transition_error": "Transition/Error",
-          "unknown": "Unknown"
-        }
-      },
       "ventilation_bypass_available_modes": {
         "name": "Bypass available modes"
       },
@@ -1102,6 +1092,16 @@
           "intensive": "Intensive ventilation",
           "reduced_noise": "Reduced noise",
           "off": "Off"
+        }
+      },
+      "ventilation_bypass_operation_state": {
+        "name": "Bypass operation state",
+        "state": {
+          "closed": "Closed",
+          "automatic": "Automatic",
+          "open": "Open",
+          "transition_error": "Transition/Error",
+          "unknown": "Unknown"
         }
       }
     },

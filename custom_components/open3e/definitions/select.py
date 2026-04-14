@@ -18,7 +18,7 @@ class Open3eSelectEntityDescription(
 ):
     """Default number entity description for open3e."""
     domain: str = "select"
-    get_option: Callable[[Any], str] = None
+    get_option: Callable[[Any], str | None] = None
     set_option: Callable[[str, Open3eDataDevice, Open3eDataUpdateCoordinator], Awaitable[None]] = None
 
 

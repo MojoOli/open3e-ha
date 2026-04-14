@@ -9,7 +9,6 @@ class BypassOperationLevel(StrEnum):
     Dynamic = "dynamic"
     Soft = "soft"
     Manual = "manual"
-    Unknown = "unknown"
 
 
 def get_bypass_operation_level(data: Any) -> BypassOperationLevel | None:
@@ -35,6 +34,6 @@ def get_bypass_operation_level(data: Any) -> BypassOperationLevel | None:
             case 3:
                 return BypassOperationLevel.Manual
             case _:
-                return BypassOperationLevel.Unknown
+                return None
     except (TypeError, ValueError, KeyError):
         return None
