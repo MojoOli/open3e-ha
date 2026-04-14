@@ -1,6 +1,7 @@
 from enum import StrEnum
-from json import loads as json_loads
 from typing import Any
+
+from homeassistant.util.json import json_loads
 
 
 class RefrigerationCircuitOperationMode(StrEnum):
