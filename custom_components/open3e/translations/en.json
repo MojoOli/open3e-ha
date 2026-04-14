@@ -160,6 +160,24 @@
       "pv_power_string_3_current": {
         "name": "PV power string3"
       },
+      "pv_voltage_string_1": {
+        "name": "PV voltage string1"
+      },
+      "pv_voltage_string_2": {
+        "name": "PV voltage string2"
+      },
+      "pv_voltage_string_3": {
+        "name": "PV voltage string3"
+      },
+      "battery_state_of_energy": {
+        "name": "Battery state of energy"
+      },
+      "battery_current": {
+        "name": "Battery current"
+      },
+      "battery_voltage": {
+        "name": "Battery voltage"
+      },
       "pv_energy_production_today": {
         "name": "PV energy production today"
       },

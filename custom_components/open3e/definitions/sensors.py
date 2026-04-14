@@ -4,7 +4,8 @@ from typing import Callable, Any, List
 
 from homeassistant.components.sensor import SensorEntityDescription, SensorDeviceClass, SensorStateClass
 from homeassistant.const import UnitOfTemperature, UnitOfEnergy, PERCENTAGE, UnitOfPower, \
-    EntityCategory, UnitOfPressure, UnitOfVolume, UnitOfVolumeFlowRate, UnitOfTime
+    EntityCategory, UnitOfPressure, UnitOfVolume, UnitOfVolumeFlowRate, UnitOfTime, \
+    UnitOfElectricCurrent, UnitOfElectricPotential
 from homeassistant.util.dt import parse_time
 from homeassistant.util.json import json_loads
 
@@ -78,6 +79,12 @@ class SensorDataRetriever:
     PV_POWER_STRING_1 = lambda data: float(json_loads(data)["ActivePower String A"])
     PV_POWER_STRING_2 = lambda data: float(json_loads(data)["ActivePower String B"])
     PV_POWER_STRING_3 = lambda data: float(json_loads(data)["ActivePower String C"])
+    PV_VOLTAGE_STRING_1 = lambda data: float(json_loads(data)["String1"])
+    PV_VOLTAGE_STRING_2 = lambda data: float(json_loads(data)["String2"])
+    PV_VOLTAGE_STRING_3 = lambda data: float(json_loads(data)["String3"])
+    STATE_OF_ENERGY = lambda data: float(json_loads(data)["StateOfEnergy"])
+    CURRENT = lambda data: float(json_loads(data)["Current"])
+    VOLTAGE = lambda data: float(json_loads(data)["Voltage"])
     STARTS = lambda data: int(json_loads(data)["starts"])
     HOURS = lambda data: int(json_loads(data)["hours"])
     TARGET_FLOW = lambda data: float(json_loads(data)["TargetFlow"])
@@ -1824,6 +1831,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="battery_state_percentage",
         translation_key="battery_state_percentage",
+        icon="mdi:home-battery",
         data_retriever=SensorDataRetriever.RAW,
         required_device=Open3eDevices.Vitocharge
     ),
@@ -1835,6 +1843,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="battery_charge_today",
         translation_key="battery_charge_today",
+        icon="mdi:battery-arrow-up",
         data_retriever=SensorDataRetriever.BATTERY_CHARGE_TODAY,
         required_device=Open3eDevices.Vitocharge
     ),
@@ -1846,6 +1855,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="battery_charge_week",
         translation_key="battery_charge_week",
+        icon="mdi:battery-arrow-up",
         data_retriever=SensorDataRetriever.BATTERY_CHARGE_WEEK,
         required_device=Open3eDevices.Vitocharge
     ),
@@ -1857,6 +1867,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="battery_charge_month",
         translation_key="battery_charge_month",
+        icon="mdi:battery-arrow-up",
         data_retriever=SensorDataRetriever.BATTERY_CHARGE_MONTH,
         required_device=Open3eDevices.Vitocharge
     ),
@@ -1868,6 +1879,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="battery_charge_year",
         translation_key="battery_charge_year",
+        icon="mdi:battery-arrow-up",
         data_retriever=SensorDataRetriever.BATTERY_CHARGE_YEAR,
         required_device=Open3eDevices.Vitocharge
     ),
@@ -1879,6 +1891,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="battery_charge_total",
         translation_key="battery_charge_total",
+        icon="mdi:battery-arrow-up",
         data_retriever=SensorDataRetriever.BATTERY_CHARGE_TOTAL,
         required_device=Open3eDevices.Vitocharge
     ),
@@ -1890,6 +1903,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="battery_discharge_today",
         translation_key="battery_discharge_today",
+        icon="mdi:battery-arrow-down",
         data_retriever=SensorDataRetriever.BATTERY_DISCHARGE_TODAY,
         required_device=Open3eDevices.Vitocharge
     ),
@@ -1901,6 +1915,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="battery_discharge_week",
         translation_key="battery_discharge_week",
+        icon="mdi:battery-arrow-down",
         data_retriever=SensorDataRetriever.BATTERY_DISCHARGE_WEEK,
         required_device=Open3eDevices.Vitocharge
     ),
@@ -1912,6 +1927,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="battery_discharge_month",
         translation_key="battery_discharge_month",
+        icon="mdi:battery-arrow-down",
         data_retriever=SensorDataRetriever.BATTERY_DISCHARGE_MONTH,
         required_device=Open3eDevices.Vitocharge
     ),
@@ -1923,6 +1939,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="battery_discharge_year",
         translation_key="battery_discharge_year",
+        icon="mdi:battery-arrow-down",
         data_retriever=SensorDataRetriever.BATTERY_DISCHARGE_YEAR,
         required_device=Open3eDevices.Vitocharge
     ),
@@ -1934,6 +1951,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="battery_discharge_total",
         translation_key="battery_discharge_total",
+        icon="mdi:battery-arrow-down",
         data_retriever=SensorDataRetriever.BATTERY_DISCHARGE_TOTAL,
         required_device=Open3eDevices.Vitocharge
     ),
@@ -1954,6 +1972,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="battery_power_current",
         translation_key="battery_power_current",
+        icon="mdi:battery-clock",
         data_retriever=SensorDataRetriever.RAW,
         required_device=Open3eDevices.Vitocharge
     ),
@@ -1964,6 +1983,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="pv_power_current",
         translation_key="pv_power_current",
+        icon="mdi:solar-power",
         data_retriever=SensorDataRetriever.PV_POWER_CUMULATED,
         required_device=Open3eDevices.Vitocharge
     ),
@@ -1974,6 +1994,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="pv_power_string_1_current",
         translation_key="pv_power_string_1_current",
+        icon="mdi:solar-power",
         data_retriever=SensorDataRetriever.PV_POWER_STRING_1,
         required_device=Open3eDevices.Vitocharge
     ),
@@ -1984,6 +2005,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="pv_power_string_2_current",
         translation_key="pv_power_string_2_current",
+        icon="mdi:solar-power",
         data_retriever=SensorDataRetriever.PV_POWER_STRING_2,
         required_device=Open3eDevices.Vitocharge
     ),
@@ -1994,6 +2016,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="pv_power_string_3_current",
         translation_key="pv_power_string_3_current",
+        icon="mdi:solar-power",
         data_retriever=SensorDataRetriever.PV_POWER_STRING_3,
         required_device=Open3eDevices.Vitocharge
     ),
@@ -2005,6 +2028,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="pv_energy_production_today",
         translation_key="pv_energy_production_today",
+        icon="mdi:solar-power-variant",
         data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_TODAY,
         required_device=Open3eDevices.Vitocharge
     ),
@@ -2016,6 +2040,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="pv_energy_production_week",
         translation_key="pv_energy_production_week",
+        icon="mdi:solar-power-variant",
         data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_WEEK,
         required_device=Open3eDevices.Vitocharge
     ),
@@ -2027,6 +2052,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="pv_energy_production_month",
         translation_key="pv_energy_production_month",
+        icon="mdi:solar-power-variant",
         data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_MONTH,
         required_device=Open3eDevices.Vitocharge
     ),
@@ -2038,6 +2064,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="pv_energy_production_year",
         translation_key="pv_energy_production_year",
+        icon="mdi:solar-power-variant",
         data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_YEAR,
         required_device=Open3eDevices.Vitocharge
     ),
@@ -2049,6 +2076,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         key="pv_energy_production_total",
         translation_key="pv_energy_production_total",
+        icon="mdi:solar-power-variant",
         data_retriever=SensorDataRetriever.PV_ENERGY_PRODUCTION_TOTAL,
         required_device=Open3eDevices.Vitocharge
     ),
@@ -2091,10 +2119,77 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         entity_category=EntityCategory.DIAGNOSTIC,
         key="battery_temperature",
         translation_key="battery_temperature",
+        icon="mdi:thermometer-lines",
         data_retriever=SensorDataRetriever.ACTUAL,
         required_device=Open3eDevices.Vitocharge
     ),
-
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.PVStringVoltage],
+        device_class=SensorDeviceClass.VOLTAGE,
+        native_unit_of_measurement=UnitOfElectricPotential.VOLT,
+        state_class=SensorStateClass.MEASUREMENT,
+        icon="mdi:solar-panel",
+        key="pv_voltage_string_1",
+        translation_key="pv_voltage_string_1",
+        data_retriever=SensorDataRetriever.PV_VOLTAGE_STRING_1,
+        required_device=Open3eDevices.Vitocharge
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.PVStringVoltage],
+        device_class=SensorDeviceClass.VOLTAGE,
+        native_unit_of_measurement=UnitOfElectricPotential.VOLT,
+        state_class=SensorStateClass.MEASUREMENT,
+        icon="mdi:solar-panel",
+        key="pv_voltage_string_2",
+        translation_key="pv_voltage_string_2",
+        data_retriever=SensorDataRetriever.PV_VOLTAGE_STRING_2,
+        required_device=Open3eDevices.Vitocharge
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.PVStringVoltage],
+        device_class=SensorDeviceClass.VOLTAGE,
+        native_unit_of_measurement=UnitOfElectricPotential.VOLT,
+        state_class=SensorStateClass.MEASUREMENT,
+        icon="mdi:solar-panel",
+        key="pv_voltage_string_3",
+        translation_key="pv_voltage_string_3",
+        data_retriever=SensorDataRetriever.PV_VOLTAGE_STRING_3,
+        required_device=Open3eDevices.Vitocharge
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.State.BatteryStateOfEnergy],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
+        suggested_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.MEASUREMENT,
+        icon="mdi:battery",
+        key="battery_state_of_energy",
+        translation_key="battery_state_of_energy",
+        data_retriever=SensorDataRetriever.STATE_OF_ENERGY,
+        required_device=Open3eDevices.Vitocharge
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Power.BatteryCurrent],
+        device_class=SensorDeviceClass.CURRENT,
+        native_unit_of_measurement=UnitOfElectricCurrent.AMPERE,
+        state_class=SensorStateClass.MEASUREMENT,
+        icon="mdi:battery-charging",
+        key="battery_current",
+        translation_key="battery_current",
+        data_retriever=SensorDataRetriever.CURRENT,
+        required_device=Open3eDevices.Vitocharge
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Power.BatteryVoltage],
+        device_class=SensorDeviceClass.VOLTAGE,
+        native_unit_of_measurement=UnitOfElectricPotential.VOLT,
+        state_class=SensorStateClass.MEASUREMENT,
+        icon="mdi:battery-charging",
+        key="battery_voltage",
+        translation_key="battery_voltage",
+        data_retriever=SensorDataRetriever.VOLTAGE,
+        required_device=Open3eDevices.Vitocharge
+    ),
     ###############
     ### VitoAir ###
     ###############
