@@ -11,6 +11,7 @@ from homeassistant.util.json import json_loads
 from .devices import Open3eDevices
 from .entity_description import Open3eEntityDescription
 from .features import Features
+from .subfeatures.bypass_operation_level import BypassOperationLevel, get_bypass_operation_level
 from .subfeatures.connection_status import ConnectionStatus, get_connection_status
 from .subfeatures.domestic_hot_water_operation_state import (
     DomesticHotWaterOperationState,
@@ -2232,6 +2233,70 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         ),
         # Acutual intended, typo on Open3e for VentilationLevel (533)
         required_device=Open3eDevices.Vitoair
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.State.BypassAvailableModes],
+        key="ventilation_bypass_available_modes",
+        translation_key="ventilation_bypass_available_modes",
+        icon="mdi:cog-outline",
+        data_retriever=SensorDataRetriever.RAW,
+        required_device=Open3eDevices.Vitoair
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.State.OutsideAirBypass],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="ventilation_outside_air_bypass",
+        translation_key="ventilation_outside_air_bypass",
+        icon="mdi:thermometer-minus",
+        data_retriever=SensorDataRetriever.RAW,
+        required_device=Open3eDevices.Vitoair
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.State.InsideAirBypass],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="ventilation_inside_air_bypass",
+        translation_key="ventilation_inside_air_bypass",
+        icon="mdi:thermometer-plus",
+        data_retriever=SensorDataRetriever.RAW,
+        required_device=Open3eDevices.Vitoair
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.State.VentilationBypassPosition],
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="ventilation_bypass_position",
+        translation_key="ventilation_bypass_position",
+        icon="mdi:valve",
+        data_retriever=SensorDataRetriever.RAW,
+        required_device=Open3eDevices.Vitoair
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.State.VentilationBypassFlapAvailableCount],
+        state_class=SensorStateClass.MEASUREMENT,
+        key="ventilation_bypass_flap_available_count",
+        translation_key="ventilation_bypass_flap_available_count",
+        icon="mdi:counter",
+        data_retriever=SensorDataRetriever.RAW,
+        required_device=Open3eDevices.Vitoair
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.State.BypassOperationLevel],
+        device_class=SensorDeviceClass.ENUM,
+        options=[
+            BypassOperationLevel.Off,
+            BypassOperationLevel.Dynamic,
+            BypassOperationLevel.Soft,
+            BypassOperationLevel.Manual,
+        ],
+        icon="mdi:cog-transfer",
+        key="ventilation_bypass_operation_level",
+        translation_key="ventilation_bypass_operation_level",
+        data_retriever=get_bypass_operation_level,
+        required_device=Open3eDevices.Vitoair,
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.EnergyOwnConsumption],

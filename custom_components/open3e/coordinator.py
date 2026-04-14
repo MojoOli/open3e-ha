@@ -12,6 +12,7 @@ from homeassistant.helpers.device_registry import DeviceRegistry
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
 from custom_components.open3e.definitions.subfeatures.buffer import Buffer
+from custom_components.open3e.definitions.subfeatures.bypass_operation_state import BypassOperationState
 from custom_components.open3e.definitions.subfeatures.dmw_mode import DmwMode
 from custom_components.open3e.definitions.subfeatures.hysteresis import Hysteresis
 from custom_components.open3e.definitions.subfeatures.program import Program
@@ -470,6 +471,21 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             hass=self.hass,
             feature_id=feature_id,
             mode=mode,
+            device_id=device.id
+        )
+
+        self.async_refresh_feature(device, [feature_id])
+
+    async def async_set_bypass_operation_state(
+            self,
+            feature_id: int,
+            state: BypassOperationState,
+            device: Open3eDataDevice
+    ):
+        await self.__client.async_set_bypass_operation_state(
+            hass=self.hass,
+            feature_id=feature_id,
+            state=state,
             device_id=device.id
         )
 

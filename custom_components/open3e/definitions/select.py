@@ -8,6 +8,7 @@ from .entity_description import Open3eEntityDescription
 from .features import Features
 from .open3e_data import Open3eDataDevice
 from .subfeatures.buffer_mode import BufferMode
+from .subfeatures.bypass_operation_state import BypassOperationState, get_bypass_operation_state
 from .. import Open3eDataUpdateCoordinator
 
 
@@ -44,6 +45,22 @@ SELECTS: tuple[Open3eSelectEntityDescription, ...] = (
     ###############
     ### VITOAIR ###
     ###############
+
+    Open3eSelectEntityDescription(
+        poll_data_features=[Features.State.BypassOperationState],
+        options=[BypassOperationState.Closed, BypassOperationState.Automatic, BypassOperationState.Open,
+                 BypassOperationState.TransitionError],
+        get_option=lambda data: get_bypass_operation_state(data),
+        set_option=lambda option, device, coordinator: coordinator.async_set_bypass_operation_state(
+            feature_id=Features.State.BypassOperationState.id,
+            state=BypassOperationState.from_str(option),
+            device=device
+        ),
+        icon="mdi:valve-open",
+        key="ventilation_bypass_operation_state",
+        translation_key="ventilation_bypass_operation_state",
+        required_device=Open3eDevices.Vitoair
+    ),
 
     # Open3eSelectEntityDescription(
     #     poll_data_features=[Features.State.CurrentQuickMode],
