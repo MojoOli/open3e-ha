@@ -682,10 +682,10 @@
       "smart_grid_ready_consolidator": {
         "name": "SmartGrid ready status",
         "state": {
-          "shutdown": "Shutdown mode",
-          "normal": "Normal mode",
-          "preferred": "Preferred mode",
-          "forced": "Forced mode"
+          "locked": "Operating state 1 – Locked",
+          "normal": "Operating state 2 – Normal",
+          "pv_recommended": "Operating state 3 – PV recommended",
+          "high_temperature": "Operating state 4 – High temperature"
         }
       },
       "smartgrid_feature_selection": {
