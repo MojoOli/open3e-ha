@@ -601,6 +601,115 @@
       "chimney_sweeper_test_mode": {
         "name": "Chimney sweeper test mode"
       },
+      "central_pump_status": {
+        "name": "Central pump status"
+      },
+      "circuit1_pump_status": {
+        "name": "Heating circuit 1 pump status"
+      },
+      "circuit1_frost_protection_config": {
+        "name": "Circuit 1 frost protection configuration"
+      },
+      "circuit2_frost_protection_config": {
+        "name": "Circuit 2 frost protection configuration"
+      },
+      "circuit2_pump_status": {
+        "name": "Heating circuit 2 pump status"
+      },
+      "compressor_max_speed_heating": {
+        "name": "Compressor maximum speed heating"
+      },
+      "compressor_min_speed_heating": {
+        "name": "Compressor minimum speed heating"
+      },
+      "domestic_hot_water_pump_max_speed": {
+        "name": "DHW pump maximum speed"
+      },
+      "domestic_hot_water_pump_min_speed": {
+        "name": "DHW pump minimum speed"
+      },
+      "domestic_hot_water_status": {
+        "name": "Domestic hot water status",
+        "state": {
+          "idle": "Idle",
+          "active": "Active",
+          "postrun": "Postrun"
+        }
+      },
+      "flow_temperature_circuit1_maximum": {
+        "name": "Circuit 1 flow temperature maximum"
+      },
+      "flow_temperature_circuit1_minimum": {
+        "name": "Circuit 1 flow temperature minimum"
+      },
+      "flow_temperature_circuit2_maximum": {
+        "name": "Circuit 2 flow temperature maximum"
+      },
+      "flow_temperature_circuit2_minimum": {
+        "name": "Circuit 2 flow temperature minimum"
+      },
+      "heater_smartgrid_max": {
+        "name": "Electrical heater SmartGrid maximum"
+      },
+      "heater_smartgrid_min": {
+        "name": "Electrical heater SmartGrid minimum"
+      },
+      "mixer_one_circuit_current_temperature_setpoint": {
+        "name": "Circuit 1 current temperature setpoint"
+      },
+      "mixer_two_circuit_current_temperature_setpoint": {
+        "name": "Circuit 2 current temperature setpoint"
+      },
+      "mixer_one_circuit_three_way_valve_position_percent": {
+        "name": "Circuit 1 three-way valve position"
+      },
+      "mixer_three_circuit_three_way_valve_position_percent": {
+        "name": "Circuit 3 three-way valve position"
+      },
+      "mixer_four_circuit_three_way_valve_position_percent": {
+        "name": "Circuit 4 three-way valve position"
+      },
+      "mixer_two_circuit_three_way_valve_position_percent": {
+        "name": "Circuit 2 three-way valve position"
+      },
+      "noise_reduction_mode": {
+        "name": "Noise reduction mode",
+        "state": {
+          "none": "Normal operation",
+          "level_1": "Level 1: Moderate reduction",
+          "level_2": "Level 2: Significant reduction"
+        }
+      },
+      "refrigeration_circuit_mode": {
+        "name": "Refrigeration circuit operation mode",
+        "state": {
+          "off": "Off",
+          "shutdown": "Shutdown",
+          "heating": "Heating",
+          "cooling": "Cooling",
+          "manual": "Manual",
+          "defrost": "Defrost",
+          "grid_lock": "Grid-lock"
+        }
+      },
+      "smart_grid_ready_consolidator": {
+        "name": "SmartGrid ready status",
+        "state": {
+          "locked": "Locked",
+          "normal": "Normal",
+          "pv_recommended": "PV recommended",
+          "high_temperature": "High temperature"
+        }
+      },
+      "smart_grid_feature_selection": {
+        "name": "SmartGrid feature selection",
+        "state": {
+          "domestic_hot_water": "Hot water",
+          "heating_buffer": "Heating buffer",
+          "room_heating": "Room heating",
+          "room_cooling": "Room cooling"
+        }
+      },
       "energy_own_consumption_today": {
         "name": "Own energy consumption today"
       },
@@ -674,6 +783,12 @@
       },
       "mixer_four_circuit_operation_state": {
         "name": "Pump circuit 4"
+      },
+      "external_lock_active": {
+        "name": "External lock active"
+      },
+      "heat_pump_frost_protection": {
+        "name": "Heat pump frost protection"
       }
     },
     "climate": {

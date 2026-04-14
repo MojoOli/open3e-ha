@@ -601,6 +601,115 @@
       "chimney_sweeper_test_mode": {
         "name": "Schornsteinfeger Testmodus"
       },
+      "central_pump_status": {
+        "name": "Zentralpumpe Status"
+      },
+      "circuit1_pump_status": {
+        "name": "Heizkreis 1 Pumpe Status"
+      },
+      "circuit1_frost_protection_config": {
+        "name": "Heizkreis 1 Frostschutz Konfiguration"
+      },
+      "circuit2_frost_protection_config": {
+        "name": "Heizkreis 2 Frostschutz Konfiguration"
+      },
+      "circuit2_pump_status": {
+        "name": "Heizkreis 2 Pumpe Status"
+      },
+      "compressor_max_speed_heating": {
+        "name": "Kompressor Max-Drehzahl Heizen"
+      },
+      "compressor_min_speed_heating": {
+        "name": "Kompressor Min-Drehzahl Heizen"
+      },
+      "domestic_hot_water_pump_max_speed": {
+        "name": "WW-Pumpe Drehzahl Maximum"
+      },
+      "domestic_hot_water_pump_min_speed": {
+        "name": "WW-Pumpe Drehzahl Minimum"
+      },
+      "domestic_hot_water_status": {
+        "name": "Warmwasser Status",
+        "state": {
+          "idle": "Inaktiv",
+          "active": "Aktiv",
+          "postrun": "Nachlauf"
+        }
+      },
+      "flow_temperature_circuit1_maximum": {
+        "name": "Heizkreis 1 Vorlauftemperatur Maximum"
+      },
+      "flow_temperature_circuit1_minimum": {
+        "name": "Heizkreis 1 Vorlauftemperatur Minimum"
+      },
+      "flow_temperature_circuit2_maximum": {
+        "name": "Heizkreis 2 Vorlauftemperatur Maximum"
+      },
+      "flow_temperature_circuit2_minimum": {
+        "name": "Heizkreis 2 Vorlauftemperatur Minimum"
+      },
+      "heater_smartgrid_max": {
+        "name": "Heizstab SmartGrid Maximum"
+      },
+      "heater_smartgrid_min": {
+        "name": "Heizstab SmartGrid Minimum"
+      },
+      "mixer_one_circuit_current_temperature_setpoint": {
+        "name": "Heizkreis 1 Temperatur Sollwert aktuell"
+      },
+      "mixer_two_circuit_current_temperature_setpoint": {
+        "name": "Heizkreis 2 Temperatur Sollwert aktuell"
+      },
+      "mixer_one_circuit_three_way_valve_position_percent": {
+        "name": "Heizkreis 1 Mischventil Position"
+      },
+      "mixer_three_circuit_three_way_valve_position_percent": {
+        "name": "Heizkreis 3 Mischventil Position"
+      },
+      "mixer_four_circuit_three_way_valve_position_percent": {
+        "name": "Heizkreis 4 Mischventil Position"
+      },
+      "mixer_two_circuit_three_way_valve_position_percent": {
+        "name": "Heizkreis 2 Mischventil Position"
+      },
+      "noise_reduction_mode": {
+        "name": "Geräuschreduzierung",
+        "state": {
+          "none": "Keine Reduzierung",
+          "level_1": "Leichte Reduzierung",
+          "level_2": "Maximale Reduzierung"
+        }
+      },
+      "refrigeration_circuit_mode": {
+        "name": "Kältekreis Betriebszustand",
+        "state": {
+          "off": "Aus",
+          "shutdown": "Abschaltbetrieb",
+          "heating": "Heizbetrieb",
+          "cooling": "Kühlbetrieb",
+          "manual": "Manuell",
+          "defrost": "Abtauen",
+          "grid_lock": "EVU-Sperre"
+        }
+      },
+      "smart_grid_ready_consolidator": {
+        "name": "SmartGrid Ready Status",
+        "state": {
+          "locked": "Sperrung",
+          "normal": "Normalbetrieb",
+          "pv_recommended": "Einschaltempfehlung PV",
+          "high_temperature": "Aktive Ansteuerung"
+        }
+      },
+      "smart_grid_feature_selection": {
+        "name": "SmartGrid Feature Auswahl",
+        "state": {
+          "domestic_hot_water": "Warmwasser",
+          "heating_buffer": "Heizwasser-Pufferspeicher",
+          "room_heating": "Raumbeheizung",
+          "room_cooling": "Raumkühlung"
+        }
+      },
       "energy_own_consumption_today": {
         "name": "Eigener Energieverbrauch heute"
       },
@@ -674,6 +783,12 @@
       },
       "mixer_four_circuit_operation_state": {
         "name": "Umwälzpumpe Heizkreis 4"
+      },
+      "external_lock_active": {
+        "name": "Externe Sperrung"
+      },
+      "heat_pump_frost_protection": {
+        "name": "Frostschutz Wärmepumpe"
       }
     },
     "climate": {

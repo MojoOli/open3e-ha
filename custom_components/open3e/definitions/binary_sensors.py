@@ -22,7 +22,8 @@ class BinarySensorDataTransform:
     )
     STATE = lambda data: json_loads(data)["State"] > 0
     HYGIENE_ACTIVE = lambda data: json_loads(data)["HygenieActive"] > 0
-    BACKUP_BOX_INSTALLED = lambda data: json_loads(data)["Unknown"] > 0 #TODO: Needs to be renamed when open3e is updated to BackUpBoxInstalled
+    BACKUP_BOX_INSTALLED = lambda data: json_loads(data)[
+                                            "Unknown"] > 0  # TODO: Needs to be renamed when open3e is updated to BackUpBoxInstalled
     HEX_ON = lambda data: data != "000000"  # on
     RAW = lambda data: data
     """The data state represents a raw value without any encapsulation."""
@@ -144,8 +145,6 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
         required_device=Open3eDevices.Vitodens
     ),
 
-
-
     ###############
     ### VITOCAL ###
     ###############
@@ -235,7 +234,29 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
         data_transform=BinarySensorDataTransform.HYGIENE_ACTIVE,
         required_device=Open3eDevices.Vitocal
     ),
-    
+
+    # DID 1731: ExternalLockActive
+    Open3eBinarySensorEntityDescription(
+        device_class=BinarySensorDeviceClass.LOCK,
+        poll_data_features=[Features.Misc.ExternalLockActive],
+        key="external_lock_active",
+        translation_key="external_lock_active",
+        icon="mdi:lock",
+        data_transform=lambda data: int(data) > 0,
+        required_device=Open3eDevices.Vitocal
+    ),
+
+    # DID 2442: HeatPumpFrostProtection
+    Open3eBinarySensorEntityDescription(
+        device_class=BinarySensorDeviceClass.COLD,
+        poll_data_features=[Features.Misc.HeatPumpFrostProtection],
+        key="heat_pump_frost_protection",
+        translation_key="heat_pump_frost_protection",
+        icon="mdi:snowflake-melt",
+        data_transform=lambda data: int(data) > 0,
+        required_device=Open3eDevices.Vitocal
+    ),
+
     ##################
     ### VITOCHARGE ###
     ##################

@@ -16,12 +16,29 @@ from .subfeatures.domestic_hot_water_operation_state import (
     DomesticHotWaterOperationState,
     get_domestic_hot_water_operation_state,
 )
+from .subfeatures.domestic_hot_water_status import (
+    DomesticHotWaterStatus,
+    get_domestic_hot_water_status,
+)
 from .subfeatures.energy_management_mode import ENERGY_MANAGEMENT_MODES_MAP, EnergyManagementMode
 from .subfeatures.four_three_way_valve_position import (
     FourThreeWayValvePosition,
     get_four_three_way_valve_position,
 )
 from .subfeatures.legionella_protection import LegionellaProtectionWeekday
+from .subfeatures.noise_reduction_mode import (
+    NoiseReductionMode,
+    get_noise_reduction_mode,
+)
+from .subfeatures.refrigeration_circuit_mode import (
+    RefrigerationCircuitOperationMode,
+    get_refrigeration_circuit_mode,
+)
+from .subfeatures.smart_grid_feature_selection import (
+    SmartGridFeatureSelection,
+    get_smart_grid_feature_selection,
+)
+from .subfeatures.smart_grid_ready_status import SMART_GRID_READY_STATUS_MAP, SmartGridReadyStatus
 from ..capability.capability import Capability
 
 
@@ -1480,6 +1497,322 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         required_device=Open3eDevices.Vitocal
     ),
 
+    # DID 475-478: MixerCircuitThreeWayValvePositionPercent
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Position.MixerOneCircuitThreeWayValvePositionPercent],
+        device_class=SensorDeviceClass.POWER_FACTOR,
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="mixer_one_circuit_three_way_valve_position_percent",
+        translation_key="mixer_one_circuit_three_way_valve_position_percent",
+        icon="mdi:valve",
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Position.MixerTwoCircuitThreeWayValvePositionPercent],
+        device_class=SensorDeviceClass.POWER_FACTOR,
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="mixer_two_circuit_three_way_valve_position_percent",
+        translation_key="mixer_two_circuit_three_way_valve_position_percent",
+        icon="mdi:valve",
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_capabilities=[Capability.Circuit2],
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Position.MixerThreeCircuitThreeWayValvePositionPercent],
+        device_class=SensorDeviceClass.POWER_FACTOR,
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="mixer_three_circuit_three_way_valve_position_percent",
+        translation_key="mixer_three_circuit_three_way_valve_position_percent",
+        icon="mdi:valve",
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_capabilities=[Capability.Circuit3],
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Position.MixerFourCircuitThreeWayValvePositionPercent],
+        device_class=SensorDeviceClass.POWER_FACTOR,
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="mixer_four_circuit_three_way_valve_position_percent",
+        translation_key="mixer_four_circuit_three_way_valve_position_percent",
+        icon="mdi:valve",
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_capabilities=[Capability.Circuit4],
+        required_device=Open3eDevices.Vitocal
+    ),
+
+    # DID 543: SmartGridReadyConsolidator
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.SmartGridReadyConsolidator],
+        device_class=SensorDeviceClass.ENUM,
+        icon="mdi:home-battery-outline",
+        key="smart_grid_ready_consolidator",
+        translation_key="smart_grid_ready_consolidator",
+        data_retriever=lambda data: SMART_GRID_READY_STATUS_MAP.get(
+            int(json_loads(data)["OperatingStatus"])
+        ),
+        options=[mode for mode in SmartGridReadyStatus],
+        required_device=Open3eDevices.Vitocal
+    ),
+
+    # DID 1100: DomesticHotWaterPumpMinimumLimit
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Speed.DomesticHotWaterPumpMinimumLimit],
+        device_class=SensorDeviceClass.POWER_FACTOR,
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="domestic_hot_water_pump_min_speed",
+        translation_key="domestic_hot_water_pump_min_speed",
+        icon="mdi:pump",
+        data_retriever=lambda data: float(json_loads(data)["MinSpeed"]),
+        required_device=Open3eDevices.Vitocal
+    ),
+    # DID 1101: DomesticHotWaterPumpMaximumLimit
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Speed.DomesticHotWaterPumpMaximumLimit],
+        device_class=SensorDeviceClass.POWER_FACTOR,
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="domestic_hot_water_pump_max_speed",
+        translation_key="domestic_hot_water_pump_max_speed",
+        icon="mdi:pump",
+        data_retriever=lambda data: float(json_loads(data)["MaxSpeed"]),
+        required_device=Open3eDevices.Vitocal
+    ),
+
+    # DID 1192/1193: FlowTemperatureMinimumMaximumLimit
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.MixerOneCircuitFlowTemperatureMinimumMaximumLimit],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="flow_temperature_circuit1_minimum",
+        translation_key="flow_temperature_circuit1_minimum",
+        icon="mdi:thermometer-chevron-down",
+        data_retriever=SensorDataRetriever.MINIMUM,
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.MixerOneCircuitFlowTemperatureMinimumMaximumLimit],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="flow_temperature_circuit1_maximum",
+        translation_key="flow_temperature_circuit1_maximum",
+        icon="mdi:thermometer-chevron-up",
+        data_retriever=SensorDataRetriever.MAXIMUM,
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.MixerTwoCircuitFlowTemperatureMinimumMaximumLimit],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="flow_temperature_circuit2_minimum",
+        translation_key="flow_temperature_circuit2_minimum",
+        icon="mdi:thermometer-chevron-down",
+        data_retriever=SensorDataRetriever.MINIMUM,
+        required_capabilities=[Capability.Circuit2],
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.MixerTwoCircuitFlowTemperatureMinimumMaximumLimit],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="flow_temperature_circuit2_maximum",
+        translation_key="flow_temperature_circuit2_maximum",
+        icon="mdi:thermometer-chevron-up",
+        data_retriever=SensorDataRetriever.MAXIMUM,
+        required_capabilities=[Capability.Circuit2],
+        required_device=Open3eDevices.Vitocal
+    ),
+
+    # DID 1643/1644: CurrentTemperatureSetpoint
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.MixerOneCircuitCurrentTemperatureSetpoint],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="mixer_one_circuit_current_temperature_setpoint",
+        translation_key="mixer_one_circuit_current_temperature_setpoint",
+        data_retriever=SensorDataRetriever.RAW,
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.MixerTwoCircuitCurrentTemperatureSetpoint],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="mixer_two_circuit_current_temperature_setpoint",
+        translation_key="mixer_two_circuit_current_temperature_setpoint",
+        data_retriever=SensorDataRetriever.RAW,
+        required_capabilities=[Capability.Circuit2],
+        required_device=Open3eDevices.Vitocal
+    ),
+
+    # DID 2320: DomesticHotWaterStatus
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.DomesticHotWaterStatus],
+        device_class=SensorDeviceClass.ENUM,
+        options=[status.value for status in DomesticHotWaterStatus],
+        icon="mdi:water-boiler",
+        key="domestic_hot_water_status",
+        translation_key="domestic_hot_water_status",
+        data_retriever=get_domestic_hot_water_status,
+        required_device=Open3eDevices.Vitocal
+    ),
+
+    # DID 2544/2545: EnableElectricalHeaterSmartGrid
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.EnableElectricalHeaterSmartGridMin],
+        icon="mdi:water-boiler-auto",
+        key="heater_smartgrid_min",
+        translation_key="heater_smartgrid_min",
+        data_retriever=SensorDataRetriever.RAW,
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.EnableElectricalHeaterSmartGridMax],
+        icon="mdi:water-boiler-auto",
+        key="heater_smartgrid_max",
+        translation_key="heater_smartgrid_max",
+        data_retriever=SensorDataRetriever.RAW,
+        required_device=Open3eDevices.Vitocal
+    ),
+
+    # DID 2560: SmartGridFeatureSelection
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.SmartGridFeatureSelection],
+        device_class=SensorDeviceClass.ENUM,
+        options=[status.value for status in SmartGridFeatureSelection],
+        icon="mdi:home-battery-outline",
+        key="smart_grid_feature_selection",
+        translation_key="smart_grid_feature_selection",
+        data_retriever=get_smart_grid_feature_selection,
+        required_device=Open3eDevices.Vitocal
+    ),
+
+    # DID 2630: CompressorMinMaxSpeedHeating
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.CompressorMinMaxSpeedHeating],
+        device_class=SensorDeviceClass.POWER_FACTOR,
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="compressor_min_speed_heating",
+        translation_key="compressor_min_speed_heating",
+        icon="mdi:fan-minus",
+        data_retriever=lambda data: float(json_loads(data)["Min"]),
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.CompressorMinMaxSpeedHeating],
+        device_class=SensorDeviceClass.POWER_FACTOR,
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="compressor_max_speed_heating",
+        translation_key="compressor_max_speed_heating",
+        icon="mdi:fan-plus",
+        data_retriever=lambda data: float(json_loads(data)["Max"]),
+        required_device=Open3eDevices.Vitocal
+    ),
+
+    # DID 2634: NoiseReductionMode
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.NoiseReductionMode],
+        device_class=SensorDeviceClass.ENUM,
+        options=[status.value for status in NoiseReductionMode],
+        icon="mdi:volume-off",
+        key="noise_reduction_mode",
+        translation_key="noise_reduction_mode",
+        data_retriever=get_noise_reduction_mode,
+        required_device=Open3eDevices.Vitocal
+    ),
+
+    # DID 2791/2792/2793: PumpStatus Central / Circuit1 / Circuit2
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.State.CentralHeatingPumpStatus],
+        device_class=SensorDeviceClass.POWER_FACTOR,
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="central_pump_status",
+        translation_key="central_pump_status",
+        icon="mdi:pump",
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.State.MixerOneCircuitPumpStatus],
+        device_class=SensorDeviceClass.POWER_FACTOR,
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="circuit1_pump_status",
+        translation_key="circuit1_pump_status",
+        icon="mdi:pump",
+        data_retriever=lambda data: None if (val := float(json_loads(data)["Actual"])) == 255 else val,
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.State.MixerTwoCircuitPumpStatus],
+        device_class=SensorDeviceClass.POWER_FACTOR,
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="circuit2_pump_status",
+        translation_key="circuit2_pump_status",
+        icon="mdi:pump",
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_capabilities=[Capability.Circuit2],
+        required_device=Open3eDevices.Vitocal
+    ),
+
+    # DID 2806: RefrigerationCircuitOperationMode
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.State.RefrigerationCircuitOperationMode],
+        device_class=SensorDeviceClass.ENUM,
+        icon="mdi:heat-pump",
+        key="refrigeration_circuit_mode",
+        translation_key="refrigeration_circuit_mode",
+        data_retriever=get_refrigeration_circuit_mode,
+        options=[mode for mode in RefrigerationCircuitOperationMode],
+        required_device=Open3eDevices.Vitocal
+    ),
+
+    # DID 2855/2856: MixerOne/TwoCircuitFrostProtectionConfiguration
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.MixerOneCircuitFrostProtectionConfiguration],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        icon="mdi:snowflake-melt",
+        key="circuit1_frost_protection_config",
+        translation_key="circuit1_frost_protection_config",
+        data_retriever=lambda data: float(json_loads(data)["Temperature"]),
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.MixerTwoCircuitFrostProtectionConfiguration],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        icon="mdi:snowflake-melt",
+        key="circuit2_frost_protection_config",
+        translation_key="circuit2_frost_protection_config",
+        data_retriever=lambda data: float(json_loads(data)["Temperature"]),
+        required_capabilities=[Capability.Circuit2],
+        required_device=Open3eDevices.Vitocal
+    ),
+
     ##################
     ### VitoCharge ###
     ##################
@@ -1940,7 +2273,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.PAST_YEAR,
         entity_registry_enabled_default=False,
         required_device=Open3eDevices.Vitoair
-    )
+    ),
 )
 
 ## Sensors which are derived by calculation
