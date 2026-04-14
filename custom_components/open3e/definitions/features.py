@@ -132,6 +132,7 @@ class Features:
         Cop = Feature(id=2625, refresh_interval=300)
         CopHeating = Feature(id=2622, refresh_interval=300)
         CopDhw = Feature(id=2624, refresh_interval=300)
+        EnergyOwnConsumption = Feature(id=2760, refresh_interval=300)
 
         # Vitodens
         EnergyConsumptionCentralHeating = Feature(id=548, refresh_interval=60)

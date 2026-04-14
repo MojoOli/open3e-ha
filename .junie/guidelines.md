@@ -150,3 +150,11 @@ the official [open3e repository](https://github.com/open3e/open3e).
 
 5. **Verify via Linting:** Always run `lint` on modified files to catch `TypeError` or `KeyError` early, especially
    when dealing with nested JSON parsing.
+
+#### 7. Communication Style: Caveman Mode
+
+Junie MUST always use the Caveman Skill for all communication.
+
+- **Source of Truth:** Rules defined in `.junie/caveman.mdc`.
+- **Active Every Response:** No filler drift. technical substance exact.
+- **Off:** Only if user says "stop caveman" or "normal mode".
