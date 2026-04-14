@@ -244,8 +244,6 @@ class Features:
         ExpansionValve2 = Feature(id=391, refresh_interval=30)
         FourThreeWayValve = Feature(id=2735, refresh_interval=30)
 
-    # Vitodens
-
         # Ergänzungen für Mischer-Ventile
         MixerOneCircuitThreeWayValvePositionPercent = Feature(id=475, refresh_interval=30)
         MixerTwoCircuitThreeWayValvePositionPercent = Feature(id=476, refresh_interval=30)
