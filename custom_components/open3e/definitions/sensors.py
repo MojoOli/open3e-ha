@@ -2280,7 +2280,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="ventilation_bypass_flap_available_count",
         translation_key="ventilation_bypass_flap_available_count",
         icon="mdi:counter",
-        data_retriever=SensorDataRetriever.RAW,
+        data_retriever=lambda value: int(value),
         required_device=Open3eDevices.Vitoair
     ),
     Open3eSensorEntityDescription(

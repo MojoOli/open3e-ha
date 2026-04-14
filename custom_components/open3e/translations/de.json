@@ -413,7 +413,7 @@
         "name": "Lüftungsstufe"
       },
       "ventilation_bypass_available_modes": {
-        "name": "Bypass-Verfügbare Modi"
+        "name": "Verfügbare Bypass-Modi"
       },
       "ventilation_outside_air_bypass": {
         "name": "Außenluft-Bypass"
