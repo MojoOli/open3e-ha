@@ -1,0 +1,16 @@
+from enum import StrEnum
+
+
+class SmartGridReadyStatus(StrEnum):
+    SHUTDOWN = "shutdown"
+    NORMAL = "normal"
+    PREFERRED = "preferred"
+    FORCED = "forced"
+
+
+SMART_GRID_READY_STATUS_MAP: dict[int, SmartGridReadyStatus] = {
+    0: SmartGridReadyStatus.SHUTDOWN,
+    1: SmartGridReadyStatus.NORMAL,
+    2: SmartGridReadyStatus.PREFERRED,
+    3: SmartGridReadyStatus.FORCED,
+}
