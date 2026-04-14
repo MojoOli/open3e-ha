@@ -682,10 +682,10 @@
       "smart_grid_ready_consolidator": {
         "name": "SmartGrid Ready Status",
         "state": {
-          "shutdown": "Abschaltbetrieb",
-          "normal": "Normalbetrieb",
-          "preferred": "Bevorzugter Betrieb",
-          "forced": "Zwangsbetrieb"
+          "locked": "Betriebszustand 1 – Sperrung",
+          "normal": "Betriebszustand 2 – Normalbetrieb",
+          "pv_recommended": "Betriebszustand 3 – Einschaltempfehlung PV",
+          "high_temperature": "Betriebszustand 4 – Aktive Ansteuerung"
         }
       },
       "smartgrid_feature_selection": {
