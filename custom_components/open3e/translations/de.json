@@ -628,9 +628,6 @@
       "domestic_hot_water_status": {
         "name": "Warmwasser Status"
       },
-      "external_lock_active": {
-        "name": "Externe Sperrung"
-      },
       "flow_temperature_hk1_maximum": {
         "name": "HK1 Vorlauftemperatur Maximum"
       },
@@ -642,9 +639,6 @@
       },
       "flow_temperature_hk2_minimum": {
         "name": "HK2 Vorlauftemperatur Minimum"
-      },
-      "heat_pump_frost_protection": {
-        "name": "Frostschutz Wärmepumpe"
       },
       "heater_smartgrid_max": {
         "name": "Heizstab SmartGrid Maximum"
@@ -658,11 +652,17 @@
       "mixer_one_circuit_current_temperature_setpoint": {
         "name": "HK1 Temperatur Sollwert aktuell"
       },
+      "mixer_one_circuit_three_way_valve_position_percent": {
+        "name": "HK1 Mischventil Position"
+      },
       "mixer_three_circuit_three_way_valve_position_percent": {
         "name": "HK3 Mischventil Position"
       },
       "mixer_two_circuit_current_temperature_setpoint": {
         "name": "HK2 Temperatur Sollwert aktuell"
+      },
+      "mixer_two_circuit_three_way_valve_position_percent": {
+        "name": "HK2 Mischventil Position"
       },
       "noise_reduction_mode": {
         "name": "Geräuschreduzierung"
@@ -680,7 +680,13 @@
         }
       },
       "smart_grid_ready_consolidator": {
-        "name": "SmartGrid Ready Status"
+        "name": "SmartGrid Ready Status",
+        "state": {
+          "shutdown": "Abschaltbetrieb",
+          "normal": "Normalbetrieb",
+          "preferred": "Bevorzugter Betrieb",
+          "forced": "Zwangsbetrieb"
+        }
       },
       "smartgrid_feature_selection": {
         "name": "SmartGrid Feature Auswahl"
@@ -749,6 +755,12 @@
       },
       "mixer_four_circuit_operation_state": {
         "name": "Umwälzpumpe Heizkreis 4"
+      },
+      "external_lock_active": {
+        "name": "Externe Sperrung"
+      },
+      "heat_pump_frost_protection": {
+        "name": "Frostschutz Wärmepumpe"
       }
     },
     "climate": {
