@@ -262,7 +262,7 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
     ##################
 
     Open3eBinarySensorEntityDescription(
-        # device_class=None,
+        #device_class=None,
         poll_data_features=[Features.State.BackUpBox],
         key="backup_box_installed",
         translation_key="backup_box_installed",

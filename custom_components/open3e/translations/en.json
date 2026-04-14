@@ -654,11 +654,11 @@
       "heater_smartgrid_min": {
         "name": "Electrical heater SmartGrid minimum"
       },
-      "mixer_four_circuit_three_way_valve_position_percent": {
-        "name": "Circuit 4 three-way valve position"
-      },
       "mixer_one_circuit_current_temperature_setpoint": {
         "name": "Circuit 1 current temperature setpoint"
+      },
+      "mixer_two_circuit_current_temperature_setpoint": {
+        "name": "Circuit 2 current temperature setpoint"
       },
       "mixer_one_circuit_three_way_valve_position_percent": {
         "name": "Circuit 1 three-way valve position"
@@ -666,8 +666,8 @@
       "mixer_three_circuit_three_way_valve_position_percent": {
         "name": "Circuit 3 three-way valve position"
       },
-      "mixer_two_circuit_current_temperature_setpoint": {
-        "name": "Circuit 2 current temperature setpoint"
+      "mixer_four_circuit_three_way_valve_position_percent": {
+        "name": "Circuit 4 three-way valve position"
       },
       "mixer_two_circuit_three_way_valve_position_percent": {
         "name": "Circuit 2 three-way valve position"

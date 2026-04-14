@@ -654,11 +654,11 @@
       "heater_smartgrid_min": {
         "name": "Heizstab SmartGrid Minimum"
       },
-      "mixer_four_circuit_three_way_valve_position_percent": {
-        "name": "HK4 Mischventil Position"
-      },
       "mixer_one_circuit_current_temperature_setpoint": {
         "name": "HK1 Temperatur Sollwert aktuell"
+      },
+      "mixer_two_circuit_current_temperature_setpoint": {
+        "name": "HK2 Temperatur Sollwert aktuell"
       },
       "mixer_one_circuit_three_way_valve_position_percent": {
         "name": "HK1 Mischventil Position"
@@ -666,8 +666,8 @@
       "mixer_three_circuit_three_way_valve_position_percent": {
         "name": "HK3 Mischventil Position"
       },
-      "mixer_two_circuit_current_temperature_setpoint": {
-        "name": "HK2 Temperatur Sollwert aktuell"
+      "mixer_four_circuit_three_way_valve_position_percent": {
+        "name": "HK4 Mischventil Position"
       },
       "mixer_two_circuit_three_way_valve_position_percent": {
         "name": "HK2 Mischventil Position"
