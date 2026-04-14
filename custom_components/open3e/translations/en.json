@@ -600,6 +600,99 @@
       },
       "chimney_sweeper_test_mode": {
         "name": "Chimney sweeper test mode"
+      },
+      "central_pump_status": {
+        "name": "Central pump status"
+      },
+      "circuit1_pump_status": {
+        "name": "Heating circuit 1 pump status"
+      },
+      "circuit2_frost_protection_config": {
+        "name": "Circuit 2 frost protection configuration"
+      },
+      "circuit2_pump_status": {
+        "name": "Heating circuit 2 pump status"
+      },
+      "compressor_max_speed_heating": {
+        "name": "Compressor maximum speed heating"
+      },
+      "compressor_min_speed_heating": {
+        "name": "Compressor minimum speed heating"
+      },
+      "domestic_hot_water_pump_max_speed": {
+        "name": "DHW pump maximum speed"
+      },
+      "domestic_hot_water_pump_min_speed": {
+        "name": "DHW pump minimum speed"
+      },
+      "domestic_hot_water_status": {
+        "name": "Domestic hot water status"
+      },
+      "flow_temperature_hk1_maximum": {
+        "name": "Circuit 1 flow temperature maximum"
+      },
+      "flow_temperature_hk1_minimum": {
+        "name": "Circuit 1 flow temperature minimum"
+      },
+      "flow_temperature_hk2_maximum": {
+        "name": "Circuit 2 flow temperature maximum"
+      },
+      "flow_temperature_hk2_minimum": {
+        "name": "Circuit 2 flow temperature minimum"
+      },
+      "heater_smartgrid_max": {
+        "name": "Electrical heater SmartGrid maximum"
+      },
+      "heater_smartgrid_min": {
+        "name": "Electrical heater SmartGrid minimum"
+      },
+      "mixer_four_circuit_three_way_valve_position_percent": {
+        "name": "Circuit 4 three-way valve position"
+      },
+      "mixer_one_circuit_current_temperature_setpoint": {
+        "name": "Circuit 1 current temperature setpoint"
+      },
+      "mixer_one_circuit_three_way_valve_position_percent": {
+        "name": "Circuit 1 three-way valve position"
+      },
+      "mixer_three_circuit_three_way_valve_position_percent": {
+        "name": "Circuit 3 three-way valve position"
+      },
+      "mixer_two_circuit_current_temperature_setpoint": {
+        "name": "Circuit 2 current temperature setpoint"
+      },
+      "mixer_two_circuit_three_way_valve_position_percent": {
+        "name": "Circuit 2 three-way valve position"
+      },
+      "noise_reduction_mode": {
+        "name": "Noise reduction mode"
+      },
+      "refrigeration_circuit_mode": {
+        "name": "Refrigeration circuit operation mode",
+        "state": {
+          "off": "Off",
+          "shutdown": "Shutdown",
+          "heating": "Heating",
+          "cooling": "Cooling",
+          "manual": "Manual",
+          "defrost": "Defrost",
+          "evu_lock": "EVU lock"
+        }
+      },
+      "smart_grid_ready_consolidator": {
+        "name": "SmartGrid ready status",
+        "state": {
+          "shutdown": "Shutdown mode",
+          "normal": "Normal mode",
+          "preferred": "Preferred mode",
+          "forced": "Forced mode"
+        }
+      },
+      "smartgrid_feature_selection": {
+        "name": "SmartGrid feature selection"
+      },
+      "software_version": {
+        "name": "Software version"
       }
     },
     "binary_sensor": {
@@ -662,6 +755,12 @@
       },
       "mixer_four_circuit_operation_state": {
         "name": "Pump circuit 4"
+      },
+      "external_lock_active": {
+        "name": "External lock active"
+      },
+      "heat_pump_frost_protection": {
+        "name": "Heat pump frost protection"
       }
     },
     "climate": {
