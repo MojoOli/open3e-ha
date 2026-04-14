@@ -2225,7 +2225,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="circuit1_pump_status",
         translation_key="circuit1_pump_status",
         icon="mdi:pump",
-        data_retriever=SensorDataRetriever.ACTUAL,
+        data_retriever=lambda data: None if (val := float(json_loads(data)["Actual"])) == 255 else val,
         required_capabilities=[Capability.Circuit1],
         required_device=Open3eDevices.Vitocal
     ),
