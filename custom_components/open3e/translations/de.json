@@ -608,10 +608,10 @@
         "name": "Heizkreis 1 Pumpe Status"
       },
       "circuit1_frost_protection_config": {
-        "name": "HK1 Frostschutz Konfiguration"
+        "name": "Heizkreis 1 Frostschutz Konfiguration"
       },
       "circuit2_frost_protection_config": {
-        "name": "HK2 Frostschutz Konfiguration"
+        "name": "Heizkreis 2 Frostschutz Konfiguration"
       },
       "circuit2_pump_status": {
         "name": "Heizkreis 2 Pumpe Status"
@@ -636,17 +636,17 @@
           "postrun": "Nachlauf"
         }
       },
-      "flow_temperature_hk1_maximum": {
-        "name": "HK1 Vorlauftemperatur Maximum"
+      "flow_temperature_circuit1_maximum": {
+        "name": "Heizkreis 1 Vorlauftemperatur Maximum"
       },
-      "flow_temperature_hk1_minimum": {
-        "name": "HK1 Vorlauftemperatur Minimum"
+      "flow_temperature_circuit1_minimum": {
+        "name": "Heizkreis 1 Vorlauftemperatur Minimum"
       },
-      "flow_temperature_hk2_maximum": {
-        "name": "HK2 Vorlauftemperatur Maximum"
+      "flow_temperature_circuit2_maximum": {
+        "name": "Heizkreis 2 Vorlauftemperatur Maximum"
       },
-      "flow_temperature_hk2_minimum": {
-        "name": "HK2 Vorlauftemperatur Minimum"
+      "flow_temperature_circuit2_minimum": {
+        "name": "Heizkreis 2 Vorlauftemperatur Minimum"
       },
       "heater_smartgrid_max": {
         "name": "Heizstab SmartGrid Maximum"
@@ -655,22 +655,22 @@
         "name": "Heizstab SmartGrid Minimum"
       },
       "mixer_one_circuit_current_temperature_setpoint": {
-        "name": "HK1 Temperatur Sollwert aktuell"
+        "name": "Heizkreis 1 Temperatur Sollwert aktuell"
       },
       "mixer_two_circuit_current_temperature_setpoint": {
-        "name": "HK2 Temperatur Sollwert aktuell"
+        "name": "Heizkreis 2 Temperatur Sollwert aktuell"
       },
       "mixer_one_circuit_three_way_valve_position_percent": {
-        "name": "HK1 Mischventil Position"
+        "name": "Heizkreis 1 Mischventil Position"
       },
       "mixer_three_circuit_three_way_valve_position_percent": {
-        "name": "HK3 Mischventil Position"
+        "name": "Heizkreis 3 Mischventil Position"
       },
       "mixer_four_circuit_three_way_valve_position_percent": {
-        "name": "HK4 Mischventil Position"
+        "name": "Heizkreis 4 Mischventil Position"
       },
       "mixer_two_circuit_three_way_valve_position_percent": {
-        "name": "HK2 Mischventil Position"
+        "name": "Heizkreis 2 Mischventil Position"
       },
       "noise_reduction_mode": {
         "name": "Geräuschreduzierung",
@@ -701,7 +701,7 @@
           "high_temperature": "Aktive Ansteuerung"
         }
       },
-      "smartgrid_feature_selection": {
+      "smart_grid_feature_selection": {
         "name": "SmartGrid Feature Auswahl",
         "state": {
           "domestic_hot_water": "Warmwasser",

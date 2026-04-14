@@ -636,16 +636,16 @@
           "postrun": "Postrun"
         }
       },
-      "flow_temperature_hk1_maximum": {
+      "flow_temperature_circuit1_maximum": {
         "name": "Circuit 1 flow temperature maximum"
       },
-      "flow_temperature_hk1_minimum": {
+      "flow_temperature_circuit1_minimum": {
         "name": "Circuit 1 flow temperature minimum"
       },
-      "flow_temperature_hk2_maximum": {
+      "flow_temperature_circuit2_maximum": {
         "name": "Circuit 2 flow temperature maximum"
       },
-      "flow_temperature_hk2_minimum": {
+      "flow_temperature_circuit2_minimum": {
         "name": "Circuit 2 flow temperature minimum"
       },
       "heater_smartgrid_max": {
@@ -701,7 +701,7 @@
           "high_temperature": "High temperature"
         }
       },
-      "smartgrid_feature_selection": {
+      "smart_grid_feature_selection": {
         "name": "SmartGrid feature selection",
         "state": {
           "domestic_hot_water": "Hot water",
