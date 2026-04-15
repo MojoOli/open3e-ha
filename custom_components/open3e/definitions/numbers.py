@@ -1144,7 +1144,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         required_capabilities=[Capability.Circuit4],
         required_device=Open3eDevices.Vitocal
     ),
-    
+
     ##################
     ### Vitocharge ###
     ##################
@@ -1164,7 +1164,6 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="backup_box_discharge_limit_percentage",
         translation_key="backup_box_discharge_limit_percentage",
-        required_capabilities=[Capability.BackupBox],
         required_device=Open3eDevices.Vitocharge
     ),
     Open3eNumberEntityDescription(
