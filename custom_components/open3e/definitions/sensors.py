@@ -206,6 +206,68 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=lambda data: get_connection_status(int(data)),
         options=[mode for mode in ConnectionStatus]
     ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.GatewayMac],
+        entity_category=EntityCategory.DIAGNOSTIC,
+        key="gateway_mac",
+        translation_key="gateway_mac",
+        icon="mdi:ethernet",
+        data_retriever=SensorDataRetriever.RAWSTR
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.GatewayRemoteLocalNetworkStatus],
+        device_class=SensorDeviceClass.ENUM,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:access-point-network",
+        entity_registry_enabled_default=False,
+        key="gateway_remote_local_network_status",
+        translation_key="gateway_remote_local_network_status",
+        data_retriever=lambda data: get_connection_status(int(data)),
+        options=[mode for mode in ConnectionStatus]
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.GatewayRemoteIp],
+        entity_category=EntityCategory.DIAGNOSTIC,
+        key="gateway_remote_ip",
+        translation_key="gateway_remote_ip",
+        icon="mdi:ip-network",
+        data_retriever=lambda data: SensorDataRetriever.cleaned_ip(json_loads(data)["WLAN_IP-Address"])
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.GatewayRemoteSignalStrength],
+        entity_category=EntityCategory.DIAGNOSTIC,
+        device_class=SensorDeviceClass.SIGNAL_STRENGTH,
+        native_unit_of_measurement="dB",
+        key="gateway_remote_signal_strength",
+        translation_key="gateway_remote_signal_strength",
+        icon="mdi:wifi",
+        data_retriever=int
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.TimeSettingSource],
+        entity_category=EntityCategory.DIAGNOSTIC,
+        key="time_setting_source",
+        translation_key="time_setting_source",
+        entity_registry_enabled_default=False,
+        data_retriever=SensorDataRetriever.TEXT,
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.BuildingType],
+        entity_category=EntityCategory.DIAGNOSTIC,
+        key="building_type",
+        translation_key="building_type",
+        entity_registry_enabled_default=False,
+        data_retriever=SensorDataRetriever.TEXT
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.ElectronicTraceabilityNumber],
+        entity_category=EntityCategory.DIAGNOSTIC,
+        key="electronic_traceability_number",
+        translation_key="electronic_traceability_number",
+        entity_registry_enabled_default=False,
+        data_retriever=SensorDataRetriever.RAWSTR
+    ),
 
     ################
     ### VITODENS ###
@@ -565,8 +627,6 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         options=[mode for mode in DomesticHotWaterOperationState],
         required_device=Open3eDevices.Vitodens
     ),
-
-    ######### MISC-SENSORS #########
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Misc.ScaldProtection],
         key="scald_protection",
@@ -577,48 +637,15 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         required_device=Open3eDevices.Vitodens
     ),
     Open3eSensorEntityDescription(
-        poll_data_features=[Features.Misc.GatewayMac],
+        poll_data_features=[Features.Misc.GasType],
         entity_category=EntityCategory.DIAGNOSTIC,
-        key="gateway_mac",
-        translation_key="gateway_mac",
-        icon="mdi:ethernet",
-        data_retriever=SensorDataRetriever.RAWSTR,
+        key="gas_type",
+        translation_key="gas_type",
+        data_retriever=SensorDataRetriever.TEXT,
         required_device=Open3eDevices.Vitodens
     ),
-    Open3eSensorEntityDescription(
-        poll_data_features=[Features.Misc.GatewayRemoteLocalNetworkStatus],
-        device_class=SensorDeviceClass.ENUM,
-        entity_category=EntityCategory.DIAGNOSTIC,
-        icon="mdi:access-point-network",
-        entity_registry_enabled_default=False,
-        key="gateway_remote_local_network_status",
-        translation_key="gateway_remote_local_network_status",
-        data_retriever=lambda data: get_connection_status(int(data)),
-        options=[mode for mode in ConnectionStatus],
-        required_device=Open3eDevices.Vitodens
-    ),
-    Open3eSensorEntityDescription(
-        poll_data_features=[Features.Misc.GatewayRemoteIp],
-        entity_category=EntityCategory.DIAGNOSTIC,
-        key="gateway_remote_ip",
-        translation_key="gateway_remote_ip",
-        icon="mdi:ip-network",
-        entity_registry_enabled_default=False,
-        data_retriever=lambda data: SensorDataRetriever.cleaned_ip(json_loads(data)["WLAN_IP-Address"]),
-        required_device=Open3eDevices.Vitodens
-    ),
-    Open3eSensorEntityDescription(
-        poll_data_features=[Features.Misc.GatewayRemoteSignalStrength],
-        entity_category=EntityCategory.DIAGNOSTIC,
-        device_class=SensorDeviceClass.SIGNAL_STRENGTH,
-        native_unit_of_measurement="dB",
-        key="gateway_remote_signal_strength",
-        translation_key="gateway_remote_signal_strength",
-        icon="mdi:wifi",
-        entity_registry_enabled_default=False,
-        data_retriever=int,
-        required_device=Open3eDevices.Vitodens
-    ),
+
+    ######### MISC-SENSORS #########
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Misc.CentralHeatingOneCircuitName],
         entity_category=EntityCategory.DIAGNOSTIC,
@@ -660,71 +687,6 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         required_device=Open3eDevices.Vitodens
     ),
     Open3eSensorEntityDescription(
-        poll_data_features=[Features.Misc.MixerOneCircuitCentralHeatingCurve],
-        entity_category=EntityCategory.DIAGNOSTIC,
-        key="mixer_one_circuit_central_heating_curve",
-        translation_key="mixer_one_circuit_central_heating_curve",
-        entity_registry_enabled_default=False,
-        data_retriever=lambda data: float(json_loads(data)["Gradient"]),
-        required_capabilities=[Capability.Circuit1],
-        required_device=Open3eDevices.Vitodens
-    ),
-    Open3eSensorEntityDescription(
-        poll_data_features=[Features.Misc.MixerTwoCircuitCentralHeatingCurve],
-        entity_category=EntityCategory.DIAGNOSTIC,
-        key="mixer_two_circuit_central_heating_curve",
-        translation_key="mixer_two_circuit_central_heating_curve",
-        entity_registry_enabled_default=False,
-        data_retriever=lambda data: float(json_loads(data)["Gradient"]),
-        required_capabilities=[Capability.Circuit2],
-        required_device=Open3eDevices.Vitodens
-    ),
-    Open3eSensorEntityDescription(
-        poll_data_features=[Features.Misc.MixerThreeCircuitCentralHeatingCurve],
-        entity_category=EntityCategory.DIAGNOSTIC,
-        key="mixer_three_circuit_central_heating_curve",
-        translation_key="mixer_three_circuit_central_heating_curve",
-        entity_registry_enabled_default=False,
-        data_retriever=lambda data: float(json_loads(data)["Gradient"]),
-        required_capabilities=[Capability.Circuit3],
-        required_device=Open3eDevices.Vitodens
-    ),
-    Open3eSensorEntityDescription(
-        poll_data_features=[Features.Misc.MixerFourCircuitCentralHeatingCurve],
-        entity_category=EntityCategory.DIAGNOSTIC,
-        key="mixer_four_circuit_central_heating_curve",
-        translation_key="mixer_four_circuit_central_heating_curve",
-        entity_registry_enabled_default=False,
-        data_retriever=lambda data: float(json_loads(data)["Gradient"]),
-        required_capabilities=[Capability.Circuit4],
-        required_device=Open3eDevices.Vitodens
-    ),
-    Open3eSensorEntityDescription(
-        poll_data_features=[Features.Misc.BuildingType],
-        entity_category=EntityCategory.DIAGNOSTIC,
-        key="building_type",
-        translation_key="building_type",
-        data_retriever=SensorDataRetriever.TEXT,
-        required_device=Open3eDevices.Vitodens
-    ),
-    Open3eSensorEntityDescription(
-        poll_data_features=[Features.Misc.ElectronicTraceabilityNumber],
-        entity_category=EntityCategory.DIAGNOSTIC,
-        key="electronic_traceability_number",
-        translation_key="electronic_traceability_number",
-        entity_registry_enabled_default=False,
-        data_retriever=SensorDataRetriever.RAWSTR,
-        required_device=Open3eDevices.Vitodens
-    ),
-    Open3eSensorEntityDescription(
-        poll_data_features=[Features.Misc.GasType],
-        entity_category=EntityCategory.DIAGNOSTIC,
-        key="gas_type",
-        translation_key="gas_type",
-        data_retriever=SensorDataRetriever.TEXT,
-        required_device=Open3eDevices.Vitodens
-    ),
-    Open3eSensorEntityDescription(
         poll_data_features=[Features.Misc.CentralHeatingRegulationMode],
         entity_category=EntityCategory.DIAGNOSTIC,
         key="central_heating_regulation_mode",
@@ -734,19 +696,11 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         required_device=Open3eDevices.Vitodens
     ),
     Open3eSensorEntityDescription(
-        poll_data_features=[Features.Misc.TimeSettingSource],
-        entity_category=EntityCategory.DIAGNOSTIC,
-        key="time_setting_source",
-        translation_key="time_setting_source",
-        entity_registry_enabled_default=False,
-        data_retriever=SensorDataRetriever.TEXT,
-        required_device=Open3eDevices.Vitodens
-    ),
-    Open3eSensorEntityDescription(
         poll_data_features=[Features.Misc.ChimneySweeperTestMode],
         key="chimney_sweeper_test_mode",
         translation_key="chimney_sweeper_test_mode",
         data_retriever=SensorDataRetriever.RAWSTR,
+        entity_registry_enabled_default=False,
         required_device=Open3eDevices.Vitodens
     ),
 
@@ -1818,6 +1772,46 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         translation_key="circuit2_frost_protection_config",
         data_retriever=lambda data: float(json_loads(data)["Temperature"]),
         required_capabilities=[Capability.Circuit2],
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.CentralHeatingOneCircuitName],
+        entity_category=EntityCategory.DIAGNOSTIC,
+        key="central_heating_one_circuit_name",
+        translation_key="central_heating_one_circuit_name",
+        entity_registry_enabled_default=False,
+        data_retriever=SensorDataRetriever.RAWSTR,
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.CentralHeatingTwoCircuitName],
+        entity_category=EntityCategory.DIAGNOSTIC,
+        key="central_heating_two_circuit_name",
+        translation_key="central_heating_two_circuit_name",
+        entity_registry_enabled_default=False,
+        data_retriever=SensorDataRetriever.RAWSTR,
+        required_capabilities=[Capability.Circuit2],
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.CentralHeatingThreeCircuitName],
+        entity_category=EntityCategory.DIAGNOSTIC,
+        key="central_heating_three_circuit_name",
+        translation_key="central_heating_three_circuit_name",
+        entity_registry_enabled_default=False,
+        data_retriever=SensorDataRetriever.RAWSTR,
+        required_capabilities=[Capability.Circuit3],
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.CentralHeatingFourCircuitName],
+        entity_category=EntityCategory.DIAGNOSTIC,
+        key="central_heating_four_circuit_name",
+        translation_key="central_heating_four_circuit_name",
+        entity_registry_enabled_default=False,
+        data_retriever=SensorDataRetriever.RAWSTR,
+        required_capabilities=[Capability.Circuit4],
         required_device=Open3eDevices.Vitocal
     ),
 

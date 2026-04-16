@@ -770,9 +770,6 @@
       "circuit_frost_protection": {
         "name": "Frost protection heating circuit"
       },
-      "circuit_pump": {
-        "name": "Heatpump circuit pump"
-      },
       "circuit_1_pump": {
         "name": "Heating circuit 1 circulation pump"
       },

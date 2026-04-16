@@ -770,9 +770,6 @@
       "circuit_frost_protection": {
         "name": "Frostschutz Heizkreis"
       },
-      "circuit_pump": {
-        "name": "Wärmepumpe Heizkreis-Pumpe"
-      },
       "circuit_1_pump": {
         "name": "Heizkreis 1 Umwälzpumpe"
       },

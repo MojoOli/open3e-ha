@@ -1184,4 +1184,80 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         translation_key="maximum_recharge_power",
         required_device=Open3eDevices.Vitocharge
     ),
+
+    ##################
+    ###  Vitodens  ###
+    ##################
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.State.FlowCircuit1HeatingCurve],
+        icon="mdi:slope-uphill",
+        native_min_value=0.2,
+        native_max_value=3.5,
+        native_step=0.1,
+        get_native_value=lambda data: data[HeatingCurve.Gradient],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_heating_curve(
+            feature_id=Features.State.FlowCircuit1HeatingCurve.id,
+            heating_curve=HeatingCurve.Gradient,
+            value=value,
+            device=device
+        ),
+        key="circuit_1_heating_curve_slope",
+        translation_key="circuit_1_heating_curve_slope",
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.State.FlowCircuit2HeatingCurve],
+        icon="mdi:slope-uphill",
+        native_min_value=0.2,
+        native_max_value=3.5,
+        native_step=0.1,
+        get_native_value=lambda data: data[HeatingCurve.Gradient],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_heating_curve(
+            feature_id=Features.State.FlowCircuit2HeatingCurve.id,
+            heating_curve=HeatingCurve.Gradient,
+            value=value,
+            device=device
+        ),
+        key="circuit_2_heating_curve_slope",
+        translation_key="circuit_2_heating_curve_slope",
+        required_capabilities=[Capability.Circuit2],
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.State.FlowCircuit3HeatingCurve],
+        icon="mdi:slope-uphill",
+        native_min_value=0.2,
+        native_max_value=3.5,
+        native_step=0.1,
+        get_native_value=lambda data: data[HeatingCurve.Gradient],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_heating_curve(
+            feature_id=Features.State.FlowCircuit3HeatingCurve.id,
+            heating_curve=HeatingCurve.Gradient,
+            value=value,
+            device=device
+        ),
+        key="circuit_3_heating_curve_slope",
+        translation_key="circuit_3_heating_curve_slope",
+        required_capabilities=[Capability.Circuit3],
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.State.FlowCircuit4HeatingCurve],
+        icon="mdi:slope-uphill",
+        native_min_value=0.2,
+        native_max_value=3.5,
+        native_step=0.1,
+        get_native_value=lambda data: data[HeatingCurve.Gradient],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_heating_curve(
+            feature_id=Features.State.FlowCircuit4HeatingCurve.id,
+            heating_curve=HeatingCurve.Gradient,
+            value=value,
+            device=device
+        ),
+        key="circuit_4_heating_curve_slope",
+        translation_key="circuit_4_heating_curve_slope",
+        required_capabilities=[Capability.Circuit4],
+        required_device=Open3eDevices.Vitodens
+    ),
 )
