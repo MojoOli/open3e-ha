@@ -2126,7 +2126,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         icon="mdi:solar-panel",
         key="pv_voltage_string_1",
         translation_key="pv_voltage_string_1",
-        data_retriever=SensorDataRetriever.PV_VOLTAGE_STRING_1,
+        data_retriever=SensorDataRetriever.PV_VOLTAGE_STRING_3,  # Its swapped on purpose because of pv_power
         required_device=Open3eDevices.Vitocharge
     ),
     Open3eSensorEntityDescription(
@@ -2148,7 +2148,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         icon="mdi:solar-panel",
         key="pv_voltage_string_3",
         translation_key="pv_voltage_string_3",
-        data_retriever=SensorDataRetriever.PV_VOLTAGE_STRING_3,
+        data_retriever=SensorDataRetriever.PV_VOLTAGE_STRING_1,  # Its swapped on purpose because of pv_power
         required_device=Open3eDevices.Vitocharge
     ),
     Open3eSensorEntityDescription(
@@ -2182,7 +2182,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         icon="mdi:battery-charging",
         key="battery_voltage",
         translation_key="battery_voltage",
-        data_retriever=SensorDataRetriever.VOLTAGE,
+        data_retriever=int,
         required_device=Open3eDevices.Vitocharge
     ),
     ###############

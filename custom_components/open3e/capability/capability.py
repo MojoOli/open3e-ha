@@ -17,7 +17,6 @@ class Capability(Enum):
     Circuit2 = auto()
     Circuit3 = auto()
     Circuit4 = auto()
-    BackupBox = auto()
 
 
 @dataclass(frozen=True)
@@ -119,11 +118,6 @@ DEVICE_CAPABILITIES: dict[Device, list[CapabilityFeature]] = {
         )
     ],
     Open3eDevices.Vitocharge: [
-        CapabilityFeature(
-            capability=Capability.BackupBox,
-            feature=Features.State.BackUpBox,
-            path="Unknown",  # TODO: Needs to be renamed when open3e is updated to BackUpBoxInstalled
-            invalid_value=0 # 0 = not installed, 1 = installed
-        )
+
     ]
 }
