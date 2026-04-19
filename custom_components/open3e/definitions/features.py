@@ -69,6 +69,9 @@ class Features:
         HeatingBuffer = Feature(id=3016, refresh_interval=30)
         CoolingBuffer = Feature(id=3017, refresh_interval=30)
         HeatingCoolingBuffer = Feature(id=3018, refresh_interval=30)
+        DhwBufferBottom = Feature(id=3232, refresh_interval=30)
+        DhwBufferMid = Feature(id=3233, refresh_interval=30)
+        DhwBufferTop = Feature(id=3234, refresh_interval=30)
         DomesticHotWaterHysteresis = Feature(id=1085, refresh_interval=30)
 
         # Vitodens

@@ -340,6 +340,15 @@
       "heating_cooling_buffer_temperature": {
         "name": "Heiz-/Kühlpuffertemperatur"
       },
+      "dhw_buffer_bottom_temperature": {
+        "name": "Warmwasserspeicher Unten"
+      },
+      "dhw_buffer_mid_temperature": {
+        "name": "Warmwasserspeicher Mitte"
+      },
+      "dhw_buffer_top_temperature": {
+        "name": "Warmwasserspeicher Oben"
+      },
       "energy_management_mode": {
         "name": "SmartGrid Betriebszustand",
         "state": {
