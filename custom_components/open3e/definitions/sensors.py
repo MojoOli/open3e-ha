@@ -1346,6 +1346,36 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.DhwBufferBottom],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="dhw_buffer_bottom_temperature",
+        translation_key="dhw_buffer_bottom_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.DhwBufferMid],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="dhw_buffer_mid_temperature",
+        translation_key="dhw_buffer_mid_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.DhwBufferTop],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="dhw_buffer_top_temperature",
+        translation_key="dhw_buffer_top_temperature",
+        data_retriever=SensorDataRetriever.ACTUAL,
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eSensorEntityDescription(
         poll_data_features=[Features.State.EnergyManagement],
         device_class=SensorDeviceClass.ENUM,
         icon="mdi:home-battery-outline",

@@ -340,6 +340,15 @@
       "heating_cooling_buffer_temperature": {
         "name": "Heating/cooling buffer temperature"
       },
+      "dhw_buffer_bottom_temperature": {
+        "name": "DHW buffer bottom"
+      },
+      "dhw_buffer_mid_temperature": {
+        "name": "DHW buffer mid"
+      },
+      "dhw_buffer_top_temperature": {
+        "name": "DHW buffer top"
+      },
       "energy_management_mode": {
         "name": "SmartGrid operating state",
         "state": {
