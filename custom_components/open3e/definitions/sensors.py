@@ -1352,6 +1352,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="dhw_buffer_bottom_temperature",
         translation_key="dhw_buffer_bottom_temperature",
+        icon="mdi:water-thermometer",
         data_retriever=SensorDataRetriever.ACTUAL,
         required_device=Open3eDevices.Vitocal
     ),
@@ -1362,6 +1363,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="dhw_buffer_mid_temperature",
         translation_key="dhw_buffer_mid_temperature",
+        icon="mdi:water-thermometer",
         data_retriever=SensorDataRetriever.ACTUAL,
         required_device=Open3eDevices.Vitocal
     ),
@@ -1372,6 +1374,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         key="dhw_buffer_top_temperature",
         translation_key="dhw_buffer_top_temperature",
+        icon="mdi:water-thermometer",
         data_retriever=SensorDataRetriever.ACTUAL,
         required_device=Open3eDevices.Vitocal
     ),
