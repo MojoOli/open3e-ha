@@ -48,8 +48,7 @@ SELECTS: tuple[Open3eSelectEntityDescription, ...] = (
 
     Open3eSelectEntityDescription(
         poll_data_features=[Features.State.BypassOperationState],
-        options=[BypassOperationState.Closed, BypassOperationState.Automatic, BypassOperationState.Open,
-                 BypassOperationState.TransitionError],
+        options=[BypassOperationState.Closed, BypassOperationState.Open, BypassOperationState.Automatic],
         get_option=lambda data: get_bypass_operation_state(data),
         set_option=lambda option, device, coordinator: coordinator.async_set_bypass_operation_state(
             feature_id=Features.State.BypassOperationState.id,

@@ -284,4 +284,12 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
         data_transform=BinarySensorDataTransform.HEX_ON,
         required_device=Open3eDevices.Vitoair
     ),
+    Open3eBinarySensorEntityDescription(
+        device_class=BinarySensorDeviceClass.OPENING,
+        poll_data_features=[Features.State.OutsideAirBypass],
+        key="ventilation_outside_air_bypass",
+        translation_key="ventilation_outside_air_bypass",
+        data_transform=lambda data: int(data) > 0,
+        required_device=Open3eDevices.Vitoair
+    ),
 )

@@ -8,42 +8,35 @@ class BypassOperationState(StrEnum):
     Closed = "closed"
     Automatic = "automatic"
     Open = "open"
-    TransitionError = "transition_error"
 
     @staticmethod
     def from_str(mode: str):
         match mode:
             case "closed":
                 return BypassOperationState.Closed
-            case "automatic":
-                return BypassOperationState.Automatic
             case "open":
                 return BypassOperationState.Open
-            case "transition_error":
-                return BypassOperationState.TransitionError
+            case "automatic":
+                return BypassOperationState.Automatic
         return None
 
     def map_to_api(self):
         match self:
             case BypassOperationState.Closed:
                 return 0
-            case BypassOperationState.Automatic:
-                return 1
             case BypassOperationState.Open:
+                return 1
+            case BypassOperationState.Automatic:
                 return 2
-            case BypassOperationState.TransitionError:
-                return 3
-        return None
 
 
 def get_bypass_operation_state(data: Any) -> BypassOperationState | None:
     try:
         if isinstance(data, str) and data.strip().startswith("{"):
             payload = json_loads(data)
-            raw_id = payload.get("BypassStatus")
-            if raw_id is None:
+            value = payload.get("BypassStatus")
+            if value is None:
                 return None
-            value = int(raw_id)
         else:
             return None
 
@@ -51,11 +44,9 @@ def get_bypass_operation_state(data: Any) -> BypassOperationState | None:
             case 0:
                 return BypassOperationState.Closed
             case 1:
-                return BypassOperationState.Automatic
-            case 2:
                 return BypassOperationState.Open
-            case 3:
-                return BypassOperationState.TransitionError
+            case 2:
+                return BypassOperationState.Automatic
             case _:
                 return None
     except (TypeError, ValueError, KeyError):

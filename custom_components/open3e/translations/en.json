@@ -443,20 +443,17 @@
         "name": "Bypass available modes"
       },
       "ventilation_outside_air_bypass": {
-        "name": "Outside air bypass"
+        "name": "Outside air bypass",
+        "state": {
+          "on": "Open (Bypass active)",
+          "off": "Closed (WRG active)"
+        }
       },
       "ventilation_inside_air_bypass": {
         "name": "Inside air bypass"
       },
       "ventilation_bypass_operation_level": {
-        "name": "Bypass operation level",
-        "state": {
-          "off": "Off",
-          "dynamic": "Dynamic",
-          "soft": "Soft",
-          "manual": "Manual",
-          "unknown": "Unknown"
-        }
+        "name": "Bypass operation level"
       },
       "ventilation_bypass_position": {
         "name": "Bypass position"
@@ -1122,10 +1119,8 @@
         "name": "Bypass operation state",
         "state": {
           "closed": "Closed",
-          "automatic": "Automatic",
           "open": "Open",
-          "transition_error": "Transition/Error",
-          "unknown": "Unknown"
+          "automatic": "Automatic"
         }
       }
     },
