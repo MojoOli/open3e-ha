@@ -241,7 +241,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="gateway_remote_signal_strength",
         translation_key="gateway_remote_signal_strength",
         icon="mdi:wifi",
-        data_retriever=int
+        data_retriever=SensorDataRetriever.RAW
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Misc.TimeSettingSource],
@@ -2215,7 +2215,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         icon="mdi:battery-charging",
         key="battery_voltage",
         translation_key="battery_voltage",
-        data_retriever=int,
+        data_retriever=SensorDataRetriever.RAW,
         required_device=Open3eDevices.Vitocharge
     ),
     ###############
