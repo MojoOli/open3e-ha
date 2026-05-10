@@ -2358,6 +2358,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.State.BypassAvailableModes],
+        entity_category=EntityCategory.DIAGNOSTIC,
         key="ventilation_bypass_available_modes",
         translation_key="ventilation_bypass_available_modes",
         icon="mdi:cog-outline",
@@ -2375,18 +2376,19 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.RAW,
         required_device=Open3eDevices.Vitoair
     ),
-    Open3eSensorEntityDescription(
-        poll_data_features=[Features.State.VentilationBypassPosition],
-        native_unit_of_measurement=PERCENTAGE,
-        state_class=SensorStateClass.MEASUREMENT,
-        key="ventilation_bypass_position",
-        translation_key="ventilation_bypass_position",
-        icon="mdi:valve",
-        data_retriever=SensorDataRetriever.HEX_INT,
-        required_device=Open3eDevices.Vitoair
-    ),
+    # Open3eSensorEntityDescription(
+    #     poll_data_features=[Features.State.VentilationBypassPosition],
+    #     native_unit_of_measurement=PERCENTAGE,
+    #     state_class=SensorStateClass.MEASUREMENT,
+    #     key="ventilation_bypass_position",
+    #     translation_key="ventilation_bypass_position",
+    #     icon="mdi:valve",
+    #     data_retriever=SensorDataRetriever.HEX_INT,
+    #     required_device=Open3eDevices.Vitoair
+    # ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.State.VentilationBypassFlapAvailableCount],
+        entity_category=EntityCategory.DIAGNOSTIC,
         state_class=SensorStateClass.MEASUREMENT,
         key="ventilation_bypass_flap_available_count",
         translation_key="ventilation_bypass_flap_available_count",

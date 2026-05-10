@@ -6,8 +6,8 @@ from homeassistant.util.json import json_loads
 
 class BypassOperationState(StrEnum):
     Closed = "closed"
-    Automatic = "automatic"
     Open = "open"
+    Automatic = "automatic"
 
     @staticmethod
     def from_str(mode: str):
