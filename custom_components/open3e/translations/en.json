@@ -442,13 +442,6 @@
       "ventilation_bypass_available_modes": {
         "name": "Bypass available modes"
       },
-      "ventilation_outside_air_bypass": {
-        "name": "Outside air bypass",
-        "state": {
-          "on": "Open (Bypass active)",
-          "off": "Closed (WRG active)"
-        }
-      },
       "ventilation_inside_air_bypass": {
         "name": "Inside air bypass"
       },
@@ -835,6 +828,13 @@
       },
       "heat_pump_frost_protection": {
         "name": "Heat pump frost protection"
+      },
+      "ventilation_outside_air_bypass": {
+        "name": "Outside air bypass",
+        "state": {
+          "on": "Open (Bypass active)",
+          "off": "Closed (WRG active)"
+        }
       }
     },
     "climate": {
