@@ -446,7 +446,11 @@
         "name": "Inside air bypass"
       },
       "ventilation_bypass_operation_level": {
-        "name": "Bypass operation level"
+        "name": "Bypass operation level",
+        "state": {
+          "noise_reduced": "Noise reduced",
+          "dynamic": "Dynamic"
+        }
       },
       "ventilation_bypass_position": {
         "name": "Bypass position"

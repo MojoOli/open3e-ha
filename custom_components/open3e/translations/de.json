@@ -446,7 +446,11 @@
         "name": "Innenluft-Bypass"
       },
       "ventilation_bypass_operation_level": {
-        "name": "Bypass-Betriebsstufe"
+        "name": "Bypass-Betriebsstufe",
+        "state": {
+          "noise_reduced": "Geräuschreduziert",
+          "dynamic": "Dynamisch"
+        }
       },
       "ventilation_bypass_position": {
         "name": "Bypass-Position"

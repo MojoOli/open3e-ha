@@ -40,6 +40,10 @@ from .subfeatures.smart_grid_feature_selection import (
     get_smart_grid_feature_selection,
 )
 from .subfeatures.smart_grid_ready_status import SMART_GRID_READY_STATUS_MAP, SmartGridReadyStatus
+from .subfeatures.ventilation_bypass_operation_level import (
+    VentilationBypassOperationLevel,
+    get_ventilation_bypass_operation_level,
+)
 from ..capability.capability import Capability
 
 
@@ -2398,10 +2402,12 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.State.BypassOperationLevel],
+        device_class=SensorDeviceClass.ENUM,
         icon="mdi:cog-transfer",
         key="ventilation_bypass_operation_level",
         translation_key="ventilation_bypass_operation_level",
-        data_retriever=lambda data: int(float(data)) + 1,
+        data_retriever=get_ventilation_bypass_operation_level,
+        options=[level for level in VentilationBypassOperationLevel],
         required_device=Open3eDevices.Vitoair,
     ),
     Open3eSensorEntityDescription(
