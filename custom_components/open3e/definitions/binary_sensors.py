@@ -262,7 +262,7 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
     ##################
 
     Open3eBinarySensorEntityDescription(
-        #device_class=None,
+        # device_class=None,
         poll_data_features=[Features.State.BackUpBox],
         key="backup_box_installed",
         translation_key="backup_box_installed",
@@ -287,8 +287,18 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
     Open3eBinarySensorEntityDescription(
         device_class=BinarySensorDeviceClass.OPENING,
         poll_data_features=[Features.State.OutsideAirBypass],
+        icon="mdi:air-filter",
         key="ventilation_outside_air_bypass",
         translation_key="ventilation_outside_air_bypass",
+        data_transform=lambda data: int(data) > 0,
+        required_device=Open3eDevices.Vitoair
+    ),
+    Open3eBinarySensorEntityDescription(
+        device_class=BinarySensorDeviceClass.OPENING,
+        poll_data_features=[Features.State.InsideAirBypass],
+        icon="mdi:air-filter",
+        key="ventilation_inside_air_bypass",
+        translation_key="ventilation_inside_air_bypass",
         data_transform=lambda data: int(data) > 0,
         required_device=Open3eDevices.Vitoair
     ),

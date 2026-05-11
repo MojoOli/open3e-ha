@@ -2369,17 +2369,6 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.RAW,
         required_device=Open3eDevices.Vitoair
     ),
-    Open3eSensorEntityDescription(
-        poll_data_features=[Features.State.InsideAirBypass],
-        device_class=SensorDeviceClass.TEMPERATURE,
-        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
-        state_class=SensorStateClass.MEASUREMENT,
-        key="ventilation_inside_air_bypass",
-        translation_key="ventilation_inside_air_bypass",
-        icon="mdi:thermometer-plus",
-        data_retriever=SensorDataRetriever.RAW,
-        required_device=Open3eDevices.Vitoair
-    ),
     # Open3eSensorEntityDescription(
     #     poll_data_features=[Features.State.VentilationBypassPosition],
     #     native_unit_of_measurement=PERCENTAGE,

@@ -442,9 +442,6 @@
       "ventilation_bypass_available_modes": {
         "name": "Verfügbare Bypass-Modi"
       },
-      "ventilation_inside_air_bypass": {
-        "name": "Innenluft-Bypass"
-      },
       "ventilation_bypass_operation_level": {
         "name": "Bypass-Betriebsstufe",
         "state": {
@@ -839,6 +836,9 @@
           "on": "Offen (Bypass aktiv)",
           "off": "Zu (WRG aktiv)"
         }
+      },
+      "ventilation_inside_air_bypass": {
+        "name": "Innenluft-Bypass"
       }
     },
     "climate": {
