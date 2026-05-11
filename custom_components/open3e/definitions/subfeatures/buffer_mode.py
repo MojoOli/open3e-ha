@@ -1,4 +1,7 @@
 from enum import StrEnum
+from typing import Any
+
+from homeassistant.util.json import json_loads
 
 
 class BufferMode(StrEnum):
@@ -6,8 +9,8 @@ class BufferMode(StrEnum):
     Cooling = "cooling"
 
     @staticmethod
-    def from_operation_mode(mode: int):
-        match mode:
+    def from_operation_mode(mode: Any):
+        match json_loads(mode):
             case 0:
                 return BufferMode.Heating
             case 1:

@@ -7,7 +7,6 @@ from typing import cast
 from homeassistant.components.select import SelectEntity
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
-from homeassistant.util.json import json_loads
 
 from .coordinator import Open3eDataUpdateCoordinator
 from .definitions.open3e_data import Open3eDataDevice
@@ -67,5 +66,5 @@ class Open3eSelect(Open3eEntity, SelectEntity):
         if self.entity_description.get_option is None:
             return
 
-        self._attr_current_option = self.entity_description.get_option(json_loads(self.data[feature_id]))
+        self._attr_current_option = self.entity_description.get_option(self.data[feature_id])
         self.async_write_ha_state()
