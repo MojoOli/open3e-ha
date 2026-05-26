@@ -153,6 +153,10 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
 
                 if hvac_mode == HvacMode.Off:
                     self._attr_hvac_action = HVACAction.OFF
+                elif hvac_mode == HvacMode.Heating:
+                    self._attr_hvac_action = HVACAction.HEATING
+                elif hvac_mode == HvacMode.Cooling:
+                    self._attr_hvac_action = HVACAction.COOLING
 
             case self.entity_description.compressor_state_feature.id:
                 power_state = json_loads(self.data[feature_id])["PowerState"]
@@ -160,7 +164,12 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
                 if self._attr_hvac_mode == HvacMode.Off:
                     self._attr_hvac_action = HVACAction.OFF
                 else:
-                    self._attr_hvac_action = HVACAction.IDLE if power_state == 0 else HVACAction.HEATING
+                    if power_state == 0:
+                        self._attr_hvac_action = HVACAction.IDLE
+                    elif self._attr_hvac_mode == HvacMode.Heating:
+                        self._attr_hvac_action = HVACAction.HEATING
+                    elif self._attr_hvac_action == HvacMode.Cooling:
+                        self._attr_hvac_action = HVACAction.COOLING
 
             case self.entity_description.flow_temperature_feature.id:
                 self.__current_flow_temperature = json_loads(self.data[feature_id])["Actual"]
