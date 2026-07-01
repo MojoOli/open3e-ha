@@ -203,8 +203,7 @@ class Features:
         OutsideAirBypass = Feature(id=1088, refresh_interval=30)
         InsideAirBypass = Feature(id=1089, refresh_interval=30)
         BypassOperationLevel = Feature(id=2403, refresh_interval=30)
-        # ToDo: Not yet in Open3e server (still raw hex)
-        # VentilationBypassPosition = Feature(id=2493, refresh_interval=30)
+        VentilationBypassPosition = Feature(id=2493, refresh_interval=30)
         VentilationBypassFlapAvailableCount = Feature(id=2797, refresh_interval=30)
 
         # Pump-Status und Kältekreis

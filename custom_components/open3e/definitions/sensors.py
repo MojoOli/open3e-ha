@@ -44,6 +44,7 @@ from .subfeatures.ventilation_bypass_operation_level import (
     VentilationBypassOperationLevel,
     get_ventilation_bypass_operation_level,
 )
+from .subfeatures.ventilation_bypass_position import get_ventilation_bypass_position
 from ..capability.capability import Capability
 
 
@@ -2369,16 +2370,16 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.RAW,
         required_device=Open3eDevices.Vitoair
     ),
-    # Open3eSensorEntityDescription(
-    #     poll_data_features=[Features.State.VentilationBypassPosition],
-    #     native_unit_of_measurement=PERCENTAGE,
-    #     state_class=SensorStateClass.MEASUREMENT,
-    #     key="ventilation_bypass_position",
-    #     translation_key="ventilation_bypass_position",
-    #     icon="mdi:valve",
-    #     data_retriever=SensorDataRetriever.HEX_INT,
-    #     required_device=Open3eDevices.Vitoair
-    # ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.State.VentilationBypassPosition],
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="ventilation_bypass_position",
+        translation_key="ventilation_bypass_position",
+        icon="mdi:valve",
+        data_retriever=get_ventilation_bypass_position,
+        required_device=Open3eDevices.Vitoair
+    ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.State.VentilationBypassFlapAvailableCount],
         entity_category=EntityCategory.DIAGNOSTIC,

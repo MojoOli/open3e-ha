@@ -443,7 +443,7 @@
         "name": "Verfügbare Bypass-Modi"
       },
       "ventilation_bypass_operation_level": {
-        "name": "Bypass-Betriebsstufe",
+        "name": "Bypass Arbeitsweise",
         "state": {
           "noise_reduced": "Geräuschreduziert",
           "dynamic": "Dynamisch"
@@ -1120,11 +1120,11 @@
         }
       },
       "ventilation_bypass_operation_state": {
-        "name": "Bypass-Betriebszustand",
+        "name": "Bypass Betriebsart",
         "state": {
           "closed": "Geschlossen",
-          "open": "Offen",
-          "automatic": "Automatik"
+          "open": "Geöffnet",
+          "automatic": "Automatisch"
         }
       }
     },
