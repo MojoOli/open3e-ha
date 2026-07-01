@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Awaitable, Any
 
-from habluetooth.models import Callable
+from collections.abc import Callable
 from homeassistant.components.switch import SwitchEntityDescription, SwitchDeviceClass
 
 from .devices import Open3eDevices
