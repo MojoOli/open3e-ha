@@ -4,10 +4,19 @@ set -e
 
 cd "$(dirname "$0")/.."
 
+# Use the project's virtualenv binaries so we don't depend on whatever
+# `hass`/`python` happens to be on the caller's PATH.
+VENV_BIN="${PWD}/.venv/bin"
+if [[ ! -x "${VENV_BIN}/hass" ]]; then
+    echo "Error: ${VENV_BIN}/hass not found. Run scripts/setup first." >&2
+    exit 1
+fi
+export PATH="${VENV_BIN}:${PATH}"
+
 # Create config dir if not present
 if [[ ! -d "${PWD}/config" ]]; then
     mkdir -p "${PWD}/config"
-    hass --config "${PWD}/config" --script ensure_config
+    "${VENV_BIN}/hass" --config "${PWD}/config" --script ensure_config
 fi
 
 # Set the path to custom_components
@@ -17,4 +26,4 @@ fi
 export PYTHONPATH="${PYTHONPATH}:${PWD}/custom_components"
 
 # Start Home Assistant
-hass --config "${PWD}/config" --debug
+"${VENV_BIN}/hass" --config "${PWD}/config" --debug

@@ -4,4 +4,12 @@ set -e
 
 cd "$(dirname "$0")/.."
 
-python3 -m pip install --requirement requirements.txt
+# Install requirements into the project's virtualenv, not into a
+# system-wide interpreter, so `scripts/develop` runs the intended versions.
+VENV_PY="${PWD}/.venv/bin/python3"
+if [[ ! -x "${VENV_PY}" ]]; then
+    echo "Error: ${VENV_PY} not found. Create the virtualenv first (e.g. python3 -m venv .venv)." >&2
+    exit 1
+fi
+
+"${VENV_PY}" -m pip install --requirement requirements.txt
