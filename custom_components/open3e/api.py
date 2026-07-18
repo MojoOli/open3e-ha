@@ -72,16 +72,20 @@ class Open3eMqttClient:
                 msg_callback=on_availability
             )
 
-            # Wait for availability message or timeout
+            # Wait for an "online" availability message or timeout.
+            # A retained LWT payload of "offline" (or any non-"online" value) must
+            # not fail the check immediately — Open3e might still publish "online"
+            # within the timeout window (e.g. shortly after (re)connecting).
             async with async_timeout.timeout(10):
-                await event.wait()
-
-            if not available:
-                raise Open3eServerUnavailableError()
+                while not available:
+                    event.clear()
+                    await event.wait()
 
             return True
 
         except asyncio.TimeoutError:
+            if available is False:
+                raise Open3eServerUnavailableError()
             raise Open3eServerTimeoutError()
         except Exception as exc:
             raise Open3eError(exc)
