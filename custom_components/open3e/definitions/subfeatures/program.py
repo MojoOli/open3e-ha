@@ -11,8 +11,6 @@ class Program(StrEnum):
     EcoReduced = "eco_reduced"
     EcoNormal = "eco_normal"
     EcoComfort = "eco_comfort"
-    CoolingNormal = "cooling_normal"
-    CoolingComfort = "cooling_comfort"
 
     @staticmethod
     def from_operation_mode(mode: int):
@@ -34,11 +32,7 @@ class Program(StrEnum):
             case 8:
                 return Program.EcoNormal
             case 9:
-                return Program.Comfort
-            case 10:
-                return Program.Comfort
-            case 11:
-                return Program.Comfort
+                return Program.EcoComfort
 
         return None
 
@@ -52,6 +46,8 @@ class Program(StrEnum):
                 return "Reduced"
             case Program.Comfort:
                 return "Comfort"
+            case Program.EcoComfort:
+                return "Comfort"
 
         return "Standard"
 
@@ -64,6 +60,8 @@ class Program(StrEnum):
             case Program.FrostProtection:
                 return "Reduced"
             case Program.Comfort:
+                return "Comfort"
+            case Program.EcoComfort:
                 return "Comfort"
 
         return "Normal"
