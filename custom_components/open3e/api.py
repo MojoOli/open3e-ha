@@ -1,4 +1,4 @@
-"""Sample API Client."""
+"""MQTT client for communicating with the Open3e server."""
 
 from __future__ import annotations
 
