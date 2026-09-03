@@ -64,6 +64,7 @@ class Features:
         SupplyAir = Feature(id=328, refresh_interval=5)
         ExtractAir = Feature(id=329, refresh_interval=5)
         ExhaustAir = Feature(id=330, refresh_interval=5)
+        MinimumVentilationSupplyAir = Feature(id=2355, refresh_interval=300)
         InverterAmbient = Feature(id=1684, refresh_interval=30)
         Battery = Feature(id=2240, refresh_interval=30)
         HeatingBuffer = Feature(id=3016, refresh_interval=30)
@@ -205,6 +206,8 @@ class Features:
         BypassOperationLevel = Feature(id=2403, refresh_interval=30)
         VentilationBypassPosition = Feature(id=2493, refresh_interval=30)
         VentilationBypassFlapAvailableCount = Feature(id=2797, refresh_interval=30)
+        CurrentVentilationHeatRecovery = Feature(id=2248, refresh_interval=30)
+        FilterPercentageBlocked = Feature(id=3206, refresh_interval=300)
 
         # Pump-Status und Kältekreis
         CentralHeatingPumpStatus = Feature(id=2791, refresh_interval=10)
@@ -270,6 +273,7 @@ class Features:
         LegionellaProtectionLastSuccessfulStartTime = Feature(id=877, refresh_interval=60)
         LegionellaProtectionLastSuccessfulWeekday = Feature(id=878, refresh_interval=60)
         HeatEngineStatistical = Feature(id=1346, refresh_interval=60)
+        FilterRuntime = Feature(id=2247, refresh_interval=300)
 
     class Misc:
         CompressorStatistics = Feature(id=2369, refresh_interval=120)
