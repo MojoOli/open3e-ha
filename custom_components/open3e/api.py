@@ -6,7 +6,6 @@ import asyncio
 import logging
 from typing import Callable, Any
 
-import async_timeout
 from homeassistant.components import mqtt
 from homeassistant.components.mqtt import ReceiveMessage
 from homeassistant.core import HomeAssistant
@@ -97,7 +96,7 @@ class Open3eMqttClient:
             # A retained LWT payload of "offline" (or any non-"online" value) must
             # not fail the check immediately — Open3e might still publish "online"
             # within the timeout window (e.g. shortly after (re)connecting).
-            async with async_timeout.timeout(10):
+            async with asyncio.timeout(10):
                 while not available:
                     event.clear()
                     await event.wait()
