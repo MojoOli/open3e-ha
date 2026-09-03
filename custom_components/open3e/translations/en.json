@@ -764,6 +764,24 @@
       },
       "energy_own_consumption_past_year": {
         "name": "Own energy consumption past year"
+      },
+      "minimum_supply_air_temperature_dynamic": {
+        "name": "Minimum supply air temperature (dynamic)"
+      },
+      "minimum_supply_air_temperature_noise_reduced": {
+        "name": "Minimum supply air temperature (noise reduced)"
+      },
+      "filter_runtime": {
+        "name": "Filter runtime"
+      },
+      "filter_runtime_remaining": {
+        "name": "Filter runtime remaining"
+      },
+      "filter_condition": {
+        "name": "Filter condition"
+      },
+      "current_ventilation_heat_recovery": {
+        "name": "Heat recovery"
       }
     },
     "binary_sensor": {
