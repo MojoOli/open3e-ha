@@ -1,0 +1,6 @@
+-r requirements.txt
+
+# Runtime dependency of homeassistant.components.mqtt, which custom_components
+# .open3e imports at module load. `pip install homeassistant` does not pull in
+# per-integration manifest requirements, so it is listed explicitly for tests.
+paho-mqtt==2.1.0
