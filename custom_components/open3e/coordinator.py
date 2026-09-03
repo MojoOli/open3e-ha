@@ -35,17 +35,6 @@ _LOGGER = logging.getLogger(__name__)
 from homeassistant.helpers import device_registry
 from .definitions.features import Feature
 
-MAX_DATAPOINTS_PER_REQUEST = 20
-"""Upper bound of datapoints requested from the Open3e server per device and cycle.
-
-Anything still due beyond this is picked up on a following cycle. This keeps the
-initial poll right after a (re)start - when every endpoint is due at once - from
-turning into a single request the server cannot answer before the next cycle,
-which is what leaves its UDS stack timing out until it is restarted. It is a
-conservative default, not a measured flow-control limit.
-"""
-
-
 @dataclass
 class CoordinatorEndpoint:
     __last_refresh: float = -1
@@ -68,38 +57,8 @@ class CoordinatorEndpoint:
     def should_refresh(self, now: float):
         return now - self.__last_refresh > self.refresh_interval - 0.5  # let's use a range so we can make sure it gets refreshed
 
-    @property
-    def last_refresh(self) -> float:
-        """Monotonic-ish wall-clock time of the last refresh (-1 if never)."""
-        return self.__last_refresh
-
     def update_last_refresh(self, now: float):
         self.__last_refresh = now
-
-
-def select_due_features(
-        endpoints: dict[tuple[int, int], CoordinatorEndpoint],
-        now: float,
-        max_per_request: int = MAX_DATAPOINTS_PER_REQUEST
-) -> dict[int, list[int]]:
-    """Pick which feature IDs to refresh this cycle, grouped by device ID.
-
-    Due endpoints are served oldest-refresh-first and capped at
-    ``max_per_request`` per device per cycle; whatever is left stays due and is
-    picked up on a following cycle. Serving the stalest first guarantees every
-    endpoint is refreshed within ``ceil(due / max_per_request)`` cycles instead
-    of letting low-insertion-order endpoints starve the rest.
-    """
-    due_by_device: dict[int, list[tuple[float, int]]] = {}
-    for (device_id, feature_id), endpoint in endpoints.items():
-        if endpoint.should_refresh(now):
-            due_by_device.setdefault(device_id, []).append((endpoint.last_refresh, feature_id))
-
-    selected: dict[int, list[int]] = {}
-    for device_id, entries in due_by_device.items():
-        entries.sort(key=lambda entry: entry[0])
-        selected[device_id] = [feature_id for _, feature_id in entries[:max_per_request]]
-    return selected
 
 
 class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
@@ -183,14 +142,15 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             raise Open3eCoordinatorUpdateFailed()
 
         now = time.time()
-        device_features = select_due_features(self.__endpoints, now)
+        device_features: dict[int, list[int]] = {}
+
+        for (device_id, feature_id), endpoint in self.__endpoints.items():
+            if endpoint.should_refresh(now):
+                device_features.setdefault(device_id, []).append(feature_id)
+                endpoint.update_last_refresh(now)
 
         if not device_features:
             return True
-
-        for device_id, feature_ids in device_features.items():
-            for feature_id in feature_ids:
-                self.__endpoints[(device_id, feature_id)].update_last_refresh(now)
 
         _LOGGER.debug(f"Requesting data update for features {device_features}")
         await self.__client.async_request_data(self.hass, device_features)
