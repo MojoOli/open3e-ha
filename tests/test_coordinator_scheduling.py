@@ -101,6 +101,25 @@ class SelectDueFeaturesTest(unittest.TestCase):
         max_cycles = math.ceil(count / MAX_DATAPOINTS_PER_REQUEST)
         self.assertLessEqual(max(first_served_at.values()) - BASE, 5.0 * max_cycles)
 
+    def test_mixed_intervals_no_endpoint_starves(self) -> None:
+        """Fast and slow endpoints on one device all get served; slow ones
+        stop consuming slots once refreshed."""
+        spec = (
+            [(0x680, fid, 5) for fid in range(25)]
+            + [(0x680, 100 + fid, 60) for fid in range(10)]
+        )
+        endpoints = _endpoints(spec)
+
+        now = BASE
+        served: set[int] = set()
+        for _ in range(30):
+            now += 5.0
+            for feature_id in select_due_features(endpoints, now=now).get(0x680, []):
+                endpoints[(0x680, feature_id)].update_last_refresh(now)
+                served.add(feature_id)
+
+        self.assertEqual(served, {fid for _, fid, _ in spec})
+
     def test_steady_state_staleness_is_bounded(self) -> None:
         count = 30
         endpoints = _endpoints([(0x680, fid, 5) for fid in range(count)])
