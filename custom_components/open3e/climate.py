@@ -47,7 +47,8 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
     __current_flow_temperature: float | None
 
     __current_program: Program | None
-    __programs: Any | None
+    __heating_programs: Any | None
+    __cooling_programs: Any | None
 
     entity_description: Open3eClimateEntityDescription
 
@@ -81,7 +82,8 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
         self.__current_flow_temperature = None
 
         self.__current_program = None
-        self.__programs = None
+        self.__heating_programs = None
+        self.__cooling_programs = None
 
     @property
     def available(self):
@@ -107,15 +109,29 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
         return self.__current_program
 
     @property
+    def __is_cooling(self) -> bool:
+        """Return True if the circuit is currently in cooling mode."""
+        return self._attr_hvac_mode == HVACMode.COOL
+
+    @property
     def target_temperature(self) -> str | None:
         """Return the current preset mode, e.g., home, away, temp.
 
         Requires ClimateEntityFeature.PRESET_MODE.
         """
-        if self.__current_program is None or self.__programs is None:
+        if self.__current_program is None:
             return None
 
-        return self.__programs[self.__current_program.map_to_api_heating()]
+        if self.__is_cooling:
+            if self.__cooling_programs is None:
+                return None
+
+            return self.__cooling_programs[self.__current_program.map_to_api_cooling()]
+
+        if self.__heating_programs is None:
+            return None
+
+        return self.__heating_programs[self.__current_program.map_to_api_heating()]
 
     def set_preset_mode(self, preset_mode: str) -> None:
         """Setting the preset mode is not possible."""
@@ -123,14 +139,25 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
     async def async_set_temperature(self, **kwargs: Any) -> None:
         """Set new target temperature."""
         temperature = kwargs["temperature"]
-        self.__programs[self.__current_program.map_to_api_heating()] = temperature
 
-        await self.coordinator.async_set_program_temperature(
-            set_programs_feature_id=self.entity_description.programs_temperature_feature.id,
-            program=self.__current_program,
-            temperature=temperature,
-            device=self.device
-        )
+        if self.__is_cooling:
+            self.__cooling_programs[self.__current_program.map_to_api_cooling()] = temperature
+
+            await self.coordinator.async_set_program_temperature_cooling(
+                set_programs_feature_id=self.entity_description.cooling_programs_temperature_feature.id,
+                program=self.__current_program,
+                temperature=temperature,
+                device=self.device
+            )
+        else:
+            self.__heating_programs[self.__current_program.map_to_api_heating()] = temperature
+
+            await self.coordinator.async_set_program_temperature(
+                set_programs_feature_id=self.entity_description.programs_temperature_feature.id,
+                program=self.__current_program,
+                temperature=temperature,
+                device=self.device
+            )
 
     async def async_set_hvac_mode(self, hvac_mode: HVACMode):
         """Set new target hvac mode."""
@@ -168,7 +195,7 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
                         self._attr_hvac_action = HVACAction.IDLE
                     elif self._attr_hvac_mode == HvacMode.Heating:
                         self._attr_hvac_action = HVACAction.HEATING
-                    elif self._attr_hvac_action == HvacMode.Cooling:
+                    elif self._attr_hvac_mode == HvacMode.Cooling:
                         self._attr_hvac_action = HVACAction.COOLING
 
             case self.entity_description.flow_temperature_feature.id:
@@ -178,6 +205,9 @@ class Open3eClimate(Open3eEntity, ClimateEntity):
                 self.__current_room_temperature = json_loads(self.data[feature_id])["Actual"]
 
             case self.entity_description.programs_temperature_feature.id:
-                self.__programs = json_loads(self.data[feature_id])
+                self.__heating_programs = json_loads(self.data[feature_id])
+
+            case self.entity_description.cooling_programs_temperature_feature.id:
+                self.__cooling_programs = json_loads(self.data[feature_id])
 
         self.async_write_ha_state()
