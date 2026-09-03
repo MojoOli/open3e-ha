@@ -10,12 +10,13 @@ from __future__ import annotations
 import logging
 from typing import TYPE_CHECKING
 
-from homeassistant.const import Platform
+from homeassistant.const import EVENT_HOMEASSISTANT_STOP, Platform
+from homeassistant.core import callback
 from homeassistant.helpers.device_registry import DeviceEntry
 from homeassistant.util import slugify
 
 if TYPE_CHECKING:
-    from homeassistant.core import HomeAssistant
+    from homeassistant.core import Event, HomeAssistant
 
 from .api import Open3eMqttClient
 from .const import MQTT_CMD_KEY, MQTT_TOPIC_KEY, DOMAIN
@@ -50,7 +51,7 @@ async def async_setup_entry(
     coordinator = Open3eDataUpdateCoordinator(
         hass=hass,
         client=client,
-        entry_id=entry.entry_id
+        config_entry=entry
     )
 
     entry.runtime_data = Open3eData(
@@ -61,6 +62,15 @@ async def async_setup_entry(
     await coordinator.async_config_entry_first_refresh()
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
+
+    @callback
+    def _handle_ha_stop(_: Event) -> None:
+        """Quiesce outgoing traffic before Home Assistant tears down MQTT."""
+        coordinator.prepare_shutdown()
+
+    entry.async_on_unload(
+        hass.bus.async_listen_once(EVENT_HOMEASSISTANT_STOP, _handle_ha_stop)
+    )
     entry.async_on_unload(entry.add_update_listener(async_reload_entry))
 
     return True
@@ -71,6 +81,12 @@ async def async_unload_entry(
         entry: Open3eDataConfigEntry,
 ) -> bool:
     """Handle removal of an entry."""
+    # Stop all traffic to the Open3e server before the platforms - and, right
+    # after, the MQTT client - are torn down. The coordinator's own
+    # async_shutdown() is registered with the config entry by
+    # DataUpdateCoordinator and runs automatically once this returns.
+    entry.runtime_data.coordinator.prepare_shutdown()
+
     return await hass.config_entries.async_unload_platforms(entry, PLATFORMS)
 
 
@@ -79,8 +95,7 @@ async def async_reload_entry(
         entry: Open3eDataConfigEntry
 ) -> None:
     """Reload config entry."""
-    await async_unload_entry(hass, entry)
-    await async_setup_entry(hass, entry)
+    await hass.config_entries.async_reload(entry.entry_id)
 
 
 async def async_migrate_entry(

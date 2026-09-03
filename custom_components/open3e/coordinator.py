@@ -8,6 +8,8 @@ import time
 from dataclasses import dataclass
 from datetime import timedelta
 
+from homeassistant.config_entries import ConfigEntry
+from homeassistant.core import callback
 from homeassistant.helpers.device_registry import DeviceRegistry
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
@@ -32,7 +34,6 @@ _LOGGER = logging.getLogger(__name__)
 
 from homeassistant.helpers import device_registry
 from .definitions.features import Feature
-
 
 @dataclass
 class CoordinatorEndpoint:
@@ -71,23 +72,24 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
 
     system_information: Open3eDataSystemInformation
     __device_registry: DeviceRegistry
-    __entry_id: str
+    __shutting_down: bool
 
     __endpoints: dict[tuple[int, int], CoordinatorEndpoint]
 
-    def __init__(self, hass, client: Open3eMqttClient, entry_id: str):
+    def __init__(self, hass, client: Open3eMqttClient, config_entry: ConfigEntry):
         super().__init__(
             hass,
             _LOGGER,
+            config_entry=config_entry,
             name="Open3eDataUpdateCoordinator",
             update_interval=timedelta(seconds=5),
             always_update=True
         )
         self.__client = client
         self.__device_registry = device_registry.async_get(hass)
-        self.__entry_id = entry_id
         self.__endpoints = {}
         self.__server_available = None
+        self.__shutting_down = False
 
     async def _async_setup(self):
         """Set up the coordinator
@@ -115,7 +117,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
                 name_suffix = f" ({device.serial_number[-4:]})"
 
             self.__device_registry.async_get_or_create(
-                config_entry_id=self.__entry_id,
+                config_entry_id=self.config_entry.entry_id,
                 identifiers={(DOMAIN, device.serial_number)},
                 manufacturer=device.manufacturer,
                 serial_number=device.serial_number,
@@ -130,6 +132,9 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
 
     async def _async_update_data(self) -> bool:
         """Update data."""
+        if self.__shutting_down:
+            return True
+
         if self.__server_available is None:
             return True
 
@@ -537,9 +542,34 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
         self.async_refresh_feature(device, [feature_id])
     
     def async_refresh_feature(self, device: Open3eDataDevice, feature_ids: list[int]):
+        if self.__shutting_down:
+            return
+
         async def delayed_refresh():
             # Wait for 2 seconds to request new states
             await asyncio.sleep(2)
+            if self.__shutting_down:
+                return
             await self.__client.async_request_data(self.hass, {device.id: feature_ids})
 
-        asyncio.create_task(delayed_refresh())
+        # Tracked by the config entry so it is cancelled on unload instead of
+        # leaking and firing a request into a half-torn-down integration.
+        feature_list = ",".join(str(feature_id) for feature_id in feature_ids)
+        self.config_entry.async_create_background_task(
+            self.hass,
+            delayed_refresh(),
+            name=f"{DOMAIN}_refresh_feature_{device.id}_{feature_list}"
+        )
+
+    @callback
+    def prepare_shutdown(self) -> None:
+        """Stop all outgoing traffic to the Open3e server.
+
+        Invoked when Home Assistant is shutting down or the config entry is
+        unloaded. Further reads and writes are suppressed so a request in flight
+        cannot leave the Open3e server's UDS stack wedged - a state it only
+        recovers from with a manual restart - while Home Assistant or the MQTT
+        link is going away.
+        """
+        self.__shutting_down = True
+        self.__client.pause_commands()

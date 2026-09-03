@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+# Run the standard-library unittest suite with the project's virtualenv so we
+# use the intended Home Assistant / Python versions. Install deps first with:
+#   .venv/bin/pip install -r requirements_test.txt
+VENV_PY="${PWD}/.venv/bin/python3"
+if [[ ! -x "${VENV_PY}" ]]; then
+    echo "Error: ${VENV_PY} not found. Run scripts/setup first." >&2
+    exit 1
+fi
+
+export PYTHONPATH="${PWD}${PYTHONPATH:+:${PYTHONPATH}}"
+
+"${VENV_PY}" -m unittest discover -s tests -v "$@"
