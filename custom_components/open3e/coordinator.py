@@ -8,6 +8,8 @@ import time
 from dataclasses import dataclass
 from datetime import timedelta
 
+from homeassistant.config_entries import ConfigEntry
+from homeassistant.core import callback
 from homeassistant.helpers.device_registry import DeviceRegistry
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
@@ -33,6 +35,16 @@ _LOGGER = logging.getLogger(__name__)
 from homeassistant.helpers import device_registry
 from .definitions.features import Feature
 
+MAX_DATAPOINTS_PER_REQUEST = 20
+"""Upper bound of datapoints requested from the Open3e server per device and cycle.
+
+Anything still due beyond this is picked up on a following cycle. This keeps the
+initial poll right after a (re)start - when every endpoint is due at once - from
+turning into a single request the server cannot answer before the next cycle,
+which is what leaves its UDS stack timing out until it is restarted. It is a
+conservative default, not a measured flow-control limit.
+"""
+
 
 @dataclass
 class CoordinatorEndpoint:
@@ -56,8 +68,38 @@ class CoordinatorEndpoint:
     def should_refresh(self, now: float):
         return now - self.__last_refresh > self.refresh_interval - 0.5  # let's use a range so we can make sure it gets refreshed
 
+    @property
+    def last_refresh(self) -> float:
+        """Monotonic-ish wall-clock time of the last refresh (-1 if never)."""
+        return self.__last_refresh
+
     def update_last_refresh(self, now: float):
         self.__last_refresh = now
+
+
+def select_due_features(
+        endpoints: dict[tuple[int, int], CoordinatorEndpoint],
+        now: float,
+        max_per_request: int = MAX_DATAPOINTS_PER_REQUEST
+) -> dict[int, list[int]]:
+    """Pick which feature IDs to refresh this cycle, grouped by device ID.
+
+    Due endpoints are served oldest-refresh-first and capped at
+    ``max_per_request`` per device per cycle; whatever is left stays due and is
+    picked up on a following cycle. Serving the stalest first guarantees every
+    endpoint is refreshed within ``ceil(due / max_per_request)`` cycles instead
+    of letting low-insertion-order endpoints starve the rest.
+    """
+    due_by_device: dict[int, list[tuple[float, int]]] = {}
+    for (device_id, feature_id), endpoint in endpoints.items():
+        if endpoint.should_refresh(now):
+            due_by_device.setdefault(device_id, []).append((endpoint.last_refresh, feature_id))
+
+    selected: dict[int, list[int]] = {}
+    for device_id, entries in due_by_device.items():
+        entries.sort(key=lambda entry: entry[0])
+        selected[device_id] = [feature_id for _, feature_id in entries[:max_per_request]]
+    return selected
 
 
 class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
@@ -71,23 +113,24 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
 
     system_information: Open3eDataSystemInformation
     __device_registry: DeviceRegistry
-    __entry_id: str
+    __shutting_down: bool
 
     __endpoints: dict[tuple[int, int], CoordinatorEndpoint]
 
-    def __init__(self, hass, client: Open3eMqttClient, entry_id: str):
+    def __init__(self, hass, client: Open3eMqttClient, config_entry: ConfigEntry):
         super().__init__(
             hass,
             _LOGGER,
+            config_entry=config_entry,
             name="Open3eDataUpdateCoordinator",
             update_interval=timedelta(seconds=5),
             always_update=True
         )
         self.__client = client
         self.__device_registry = device_registry.async_get(hass)
-        self.__entry_id = entry_id
         self.__endpoints = {}
         self.__server_available = None
+        self.__shutting_down = False
 
     async def _async_setup(self):
         """Set up the coordinator
@@ -115,7 +158,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
                 name_suffix = f" ({device.serial_number[-4:]})"
 
             self.__device_registry.async_get_or_create(
-                config_entry_id=self.__entry_id,
+                config_entry_id=self.config_entry.entry_id,
                 identifiers={(DOMAIN, device.serial_number)},
                 manufacturer=device.manufacturer,
                 serial_number=device.serial_number,
@@ -130,6 +173,9 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
 
     async def _async_update_data(self) -> bool:
         """Update data."""
+        if self.__shutting_down:
+            return True
+
         if self.__server_available is None:
             return True
 
@@ -137,15 +183,14 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             raise Open3eCoordinatorUpdateFailed()
 
         now = time.time()
-        device_features: dict[int, list[int]] = {}
-
-        for (device_id, feature_id), endpoint in self.__endpoints.items():
-            if endpoint.should_refresh(now):
-                device_features.setdefault(device_id, []).append(feature_id)
-                endpoint.update_last_refresh(now)
+        device_features = select_due_features(self.__endpoints, now)
 
         if not device_features:
             return True
+
+        for device_id, feature_ids in device_features.items():
+            for feature_id in feature_ids:
+                self.__endpoints[(device_id, feature_id)].update_last_refresh(now)
 
         _LOGGER.debug(f"Requesting data update for features {device_features}")
         await self.__client.async_request_data(self.hass, device_features)
@@ -537,9 +582,34 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
         self.async_refresh_feature(device, [feature_id])
     
     def async_refresh_feature(self, device: Open3eDataDevice, feature_ids: list[int]):
+        if self.__shutting_down:
+            return
+
         async def delayed_refresh():
             # Wait for 2 seconds to request new states
             await asyncio.sleep(2)
+            if self.__shutting_down:
+                return
             await self.__client.async_request_data(self.hass, {device.id: feature_ids})
 
-        asyncio.create_task(delayed_refresh())
+        # Tracked by the config entry so it is cancelled on unload instead of
+        # leaking and firing a request into a half-torn-down integration.
+        feature_list = ",".join(str(feature_id) for feature_id in feature_ids)
+        self.config_entry.async_create_background_task(
+            self.hass,
+            delayed_refresh(),
+            name=f"{DOMAIN}_refresh_feature_{device.id}_{feature_list}"
+        )
+
+    @callback
+    def prepare_shutdown(self) -> None:
+        """Stop all outgoing traffic to the Open3e server.
+
+        Invoked when Home Assistant is shutting down or the config entry is
+        unloaded. Further reads and writes are suppressed so a request in flight
+        cannot leave the Open3e server's UDS stack wedged - a state it only
+        recovers from with a manual restart - while Home Assistant or the MQTT
+        link is going away.
+        """
+        self.__shutting_down = True
+        self.__client.pause_commands()
