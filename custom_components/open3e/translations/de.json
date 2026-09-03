@@ -764,6 +764,24 @@
       },
       "energy_own_consumption_past_year": {
         "name": "Eigener Energieverbrauch letztes Jahr"
+      },
+      "minimum_supply_air_temperature_dynamic": {
+        "name": "Minimale Zulufttemperatur (Dynamisch)"
+      },
+      "minimum_supply_air_temperature_noise_reduced": {
+        "name": "Minimale Zulufttemperatur (Geräuschreduziert)"
+      },
+      "filter_runtime": {
+        "name": "Filterlaufzeit"
+      },
+      "filter_runtime_remaining": {
+        "name": "Verbleibende Filterlaufzeit"
+      },
+      "filter_condition": {
+        "name": "Filterzustand"
+      },
+      "current_ventilation_heat_recovery": {
+        "name": "Wärmerückgewinnung"
       }
     },
     "binary_sensor": {

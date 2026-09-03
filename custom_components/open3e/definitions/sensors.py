@@ -97,6 +97,7 @@ class SensorDataRetriever:
     UNKNOWN = lambda data: float(json_loads(data)["Unknown"])
     RAWSTR = lambda data: str(data[1:][:-1])
     HEX_INT = lambda data: int(str(data), 16) if data is not None else None
+    HEX_FIRST_BYTE = lambda data: float(int(str(data)[0:2], 16)) if data is not None else None
     RAW = lambda data: float(data)
     """The data state represents a raw value without any encapsulation."""
 
@@ -2439,6 +2440,72 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         translation_key="energy_own_consumption_past_year",
         data_retriever=SensorDataRetriever.PAST_YEAR,
         entity_registry_enabled_default=False,
+        required_device=Open3eDevices.Vitoair
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.MinimumVentilationSupplyAir],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="minimum_supply_air_temperature_dynamic",
+        translation_key="minimum_supply_air_temperature_dynamic",
+        data_retriever=lambda data: float(json_loads(data)["Sensor1"]),
+        required_device=Open3eDevices.Vitoair
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.MinimumVentilationSupplyAir],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="minimum_supply_air_temperature_noise_reduced",
+        translation_key="minimum_supply_air_temperature_noise_reduced",
+        data_retriever=lambda data: float(json_loads(data)["Sensor2"]),
+        required_device=Open3eDevices.Vitoair
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Time.FilterRuntime],
+        device_class=SensorDeviceClass.DURATION,
+        native_unit_of_measurement=UnitOfTime.HOURS,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:air-filter",
+        key="filter_runtime",
+        translation_key="filter_runtime",
+        data_retriever=lambda data: int(json_loads(data)["Actual"]),
+        required_device=Open3eDevices.Vitoair
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Time.FilterRuntime],
+        device_class=SensorDeviceClass.DURATION,
+        native_unit_of_measurement=UnitOfTime.HOURS,
+        state_class=SensorStateClass.MEASUREMENT,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:air-filter",
+        key="filter_runtime_remaining",
+        translation_key="filter_runtime_remaining",
+        data_retriever=lambda data: int(json_loads(data)["Remaining"]),
+        required_device=Open3eDevices.Vitoair
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.State.FilterPercentageBlocked],
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        suggested_display_precision=0,
+        icon="mdi:air-filter",
+        key="filter_condition",
+        translation_key="filter_condition",
+        data_retriever=SensorDataRetriever.HEX_FIRST_BYTE,
+        required_device=Open3eDevices.Vitoair
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.State.CurrentVentilationHeatRecovery],
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        suggested_display_precision=0,
+        icon="mdi:heat-wave",
+        key="current_ventilation_heat_recovery",
+        translation_key="current_ventilation_heat_recovery",
+        data_retriever=SensorDataRetriever.RAW,
         required_device=Open3eDevices.Vitoair
     ),
 )
