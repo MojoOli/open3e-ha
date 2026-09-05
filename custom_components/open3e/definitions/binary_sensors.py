@@ -11,6 +11,11 @@ from .subfeatures.domestic_hot_water_operation_state import is_domestic_hot_wate
 from ..capability.capability import Capability
 
 
+def _to_int(value: Any) -> int:
+    """Convert a value to int, treating strings as hexadecimal."""
+    return int(value, 16) if isinstance(value, str) else value
+
+
 class BinarySensorDataTransform:
     """Data transform functions for MQTT binary on/off state."""
 
@@ -22,9 +27,7 @@ class BinarySensorDataTransform:
     )
     STATE = lambda data: json_loads(data)["State"] > 0
     HYGIENE_ACTIVE = lambda data: json_loads(data)["HygenieActive"] > 0
-    BACKUP_BOX_INSTALLED = lambda data: (
-        lambda value: int(value, 16) if isinstance(value, str) else value
-    )(json_loads(data)["Unknown"]) > 0  # TODO: Needs to be renamed when open3e is updated to BackUpBoxInstalled
+    BACKUP_BOX_INSTALLED = lambda data: _to_int(json_loads(data)["Unknown"]) > 0  # TODO: Needs to be renamed when open3e is updated to BackUpBoxInstalled
     HEX_ON = lambda data: data != "000000"  # on
     RAW = lambda data: data
     """The data state represents a raw value without any encapsulation."""
