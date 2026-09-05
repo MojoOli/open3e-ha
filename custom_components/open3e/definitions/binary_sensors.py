@@ -12,7 +12,11 @@ from ..capability.capability import Capability
 
 
 def _to_int(value: Any) -> int:
-    """Convert a value to int, treating strings as hexadecimal."""
+    """Convert a value to int.
+
+    Open3e reports unmapped/unknown fields as hexadecimal strings (e.g. "01")
+    while other fields are already ints, so strings are always parsed as base 16.
+    """
     return int(value, 16) if isinstance(value, str) else value
 
 
