@@ -276,23 +276,26 @@ class Open3eMqttClient:
         try:
             _LOGGER.debug(f"Setting DMW mode to {mode}")
 
+            # The operation state (Mode + State, one byte each) is written as raw bytes:
+            # since Open3e 0.6.1 "State" is an enum that rejects plain integers, while
+            # older versions only accept integers. Raw bytes work with both.
             state_payload = None
             efficiency_payload = None
 
             match mode:
                 case DmwMode.Eco:
-                    state_payload = {"Mode": 1, "State": 1}
+                    state_payload = "0101"
                     efficiency_payload = 0
                 case DmwMode.Comfort:
-                    state_payload = {"Mode": 1, "State": 1}
+                    state_payload = "0101"
                     efficiency_payload = 2
                 case DmwMode.Off:
-                    state_payload = {"Mode": 0, "State": 0}
+                    state_payload = "0000"
 
             if state_payload is not None:
                 await self.__async_publish_command(
                     hass=hass,
-                    payload=self.__write_json_payload(
+                    payload=self.__write_raw_payload(
                         feature_id=dmw_state_feature_id,
                         data=state_payload,
                         device_id=device_id
