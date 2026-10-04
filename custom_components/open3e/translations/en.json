@@ -801,7 +801,7 @@
         "name": "Heating circuit 4 circulation pump"
       },
       "hot_water_circulation_pump_hygiene": {
-        "name": "Hot water legionella protection"
+        "name": "Circulation pump during hygiene function"
       },
       "additional_heater_active": {
         "name": "Additional heater"
@@ -825,7 +825,7 @@
         "name": "Hot water operation status"
       },
       "legionella_protection_activation": {
-        "name": "Hot water legionella protection"
+        "name": "Legionella protection"
       },
       "malfunction_heating_unit_blocked": {
         "name": "Heating malfunction"

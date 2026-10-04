@@ -30,6 +30,7 @@ class BinarySensorDataTransform:
         else json_loads(data)["PowerState"] > 0
     )
     STATE = lambda data: json_loads(data)["State"] > 0
+    MODE = lambda data: json_loads(data)["Mode"] > 0
     HYGIENE_ACTIVE = lambda data: json_loads(data)["HygenieActive"] > 0
     BACKUP_BOX_INSTALLED = lambda data: _to_int(json_loads(data)["Unknown"]) > 0  # TODO: Needs to be renamed when open3e is updated to BackUpBoxInstalled
     HEX_ON = lambda data: data != "000000"  # on
@@ -91,11 +92,10 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
     ),
     Open3eBinarySensorEntityDescription(
         poll_data_features=[Features.State.LegionellaProtectionActivation],
-        device_class=BinarySensorDeviceClass.POWER,
-        icon="mdi:water-plus",
+        icon="mdi:bacteria-outline",
         key="legionella_protection_activation",
         translation_key="legionella_protection_activation",
-        data_transform=BinarySensorDataTransform.STATE,
+        data_transform=BinarySensorDataTransform.MODE,
         required_device=Open3eDevices.Vitodens
     ),
     Open3eBinarySensorEntityDescription(
@@ -234,12 +234,21 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
         required_device=Open3eDevices.Vitocal
     ),
     Open3eBinarySensorEntityDescription(
-        device_class=BinarySensorDeviceClass.POWER,
         poll_data_features=[Features.State.DomesticHotWaterCirculationPumpMode],
         key="hot_water_circulation_pump_hygiene",
         translation_key="hot_water_circulation_pump_hygiene",
-        icon="mdi:bacteria-outline",
+        entity_registry_enabled_default=False,
+        icon="mdi:water-sync",
         data_transform=BinarySensorDataTransform.HYGIENE_ACTIVE,
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eBinarySensorEntityDescription(
+        poll_data_features=[Features.State.LegionellaProtectionActivation],
+        key="legionella_protection_activation",
+        translation_key="legionella_protection_activation",
+        entity_registry_enabled_default=False,
+        icon="mdi:bacteria-outline",
+        data_transform=BinarySensorDataTransform.MODE,
         required_device=Open3eDevices.Vitocal
     ),
 
