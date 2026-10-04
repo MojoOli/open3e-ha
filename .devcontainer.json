@@ -1,7 +1,7 @@
 {
     "name": "open3e",
-    "image": "mcr.microsoft.com/devcontainers/python:3.13",
-    "postCreateCommand": "scripts/setup",
+    "image": "mcr.microsoft.com/devcontainers/python:3.14",
+    "postCreateCommand": "python3 -m venv .venv && scripts/setup",
     "forwardPorts": [
         8123
     ],

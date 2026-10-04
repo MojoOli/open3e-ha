@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(scripts/test:*)",
+      "Bash(scripts/setup)"
+    ],
+    "deny": [
+      "Read(./.venv/**)",
+      "Read(./config/.storage/**)",
+      "Read(./config/secrets.yaml)",
+      "Read(./config/*.db*)"
+    ]
+  }
+}
