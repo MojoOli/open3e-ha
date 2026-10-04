@@ -801,7 +801,7 @@
         "name": "Heizkreis 4 Umwälzpumpe"
       },
       "hot_water_circulation_pump_hygiene": {
-        "name": "Warmwasser Legionellenschutz"
+        "name": "Zirkulationspumpe bei Hygienefunktion"
       },
       "additional_heater_active": {
         "name": "Heizstab"
@@ -825,7 +825,7 @@
         "name": "Warmwasser Status"
       },
       "legionella_protection_activation": {
-        "name": "Legionellenschutz aktiv"
+        "name": "Legionellenschutz"
       },
       "malfunction_heating_unit_blocked": {
         "name": "Heizung Fehlfunktion"
