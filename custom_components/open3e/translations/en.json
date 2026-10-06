@@ -1107,6 +1107,12 @@
       "dhw_hysteresis_off": {
         "name": "Warm water hysteresis off"
       },
+      "buffer_hysteresis_on": {
+        "name": "Buffer hysteresis on"
+      },
+      "buffer_hysteresis_off": {
+        "name": "Buffer hysteresis off"
+      },
       "circuit_1_pump_speed": {
         "name": "Heating circuit 1 circulation pump speed"
       },
