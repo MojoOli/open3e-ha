@@ -1069,6 +1069,44 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         required_device=Open3eDevices.Vitocal
     ),
     Open3eNumberEntityDescription(
+        poll_data_features=[Features.Temperature.BufferHysteresis],
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        device_class=NumberDeviceClass.TEMPERATURE,
+        icon="mdi:thermometer-chevron-up",
+        native_min_value=0,
+        native_max_value=10,
+        native_step=0.5,
+        get_native_value=lambda data: data[DhwHysteresis.On],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_dhw_hysteresis(
+            feature_id=Features.Temperature.BufferHysteresis.id,
+            hysteresis=DhwHysteresis.On,
+            value=value,
+            device=device
+        ),
+        key="buffer_hysteresis_on",
+        translation_key="buffer_hysteresis_on",
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.Temperature.BufferHysteresis],
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        device_class=NumberDeviceClass.TEMPERATURE,
+        icon="mdi:thermometer-chevron-down",
+        native_min_value=0,
+        native_max_value=10,
+        native_step=0.5,
+        get_native_value=lambda data: data[DhwHysteresis.Off],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_dhw_hysteresis(
+            feature_id=Features.Temperature.BufferHysteresis.id,
+            hysteresis=DhwHysteresis.Off,
+            value=value,
+            device=device
+        ),
+        key="buffer_hysteresis_off",
+        translation_key="buffer_hysteresis_off",
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eNumberEntityDescription(
         poll_data_features=[Features.Speed.Circuit1Pump],
         native_unit_of_measurement=PERCENTAGE,
         device_class=NumberDeviceClass.SPEED,
