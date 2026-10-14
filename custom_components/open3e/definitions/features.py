@@ -117,6 +117,7 @@ class Features:
         Water = Feature(id=318, refresh_interval=15)
         CompressorInlet = Feature(id=322, refresh_interval=15)
         CompressorOutlet = Feature(id=325, refresh_interval=15)
+        WaterConfiguration = Feature(id=1721, refresh_interval=3600)
 
         # Vitodens
         WaterPressureSensor = Feature(id=318, refresh_interval=10)
@@ -283,6 +284,7 @@ class Features:
         MalfunctionIdentification = Feature(id=902, refresh_interval=30)
         ErrorDtcList = Feature(id=265, refresh_interval=30)
         BackendConnectionStatus = Feature(id=1165, refresh_interval=30)
+        DomesticHotWaterTankAnode = Feature(id=3170, refresh_interval=300)
 
         # Vitodens
         StatusDtcList = Feature(id=257, refresh_interval=60)

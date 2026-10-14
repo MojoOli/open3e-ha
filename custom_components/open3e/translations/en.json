@@ -679,6 +679,41 @@
           "postrun": "Postrun"
         }
       },
+      "dhw_tank_anode_current": {
+        "name": "Hot water tank anode"
+      },
+      "dhw_tank_anode_current_average": {
+        "name": "Hot water tank anode average"
+      },
+      "dhw_tank_anode_current_minimum": {
+        "name": "Hot water tank anode minimum"
+      },
+      "dhw_tank_anode_current_maximum": {
+        "name": "Hot water tank anode maximum"
+      },
+      "dhw_tank_anode_sensor_status": {
+        "name": "Hot water tank anode sensor status",
+        "state": {
+          "no_error": "No error",
+          "interruption": "Interruption",
+          "short_circuit": "Short circuit",
+          "electrical_fault": "Electrical fault",
+          "not_available": "Not available",
+          "invalidates": "Invalid"
+        }
+      },
+      "water_pressure_default": {
+        "name": "Water pressure default"
+      },
+      "water_pressure_normal_delta": {
+        "name": "Water pressure normal delta"
+      },
+      "water_pressure_maximum": {
+        "name": "Water pressure maximum"
+      },
+      "water_pressure_error_threshold": {
+        "name": "Water pressure error threshold"
+      },
       "flow_temperature_circuit1_maximum": {
         "name": "Circuit 1 flow temperature maximum"
       },
