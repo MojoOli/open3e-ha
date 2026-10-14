@@ -735,6 +735,15 @@
       "mixer_one_circuit_current_temperature_setpoint": {
         "name": "Heizkreis 1 Temperatur Sollwert aktuell"
       },
+      "mixer_one_circuit_pump_minimum_speed": {
+        "name": "Heizkreis 1 Pumpe Mindestdrehzahl"
+      },
+      "mixer_one_circuit_pump_maximum_speed": {
+        "name": "Heizkreis 1 Pumpe Maximaldrehzahl"
+      },
+      "mixer_one_circuit_summer_saving_temperature": {
+        "name": "Heizkreis 1 Sommersparschaltung Temperaturgrenze"
+      },
       "mixer_two_circuit_current_temperature_setpoint": {
         "name": "Heizkreis 2 Temperatur Sollwert aktuell"
       },
@@ -867,6 +876,9 @@
       },
       "mixer_one_circuit_operation_state": {
         "name": "Umwälzpumpe Heizkreis 1"
+      },
+      "mixer_one_circuit_summer_saving": {
+        "name": "Heizkreis 1 Sommersparschaltung"
       },
       "mixer_two_circuit_operation_state": {
         "name": "Umwälzpumpe Heizkreis 2"
@@ -1111,6 +1123,15 @@
       },
       "frost_protection_temperature": {
         "name": "Frostschutztemperatur Heizkreis"
+      },
+      "mixer_one_circuit_room_temperature_reduced": {
+        "name": "Heizkreis 1 Raumtemperatur Reduziert"
+      },
+      "mixer_one_circuit_room_temperature_standard": {
+        "name": "Heizkreis 1 Raumtemperatur Normal"
+      },
+      "mixer_one_circuit_room_temperature_comfort": {
+        "name": "Heizkreis 1 Raumtemperatur Komfort"
       },
       "circuit_1_heating_curve_slope": {
         "name": "Heizkurve 1 Steigung"

@@ -120,6 +120,15 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
         required_device=Open3eDevices.Vitodens
     ),
     Open3eBinarySensorEntityDescription(
+        poll_data_features=[Features.Temperature.MixerOneCircuitSummerSavingTemperatureThreshold],
+        icon="mdi:weather-sunny",
+        key="mixer_one_circuit_summer_saving",
+        translation_key="mixer_one_circuit_summer_saving",
+        data_transform=lambda data: int(json_loads(data)["State"]) > 0,
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eBinarySensorEntityDescription(
         poll_data_features=[Features.State.MixerTwoCircuitOperationState],
         device_class=BinarySensorDeviceClass.POWER,
         icon="mdi:water-sync",

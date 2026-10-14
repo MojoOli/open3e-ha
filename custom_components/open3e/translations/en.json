@@ -735,6 +735,15 @@
       "mixer_one_circuit_current_temperature_setpoint": {
         "name": "Circuit 1 current temperature setpoint"
       },
+      "mixer_one_circuit_pump_minimum_speed": {
+        "name": "Circuit 1 pump minimum speed"
+      },
+      "mixer_one_circuit_pump_maximum_speed": {
+        "name": "Circuit 1 pump maximum speed"
+      },
+      "mixer_one_circuit_summer_saving_temperature": {
+        "name": "Circuit 1 summer saving temperature threshold"
+      },
       "mixer_two_circuit_current_temperature_setpoint": {
         "name": "Circuit 2 current temperature setpoint"
       },
@@ -867,6 +876,9 @@
       },
       "mixer_one_circuit_operation_state": {
         "name": "Pump circuit 1"
+      },
+      "mixer_one_circuit_summer_saving": {
+        "name": "Circuit 1 summer saving"
       },
       "mixer_two_circuit_operation_state": {
         "name": "Pump circuit 2"
@@ -1111,6 +1123,15 @@
       },
       "frost_protection_temperature": {
         "name": "Frost protection temperature heating circuit"
+      },
+      "mixer_one_circuit_room_temperature_reduced": {
+        "name": "Circuit 1 room temperature reduced"
+      },
+      "mixer_one_circuit_room_temperature_standard": {
+        "name": "Circuit 1 room temperature standard"
+      },
+      "mixer_one_circuit_room_temperature_comfort": {
+        "name": "Circuit 1 room temperature comfort"
       },
       "circuit_1_heating_curve_slope": {
         "name": "Heating curve 1 slope"
