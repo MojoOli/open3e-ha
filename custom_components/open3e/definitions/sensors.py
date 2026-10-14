@@ -103,6 +103,22 @@ class SensorDataRetriever:
     """The data state represents a raw value without any encapsulation."""
 
     @staticmethod
+    def complex_field(field: str) -> Callable[[Any], float | None]:
+        """Read a numeric field of a complex payload; None for raw hex payloads from older Open3e releases."""
+
+        def retrieve(data: Any) -> float | None:
+            try:
+                payload = json_loads(data)
+            except (TypeError, ValueError):
+                return None
+            value = payload.get(field) if isinstance(payload, dict) else None
+            if isinstance(value, bool) or not isinstance(value, (int, float)):
+                return None
+            return float(value)
+
+        return retrieve
+
+    @staticmethod
     def cleaned_ip(ip_str: str) -> str:
         """Clean-up the IP address string by removing leading zeros from each octet. 
            This is necessary because the Viessmann CAN Bus returns IPs with leading zeros."""
@@ -1865,7 +1881,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         native_unit_of_measurement=UnitOfElectricCurrent.MILLIAMPERE,
         state_class=SensorStateClass.MEASUREMENT,
         entity_registry_enabled_default=False,
-        data_retriever=lambda data: float(json_loads(data)["Actual"]),
+        data_retriever=SensorDataRetriever.complex_field("Actual"),
         required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
@@ -1877,7 +1893,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         native_unit_of_measurement=UnitOfElectricCurrent.MILLIAMPERE,
         state_class=SensorStateClass.MEASUREMENT,
         entity_registry_enabled_default=False,
-        data_retriever=lambda data: float(json_loads(data)["Average"]),
+        data_retriever=SensorDataRetriever.complex_field("Average"),
         required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
@@ -1890,7 +1906,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         entity_category=EntityCategory.DIAGNOSTIC,
         entity_registry_enabled_default=False,
-        data_retriever=lambda data: float(json_loads(data)["Min"]),
+        data_retriever=SensorDataRetriever.complex_field("Min"),
         required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
@@ -1903,7 +1919,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         entity_category=EntityCategory.DIAGNOSTIC,
         entity_registry_enabled_default=False,
-        data_retriever=lambda data: float(json_loads(data)["Max"]),
+        data_retriever=SensorDataRetriever.complex_field("Max"),
         required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
@@ -1928,7 +1944,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         native_unit_of_measurement=UnitOfPressure.BAR,
         entity_category=EntityCategory.DIAGNOSTIC,
         entity_registry_enabled_default=False,
-        data_retriever=lambda data: float(json_loads(data)["Default Pressure"]),
+        data_retriever=SensorDataRetriever.complex_field("Default Pressure"),
         required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
@@ -1939,7 +1955,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         native_unit_of_measurement=UnitOfPressure.BAR,
         entity_category=EntityCategory.DIAGNOSTIC,
         entity_registry_enabled_default=False,
-        data_retriever=lambda data: float(json_loads(data)["Normal Pressure Delta"]),
+        data_retriever=SensorDataRetriever.complex_field("Normal Pressure Delta"),
         required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
@@ -1950,7 +1966,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         native_unit_of_measurement=UnitOfPressure.BAR,
         entity_category=EntityCategory.DIAGNOSTIC,
         entity_registry_enabled_default=False,
-        data_retriever=lambda data: float(json_loads(data)["Maximum Pressure"]),
+        data_retriever=SensorDataRetriever.complex_field("Maximum Pressure"),
         required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
@@ -1961,7 +1977,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         native_unit_of_measurement=UnitOfPressure.BAR,
         entity_category=EntityCategory.DIAGNOSTIC,
         entity_registry_enabled_default=False,
-        data_retriever=lambda data: float(json_loads(data)["Error Threshold"]),
+        data_retriever=SensorDataRetriever.complex_field("Error Threshold"),
         required_device=Open3eDevices.Vitocal
     ),
 
