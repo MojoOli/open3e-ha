@@ -1108,10 +1108,10 @@
         "name": "Warmwasser Hysterese aus"
       },
       "buffer_hysteresis_on": {
-        "name": "Pufferspeicher Hysterese Einschalten"
+        "name": "Pufferspeicher Hysterese an"
       },
       "buffer_hysteresis_off": {
-        "name": "Pufferspeicher Hysterese Ausschalten"
+        "name": "Pufferspeicher Hysterese aus"
       },
       "circuit_1_pump_speed": {
         "name": "Heizkreis 1 Umwälzpumpe Drehzahl"
