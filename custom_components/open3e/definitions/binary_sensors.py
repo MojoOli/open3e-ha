@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from typing import Callable, Any
 
 from homeassistant.components.binary_sensor import BinarySensorEntityDescription, BinarySensorDeviceClass
+from homeassistant.const import EntityCategory
 from homeassistant.util.json import json_loads
 
 from .devices import Open3eDevices
@@ -116,6 +117,16 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
         translation_key="mixer_one_circuit_operation_state",
         entity_registry_enabled_default=False,
         data_transform=lambda data: int(json_loads(data)["State"]["ID"]) < 255,
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eBinarySensorEntityDescription(
+        poll_data_features=[Features.Temperature.MixerOneCircuitSummerSavingTemperatureThreshold],
+        icon="mdi:weather-sunny",
+        key="mixer_one_circuit_summer_saving",
+        translation_key="mixer_one_circuit_summer_saving",
+        entity_category=EntityCategory.DIAGNOSTIC,
+        data_transform=lambda data: int(json_loads(data)["State"]) > 0,
         required_capabilities=[Capability.Circuit1],
         required_device=Open3eDevices.Vitodens
     ),

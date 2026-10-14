@@ -106,6 +106,7 @@ class Features:
         MixerTwoCircuitFlowTemperatureMinimumMaximumLimit = Feature(id=1193, refresh_interval=300)
         MixerOneCircuitCurrentTemperatureSetpoint = Feature(id=1643, refresh_interval=30)
         MixerTwoCircuitCurrentTemperatureSetpoint = Feature(id=1644, refresh_interval=30)
+        MixerOneCircuitSummerSavingTemperatureThreshold = Feature(id=1395, refresh_interval=300)
 
     class Humidity:
         Outdoor = Feature(id=419, refresh_interval=5)
@@ -246,6 +247,9 @@ class Features:
         SupplyAirFan = Feature(id=1040, refresh_interval=10)
         ExhaustAirFan = Feature(id=1041, refresh_interval=10)
         Circuit1Pump = Feature(id=1102, refresh_interval=10)
+
+        # Vitodens
+        MixerOneCircuitPumpMinimumMaximumLimit = Feature(id=1102, refresh_interval=300)
         Circuit2Pump = Feature(id=1103, refresh_interval=10)
         Circuit3Pump = Feature(id=1104, refresh_interval=10)
         Circuit4Pump = Feature(id=1105, refresh_interval=10)

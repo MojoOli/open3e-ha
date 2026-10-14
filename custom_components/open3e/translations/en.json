@@ -735,6 +735,24 @@
       "mixer_one_circuit_current_temperature_setpoint": {
         "name": "Circuit 1 current temperature setpoint"
       },
+      "mixer_one_circuit_room_temperature_setpoint_comfort": {
+        "name": "Circuit 1 room temperature setpoint comfort"
+      },
+      "mixer_one_circuit_room_temperature_setpoint_standard": {
+        "name": "Circuit 1 room temperature setpoint standard"
+      },
+      "mixer_one_circuit_room_temperature_setpoint_reduced": {
+        "name": "Circuit 1 room temperature setpoint reduced"
+      },
+      "mixer_one_circuit_pump_minimum_speed": {
+        "name": "Circuit 1 pump minimum speed"
+      },
+      "mixer_one_circuit_pump_maximum_speed": {
+        "name": "Circuit 1 pump maximum speed"
+      },
+      "mixer_one_circuit_summer_saving_temperature": {
+        "name": "Circuit 1 summer saving temperature threshold"
+      },
       "mixer_two_circuit_current_temperature_setpoint": {
         "name": "Circuit 2 current temperature setpoint"
       },
@@ -867,6 +885,9 @@
       },
       "mixer_one_circuit_operation_state": {
         "name": "Pump circuit 1"
+      },
+      "mixer_one_circuit_summer_saving": {
+        "name": "Circuit 1 summer saving"
       },
       "mixer_two_circuit_operation_state": {
         "name": "Pump circuit 2"

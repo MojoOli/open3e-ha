@@ -506,6 +506,134 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=SensorDataRetriever.RAW,
         required_device=Open3eDevices.Vitodens
     ),
+
+    # DID 987: MixerOneCircuitFlowTemperatureTargetSetpoint
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.MixerOneCircuitFlowTemperatureTargetSetpoint],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="flow_circuit_1_supply_temp_setpoint",
+        translation_key="flow_circuit_1_supply_temp_setpoint",
+        data_retriever=SensorDataRetriever.RAW,
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitodens
+    ),
+
+    # DID 1643: MixerOneCircuitCurrentTemperatureSetpoint
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.MixerOneCircuitCurrentTemperatureSetpoint],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="mixer_one_circuit_current_temperature_setpoint",
+        translation_key="mixer_one_circuit_current_temperature_setpoint",
+        data_retriever=SensorDataRetriever.RAW,
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitodens
+    ),
+
+    # DID 424: MixerOneCircuitRoomTemperatureSetpoint
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.MixerOneCircuitRoomTemperatureSetpoint],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="mixer_one_circuit_room_temperature_setpoint_comfort",
+        translation_key="mixer_one_circuit_room_temperature_setpoint_comfort",
+        data_retriever=lambda data: float(json_loads(data)["Comfort"]),
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.MixerOneCircuitRoomTemperatureSetpoint],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="mixer_one_circuit_room_temperature_setpoint_standard",
+        translation_key="mixer_one_circuit_room_temperature_setpoint_standard",
+        data_retriever=SensorDataRetriever.STANDARD,
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.MixerOneCircuitRoomTemperatureSetpoint],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="mixer_one_circuit_room_temperature_setpoint_reduced",
+        translation_key="mixer_one_circuit_room_temperature_setpoint_reduced",
+        data_retriever=lambda data: float(json_loads(data)["Reduced"]),
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitodens
+    ),
+
+    # DID 1192: MixerOneCircuitFlowTemperatureMinimumMaximumLimit
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.MixerOneCircuitFlowTemperatureMinimumMaximumLimit],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="flow_temperature_circuit1_minimum",
+        translation_key="flow_temperature_circuit1_minimum",
+        icon="mdi:thermometer-chevron-down",
+        data_retriever=SensorDataRetriever.MINIMUM,
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.MixerOneCircuitFlowTemperatureMinimumMaximumLimit],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="flow_temperature_circuit1_maximum",
+        translation_key="flow_temperature_circuit1_maximum",
+        icon="mdi:thermometer-chevron-up",
+        data_retriever=SensorDataRetriever.MAXIMUM,
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitodens
+    ),
+
+    # DID 1102: MixerOneCircuitPumpMinimumMaximumLimit
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Speed.MixerOneCircuitPumpMinimumMaximumLimit],
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="mixer_one_circuit_pump_minimum_speed",
+        translation_key="mixer_one_circuit_pump_minimum_speed",
+        icon="mdi:pump",
+        entity_category=EntityCategory.DIAGNOSTIC,
+        data_retriever=lambda data: float(json_loads(data)["MinSpeed"]),
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Speed.MixerOneCircuitPumpMinimumMaximumLimit],
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="mixer_one_circuit_pump_maximum_speed",
+        translation_key="mixer_one_circuit_pump_maximum_speed",
+        icon="mdi:pump",
+        entity_category=EntityCategory.DIAGNOSTIC,
+        data_retriever=lambda data: float(json_loads(data)["MaxSpeed"]),
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitodens
+    ),
+
+    # DID 1395: MixerOneCircuitSummerSavingTemperatureThreshold
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Temperature.MixerOneCircuitSummerSavingTemperatureThreshold],
+        device_class=SensorDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="mixer_one_circuit_summer_saving_temperature",
+        translation_key="mixer_one_circuit_summer_saving_temperature",
+        icon="mdi:weather-sunny",
+        entity_category=EntityCategory.DIAGNOSTIC,
+        data_retriever=lambda data: float(json_loads(data)["Temperature"]),
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitodens
+    ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Volume.AllengraSensor],
         device_class=SensorDeviceClass.TEMPERATURE,
