@@ -13,7 +13,7 @@ from .devices import Open3eDevices
 from .entity_description import Open3eEntityDescription
 from .features import Features
 from .open3e_data import Open3eDataDevice
-from .subfeatures.dhw_hysteresis import DhwHysteresis
+from .subfeatures.dhw_hysteresis import DhwHysteresis, get_hysteresis_setpoint
 from .subfeatures.heating_curve import HeatingCurve
 from .. import Open3eDataUpdateCoordinator
 from ..capability.capability import Capability
@@ -1076,7 +1076,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         native_min_value=0,
         native_max_value=10,
         native_step=1,
-        get_native_value=lambda data: data[DhwHysteresis.On],
+        get_native_value=lambda data: get_hysteresis_setpoint(data, DhwHysteresis.On),
         set_native_value=lambda value, device, coordinator: coordinator.async_set_dhw_hysteresis(
             feature_id=Features.Temperature.BufferHysteresis.id,
             hysteresis=DhwHysteresis.On,
@@ -1095,7 +1095,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         native_min_value=0,
         native_max_value=10,
         native_step=1,
-        get_native_value=lambda data: data[DhwHysteresis.Off],
+        get_native_value=lambda data: get_hysteresis_setpoint(data, DhwHysteresis.Off),
         set_native_value=lambda value, device, coordinator: coordinator.async_set_dhw_hysteresis(
             feature_id=Features.Temperature.BufferHysteresis.id,
             hysteresis=DhwHysteresis.Off,
