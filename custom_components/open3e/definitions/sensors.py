@@ -107,14 +107,8 @@ class SensorDataRetriever:
         """Read a numeric field of a complex payload; None for raw hex payloads from older Open3e releases."""
 
         def retrieve(data: Any) -> float | None:
-            try:
-                payload = json_loads(data)
-            except (TypeError, ValueError):
-                return None
-            value = payload.get(field) if isinstance(payload, dict) else None
-            if isinstance(value, bool) or not isinstance(value, (int, float)):
-                return None
-            return float(value)
+            payload = json_loads(data)
+            return float(payload[field]) if isinstance(payload, dict) else None
 
         return retrieve
 
