@@ -98,7 +98,7 @@ class SensorDataRetriever:
     UNKNOWN = lambda data: float(json_loads(data)["Unknown"])
     RAWSTR = lambda data: str(data[1:][:-1])
     HEX_INT = lambda data: int(str(data), 16) if data is not None else None
-    HEX_FIRST_BYTE = lambda data: float(int(str(data)[0:2], 16)) if data is not None else None
+    HEX_FIRST_BYTE = lambda data: float(int(json_loads(data)[0:2], 16))
     RAW = lambda data: float(data)
     """The data state represents a raw value without any encapsulation."""
 
