@@ -1226,6 +1226,64 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
     ##################
     ###  Vitodens  ###
     ##################
+    # DID 424: MixerOneCircuitRoomTemperatureSetpoint
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.Temperature.MixerOneCircuitRoomTemperatureSetpoint],
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        device_class=NumberDeviceClass.TEMPERATURE,
+        native_min_value=VIESSMANN_TEMP_HEATING_MIN,
+        native_max_value=VIESSMANN_TEMP_HEATING_MAX,
+        native_step=1,
+        get_native_value=lambda data: data[Program.Reduced.map_to_api_heating()],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_program_temperature(
+            set_programs_feature_id=Features.Temperature.MixerOneCircuitRoomTemperatureSetpoint.id,
+            program=Program.Reduced,
+            temperature=value,
+            device=device
+        ),
+        key="mixer_one_circuit_room_temperature_reduced",
+        translation_key="mixer_one_circuit_room_temperature_reduced",
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.Temperature.MixerOneCircuitRoomTemperatureSetpoint],
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        device_class=NumberDeviceClass.TEMPERATURE,
+        native_min_value=VIESSMANN_TEMP_HEATING_MIN,
+        native_max_value=VIESSMANN_TEMP_HEATING_MAX,
+        native_step=1,
+        get_native_value=lambda data: data[Program.Normal.map_to_api_heating()],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_program_temperature(
+            set_programs_feature_id=Features.Temperature.MixerOneCircuitRoomTemperatureSetpoint.id,
+            program=Program.Normal,
+            temperature=value,
+            device=device
+        ),
+        key="mixer_one_circuit_room_temperature_standard",
+        translation_key="mixer_one_circuit_room_temperature_standard",
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitodens
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.Temperature.MixerOneCircuitRoomTemperatureSetpoint],
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        device_class=NumberDeviceClass.TEMPERATURE,
+        native_min_value=VIESSMANN_TEMP_HEATING_MIN,
+        native_max_value=VIESSMANN_TEMP_HEATING_MAX,
+        native_step=1,
+        get_native_value=lambda data: data[Program.Comfort.map_to_api_heating()],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_program_temperature(
+            set_programs_feature_id=Features.Temperature.MixerOneCircuitRoomTemperatureSetpoint.id,
+            program=Program.Comfort,
+            temperature=value,
+            device=device
+        ),
+        key="mixer_one_circuit_room_temperature_comfort",
+        translation_key="mixer_one_circuit_room_temperature_comfort",
+        required_capabilities=[Capability.Circuit1],
+        required_device=Open3eDevices.Vitodens
+    ),
     Open3eNumberEntityDescription(
         poll_data_features=[Features.State.FlowCircuit1HeatingCurve],
         icon="mdi:slope-uphill",

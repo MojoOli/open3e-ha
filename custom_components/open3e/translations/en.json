@@ -735,15 +735,6 @@
       "mixer_one_circuit_current_temperature_setpoint": {
         "name": "Circuit 1 current temperature setpoint"
       },
-      "mixer_one_circuit_room_temperature_setpoint_comfort": {
-        "name": "Circuit 1 room temperature setpoint comfort"
-      },
-      "mixer_one_circuit_room_temperature_setpoint_standard": {
-        "name": "Circuit 1 room temperature setpoint standard"
-      },
-      "mixer_one_circuit_room_temperature_setpoint_reduced": {
-        "name": "Circuit 1 room temperature setpoint reduced"
-      },
       "mixer_one_circuit_pump_minimum_speed": {
         "name": "Circuit 1 pump minimum speed"
       },
@@ -1132,6 +1123,15 @@
       },
       "frost_protection_temperature": {
         "name": "Frost protection temperature heating circuit"
+      },
+      "mixer_one_circuit_room_temperature_reduced": {
+        "name": "Circuit 1 room temperature reduced"
+      },
+      "mixer_one_circuit_room_temperature_standard": {
+        "name": "Circuit 1 room temperature standard"
+      },
+      "mixer_one_circuit_room_temperature_comfort": {
+        "name": "Circuit 1 room temperature comfort"
       },
       "circuit_1_heating_curve_slope": {
         "name": "Heating curve 1 slope"

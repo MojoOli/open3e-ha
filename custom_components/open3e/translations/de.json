@@ -735,15 +735,6 @@
       "mixer_one_circuit_current_temperature_setpoint": {
         "name": "Heizkreis 1 Temperatur Sollwert aktuell"
       },
-      "mixer_one_circuit_room_temperature_setpoint_comfort": {
-        "name": "Heizkreis 1 Raumtemperatur Soll Komfort"
-      },
-      "mixer_one_circuit_room_temperature_setpoint_standard": {
-        "name": "Heizkreis 1 Raumtemperatur Soll Normal"
-      },
-      "mixer_one_circuit_room_temperature_setpoint_reduced": {
-        "name": "Heizkreis 1 Raumtemperatur Soll Reduziert"
-      },
       "mixer_one_circuit_pump_minimum_speed": {
         "name": "Heizkreis 1 Pumpe Mindestdrehzahl"
       },
@@ -1132,6 +1123,15 @@
       },
       "frost_protection_temperature": {
         "name": "Frostschutztemperatur Heizkreis"
+      },
+      "mixer_one_circuit_room_temperature_reduced": {
+        "name": "Heizkreis 1 Raumtemperatur Reduziert"
+      },
+      "mixer_one_circuit_room_temperature_standard": {
+        "name": "Heizkreis 1 Raumtemperatur Normal"
+      },
+      "mixer_one_circuit_room_temperature_comfort": {
+        "name": "Heizkreis 1 Raumtemperatur Komfort"
       },
       "circuit_1_heating_curve_slope": {
         "name": "Heizkurve 1 Steigung"

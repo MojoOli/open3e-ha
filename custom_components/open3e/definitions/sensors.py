@@ -533,41 +533,6 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         required_device=Open3eDevices.Vitodens
     ),
 
-    # DID 424: MixerOneCircuitRoomTemperatureSetpoint
-    Open3eSensorEntityDescription(
-        poll_data_features=[Features.Temperature.MixerOneCircuitRoomTemperatureSetpoint],
-        device_class=SensorDeviceClass.TEMPERATURE,
-        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
-        state_class=SensorStateClass.MEASUREMENT,
-        key="mixer_one_circuit_room_temperature_setpoint_comfort",
-        translation_key="mixer_one_circuit_room_temperature_setpoint_comfort",
-        data_retriever=lambda data: float(json_loads(data)["Comfort"]),
-        required_capabilities=[Capability.Circuit1],
-        required_device=Open3eDevices.Vitodens
-    ),
-    Open3eSensorEntityDescription(
-        poll_data_features=[Features.Temperature.MixerOneCircuitRoomTemperatureSetpoint],
-        device_class=SensorDeviceClass.TEMPERATURE,
-        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
-        state_class=SensorStateClass.MEASUREMENT,
-        key="mixer_one_circuit_room_temperature_setpoint_standard",
-        translation_key="mixer_one_circuit_room_temperature_setpoint_standard",
-        data_retriever=SensorDataRetriever.STANDARD,
-        required_capabilities=[Capability.Circuit1],
-        required_device=Open3eDevices.Vitodens
-    ),
-    Open3eSensorEntityDescription(
-        poll_data_features=[Features.Temperature.MixerOneCircuitRoomTemperatureSetpoint],
-        device_class=SensorDeviceClass.TEMPERATURE,
-        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
-        state_class=SensorStateClass.MEASUREMENT,
-        key="mixer_one_circuit_room_temperature_setpoint_reduced",
-        translation_key="mixer_one_circuit_room_temperature_setpoint_reduced",
-        data_retriever=lambda data: float(json_loads(data)["Reduced"]),
-        required_capabilities=[Capability.Circuit1],
-        required_device=Open3eDevices.Vitodens
-    ),
-
     # DID 1192: MixerOneCircuitFlowTemperatureMinimumMaximumLimit
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Temperature.MixerOneCircuitFlowTemperatureMinimumMaximumLimit],
