@@ -74,6 +74,7 @@ class Features:
         DhwBufferMid = Feature(id=3233, refresh_interval=30)
         DhwBufferTop = Feature(id=3234, refresh_interval=30)
         DomesticHotWaterHysteresis = Feature(id=1085, refresh_interval=30)
+        BufferHysteresis = Feature(id=1593, refresh_interval=300)
 
         # Vitodens
         FlowTemperatureSensor = Feature(id=268, refresh_interval=30)
