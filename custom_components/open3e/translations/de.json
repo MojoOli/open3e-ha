@@ -679,6 +679,41 @@
           "postrun": "Nachlauf"
         }
       },
+      "dhw_tank_anode_current": {
+        "name": "Anodenstrom Warmwasserspeicher"
+      },
+      "dhw_tank_anode_current_average": {
+        "name": "Anodenstrom Warmwasserspeicher Mittelwert"
+      },
+      "dhw_tank_anode_current_minimum": {
+        "name": "Anodenstrom Warmwasserspeicher Minimum"
+      },
+      "dhw_tank_anode_current_maximum": {
+        "name": "Anodenstrom Warmwasserspeicher Maximum"
+      },
+      "dhw_tank_anode_sensor_status": {
+        "name": "Anodensensor Warmwasserspeicher Status",
+        "state": {
+          "no_error": "Kein Fehler",
+          "interruption": "Unterbrechung",
+          "short_circuit": "Kurzschluss",
+          "electrical_fault": "Elektrischer Fehler",
+          "not_available": "Nicht verfügbar",
+          "invalidates": "Ungültig"
+        }
+      },
+      "water_pressure_default": {
+        "name": "Wasserdruck Standard"
+      },
+      "water_pressure_normal_delta": {
+        "name": "Wasserdruck normale Abweichung"
+      },
+      "water_pressure_maximum": {
+        "name": "Wasserdruck Maximum"
+      },
+      "water_pressure_error_threshold": {
+        "name": "Wasserdruck Fehlerschwelle"
+      },
       "flow_temperature_circuit1_maximum": {
         "name": "Heizkreis 1 Vorlauftemperatur Maximum"
       },

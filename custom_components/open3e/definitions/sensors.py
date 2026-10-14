@@ -35,6 +35,7 @@ from .subfeatures.refrigeration_circuit_mode import (
     RefrigerationCircuitOperationMode,
     get_refrigeration_circuit_mode,
 )
+from .subfeatures.sensor_status import SensorStatus, get_sensor_status
 from .subfeatures.smart_grid_feature_selection import (
     SmartGridFeatureSelection,
     get_smart_grid_feature_selection,
@@ -1851,6 +1852,116 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         entity_registry_enabled_default=False,
         data_retriever=SensorDataRetriever.RAWSTR,
         required_capabilities=[Capability.Circuit4],
+        required_device=Open3eDevices.Vitocal
+    ),
+
+    # DID 3170: DomesticHotWaterTankAnodeSensor
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.DomesticHotWaterTankAnode],
+        device_class=SensorDeviceClass.CURRENT,
+        icon="mdi:flash",
+        key="dhw_tank_anode_current",
+        translation_key="dhw_tank_anode_current",
+        native_unit_of_measurement=UnitOfElectricCurrent.MILLIAMPERE,
+        state_class=SensorStateClass.MEASUREMENT,
+        entity_registry_enabled_default=False,
+        data_retriever=lambda data: float(json_loads(data)["Actual"]),
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.DomesticHotWaterTankAnode],
+        device_class=SensorDeviceClass.CURRENT,
+        icon="mdi:flash",
+        key="dhw_tank_anode_current_average",
+        translation_key="dhw_tank_anode_current_average",
+        native_unit_of_measurement=UnitOfElectricCurrent.MILLIAMPERE,
+        state_class=SensorStateClass.MEASUREMENT,
+        entity_registry_enabled_default=False,
+        data_retriever=lambda data: float(json_loads(data)["Average"]),
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.DomesticHotWaterTankAnode],
+        device_class=SensorDeviceClass.CURRENT,
+        icon="mdi:flash",
+        key="dhw_tank_anode_current_minimum",
+        translation_key="dhw_tank_anode_current_minimum",
+        native_unit_of_measurement=UnitOfElectricCurrent.MILLIAMPERE,
+        state_class=SensorStateClass.MEASUREMENT,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        entity_registry_enabled_default=False,
+        data_retriever=lambda data: float(json_loads(data)["Min"]),
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.DomesticHotWaterTankAnode],
+        device_class=SensorDeviceClass.CURRENT,
+        icon="mdi:flash",
+        key="dhw_tank_anode_current_maximum",
+        translation_key="dhw_tank_anode_current_maximum",
+        native_unit_of_measurement=UnitOfElectricCurrent.MILLIAMPERE,
+        state_class=SensorStateClass.MEASUREMENT,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        entity_registry_enabled_default=False,
+        data_retriever=lambda data: float(json_loads(data)["Max"]),
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.DomesticHotWaterTankAnode],
+        device_class=SensorDeviceClass.ENUM,
+        options=[status.value for status in SensorStatus],
+        icon="mdi:shield-check-outline",
+        key="dhw_tank_anode_sensor_status",
+        translation_key="dhw_tank_anode_sensor_status",
+        entity_category=EntityCategory.DIAGNOSTIC,
+        entity_registry_enabled_default=False,
+        data_retriever=get_sensor_status,
+        required_device=Open3eDevices.Vitocal
+    ),
+
+    # DID 1721: WaterPressureConfiguration
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Pressure.WaterConfiguration],
+        device_class=SensorDeviceClass.PRESSURE,
+        key="water_pressure_default",
+        translation_key="water_pressure_default",
+        native_unit_of_measurement=UnitOfPressure.BAR,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        entity_registry_enabled_default=False,
+        data_retriever=lambda data: float(json_loads(data)["Default Pressure"]),
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Pressure.WaterConfiguration],
+        device_class=SensorDeviceClass.PRESSURE,
+        key="water_pressure_normal_delta",
+        translation_key="water_pressure_normal_delta",
+        native_unit_of_measurement=UnitOfPressure.BAR,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        entity_registry_enabled_default=False,
+        data_retriever=lambda data: float(json_loads(data)["Normal Pressure Delta"]),
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Pressure.WaterConfiguration],
+        device_class=SensorDeviceClass.PRESSURE,
+        key="water_pressure_maximum",
+        translation_key="water_pressure_maximum",
+        native_unit_of_measurement=UnitOfPressure.BAR,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        entity_registry_enabled_default=False,
+        data_retriever=lambda data: float(json_loads(data)["Maximum Pressure"]),
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Pressure.WaterConfiguration],
+        device_class=SensorDeviceClass.PRESSURE,
+        key="water_pressure_error_threshold",
+        translation_key="water_pressure_error_threshold",
+        native_unit_of_measurement=UnitOfPressure.BAR,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        entity_registry_enabled_default=False,
+        data_retriever=lambda data: float(json_loads(data)["Error Threshold"]),
         required_device=Open3eDevices.Vitocal
     ),
 
