@@ -680,16 +680,16 @@
         }
       },
       "dhw_tank_anode_current": {
-        "name": "Hot water tank anode current"
+        "name": "Hot water tank anode"
       },
       "dhw_tank_anode_current_average": {
-        "name": "Hot water tank anode current average"
+        "name": "Hot water tank anode average"
       },
       "dhw_tank_anode_current_minimum": {
-        "name": "Hot water tank anode current minimum"
+        "name": "Hot water tank anode minimum"
       },
       "dhw_tank_anode_current_maximum": {
-        "name": "Hot water tank anode current maximum"
+        "name": "Hot water tank anode maximum"
       },
       "dhw_tank_anode_sensor_status": {
         "name": "Hot water tank anode sensor status",
