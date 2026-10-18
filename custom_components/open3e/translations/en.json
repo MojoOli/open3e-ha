@@ -1169,6 +1169,9 @@
       "buffer_hysteresis_off": {
         "name": "Buffer tank hysteresis off"
       },
+      "central_heating_pump_speed": {
+        "name": "Primary pump speed (buffer/defrost)"
+      },
       "circuit_1_pump_speed": {
         "name": "Heating circuit 1 circulation pump speed"
       },

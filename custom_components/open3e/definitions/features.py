@@ -247,6 +247,7 @@ class Features:
         SupplyAirFan = Feature(id=1040, refresh_interval=10)
         ExhaustAirFan = Feature(id=1041, refresh_interval=10)
         Circuit1Pump = Feature(id=1102, refresh_interval=10)
+        CentralHeatingPump = Feature(id=1100, refresh_interval=300)
 
         # Vitodens
         MixerOneCircuitPumpMinimumMaximumLimit = Feature(id=1102, refresh_interval=300)
