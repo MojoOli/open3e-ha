@@ -500,13 +500,15 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             self,
             feature_id: int,
             speed: float,
-            device: Open3eDataDevice
+            device: Open3eDataDevice,
+            use_service_77: bool = False
     ):
         await self.__client.async_set_circuit_pump_speed(
             hass=self.hass,
             feature_id=feature_id,
             speed=speed,
-            device_id=device.id
+            device_id=device.id,
+            use_service_77=use_service_77
         )
 
         self.async_refresh_feature(device, [feature_id])
