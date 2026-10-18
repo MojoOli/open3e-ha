@@ -636,7 +636,8 @@ class Open3eMqttClient:
             hass: HomeAssistant,
             feature_id: int,
             speed: float,
-            device_id: int
+            device_id: int,
+            use_service_77: bool = False
     ):
         try:
             _LOGGER.debug(f"Setting pump speed to {speed} of feature ID {feature_id}")
@@ -646,7 +647,8 @@ class Open3eMqttClient:
                     feature_id=feature_id,
                     data=speed,
                     sub_feature="Setpoint",
-                    device_id=device_id
+                    device_id=device_id,
+                    use_service_77=use_service_77
                 )
             )
         except Exception as exception:
@@ -695,12 +697,20 @@ class Open3eMqttClient:
         
 
     @staticmethod
-    def __write_json_payload(feature_id: int, data: any, device_id: int, sub_feature: str | None = None):
+    def __write_json_payload(
+            feature_id: int,
+            data: any,
+            device_id: int,
+            sub_feature: str | None = None,
+            use_service_77: bool = False
+    ):
+        # Some DIDs reject the standard write service (0x2E) and only accept Viessmann's service 0x77
+        mode = "write-sid77" if use_service_77 else "write"
         if sub_feature is None:
-            return json_dumps({"mode": "write", "addr": device_id, "data": [[feature_id, json_dumps(data)]]})
+            return json_dumps({"mode": mode, "addr": device_id, "data": [[feature_id, json_dumps(data)]]})
 
         return json_dumps(
-            {"mode": "write", "addr": device_id, "data": [[f"{feature_id}.{sub_feature}", json_dumps(data)]]})
+            {"mode": mode, "addr": device_id, "data": [[f"{feature_id}.{sub_feature}", json_dumps(data)]]})
 
     @staticmethod
     def __write_raw_payload(feature_id: int, data: str, device_id: int):

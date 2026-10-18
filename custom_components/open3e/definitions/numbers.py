@@ -1126,7 +1126,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         required_device=Open3eDevices.Vitocal
     ),
     # DID 1100: CentralHeatingPumpMinimumMaximumLimit. Secondary pump speed for buffer heating, defrost and frost
-    # protection, so disabled by default.
+    # protection, so disabled by default. Rejects the standard write, only accepts service 0x77.
     Open3eNumberEntityDescription(
         poll_data_features=[Features.Speed.CentralHeatingPump],
         native_unit_of_measurement=PERCENTAGE,
@@ -1139,7 +1139,8 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         set_native_value=lambda value, device, coordinator: coordinator.async_set_circuit_pump_speed(
             feature_id=Features.Speed.CentralHeatingPump.id,
             speed=value,
-            device=device
+            device=device,
+            use_service_77=True
         ),
         key="central_heating_pump_speed",
         translation_key="central_heating_pump_speed",
