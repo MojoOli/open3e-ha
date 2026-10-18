@@ -822,7 +822,7 @@
         "name": "Verbleibende Filterlaufzeit"
       },
       "filter_condition": {
-        "name": "Filterzustand"
+        "name": "Filterverschmutzungszustand"
       },
       "current_ventilation_heat_recovery": {
         "name": "Wärmerückgewinnung"
