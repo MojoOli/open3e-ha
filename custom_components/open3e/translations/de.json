@@ -406,6 +406,9 @@
       "cop_heating_current_year": {
         "name": "COP Heizung Jahr"
       },
+      "cop_cooling_current_year": {
+        "name": "COP Kühlen Jahr"
+      },
       "cop_dhw_current_year": {
         "name": "COP Warmwasser Jahr"
       },

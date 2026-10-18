@@ -138,6 +138,7 @@ class Features:
         DesiredThermalEnergyDefrost = Feature(id=2256, refresh_interval=30)
         Cop = Feature(id=2625, refresh_interval=300)
         CopHeating = Feature(id=2622, refresh_interval=300)
+        CopCooling = Feature(id=2623, refresh_interval=300)
         CopDhw = Feature(id=2624, refresh_interval=300)
         EnergyOwnConsumption = Feature(id=2760, refresh_interval=300)
 

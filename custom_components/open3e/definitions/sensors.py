@@ -1592,6 +1592,15 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         required_device=Open3eDevices.Vitocal
     ),
     Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.CopCooling],
+        native_unit_of_measurement="COP",
+        icon="mdi:leaf",
+        key="cop_cooling_current_year",
+        translation_key="cop_cooling_current_year",
+        data_retriever=SensorDataRetriever.CURRENT_YEAR,
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.CopDhw],
         native_unit_of_measurement="COP",
         icon="mdi:leaf",
