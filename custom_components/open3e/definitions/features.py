@@ -255,8 +255,7 @@ class Features:
         Circuit4Pump = Feature(id=1105, refresh_interval=10)
 
         # Pumpgeschwindigkeit WW
-        DomesticHotWaterPumpMinimumLimit = Feature(id=1100, refresh_interval=300)
-        DomesticHotWaterPumpMaximumLimit = Feature(id=1101, refresh_interval=300)
+        DomesticHotWaterPumpMinimumMaximumLimit = Feature(id=1101, refresh_interval=300)
 
     class Position:
         ExpansionValve1 = Feature(id=389, refresh_interval=30)

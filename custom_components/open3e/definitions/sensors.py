@@ -1665,9 +1665,9 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         required_device=Open3eDevices.Vitocal
     ),
 
-    # DID 1100: DomesticHotWaterPumpMinimumLimit
+    # DID 1101: DomesticHotWaterPumpMinimumMaximumLimit
     Open3eSensorEntityDescription(
-        poll_data_features=[Features.Speed.DomesticHotWaterPumpMinimumLimit],
+        poll_data_features=[Features.Speed.DomesticHotWaterPumpMinimumMaximumLimit],
         device_class=SensorDeviceClass.POWER_FACTOR,
         native_unit_of_measurement=PERCENTAGE,
         state_class=SensorStateClass.MEASUREMENT,
@@ -1677,9 +1677,8 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         data_retriever=lambda data: float(json_loads(data)["MinSpeed"]),
         required_device=Open3eDevices.Vitocal
     ),
-    # DID 1101: DomesticHotWaterPumpMaximumLimit
     Open3eSensorEntityDescription(
-        poll_data_features=[Features.Speed.DomesticHotWaterPumpMaximumLimit],
+        poll_data_features=[Features.Speed.DomesticHotWaterPumpMinimumMaximumLimit],
         device_class=SensorDeviceClass.POWER_FACTOR,
         native_unit_of_measurement=PERCENTAGE,
         state_class=SensorStateClass.MEASUREMENT,
