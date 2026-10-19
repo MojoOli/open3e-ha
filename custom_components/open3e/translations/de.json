@@ -1172,9 +1172,6 @@
       "buffer_hysteresis_off": {
         "name": "Pufferspeicher Hysterese aus"
       },
-      "central_heating_pump_speed": {
-        "name": "Primärpumpe Drehzahl (Puffer/Abtauen)"
-      },
       "circuit_1_pump_speed": {
         "name": "Heizkreis 1 Umwälzpumpe Drehzahl"
       },
