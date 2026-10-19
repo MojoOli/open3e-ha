@@ -22,6 +22,7 @@ from .subfeatures.domestic_hot_water_status import (
     get_domestic_hot_water_status,
 )
 from .subfeatures.energy_management_mode import ENERGY_MANAGEMENT_MODES_MAP, EnergyManagementMode
+from .subfeatures.first_byte_value import get_first_byte_value
 from .subfeatures.four_three_way_valve_position import (
     FourThreeWayValvePosition,
     get_four_three_way_valve_position,
@@ -98,7 +99,6 @@ class SensorDataRetriever:
     UNKNOWN = lambda data: float(json_loads(data)["Unknown"])
     RAWSTR = lambda data: str(data[1:][:-1])
     HEX_INT = lambda data: int(str(data), 16) if data is not None else None
-    HEX_FIRST_BYTE = lambda data: float(int(json_loads(data)[0:2], 16))
     RAW = lambda data: float(data)
     """The data state represents a raw value without any encapsulation."""
 
@@ -2623,6 +2623,15 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         required_device=Open3eDevices.Vitoair,
     ),
     Open3eSensorEntityDescription(
+        poll_data_features=[Features.State.VentilationBypassDynamicVentilationLevel],
+        state_class=SensorStateClass.MEASUREMENT,
+        icon="mdi:fan",
+        key="ventilation_bypass_dynamic_level",
+        translation_key="ventilation_bypass_dynamic_level",
+        data_retriever=get_first_byte_value,
+        required_device=Open3eDevices.Vitoair
+    ),
+    Open3eSensorEntityDescription(
         poll_data_features=[Features.Energy.EnergyOwnConsumption],
         device_class=SensorDeviceClass.ENERGY,
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
@@ -2660,6 +2669,51 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         key="energy_own_consumption_past_year",
         translation_key="energy_own_consumption_past_year",
         data_retriever=SensorDataRetriever.PAST_YEAR,
+        entity_registry_enabled_default=False,
+        required_device=Open3eDevices.Vitoair
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.EnergyRecoveredCrossHeatExchanger],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        icon="mdi:heat-wave",
+        key="energy_recovered_today",
+        translation_key="energy_recovered_today",
+        data_retriever=SensorDataRetriever.complex_field("Today"),
+        required_device=Open3eDevices.Vitoair
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.EnergyRecoveredCrossHeatExchanger],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        icon="mdi:heat-wave",
+        key="energy_recovered_current_month",
+        translation_key="energy_recovered_current_month",
+        data_retriever=SensorDataRetriever.complex_field("CurrentMonth"),
+        required_device=Open3eDevices.Vitoair
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.EnergyRecoveredCrossHeatExchanger],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        icon="mdi:heat-wave",
+        key="energy_recovered_current_year",
+        translation_key="energy_recovered_current_year",
+        data_retriever=SensorDataRetriever.complex_field("CurrentYear"),
+        required_device=Open3eDevices.Vitoair
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Energy.EnergyRecoveredCrossHeatExchanger],
+        device_class=SensorDeviceClass.ENERGY,
+        native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+        state_class=SensorStateClass.TOTAL_INCREASING,
+        icon="mdi:heat-wave",
+        key="energy_recovered_past_year",
+        translation_key="energy_recovered_past_year",
+        data_retriever=SensorDataRetriever.complex_field("PastYear"),
         entity_registry_enabled_default=False,
         required_device=Open3eDevices.Vitoair
     ),
@@ -2715,7 +2769,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         icon="mdi:air-filter",
         key="filter_condition",
         translation_key="filter_condition",
-        data_retriever=SensorDataRetriever.HEX_FIRST_BYTE,
+        data_retriever=get_first_byte_value,
         required_device=Open3eDevices.Vitoair
     ),
     Open3eSensorEntityDescription(

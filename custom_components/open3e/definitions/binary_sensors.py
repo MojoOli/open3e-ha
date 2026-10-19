@@ -8,6 +8,7 @@ from .devices import Open3eDevices
 from .entity_description import Open3eEntityDescription
 from .features import Features
 from .subfeatures.domestic_hot_water_operation_state import is_domestic_hot_water_operation_state_active
+from .subfeatures.frost_protection_status import is_frost_protection_active
 from ..capability.capability import Capability
 
 
@@ -33,7 +34,6 @@ class BinarySensorDataTransform:
     MODE = lambda data: json_loads(data)["Mode"] > 0
     HYGIENE_ACTIVE = lambda data: json_loads(data)["HygenieActive"] > 0
     BACKUP_BOX_INSTALLED = lambda data: _to_int(json_loads(data)["Unknown"]) > 0  # TODO: Needs to be renamed when open3e is updated to BackUpBoxInstalled
-    HEX_ON = lambda data: data != "000000"  # on
     RAW = lambda data: data
     """The data state represents a raw value without any encapsulation."""
 
@@ -307,7 +307,7 @@ BINARY_SENSORS: tuple[Open3eBinarySensorEntityDescription, ...] = (
         key="frost_protection",
         translation_key="frost_protection",
         icon="mdi:snowflake-melt",
-        data_transform=BinarySensorDataTransform.HEX_ON,
+        data_transform=is_frost_protection_active,
         required_device=Open3eDevices.Vitoair
     ),
     Open3eBinarySensorEntityDescription(
