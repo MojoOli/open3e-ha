@@ -995,6 +995,7 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         poll_data_features=[Features.State.MixerTwoCircuitProperty],
         native_unit_of_measurement=UnitOfTemperature.KELVIN,
         device_class=NumberDeviceClass.TEMPERATURE_DELTA,
+        enabled_by_default=False,
         icon="mdi:thermometer-plus",
         native_min_value=0,
         native_max_value=20,
