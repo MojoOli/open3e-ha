@@ -199,7 +199,7 @@ class Features:
         EnergyManagement = Feature(id=2350, refresh_interval=30)
         FlowCircuit1HeatingCurve = Feature(id=880, refresh_interval=30)
         FlowCircuit2HeatingCurve = Feature(id=881, refresh_interval=30)
-        MixerTwoCircuitProperty = Feature(id=934, refresh_interval=30)
+        MixerTwoCircuitProperty = Feature(id=934, refresh_interval=300)
         FlowCircuit3HeatingCurve = Feature(id=882, refresh_interval=30)
         FlowCircuit4HeatingCurve = Feature(id=883, refresh_interval=30)
         VentilationMode = Feature(id=2371, refresh_interval=30)
