@@ -25,6 +25,7 @@ from .definitions.open3e_data import Open3eDataSystemInformation, Open3eDataDevi
 from .definitions.subfeatures.buffer_mode import BufferMode
 from .definitions.subfeatures.dhw_hysteresis import DhwHysteresis
 from .definitions.subfeatures.heating_curve import HeatingCurve
+from .definitions.subfeatures.mixer_circuit_property import MixerCircuitProperty
 from .definitions.subfeatures.hvac_mode import HvacMode
 from .definitions.subfeatures.ventilation_mode import VentilationMode
 from .definitions.subfeatures.vitoair_quick_mode import VitoairQuickMode
@@ -367,6 +368,21 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             hass=self.hass,
             feature_id=feature_id,
             heating_curve=heating_curve,
+            value=value,
+            device_id=device.id
+        )
+
+        self.async_refresh_feature(device, [feature_id])
+
+    async def async_set_flow_temperature_offset(
+            self,
+            feature_id: int,
+            value: float,
+            device: Open3eDataDevice
+    ):
+        await self.__client.async_set_flow_temperature_offset(
+            hass=self.hass,
+            feature_id=feature_id,
             value=value,
             device_id=device.id
         )
