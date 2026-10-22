@@ -28,6 +28,7 @@ from .definitions.subfeatures.buffer_mode import BufferMode
 from .definitions.subfeatures.dhw_hysteresis import DhwHysteresis
 from .definitions.subfeatures.heating_curve import HeatingCurve
 from .definitions.subfeatures.hvac_mode import HvacMode
+from .definitions.subfeatures.mixer_circuit_property import MixerCircuitProperty
 from .definitions.subfeatures.ventilation_mode import VentilationMode
 from .definitions.subfeatures.vitoair_quick_mode import VitoairQuickMode
 from .errors import Open3eServerTimeoutError, Open3eError, Open3eServerUnavailableError
@@ -480,6 +481,27 @@ class Open3eMqttClient:
                     feature_id=feature_id,
                     data=value,
                     sub_feature=hysteresis,
+                    device_id=device_id
+                )
+            )
+        except Exception as exception:
+            raise Open3eError(exception)
+
+    async def async_set_flow_temperature_offset(
+            self,
+            hass: HomeAssistant,
+            feature_id: int,
+            value: float,
+            device_id: int
+    ):
+        try:
+            _LOGGER.debug(f"Setting {MixerCircuitProperty.FlowTemperatureOffset} of feature ID {feature_id}")
+            await self.__async_publish_command(
+                hass=hass,
+                payload=self.__write_json_payload(
+                    feature_id=feature_id,
+                    data=value,
+                    sub_feature=MixerCircuitProperty.FlowTemperatureOffset,
                     device_id=device_id
                 )
             )

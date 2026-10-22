@@ -15,6 +15,7 @@ from .features import Features
 from .open3e_data import Open3eDataDevice
 from .subfeatures.dhw_hysteresis import DhwHysteresis, get_hysteresis_setpoint
 from .subfeatures.heating_curve import HeatingCurve
+from .subfeatures.mixer_circuit_property import MixerCircuitProperty
 from .. import Open3eDataUpdateCoordinator
 from ..capability.capability import Capability
 from ..const import VIESSMANN_TEMP_HEATING_MIN, VIESSMANN_TEMP_HEATING_MAX, VIESSMANN_POWER_MAX_WATT_ELECTRICAL_HEATER, \
@@ -987,6 +988,26 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         ),
         key="circuit_2_heating_curve_level",
         translation_key="circuit_2_heating_curve_level",
+        required_capabilities=[Capability.Circuit2],
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.State.MixerTwoCircuitProperty],
+        native_unit_of_measurement=UnitOfTemperature.KELVIN,
+        device_class=NumberDeviceClass.TEMPERATURE_DELTA,
+        enabled_by_default=False,
+        icon="mdi:thermometer-plus",
+        native_min_value=0,
+        native_max_value=20,
+        native_step=1,
+        get_native_value=lambda data: data[MixerCircuitProperty.FlowTemperatureOffset],
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_flow_temperature_offset(
+            feature_id=Features.State.MixerTwoCircuitProperty.id,
+            value=value,
+            device=device
+        ),
+        key="circuit_2_flow_temperature_offset",
+        translation_key="circuit_2_flow_temperature_offset",
         required_capabilities=[Capability.Circuit2],
         required_device=Open3eDevices.Vitocal
     ),

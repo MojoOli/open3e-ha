@@ -1154,6 +1154,9 @@
       "circuit_2_heating_curve_level": {
         "name": "Heizkurve 2 Verschiebung"
       },
+      "circuit_2_flow_temperature_offset": {
+        "name": "Heizkreis 2 Puffer-Sollwert Offset"
+      },
       "circuit_3_heating_curve_level": {
         "name": "Heizkurve 3 Verschiebung"
       },
