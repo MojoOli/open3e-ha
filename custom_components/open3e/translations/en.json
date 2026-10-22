@@ -452,6 +452,9 @@
           "dynamic": "Dynamic"
         }
       },
+      "ventilation_bypass_dynamic_level": {
+        "name": "Dynamic bypass ventilation level"
+      },
       "ventilation_bypass_position": {
         "name": "Bypass position"
       },
@@ -811,6 +814,18 @@
       },
       "energy_own_consumption_past_year": {
         "name": "Own energy consumption past year"
+      },
+      "energy_recovered_today": {
+        "name": "Recovered energy today"
+      },
+      "energy_recovered_current_month": {
+        "name": "Recovered energy current month"
+      },
+      "energy_recovered_current_year": {
+        "name": "Recovered energy current year"
+      },
+      "energy_recovered_past_year": {
+        "name": "Recovered energy past year"
       },
       "minimum_supply_air_temperature_dynamic": {
         "name": "Minimum supply air temperature (dynamic)"

@@ -141,6 +141,7 @@ class Features:
         CopCooling = Feature(id=2623, refresh_interval=300)
         CopDhw = Feature(id=2624, refresh_interval=300)
         EnergyOwnConsumption = Feature(id=2760, refresh_interval=300)
+        EnergyRecoveredCrossHeatExchanger = Feature(id=2759, refresh_interval=300)
 
         # Vitodens
         EnergyConsumptionCentralHeating = Feature(id=548, refresh_interval=60)
@@ -213,6 +214,7 @@ class Features:
         VentilationBypassFlapAvailableCount = Feature(id=2797, refresh_interval=30)
         CurrentVentilationHeatRecovery = Feature(id=2248, refresh_interval=30)
         FilterPercentageBlocked = Feature(id=3206, refresh_interval=300)
+        VentilationBypassDynamicVentilationLevel = Feature(id=2846, refresh_interval=300)
 
         # Pump-Status und Kältekreis
         CentralHeatingPumpStatus = Feature(id=2791, refresh_interval=10)
