@@ -1,4 +1,7 @@
 from enum import StrEnum
+from typing import Any
+
+from homeassistant.util.json import json_loads
 
 
 class VitoairQuickMode(StrEnum):
@@ -43,3 +46,23 @@ class VitoairQuickMode(StrEnum):
                 return 12
             case VitoairQuickMode.Nothing:
                 return 0
+
+
+def get_vitoair_quick_mode(data: Any) -> VitoairQuickMode | None:
+    """Parse feature 1007 (Vitoair current quick mode).
+
+    Needs an Open3e release that decodes the 6-byte Vitoair variant
+    ({"OpMode": 8, "Required": "on", "Runtime": 90.0, "Unknown": "0000"}).
+    Older releases publish raw hex, which returns None so the select stays unavailable.
+    """
+    try:
+        payload = json_loads(data)
+        if not isinstance(payload, dict):
+            return None
+
+        if str(payload["Required"]).lower() != "on":
+            return VitoairQuickMode.Nothing
+
+        return VitoairQuickMode.from_operation_mode(int(payload["OpMode"]))
+    except (TypeError, ValueError, KeyError):
+        return None

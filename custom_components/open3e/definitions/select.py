@@ -9,6 +9,7 @@ from .features import Features
 from .open3e_data import Open3eDataDevice
 from .subfeatures.buffer_mode import BufferMode
 from .subfeatures.bypass_operation_state import BypassOperationState, get_bypass_operation_state
+from .subfeatures.vitoair_quick_mode import VitoairQuickMode, get_vitoair_quick_mode
 from .. import Open3eDataUpdateCoordinator
 
 
@@ -61,20 +62,20 @@ SELECTS: tuple[Open3eSelectEntityDescription, ...] = (
         required_device=Open3eDevices.Vitoair
     ),
 
-    # Open3eSelectEntityDescription(
-    #     poll_data_features=[Features.State.CurrentQuickMode],
-    #     options=[VitoairQuickMode.Intensive, VitoairQuickMode.ReducedNoise, VitoairQuickMode.Off,
-    #              VitoairQuickMode.Nothing],
-    #     get_option=lambda data: VitoairQuickMode.from_operation_mode(data["OpMode"]),
-    #     set_option=lambda option, device, coordinator: coordinator.async_set_vitoair_quick_mode(
-    #         refresh_feature_id=Features.State.CurrentQuickMode.id,
-    #         set_feature_id=Features.State.TargetQuickMode.id,
-    #         mode=VitoairQuickMode.from_str(option),
-    #         device=device
-    #     ),
-    #     icon="mdi:fan-chevron-up",
-    #     key="quick_operation_mode",
-    #     translation_key="quick_operation_mode",
-    #     required_device=Open3eDevices.Vitoair
-    # ),
+    Open3eSelectEntityDescription(
+        poll_data_features=[Features.State.CurrentQuickMode],
+        options=[VitoairQuickMode.Intensive, VitoairQuickMode.ReducedNoise, VitoairQuickMode.Off,
+                 VitoairQuickMode.Nothing],
+        get_option=get_vitoair_quick_mode,
+        set_option=lambda option, device, coordinator: coordinator.async_set_vitoair_quick_mode(
+            refresh_feature_id=Features.State.CurrentQuickMode.id,
+            set_feature_id=Features.State.TargetQuickMode.id,
+            mode=VitoairQuickMode.from_str(option),
+            device=device
+        ),
+        icon="mdi:fan-chevron-up",
+        key="quick_operation_mode",
+        translation_key="quick_operation_mode",
+        required_device=Open3eDevices.Vitoair
+    ),
 )

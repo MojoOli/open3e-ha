@@ -561,7 +561,13 @@ class Open3eMqttClient:
                 hass=hass,
                 payload=self.__write_json_payload(
                     feature_id=feature_id,
-                    data={"OpMode": mode.map_to_api(), "Required": "on", "Unknown": "3c00"},  # 3c00 -> 60mins
+                    # 6-byte Vitoair layout of DID 1006, Runtime in minutes
+                    data={
+                        "OpMode": mode.map_to_api(),
+                        "Required": "off" if mode == VitoairQuickMode.Nothing else "on",
+                        "Runtime": 0 if mode == VitoairQuickMode.Nothing else 60,
+                        "Unknown": "0000"
+                    },
                     device_id=device_id
                 )
             )
