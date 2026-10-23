@@ -2626,6 +2626,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         poll_data_features=[Features.State.VentilationBypassDynamicVentilationLevel],
         state_class=SensorStateClass.MEASUREMENT,
         icon="mdi:fan",
+        suggested_display_precision=0,
         key="ventilation_bypass_dynamic_level",
         translation_key="ventilation_bypass_dynamic_level",
         data_retriever=get_first_byte_value,

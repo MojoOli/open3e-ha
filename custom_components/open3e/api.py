@@ -553,10 +553,11 @@ class Open3eMqttClient:
             hass: HomeAssistant,
             feature_id: int,
             mode: VitoairQuickMode,
+            runtime: int,
             device_id: int
     ):
         try:
-            _LOGGER.debug(f"Setting quickmode to {mode} of feature ID {feature_id}")
+            _LOGGER.debug(f"Setting quickmode to {mode} for {runtime} min of feature ID {feature_id}")
             await self.__async_publish_command(
                 hass=hass,
                 payload=self.__write_json_payload(
@@ -565,7 +566,7 @@ class Open3eMqttClient:
                     data={
                         "OpMode": mode.map_to_api(),
                         "Required": "off" if mode == VitoairQuickMode.Nothing else "on",
-                        "Runtime": 0 if mode == VitoairQuickMode.Nothing else 60,
+                        "Runtime": 0 if mode == VitoairQuickMode.Nothing else runtime,
                         "Unknown": "0000"
                     },
                     device_id=device_id
