@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import Callable, Any, Awaitable
 
 from homeassistant.components.number import NumberEntityDescription, NumberDeviceClass
-from homeassistant.const import UnitOfTemperature, UnitOfPower, PERCENTAGE
+from homeassistant.const import UnitOfTemperature, UnitOfPower, PERCENTAGE, UnitOfTime, EntityCategory
 
 from custom_components.open3e.definitions.subfeatures.buffer import Buffer
 from custom_components.open3e.definitions.subfeatures.hysteresis import Hysteresis
@@ -20,7 +20,9 @@ from .. import Open3eDataUpdateCoordinator
 from ..capability.capability import Capability
 from ..const import VIESSMANN_TEMP_HEATING_MIN, VIESSMANN_TEMP_HEATING_MAX, VIESSMANN_POWER_MAX_WATT_ELECTRICAL_HEATER, \
     VIESSMANN_POWER_MIN_WATT_ELECTRICAL_HEATER, VIESSMANN_POWER_WATT_ELECTRICAL_HEATER_STEP, \
-    VIESSMANN_SMART_GRID_TEMP_MIN, VIESSMANN_SMART_GRID_TEMP_MAX, VIESSMANN_HYSTERESIS_MIN, VIESSMANN_HYSTERESIS_MAX
+    VIESSMANN_SMART_GRID_TEMP_MIN, VIESSMANN_SMART_GRID_TEMP_MAX, VIESSMANN_HYSTERESIS_MIN, VIESSMANN_HYSTERESIS_MAX, \
+    VITOAIR_QUICK_MODE_RUNTIME_MIN, VITOAIR_QUICK_MODE_RUNTIME_MAX, VITOAIR_QUICK_MODE_RUNTIME_STEP, \
+    VITOAIR_QUICK_MODE_RUNTIME_DEFAULT
 
 
 @dataclass(frozen=True)
@@ -31,6 +33,9 @@ class Open3eNumberEntityDescription(
     domain: str = "number"
     get_native_value: Callable[[Any], float] = None
     set_native_value: Callable[[float, Open3eDataDevice, Open3eDataUpdateCoordinator], Awaitable[None]] = None
+    local_default_value: float | None = None
+    """Set for numbers whose value only lives in HA because no DID holds it. The value starts at this default, is
+    restored after a restart and handed to set_native_value; get_native_value is not used."""
 
 
 NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
@@ -1376,5 +1381,28 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         translation_key="circuit_4_heating_curve_slope",
         required_capabilities=[Capability.Circuit4],
         required_device=Open3eDevices.Vitodens
+    ),
+
+    ###############
+    ### VITOAIR ###
+    ###############
+
+    Open3eNumberEntityDescription(
+        poll_data_features=[Features.State.CurrentQuickMode],
+        native_unit_of_measurement=UnitOfTime.MINUTES,
+        device_class=NumberDeviceClass.DURATION,
+        entity_category=EntityCategory.CONFIG,
+        icon="mdi:timer-cog-outline",
+        native_min_value=VITOAIR_QUICK_MODE_RUNTIME_MIN,
+        native_max_value=VITOAIR_QUICK_MODE_RUNTIME_MAX,
+        native_step=VITOAIR_QUICK_MODE_RUNTIME_STEP,
+        local_default_value=VITOAIR_QUICK_MODE_RUNTIME_DEFAULT,
+        set_native_value=lambda value, device, coordinator: coordinator.async_set_vitoair_quick_mode_runtime(
+            runtime=value,
+            device=device
+        ),
+        key="quick_mode_duration",
+        translation_key="quick_mode_duration",
+        required_device=Open3eDevices.Vitoair
     ),
 )

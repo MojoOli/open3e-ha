@@ -20,7 +20,7 @@ from custom_components.open3e.definitions.subfeatures.hysteresis import Hysteres
 from custom_components.open3e.definitions.subfeatures.program import Program
 from custom_components.open3e.definitions.subfeatures.smart_grid_temperature_offsets import SmartGridTemperatureOffsets
 from .api import Open3eMqttClient
-from .const import DOMAIN
+from .const import DOMAIN, VITOAIR_QUICK_MODE_RUNTIME_DEFAULT
 from .definitions.open3e_data import Open3eDataSystemInformation, Open3eDataDevice
 from .definitions.subfeatures.buffer_mode import BufferMode
 from .definitions.subfeatures.dhw_hysteresis import DhwHysteresis
@@ -91,6 +91,7 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
         self.__endpoints = {}
         self.__server_available = None
         self.__shutting_down = False
+        self.__vitoair_quick_mode_runtimes: dict[int, int] = {}
 
     async def _async_setup(self):
         """Set up the coordinator
@@ -447,10 +448,19 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
             hass=self.hass,
             feature_id=set_feature_id,
             mode=mode,
+            runtime=self.__vitoair_quick_mode_runtimes.get(device.id, VITOAIR_QUICK_MODE_RUNTIME_DEFAULT),
             device_id=device.id
         )
 
         self.async_refresh_feature(device, [refresh_feature_id])
+
+    async def async_set_vitoair_quick_mode_runtime(
+            self,
+            runtime: float,
+            device: Open3eDataDevice
+    ):
+        """Store the runtime sent with the next quick mode write. Nothing is sent to the device."""
+        self.__vitoair_quick_mode_runtimes[device.id] = int(runtime)
 
     async def async_set_hot_water_circulation_pump(
             self,
