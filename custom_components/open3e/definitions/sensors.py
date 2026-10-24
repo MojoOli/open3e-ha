@@ -697,10 +697,10 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         required_device=Open3eDevices.Vitodens
     ),
 
-    ######### VOLUME-SENSORS #########
+    ######### GAS-SENSORS #########
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Volume.GasConsumptionCentralHeating],
-        device_class=SensorDeviceClass.VOLUME,
+        device_class=SensorDeviceClass.GAS,
         native_unit_of_measurement=UnitOfVolume.CUBIC_METERS,
         icon="mdi:meter-gas",
         state_class=SensorStateClass.TOTAL_INCREASING,
@@ -713,7 +713,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Volume.GasConsumptionDomesticHotWater],
-        device_class=SensorDeviceClass.VOLUME,
+        device_class=SensorDeviceClass.GAS,
         native_unit_of_measurement=UnitOfVolume.CUBIC_METERS,
         icon="mdi:meter-gas",
         state_class=SensorStateClass.TOTAL_INCREASING,
