@@ -9,6 +9,7 @@ import unittest
 
 from custom_components.open3e.definitions.subfeatures.first_byte_value import get_first_byte_value
 from custom_components.open3e.definitions.subfeatures.frost_protection_status import is_frost_protection_active
+from custom_components.open3e.definitions.subfeatures.ventilation_volume_flow import get_exhaust_air_volume_flow
 
 
 class FrostProtectionStatusTest(unittest.TestCase):
@@ -40,6 +41,24 @@ class FirstByteValueTest(unittest.TestCase):
         self.assertIsNone(get_first_byte_value('"zz"'))
         self.assertIsNone(get_first_byte_value('{"Value": 1}'))
         self.assertIsNone(get_first_byte_value("null"))
+
+
+class ExhaustAirVolumeFlowTest(unittest.TestCase):
+    def test_named_field(self) -> None:
+        self.assertEqual(get_exhaust_air_volume_flow('{"TargetFlow": 160.0, "ExhaustFlow": 154.0}'), 154.0)
+
+    def test_unknown_raw_hex(self) -> None:
+        self.assertEqual(get_exhaust_air_volume_flow('{"TargetFlow": 160.0, "Unknown": "9a00"}'), 154.0)
+        self.assertEqual(get_exhaust_air_volume_flow('{"TargetFlow": 160.0, "Unknown": "0901"}'), 265.0)
+
+    def test_unknown_decoded(self) -> None:
+        self.assertEqual(get_exhaust_air_volume_flow('{"TargetFlow": 160.0, "Unknown": 154}'), 154.0)
+
+    def test_bad_input(self) -> None:
+        self.assertIsNone(get_exhaust_air_volume_flow('{"TargetFlow": 160.0}'))
+        self.assertIsNone(get_exhaust_air_volume_flow('{"Unknown": "zz"}'))
+        self.assertIsNone(get_exhaust_air_volume_flow('"a0009a00"'))
+        self.assertIsNone(get_exhaust_air_volume_flow("not json"))
 
 
 if __name__ == "__main__":

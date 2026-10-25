@@ -16,6 +16,7 @@ from .open3e_data import Open3eDataDevice
 from .subfeatures.dhw_hysteresis import DhwHysteresis, get_hysteresis_setpoint
 from .subfeatures.heating_curve import HeatingCurve
 from .subfeatures.mixer_circuit_property import MixerCircuitProperty
+from .subfeatures.vitoair_quick_mode import get_vitoair_quick_mode
 from .. import Open3eDataUpdateCoordinator
 from ..capability.capability import Capability
 from ..const import VIESSMANN_TEMP_HEATING_MIN, VIESSMANN_TEMP_HEATING_MAX, VIESSMANN_POWER_MAX_WATT_ELECTRICAL_HEATER, \
@@ -35,7 +36,9 @@ class Open3eNumberEntityDescription(
     set_native_value: Callable[[float, Open3eDataDevice, Open3eDataUpdateCoordinator], Awaitable[None]] = None
     local_default_value: float | None = None
     """Set for numbers whose value only lives in HA because no DID holds it. The value starts at this default, is
-    restored after a restart and handed to set_native_value; get_native_value is not used."""
+    restored after a restart and handed to set_local_value; get_native_value and set_native_value are not used."""
+    set_local_value: Callable[[float, str | None, Open3eDataDevice, Open3eDataUpdateCoordinator], Awaitable[None]] = None
+    """Receives the local value and the latest raw payload of the first poll feature (None when restored at startup)."""
 
 
 NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
@@ -1397,8 +1400,11 @@ NUMBERS: tuple[Open3eNumberEntityDescription, ...] = (
         native_max_value=VITOAIR_QUICK_MODE_RUNTIME_MAX,
         native_step=VITOAIR_QUICK_MODE_RUNTIME_STEP,
         local_default_value=VITOAIR_QUICK_MODE_RUNTIME_DEFAULT,
-        set_native_value=lambda value, device, coordinator: coordinator.async_set_vitoair_quick_mode_runtime(
+        set_local_value=lambda value, data, device, coordinator: coordinator.async_set_vitoair_quick_mode_runtime(
+            refresh_feature_id=Features.State.CurrentQuickMode.id,
+            set_feature_id=Features.State.TargetQuickMode.id,
             runtime=value,
+            active_mode=get_vitoair_quick_mode(data) if data is not None else None,
             device=device
         ),
         key="quick_mode_duration",

@@ -456,11 +456,27 @@ class Open3eDataUpdateCoordinator(DataUpdateCoordinator):
 
     async def async_set_vitoair_quick_mode_runtime(
             self,
+            refresh_feature_id: int,
+            set_feature_id: int,
             runtime: float,
+            active_mode: VitoairQuickMode | None,
             device: Open3eDataDevice
     ):
-        """Store the runtime sent with the next quick mode write. Nothing is sent to the device."""
+        """Store the runtime sent with the next quick mode write.
+
+        A running quick mode is written again so it restarts with the new runtime, like in the ViCare app.
+        """
         self.__vitoair_quick_mode_runtimes[device.id] = int(runtime)
+
+        if active_mode is None or active_mode == VitoairQuickMode.Nothing:
+            return
+
+        await self.async_set_vitoair_quick_mode(
+            refresh_feature_id=refresh_feature_id,
+            set_feature_id=set_feature_id,
+            mode=active_mode,
+            device=device
+        )
 
     async def async_set_hot_water_circulation_pump(
             self,

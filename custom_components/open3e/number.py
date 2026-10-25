@@ -82,7 +82,7 @@ class Open3eLocalNumber(Open3eNumber, RestoreNumber):
         else:
             self._attr_native_value = self.entity_description.local_default_value
 
-        await self.entity_description.set_native_value(self._attr_native_value, self.device, self.coordinator)
+        await self.entity_description.set_local_value(self._attr_native_value, None, self.device, self.coordinator)
         self.async_write_ha_state()
 
     async def async_set_native_value(self, value: float) -> None:
@@ -90,4 +90,5 @@ class Open3eLocalNumber(Open3eNumber, RestoreNumber):
         self._attr_native_value = value
         self.async_write_ha_state()
 
-        await self.entity_description.set_native_value(value, self.device, self.coordinator)
+        feature_id = self.entity_description.poll_data_features[0].id
+        await self.entity_description.set_local_value(value, self.data.get(feature_id), self.device, self.coordinator)
