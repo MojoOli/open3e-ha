@@ -1007,6 +1007,9 @@
       }
     },
     "number": {
+      "quick_mode_duration": {
+        "name": "Schnellmodus Dauer"
+      },
       "circuit_1_comfort_temperature": {
         "name": "Heiz-Kühlkreis 1 Heizen Komfort"
       },
@@ -1217,7 +1220,7 @@
           "none": "-",
           "intensive": "Intensivlüftung",
           "reduced_noise": "Reduzierte Lüftung",
-          "off": "Aus"
+          "off": "Temporäre Anlagenabschaltung"
         }
       },
       "ventilation_bypass_operation_state": {

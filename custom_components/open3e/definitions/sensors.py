@@ -47,6 +47,7 @@ from .subfeatures.ventilation_bypass_operation_level import (
     get_ventilation_bypass_operation_level,
 )
 from .subfeatures.ventilation_bypass_position import get_ventilation_bypass_position
+from .subfeatures.ventilation_volume_flow import get_exhaust_air_volume_flow
 from ..capability.capability import Capability
 
 
@@ -96,7 +97,6 @@ class SensorDataRetriever:
     HOURS = lambda data: int(json_loads(data)["hours"])
     TARGET_FLOW = lambda data: float(json_loads(data)["TargetFlow"])
     TEXT = lambda data: str(json_loads(data)["Text"])
-    UNKNOWN = lambda data: float(json_loads(data)["Unknown"])
     RAWSTR = lambda data: str(data[1:][:-1])
     HEX_INT = lambda data: int(str(data), 16) if data is not None else None
     RAW = lambda data: float(data)
@@ -2568,7 +2568,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         icon="mdi:fan",
         key="ventilation_exhaust_air_volume",
         translation_key="ventilation_exhaust_air_volume",
-        data_retriever=SensorDataRetriever.UNKNOWN,
+        data_retriever=get_exhaust_air_volume_flow,
         required_device=Open3eDevices.Vitoair
     ),
     Open3eSensorEntityDescription(
@@ -2626,6 +2626,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         poll_data_features=[Features.State.VentilationBypassDynamicVentilationLevel],
         state_class=SensorStateClass.MEASUREMENT,
         icon="mdi:fan",
+        suggested_display_precision=0,
         key="ventilation_bypass_dynamic_level",
         translation_key="ventilation_bypass_dynamic_level",
         data_retriever=get_first_byte_value,

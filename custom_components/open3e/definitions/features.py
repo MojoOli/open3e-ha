@@ -214,7 +214,7 @@ class Features:
         VentilationBypassFlapAvailableCount = Feature(id=2797, refresh_interval=30)
         CurrentVentilationHeatRecovery = Feature(id=2248, refresh_interval=30)
         FilterPercentageBlocked = Feature(id=3206, refresh_interval=300)
-        VentilationBypassDynamicVentilationLevel = Feature(id=2846, refresh_interval=300)
+        VentilationBypassDynamicVentilationLevel = Feature(id=2846, refresh_interval=60)
 
         # Pump-Status und Kältekreis
         CentralHeatingPumpStatus = Feature(id=2791, refresh_interval=10)
