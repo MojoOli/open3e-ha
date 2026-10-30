@@ -12,7 +12,7 @@ def map_devices_to_entities(
 ) -> Dict[Open3eDataDevice, List[Open3eEntityDescription]]:
     """
     Maps each device to a list of entities that match all their poll_data_features,
-    required capabilities, and optional required_device.
+    required capabilities, excluded capabilities, and optional required_device.
     """
     result: Dict[Open3eDataDevice, List[Open3eEntityDescription]] = defaultdict(list)
 
@@ -30,6 +30,10 @@ def map_devices_to_entities(
 
             # Skip if required_capabilities are missing
             if entity.required_capabilities and not set(entity.required_capabilities).issubset(device.capabilities):
+                continue
+
+            # Skip if any excluded capability is present
+            if entity.excluded_capabilities and not set(entity.excluded_capabilities).isdisjoint(device.capabilities):
                 continue
 
             # All checks passed

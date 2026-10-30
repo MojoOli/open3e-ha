@@ -17,6 +17,7 @@ class Capability(Enum):
     Circuit2 = auto()
     Circuit3 = auto()
     Circuit4 = auto()
+    Ethernet = auto()
 
 
 @dataclass(frozen=True)
@@ -88,6 +89,12 @@ DEVICE_CAPABILITIES: dict[Device, list[CapabilityFeature]] = {
             feature=Features.Temperature.FlowCircuit4,
             path="Actual",
             invalid_value=VIESSMANN_UNAVAILABLE_VALUE
+        ),
+        CapabilityFeature(
+            capability=Capability.Ethernet,
+            feature=Features.Misc.GatewayEthernetEnable,
+            path=None,
+            invalid_value=0
         )
     ],
     Open3eDevices.Vitoair: [],
