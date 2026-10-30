@@ -27,8 +27,25 @@ class GatewayEthernetIpTest(unittest.TestCase):
         self.assertEqual(get_gateway_ethernet_ip('"0000000000000000000000000000000000000000"'), "0.0.0.0")
 
     def test_decoded(self) -> None:
+        # Layout of open3e/open3e#406
         self.assertEqual(
-            get_gateway_ethernet_ip('{"LAN_IP-Address": "010.000.000.234", "SubnetMask": "255.255.255.000"}'),
+            get_gateway_ethernet_ip(
+                '{"LAN_IP-Address": "192.168.178.025", "SubnetMask": "255.255.255.000", '
+                '"Gateway_IP-Address": "192.168.178.001", "DNSServer1": "192.168.178.001", '
+                '"DNSServer2": "000.000.000.000"}'
+            ),
+            "192.168.178.25",
+        )
+
+    def test_decoded_by_name(self) -> None:
+        self.assertEqual(
+            get_gateway_ethernet_ip('{"SubnetMask": "255.255.255.000", "LAN_IP-Address": "010.000.000.234"}'),
+            "10.0.0.234",
+        )
+
+    def test_decoded_other_name(self) -> None:
+        self.assertEqual(
+            get_gateway_ethernet_ip('{"IP-Address": "010.000.000.234", "SubnetMask": "255.255.255.000"}'),
             "10.0.0.234",
         )
 
