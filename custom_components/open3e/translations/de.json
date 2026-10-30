@@ -608,6 +608,19 @@
       "gateway_remote_signal_strength": {
         "name": "WLAN Signalstärke"
       },
+      "gateway_ethernet_mac": {
+        "name": "LAN MAC Adresse"
+      },
+      "gateway_ethernet_network_status": {
+        "name": "LAN Status",
+        "state": {
+          "connected": "Verbunden",
+          "not_connected": "Nicht verbunden"
+        }
+      },
+      "gateway_ethernet_ip": {
+        "name": "LAN IP Adresse"
+      },
       "central_heating_one_circuit_name": {
         "name": "Name Heizkreis 1"
       },

@@ -17,3 +17,5 @@ class Open3eEntityDescription(EntityDescription):
     """Defines which device this requires. Some features can be used for multiple devices such as TargetQuickMode."""
     required_capabilities: list[Capability] | None = None
     """Defines which capabilities this requires. Some devices have optional features, such as multiple circuits on the Vitocal."""
+    excluded_capabilities: list[Capability] | None = None
+    """Defines capabilities that hide this entity, e.g. the WiFi sensors when the gateway uses LAN."""

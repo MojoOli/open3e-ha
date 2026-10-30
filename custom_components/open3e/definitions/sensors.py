@@ -27,6 +27,7 @@ from .subfeatures.four_three_way_valve_position import (
     FourThreeWayValvePosition,
     get_four_three_way_valve_position,
 )
+from .subfeatures.gateway_ethernet_ip import get_gateway_ethernet_ip
 from .subfeatures.legionella_protection import LegionellaProtectionWeekday
 from .subfeatures.noise_reduction_mode import (
     NoiseReductionMode,
@@ -228,6 +229,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         entity_category=EntityCategory.DIAGNOSTIC,
         key="gateway_mac",
         translation_key="gateway_mac",
+        excluded_capabilities=[Capability.Ethernet],
         icon="mdi:ethernet",
         data_retriever=SensorDataRetriever.RAWSTR
     ),
@@ -239,6 +241,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         entity_registry_enabled_default=False,
         key="gateway_remote_local_network_status",
         translation_key="gateway_remote_local_network_status",
+        excluded_capabilities=[Capability.Ethernet],
         data_retriever=lambda data: get_connection_status(int(data)),
         options=[mode for mode in ConnectionStatus]
     ),
@@ -247,6 +250,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         entity_category=EntityCategory.DIAGNOSTIC,
         key="gateway_remote_ip",
         translation_key="gateway_remote_ip",
+        excluded_capabilities=[Capability.Ethernet],
         icon="mdi:ip-network",
         data_retriever=lambda data: SensorDataRetriever.cleaned_ip(json_loads(data)["WLAN_IP-Address"])
     ),
@@ -257,8 +261,39 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         native_unit_of_measurement="dB",
         key="gateway_remote_signal_strength",
         translation_key="gateway_remote_signal_strength",
+        excluded_capabilities=[Capability.Ethernet],
         icon="mdi:wifi",
         data_retriever=SensorDataRetriever.RAW
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.MacAddressLan],
+        entity_category=EntityCategory.DIAGNOSTIC,
+        key="gateway_ethernet_mac",
+        translation_key="gateway_ethernet_mac",
+        required_capabilities=[Capability.Ethernet],
+        icon="mdi:ethernet",
+        data_retriever=SensorDataRetriever.RAWSTR
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.GatewayEthernetNetworkStatus],
+        device_class=SensorDeviceClass.ENUM,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:lan-connect",
+        entity_registry_enabled_default=False,
+        key="gateway_ethernet_network_status",
+        translation_key="gateway_ethernet_network_status",
+        required_capabilities=[Capability.Ethernet],
+        data_retriever=lambda data: get_connection_status(int(data)),
+        options=[mode for mode in ConnectionStatus]
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.Misc.GatewayEthernetIp],
+        entity_category=EntityCategory.DIAGNOSTIC,
+        key="gateway_ethernet_ip",
+        translation_key="gateway_ethernet_ip",
+        required_capabilities=[Capability.Ethernet],
+        icon="mdi:ip-network",
+        data_retriever=get_gateway_ethernet_ip
     ),
     Open3eSensorEntityDescription(
         poll_data_features=[Features.Misc.TimeSettingSource],
