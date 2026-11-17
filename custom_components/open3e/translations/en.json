@@ -678,6 +678,12 @@
       "circuit2_pump_status": {
         "name": "Heating circuit 2 pump status"
       },
+      "circuit3_pump_status": {
+        "name": "Heating circuit 3 pump status"
+      },
+      "circuit4_pump_status": {
+        "name": "Heating circuit 4 pump status"
+      },
       "compressor_max_speed_heating": {
         "name": "Compressor maximum speed heating"
       },

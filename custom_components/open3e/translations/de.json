@@ -678,6 +678,12 @@
       "circuit2_pump_status": {
         "name": "Heizkreis 2 Pumpe Status"
       },
+      "circuit3_pump_status": {
+        "name": "Heizkreis 3 Pumpe Status"
+      },
+      "circuit4_pump_status": {
+        "name": "Heizkreis 4 Pumpe Status"
+      },
       "compressor_max_speed_heating": {
         "name": "Kompressor Max-Drehzahl Heizen"
       },

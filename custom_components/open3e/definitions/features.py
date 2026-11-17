@@ -220,6 +220,8 @@ class Features:
         CentralHeatingPumpStatus = Feature(id=2791, refresh_interval=10)
         MixerOneCircuitPumpStatus = Feature(id=2792, refresh_interval=10)
         MixerTwoCircuitPumpStatus = Feature(id=2793, refresh_interval=10)
+        MixerThreeCircuitPumpStatus = Feature(id=2794, refresh_interval=10)
+        MixerFourCircuitPumpStatus = Feature(id=2795, refresh_interval=10)
         RefrigerationCircuitOperationMode = Feature(id=2806, refresh_interval=10)
 
         # Vitodens
