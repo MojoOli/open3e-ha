@@ -1883,7 +1883,7 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         required_device=Open3eDevices.Vitocal
     ),
 
-    # DID 2791/2792/2793: PumpStatus Central / Circuit1 / Circuit2
+    # DID 2791-2795: PumpStatus Central / Circuit1-4
     Open3eSensorEntityDescription(
         poll_data_features=[Features.State.CentralHeatingPumpStatus],
         device_class=SensorDeviceClass.POWER_FACTOR,
@@ -1917,6 +1917,30 @@ SENSORS: tuple[Open3eSensorEntityDescription, ...] = (
         icon="mdi:pump",
         data_retriever=SensorDataRetriever.ACTUAL,
         required_capabilities=[Capability.Circuit2],
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.State.MixerThreeCircuitPumpStatus],
+        device_class=SensorDeviceClass.POWER_FACTOR,
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="circuit3_pump_status",
+        translation_key="circuit3_pump_status",
+        icon="mdi:pump",
+        data_retriever=lambda data: None if (val := float(json_loads(data)["Actual"])) == 255 else val,
+        required_capabilities=[Capability.Circuit3],
+        required_device=Open3eDevices.Vitocal
+    ),
+    Open3eSensorEntityDescription(
+        poll_data_features=[Features.State.MixerFourCircuitPumpStatus],
+        device_class=SensorDeviceClass.POWER_FACTOR,
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        key="circuit4_pump_status",
+        translation_key="circuit4_pump_status",
+        icon="mdi:pump",
+        data_retriever=lambda data: None if (val := float(json_loads(data)["Actual"])) == 255 else val,
+        required_capabilities=[Capability.Circuit4],
         required_device=Open3eDevices.Vitocal
     ),
 
