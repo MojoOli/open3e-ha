@@ -108,3 +108,5 @@ DID definitions live in `src/open3e/Open3Edatapoints.py` (general) plus per-devi
 
 - `/add-entity` — add a sensor/number/select/... for a DID end to end.
 - `/check-datapoints` — diff the integration against upstream Open3e datapoints and fix changed payload shapes.
+- `/beta-release` — publish a `vX.Y.Z-betaN` pre-release from `master` with release notes grouped per device.
+- `/release` — bump `manifest.json`, push to `master` and publish the stable `vX.Y.Z` release.
